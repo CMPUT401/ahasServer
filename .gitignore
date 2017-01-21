@@ -1,3 +1,5 @@
+.powder
+
 *.rbc
 capybara-*.html
 .rspec
