@@ -96,3 +96,18 @@
 - Pet food -> in stock = in van
     + Make an order = list of things they need to pick up (food & medical)
 - More so what the van should be stocked with
+- Red denotes out of stock
+- How do we update quantities? → want it to auto deduct when it gets
+  prescribed
+    + Would still need a way
+- It's a want, not a need
+** Questions
+- Should have connectivity
+- Track client communication
+    + Just means, everything in the file is searchable → done through the
+    notes function
+- Record deletion
+    + Records can be kept forever, but files may become inactive for a
+    variety of reasons → don't need to worry about deletions now
+- Phone is best way to reach = Maria
+- Email is best way to reach Connie

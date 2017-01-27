@@ -1,0 +1,64 @@
+* Intro
+<2017-01-27 Fri>
+- Add TA to GitHub
+- Using rails on back end
+- Rails generate is pushed
+- No design/models are empty → project is currently a blank template
+- Front end is between react or ember, Angular isn't as appealing now because
+- React is easy to test
+- Ember works well with rails and is very strong MVC
+- No bad front end choice between react, angular and ember
+- 1 Week to finish first sprint → will show our plan
+* Deliverables
+- Wiki page for requirements
+- TA thinks we should use project page
+- 37 stories presently, roughly 5 that are not critical
+- Stories are merge able, but we can keep them very specific
+    + As long as they're testable, it is OK
+- App is a web app that is opened in a mobile device
+* Questions
+- Need to know what tablet they're using
+* Rubrics
+- Easy to miss simple docs in the first sprint
+- No code
+- Design doc, arch, project plan
+- Basically expected to only give requirements + some small stuff
+- Put stories as project cards
+    + You can import issues into the projects page
+- For requirements, we need a finalized list of requirements
+- For software design, they expect a high level, abstract view of what we're
+  making. What components
+    + Front end,
+        + Template engine, are you doing REST
+    + Back end
+    + Data base
+    + Just want components, names, protocols. Technical specs but not object
+    names
+        * Like a UML type thing
+        * Layers → components, how they talk
+        * Type of interactions on arrows
+        * *Component connector/view diagram*
+- Very brief description of what tech we want to use, and why
+    + We use rails because it's convenient
+    + We use react because I like Facebook
+- API specification
+    + Specified in component connector view
+    + Or in separate document
+    + What kind of calls we're making
+        * Behaviours it will do
+        * API UML?
+    + E.g. Ajax calls from front end to back end, give that more details
+    + Try to specify whatever you know
+    + We don't have resources/UML so tell us what you know in an abstract way
+- Have design, make storyboard
+- Star UML is great for design documents
+* Project Management
+- Need a Gantt chart
+- Detailed task assignment for next sprint
+- Simple project management plan (who gets what and why)
+- Needs to be very legit
+- What is assigned to whom, starting at the second sprint
+- Who is doing what, and why
+- Put stories into future sprints (2-5)
+- May not be implementing stories in sprint 5
+- Sprint 5 is mostly polishing and tests
