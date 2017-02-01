@@ -1,0 +1,113 @@
+* Intro
+<2017-01-25 Wed>
+- Don't need invoicing
+- Have inventory, which is slightly anomalous
+- Just want something simple and useable
+- Will send us a PMR
+- We can go on a call if we want to
+- Connie Varnhagen is a website admin for ahas
+* Requirements Discussion
+- There is a sample ppt that demos their UI/what they need
+- PPT is a rough idea of what they need/want
+- Want database to search for clients by first name, last name and phone
+- Client = owner
+- Patient = pet. Pets inherit client last name
+- Patients are owned by clients
+- Search for volunteer, and vet names → would be nice. Not critical
+    + Search for anyone in the system (on contacts list)
+- Need some contact info
+- Client list and patient list is critical
+** Client list
+- Search bar for first name, last name → could do fuzzy search
+- Comes up with a "flash card of information" or file record
+- Don't care about gender
+- Care about address
+- 1 to many phone number
+- Email would be nice → clients probably don't have email
+- Need to cover for alternative caregiver (2nd client authorized as a
+  caregiver for the pet) → basically a confidentiality agreement
+    + Name and phone for alternative caregiver. Don't care about other stuff
+- Client must be registered as some kind of low income person
+    + Must provide capability to show eligibility has been verified
+        * Y/N/Waiting
+- Animal ID: tattoo/chip. Can be both
+** Patient list
+- Same as client list
+- Search by last name, patient name
+    + Scrollable list
+- Ability to access actual view of record
+    + Full info
+    + Animal ID: rabies tag number
+    + Must be attached to the client
+    + Shows client info, pet info
+    + Reminders section is very important
+        * When vaccines are due
+        * Must have notification of reminders? → should ask client
+        * Reminders change colors if overdue in some programs
+    + Like to have a picture of pet,
+    + Quick summary of what they've had done
+        * Scrollable
+- Likes red for alerts
+- Need vaccine history
+- Medication list is important
+    * That they've ever been on
+- Lab results is important to have as well
+    * Scan into file somehow
+- Perhaps just have a general notes/documents attachment field
+- Need to have some way to look at radiology
+    + Come via email, and attached to file → need to know image format
+*** New notes for day should be implementable
+- Need to have all parties information
+- Notes can be typed
+- Animal diagram
+    + Be able to draw on it somehow
+- Notes need to be opened and read
+- Windows tablet
+- Must be a signature → very important
+- Connie needs to be asked how long notes can be editable
+    + Probably at least 1 day till they get locked
+    + Comments, and edits must be logged, and signed
+- Signature function will be very important
+- Edits/additions to files need to be logged
+- Vets must be able to sign
+- Force signature before document closure?
+** Schedule
+- Would be great to see times and stuff
+- Basic calendar function
+- Linking address to google maps
+- Doesn't like google calendar API because google owns it
+    + Because there is a patient client confidentiality issue
+- Need make and model of tablet
+- Connie → organizer doing scheduling
+- Whoever isn't a technician or a vet don't have access
+- How will account creation work?
+- All recorded notes cannot be edited, but a finalization period would be
+  acceptable (2 days)
+** Contacts
+- May expand the number of tables, but 1-2 total
+- Click on schedule → shows info
+- Frequently is multiple users editing the same thing, on the same tablet
+- Vets, techs
+- Volunteers
+- Contacts for labs/other vet clinics
+- Main phone, fax, email, address
+** Inventory
+- Medications
+- Pet food -> in stock = in van
+    + Make an order = list of things they need to pick up (food & medical)
+- More so what the van should be stocked with
+- Red denotes out of stock
+- How do we update quantities? → want it to auto deduct when it gets
+  prescribed
+    + Would still need a way
+- It's a want, not a need
+** Questions
+- Should have connectivity
+- Track client communication
+    + Just means, everything in the file is searchable → done through the
+    notes function
+- Record deletion
+    + Records can be kept forever, but files may become inactive for a
+    variety of reasons → don't need to worry about deletions now
+- Phone is best way to reach = Maria
+- Email is best way to reach Connie

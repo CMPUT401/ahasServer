@@ -1,0 +1,71 @@
+Search for client name by lastname, phone(if possible), firstname
+
+
+ FLASHCARD
+
+Pets get lastname?
+Must have - Searchbar - first,last,phone,patient
+
+Don’t care about gender, at least one phone number, nice to have more than one if possible, nice to have email (sometimes might not have)
+Alternative caregiver
+	- At least name and phone number for alternative caregiver
+
+Documentation 3 for this service, we need a space that they have such documents (3 of them)
+
+Extra notes space (definetly needed)
+
+Pets name, however many pets they have on file, species(M or F, reproduction status)
+Animal ID = tatoo/microchip or both (have a space for both)
+//End FLASHCARD ( in search tool)
+
+PATIENT FILE
+Patient and client list more or less the same (Scrollable- nice to have)
+(rabies tag? Animal id) It'd be nice
+
+Same thing on the flash card, We need to have a reminders sectio, when the next vaccinations are due
+Reminders (nice to have change colors) "goes red if overdue"
+Like to put pictures, what they look like over the years
+Summary of what they've done, scrollable would be nice
+If we can have an ALERT in red, stands out
+
+Separate History ( vaccine history- where in body, by who) 
+Medication list - BIG? ( List of all the medications that they've been on, chronologically)
+Lab Result ( don’t ususally, when we do they need to be in file), scanned into the file
+Keep radiographs, doesn’t need separate graph, regular history, double click to open up images would be nice( Comes by email) (what format)
+
++NEW, click and open up a new set of notes for a day - has template (notes for the day)(vet info would be nice)
+Be able to tap and open one of these notes (she has a windows tablets)
+Click and cpu checkmarks(easier)
+SIGNATURE HAS TO BE THERE EVERYTIME
+Section for notes, type it in, extra things, take home messages
+Diagram , can interact (sounds like nice to have)
+Whatever meds , name of med, how many mg, how many times a day
+Give her one day to edit(currently what they're saying) then auto finalize
+Have to be able to sign it
+Print it , cannot be changed
+
+Can add notes, right click the history then add as a side note BUT not attached to the file
+Signature, are they allowed to close?
+//end Patient
+
+SCHEDULE
+Linking address to googlemaps, nice to have
+
+
+Vet, techs, volunteers, lab supply (contact list)
+Main phone number, and fax number & address & email
+Scroll/search
+
+Inventory
+Meds list
+Pet food (make an order?)
+Med supplies - gause, alcohol, vac … etc
+Other…?
+Nice to have, auto update
+
+
+
+
+Nice to have- volunteer names and vet names (contact place)
+
+Active/non active clients (nice to have)

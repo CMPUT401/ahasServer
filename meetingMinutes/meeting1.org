@@ -1,0 +1,41 @@
+*
+Basically have to make a JSON API
+
+* As a vet
+1. Title: I want to be able to view scheduled appointments
+   Description:
+        I log into the system
+        I go to the schedule tab
+        I view scheduled appointments
+2. Title: I want to be able to schedule an appointment
+        I log into the system
+        I go to the schedule tab
+        I click "Schedule new appointment"
+        I assign a date and time
+        I assign a client
+            If the client does not exist, I will be able to create a new
+            patient profile
+        I assign a location
+        I click confirm appointment
+
+3. Title: I want to be able to record follow up instructions I've given to
+patients
+Description:
+I open an appointment. I add follow up instructions to the appointment
+4. Title: I want to be able to view follow up instructions for a given
+appointment
+I access an appointment, and read the follow up instructions that were
+provided
+* As an administrator
+1. Title: I want to schedule an appointment
+        I log into the system
+        I go to the schedule tab
+        I click "Schedule new appointment"
+        I assign a date and time
+        I assign a client
+            If the client does not exist, I will be able to create a new
+            patient profile
+        I assign a location
+        I click confirm appointment
+
+
