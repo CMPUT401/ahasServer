@@ -6525,7 +6525,7 @@
 									"model": {
 										"$ref": "AAAAAAFaAjCbHEytLY8="
 									},
-									"visible": false,
+									"visible": true,
 									"enabled": true,
 									"lineColor": "#000000",
 									"fillColor": "#ffffff",
@@ -6534,9 +6534,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 1068,
+									"left": 1025,
 									"top": 51,
-									"width": 0,
+									"width": 86,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.5707963267948966,
@@ -6546,6 +6546,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
+									"text": "+ActiveRecord",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -7630,6 +7631,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFaAiF9NcX7gYA="
 							},
+							"name": "ActiveRecord",
 							"end1": {
 								"_type": "UMLLinkEnd",
 								"_id": "AAAAAAFaAjCbHUyuCyI=",
