@@ -1,17 +1,14 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
+    
     def setup
-        @user =  {
-            email: "jbarclay@ualberta.ca",
-            password: "foobarz"
-        }
-        
+        @user = users(:justin)
     end
 
     test "logging in a valid user should be successful" do
-        post "/api/login", params: @user
-        assert response.success?
+        post "/user_token", params: {auth: @user}
+        assert_response :success
     end
 
     test "should create a new user" do
