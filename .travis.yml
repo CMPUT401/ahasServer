@@ -17,4 +17,10 @@ test:
   adapter: postgresql
   database: travis_ci_test
 
-  
+notifications:
+  email:
+    - jbarclay@ualberta.ca
+    - bligh@ualberta.ca
+    - malajeun@ualberta.ca
+    - knewbury@ualberta.ca
+    - ehsueh@ualberta.ca
