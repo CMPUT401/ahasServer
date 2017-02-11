@@ -1,0 +1,18 @@
+<2017-02-10 Fri>
+* Intro
+- 1 Week till next sprint deadline
+- 4 front end and 2 back end
+- 2 back end portions of stories are done
+- Front end and back end members will be touching every story
+- UML should be exactly as implemented but generally common sense
+- Sketched Sequence diagram is a good level of detail
+    + But functions should be named appropriately
+- Do sequence diagramming for major stories
+    + Roughly 5
+- Node isn't needed for paths that require authentication
+- Whatever we get feedback for, should be provided for next sprint
+- Prefer 1 repository
+- Need a completed project by sprint 4
+- Every story delivered must have test cases. But you should have 3-4 test
+  cases per story
+    + Stories aren't complete without test cases
