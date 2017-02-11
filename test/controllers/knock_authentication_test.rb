@@ -5,9 +5,9 @@ class KnockAuthenticationTests < ActionDispatch::IntegrationTest
         @user = users(:justin)
     end
 
-    test "logging in a valid user should be successful" do
+    test "logging in a valid user" do
         post "/api/user_token", params: {auth: { email: @user.email, password: "foobarbaz"} }
-        assert_response :success
+        assert_response 201
     end
 
     test "logging in a valid username but wrong password should fail" do
@@ -16,9 +16,12 @@ class KnockAuthenticationTests < ActionDispatch::IntegrationTest
     end
     
 
-    test "loggin in the wrong user should fail" do
+    test "logging in the wrong user should fail" do
         user = {email: "bligh@ualberta.ca", password: "fail"}
         post "/api/user_token", params: {auth: user}
         assert_response :missing
     end
+
+    # test "passing in JWT authentication to Authorization header"
+    # end
 end

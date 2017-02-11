@@ -9,6 +9,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                                 password_confirmation: "bar" } }
         end
         assert_response :error
+#        put(response.body)
         # I should get a list of errors back
         assert (JSON.parse(response.body)["errors"].count > 0)
     end
@@ -21,5 +22,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                             email: "bligh@ualberta.ca",
                                             password: "bazfoobar",
                                             password_confirmation: "bazfoobar" } }
+        assert User.count == old_count + 1
     end
 end
