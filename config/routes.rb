@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  get 'client/new'
+
     get              'static_pages/home'
     get              'static_pages/help'
     root             'static_pages#home'
