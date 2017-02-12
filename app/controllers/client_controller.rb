@@ -1,4 +1,4 @@
-class ClientController < PersonController 
+class ClientController < PersonController
   def new
   end
 end
