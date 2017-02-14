@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-    # Created by Mack
+    # Created by Mack, route for client crud
     resource :client
 
     get              'static_pages/home'
