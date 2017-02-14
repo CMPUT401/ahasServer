@@ -3,7 +3,6 @@ class PatientsController < ApplicationController
 
   def create
     patient = patient_params
-    puts patient.to_json
     # extract the client id from the JSON to a Client object
     patient['client'] = Client.find_by(id: patient['client'])
     @patient = Patient.new(patient)

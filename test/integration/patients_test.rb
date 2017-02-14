@@ -1,7 +1,13 @@
 require 'test_helper'
 
 class PatientsTest < ActionDispatch::IntegrationTest
-  test "posting to /api/patients should succeed" do
+
+  def setup
+    @client = clients(:Justin)
+    @client.save
+  end
+  
+  test "posting invalid info to /api/patients" do
     assert_no_difference 'Patient.count' do
       post '/api/patients', params: { patient: { name: '',
                                                  gender: '',
@@ -15,5 +21,22 @@ class PatientsTest < ActionDispatch::IntegrationTest
     #        put(response.body)
     # I should get a list of errors back
     assert JSON.parse(response.body)['errors'].count > 0
+  end
+
+  test "posting a valid patient to /api/patients should" do
+    
+    post '/api/patients', params: { patient: { name: 'Chairman Meow',
+                                               species: 'Cat',
+                                               gender: 'Female',
+                                               colour: 'Red',
+                                               tattoo: 18,
+                                               microchip: 0,
+                                               reproductive_status: 'Spade',
+                                               age: 23,
+                                               client: @client.id } }
+    
+    assert_response :success
+    #        put(response.body)
+    # I should get a list of errors back
   end
 end
