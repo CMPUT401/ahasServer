@@ -3,10 +3,10 @@ class CreatePatients < ActiveRecord::Migration[5.0]
     create_table :patients do |t|
       t.string :species
       t.string :name
-      t.int :age
+      t.integer :age
       t.string :colour
-      t.int :tattoo
-      t.int :microchip
+      t.integer :tattoo
+      t.integer :microchip
       t.string :reproductive_status
 
       t.timestamps

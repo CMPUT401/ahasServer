@@ -1,7 +1,14 @@
 require 'test_helper'
 
 class PatientTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+    @one = patients(:one)
+  end
+  
+  test 'patient should be valid' do
+    assert_kind_of Patient, @one
+    @one.save
+    puts @one.errors.full_messages
+    assert @one.valid?
+  end
 end

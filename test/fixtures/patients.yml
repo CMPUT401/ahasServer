@@ -1,19 +1,18 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  species: MyString
-  name: MyString
-  age: 
-  colour: MyString
-  tattoo: 
-  microchip: 
-  reproductive_status: MyString
+  client: Justin
+  species: Cat
+  name: Chairman Meow
+  age: 17
+  colour: Red
+  tattoo: 197265
+  microchip: nil
+  reproductive_status: "Spade"
 
 two:
-  species: MyString
-  name: MyString
-  age: 
-  colour: MyString
-  tattoo: 
-  microchip: 
-  reproductive_status: MyString
+  species: 
+  name: 
+  age: Thing
+  colour: 
+  tattoo: Not a number
+  microchip: Also not a number
+  reproductive_status: 18

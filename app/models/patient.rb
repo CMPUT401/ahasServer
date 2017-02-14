@@ -2,6 +2,8 @@
 # pet or animal.
 
 class Patient < ApplicationRecord
+  belongs_to :client
+
   validates :species, presence: true
 
   validates :name, presence: true
@@ -10,9 +12,9 @@ class Patient < ApplicationRecord
 
   validates :reproductive_status, presence: true
 
-  validates :tattoo, numericality: {only_integer: true}
+  validates :tattoo, numericality: { only_integer: true }
 
-  validates :age, numericality: { only_integer: true}
+  validates :age, numericality: { only_integer: true }
 
-  validates :microchip, numericality: {only_integer: true}
+  validates :microchip, numericality: { only_integer: true }
 end
