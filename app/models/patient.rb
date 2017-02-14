@@ -17,4 +17,6 @@ class Patient < ApplicationRecord
   validates :age, numericality: { only_integer: true }
 
   validates :microchip, numericality: { only_integer: true }
+
+  validates :gender, presence: true
 end

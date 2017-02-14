@@ -3,6 +3,7 @@ one:
   species: Cat
   name: Chairman Meow
   age: 17
+  gender: Male
   colour: Red
   tattoo: 197265
   microchip: nil
