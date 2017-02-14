@@ -4,11 +4,11 @@ class CreateClients < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :address
       t.string :phoneNumber
-      t.String :email
+      t.string :email
       t.float :licos
       t.float :aish
       t.float :socialAssistance
-      t.int :pets
+      t.string :pets
 
       t.timestamps
     end
