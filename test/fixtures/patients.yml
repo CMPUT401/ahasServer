@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  species: MyString
+  name: MyString
+  age: 
+  colour: MyString
+  tattoo: 
+  microchip: 
+  reproductive_status: MyString
+
+two:
+  species: MyString
+  name: MyString
+  age: 
+  colour: MyString
+  tattoo: 
+  microchip: 
+  reproductive_status: MyString
