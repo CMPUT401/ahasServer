@@ -14,6 +14,17 @@ class PatientsController < ApplicationController
     end
   end
 
+  def show
+    patient = Patient.find_by(id: params[:id])
+    if patient
+      render json: { success: true, patient: patient }
+    else
+      render status: 404, json: {success: false, error: 'Patient not found'}
+    end
+    
+    
+  end
+
   private
 
   def patient_params
