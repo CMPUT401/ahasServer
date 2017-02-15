@@ -6,6 +6,7 @@ class ClientController < PersonController
   end
 
   def create
+    #Grab params from POST
     render json: params
     
     #Pull attributes from params

@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ClientTest < ActiveSupport::TestCase
-  
+
   def setup
     name = "Leeroy Jenkins"
     address = "1234 Fake St, Edmonton, Alberta"
@@ -59,7 +59,7 @@ class ClientTest < ActiveSupport::TestCase
   test "client licos should reject numbers less than 0" do
     @client.licos = -12314
     assert_not @client.valid?
-  end 
+  end
   test "client licos should be able to be empty"do
     @client.licos = " "
     assert @client.valid?
@@ -73,7 +73,7 @@ class ClientTest < ActiveSupport::TestCase
   test "client aish  should reject numbers less than 0" do
     @client.aish = -12314
     assert_not @client.valid?
-  end 
+  end
 
   test "client aish  should be able to be empty"do
     @client.socialAssistance = " "
@@ -88,7 +88,7 @@ class ClientTest < ActiveSupport::TestCase
   test "client socialAssistance should reject numbers less than 0" do
     @client.licos = -12314
     assert_not @client.valid?
-  end 
+  end
 
   test "client socialAssistance should be able to be empty"do
     @client.licos = " "
