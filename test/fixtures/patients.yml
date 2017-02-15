@@ -1,0 +1,19 @@
+one:
+  client: Justin
+  species: Cat
+  name: Chairman Meow
+  age: 17
+  gender: Male
+  colour: Red
+  tattoo: 197265
+  microchip: nil
+  reproductive_status: "Spade"
+
+two:
+  species: 
+  name: 
+  age: Thing
+  colour: 
+  tattoo: Not a number
+  microchip: Also not a number
+  reproductive_status: 18

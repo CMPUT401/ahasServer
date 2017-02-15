@@ -15,5 +15,4 @@ class Client < ApplicationRecord
   validates :socialAssistance, presence: true, allow_blank: true, numericality: {greater_than_or_equal_to: 0}
 
 
-
 end

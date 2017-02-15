@@ -10,12 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20170212210100) do
+=======
+ActiveRecord::Schema.define(version: 20170214192834) do
+>>>>>>> master
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "clients", force: :cascade do |t|
+<<<<<<< HEAD
     t.string   "name"
     t.string   "address"
     t.string   "phoneNumber"
@@ -26,6 +31,25 @@ ActiveRecord::Schema.define(version: 20170212210100) do
     t.string   "pets"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+=======
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "patients", force: :cascade do |t|
+    t.string   "species"
+    t.string   "name"
+    t.integer  "age"
+    t.string   "colour"
+    t.integer  "tattoo"
+    t.integer  "microchip"
+    t.string   "reproductive_status"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "client_id"
+    t.string   "gender"
+    t.index ["client_id"], name: "index_patients_on_client_id", using: :btree
+>>>>>>> master
   end
 
   create_table "users", force: :cascade do |t|
@@ -37,4 +61,5 @@ ActiveRecord::Schema.define(version: 20170212210100) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
+  add_foreign_key "patients", "clients"
 end

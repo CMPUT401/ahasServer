@@ -1,0 +1,28 @@
+
+  * Patient: 
+Species:String name:string age:int colour:string tattoo:int microchip:int reproductive_status:string
+
+Http status header:
+
+POST /api/patient/
+
+HTTP 201
+
+{success: true}
+
+{success: false, error: []}
+
+let patient =  { "patient": { "client": "id",
+                              "species": "string"
+                              "name": "string",
+                              ...
+                              }
+               }
+
+
+GET /api/patient/{id}
+
+response:
+{ client: {...},
+  patient: {...}
+}
