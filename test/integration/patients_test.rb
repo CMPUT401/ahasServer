@@ -24,7 +24,6 @@ class PatientsTest < ActionDispatch::IntegrationTest
   end
 
   test 'posting a valid patient' do
-
     post '/api/patients', headers: authenticated_header,
                           params: { patient: { name: 'Chairman Meow',
                               species: 'Cat',
@@ -33,10 +32,11 @@ class PatientsTest < ActionDispatch::IntegrationTest
                               tattoo: 18,
                               microchip: 0,
                               reproductive_status: 'Spade',
-                             age: 23,
+                              age: 23,
                               client: @client.id } }
 
     assert_response :success
+    assert JSON.parse(response.body)['success']
   end
 
   test 'asking for invalid patient id returns a 404' do

@@ -2,13 +2,12 @@ require 'test_helper'
 
 class PatientTest < ActiveSupport::TestCase
   def setup
-    @one = patients(:one)
-    @two = patients(:two)
+    @one = patients(:one) # good data
+    @two = patients(:two) # bad data
   end
- 
+
   test 'patient one should be valid' do
     assert_kind_of Patient, @one
-    @one.save
     assert @one.valid?
   end
 
