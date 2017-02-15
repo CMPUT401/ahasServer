@@ -1,0 +1,3 @@
+* Questions for Marco
+- How are we standardizing the addresses
+- How are we storing phone numbers?
