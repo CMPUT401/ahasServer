@@ -22,14 +22,28 @@ class PatientTest < ActiveSupport::TestCase
     assert_not @one.valid?
   end
 
-  test 'should belong to a client' do
+  test 'patients should belong to a client' do
     @one.client = nil
     assert_not @one.valid?
   end
 
-  test 'should have a gender' do
+  test 'patients should have a gender' do
     @one.gender = nil
     assert_not @one.valid?
   end
-  
+
+  test 'patients should have color' do
+    @one.gender = nil
+    assert_not @one.valid?
+  end
+
+  test 'patients should have ' do
+    @one.gender = nil
+    assert_not @one.valid?
+  end
+
+  test 'patients should have a species' do
+    @one.species = nil
+    assert_not @one.valid?
+  end
 end
