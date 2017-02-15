@@ -25,7 +25,6 @@ class PatientsTest < ActionDispatch::IntegrationTest
                                 reproductive_status: nil,
                                 age: '',
                                 client: 0 } }
-      puts request
     end
     assert_response :error
     assert JSON.parse(response.body)['errors'].count > 0
