@@ -6,23 +6,18 @@ class ClientController < PersonController
   end
 
   def create
-    #Pull attributes from params
-    name = params[:name]
-    address = params[:address]
-    phoneNumber = params[:phoneNumber]
-    email = params[:email]
-    licos = params[:licos]
-    aish = params[:aish ]
-    socialAssistance =  params[:socialAssistance]
-    pets = params[:pets]
+    @client = Client.new(client_params)
 
-    @client = Client.new(name: name, address: address, phoneNumber: phone, email: email, \
-                        licos: licos, aish: aish ,socialAssistance: socialAssistance,\
-                        pets: pets)
    if @client.save
-     response.status = :created
+      render status: 201, json: {success: true}
     else
-     render status: :error, json: { errors: @client.errors.full_messages }
+     render status: :error, json: {success: false, errors: @client.errors.full_messages}
     end
+  end
+
+  def client_params
+    params.require(:client).permit(:name, :address, :phone, :email,
+                        :licos, :aish ,:socialAssistance,
+                        :pets)
   end
 end
