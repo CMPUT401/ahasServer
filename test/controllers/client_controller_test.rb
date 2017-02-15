@@ -3,10 +3,11 @@ require 'test_helper'
 class ClientControllerTest < ActionDispatch::IntegrationTest
 
   test "respond to successful POST" do
+      
       post "/client",
       params: {client: {name:  "Leeroy Jenkins", address: "1234 Fake St, Edmonton, Alberta",\
                        phone: "7809519085", email: "leeroyjenkins@gmail.com", licos: "40210.00",\
-                       socialAssistance: "78000", pets: "123"}}
+                       socialAssistance: "78000", pets: "123"}}, headers: authentication_header
 
     assert_response 201
   end
