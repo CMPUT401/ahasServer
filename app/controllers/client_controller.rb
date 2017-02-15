@@ -6,11 +6,8 @@ class ClientController < PersonController
   end
 
   def create
-    #Grab params from POST
-    render json: params
-    
     #Pull attributes from params
-    name = params[:name] 
+    name = params[:name]
     address = params[:address]
     phoneNumber = params[:phoneNumber]
     email = params[:email]
@@ -19,6 +16,13 @@ class ClientController < PersonController
     socialAssistance =  params[:socialAssistance]
     pets = params[:pets]
 
-
+    @client = Client.new(name: name, address: address, phoneNumber: phone, email: email, \
+                        licos: licos, aish: aish ,socialAssistance: socialAssistance,\
+                        pets: pets)
+   if @client.save
+     response.status = :created
+    else
+     render status: :error, json: { errors: @client.errors.full_messages }
+    end
   end
 end

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
     # Created by Mack, route for client crud
-    resource :client
+    resources :client
 
     get              'static_pages/home'
     get              'static_pages/help'
