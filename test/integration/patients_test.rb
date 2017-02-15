@@ -8,13 +8,6 @@ class PatientsTest < ActionDispatch::IntegrationTest
     @patient.save
   end
 
-  def authenticated_header
-    token = Knock::AuthToken.new(payload: { sub: users(:justin).id }).token
-
-    { "Authorization": "Bearer #{token}" }
-    
-  end
-
   test 'posting invalid info to /api/patients' do
     assert_no_difference 'Patient.count' do
       post '/api/patients', headers: authenticated_header,
