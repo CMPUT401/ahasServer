@@ -9,8 +9,9 @@ Rails.application.routes.draw do
     # this may need to be reevalutated if we get lots of non api
     # controllers
     scope :api do
-        post         'signup', to: 'users#create'
+        post         'signup',     to: 'users#create'
         post         'user_token', to: 'user_token#create'
+        post         'login',      to: 'user_token#create'
         resources    :users
         resources    :patients
     end
