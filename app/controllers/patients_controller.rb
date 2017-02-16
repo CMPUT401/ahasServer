@@ -8,9 +8,9 @@ class PatientsController < ApplicationController
     @patient = Patient.new(patient)
 
     if @patient.save
-      response.status = 201
+      render json: { success: true }
     else
-      render status: :error, json: { errors: @patient.errors.full_messages }
+      render status: :error, json: { success: false, errors: @patient.errors.full_messages }
     end
   end
 

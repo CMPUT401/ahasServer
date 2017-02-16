@@ -12,11 +12,11 @@ class Patient < ApplicationRecord
 
   validates :reproductive_status, presence: true
 
-  validates :tattoo, numericality: { only_integer: true }
+  validates :tattoo, numericality: { only_integer: true }, allow_blank: true
 
-  validates :age, numericality: { only_integer: true }
+  validates :age, numericality: { only_integer: true }, allow_blank: true
 
-  validates :microchip, numericality: { only_integer: true }
+  validates :microchip, numericality: { only_integer: true }, allow_blank: true
 
   validates :gender, presence: true
 end
