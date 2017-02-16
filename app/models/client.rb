@@ -13,6 +13,15 @@ class Client < ApplicationRecord
   validates :licos, presence: true, allow_blank: true, numericality: {greater_than_or_equal_to: 0}
   validates :aish, presence: true, allow_blank: true,  numericality: {greater_than_or_equal_to: 0}
   validates :socialAssistance, presence: true, allow_blank: true, numericality: {greater_than_or_equal_to: 0}
+  validates :alternativeContactName, presence: true, length: {maximum: 50, message: "Alternate Name is too long"}\
+    allow_blank: true
+  validates :alternativeContactPhoneNumber, presence: true, allow_blank: true
+  validates :alternativeContactAddress, presence: {message: "Address is required"}, length: {maximum: 50, message: "Address is too long"}
+  validates :notes,presence: true, allow_blank: true
+  validates :alternativeContact2ndPhone, presence: true, allow_blank: true
+  validates :alternateContactEmail, presence: true, length: {maximum: 255}, \
+    format: {with: VALID_EMAIL_REGEX, message: "Email is invalid format"}, allow_blank: true
+
 
 
 end
