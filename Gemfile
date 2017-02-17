@@ -12,13 +12,14 @@ gem 'jquery-rails',            '4.1.1'
 gem 'knock',                   '2.1.1'
 gem 'mini_magick',             '4.5.1'
 gem 'pg',                      '0.18.4'
+gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
 gem 'puma',                    '3.4.0'
 gem 'rails',                   '5.0.1'
 gem 'sass-rails',              '5.0.6'
 gem 'turbolinks',              '5.0.1'
 gem 'uglifier',                '3.0.0'
 gem 'will_paginate',           '3.1.0'
-gem 'rack-cors'
+gem 'rack-cors',               '0.4.1'
 
 group :development, :test do
   gem 'byebug',                '9.0.0', platform: :mri
