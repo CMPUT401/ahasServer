@@ -257,6 +257,9 @@ GEM
       shellany (~> 0.0)
     parser (2.4.0.0)
       ast (~> 2.2)
+    passenger (5.1.2)
+      rack
+      rake (>= 0.8.1)
     pg (0.18.4)
     powerpack (0.1.1)
     pry (0.10.4)
@@ -373,9 +376,10 @@ DEPENDENCIES
   listen (= 3.0.8)
   mini_magick (= 4.5.1)
   minitest-reporters (= 1.1.9)
+  passenger (>= 5.0.25)
   pg (= 0.18.4)
   puma (= 3.4.0)
-  rack-cors
+  rack-cors (= 0.4.1)
   rails (= 5.0.1)
   rails-controller-testing (= 0.1.1)
   rubocop

@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   include Knock::Authenticable
+  rescue_from Exception, with: :server_error
+  
   # set_access
   use Rack::Cors do
     allow do
@@ -8,7 +10,14 @@ class ApplicationController < ActionController::Base
     end
   end
   # before_action :authenticate_user
-  def set_access
-    @response.headers["Access-Control-Allow-Origin"] = "*"
+
+
+  def server_error(exception)
+    unless performed?
+      respond_to do |format|
+        format.html { render "all/errors/server_error", status: status}
+        format.all { head status }
+      end
+    end
   end
 end
