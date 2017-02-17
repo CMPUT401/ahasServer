@@ -61,7 +61,7 @@ class ClientTest < ActiveSupport::TestCase
     assert_not @client.valid?
   end
   test "client licos should be able to be empty"do
-    @client.licos = " "
+    @client.licos = nil 
     assert @client.valid?
   end
 
@@ -76,7 +76,7 @@ class ClientTest < ActiveSupport::TestCase
   end
 
   test "client aish  should be able to be empty"do
-    @client.socialAssistance = " "
+    @client.socialAssistance = "" 
     assert @client.valid?
   end
 
