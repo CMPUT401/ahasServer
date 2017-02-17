@@ -11,9 +11,17 @@ class ClientTest < ActiveSupport::TestCase
     aish = 91231.00
     socialAssistance = 1231.00
     pets = 1
+    alternativeContactPhoneNumber = "7809999999"
+    alternativeContactAddress = "484 fake st, Canada"
+    notes = "Client is angry"
+    alternativeContact2ndPhone = "7809519084"
+    alternateContactEmail = "jimmy@jim.com"
+
+#    alternativeContactPhoneNumber, alternativeContactAddress, notes, alternativeContact2ndPhone,alternateContactEmail
+
     @client = Client.new(name: name, address: address, phoneNumber: phone, email: email, \
                         licos: licos, aish: aish ,socialAssistance: socialAssistance,\
-                        pets:pets)
+                        pets: pets, alternativeContactPhoneNumber: alternativeContactPhoneNumber, alternativeContactAddress: alternativeContactAddress, notes: notes, alternativeContact2ndPhone: alternativeContact2ndPhone,alternateContactEmail: alternateContactEmail)
   end
 
   test "create client with good input" do
@@ -61,7 +69,7 @@ class ClientTest < ActiveSupport::TestCase
     assert_not @client.valid?
   end
   test "client licos should be able to be empty"do
-    @client.licos = nil 
+    @client.licos = nil
     assert @client.valid?
   end
 
@@ -76,7 +84,7 @@ class ClientTest < ActiveSupport::TestCase
   end
 
   test "client aish  should be able to be empty"do
-    @client.socialAssistance = "" 
+    @client.socialAssistance = ""
     assert @client.valid?
   end
 
