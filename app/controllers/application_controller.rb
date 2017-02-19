@@ -4,12 +4,7 @@ class ApplicationController < ActionController::Base
   rescue_from Exception, with: :server_error
   
   # set_access
-  config.middleware.insert_before 0, Rack::Cors do
-    allow do
-      origins '*'
-      resource '*', :headers => :any, :methods => [:get, :post, :options]
-    end
-  end
+
   # before_action :authenticate_user
 
 
