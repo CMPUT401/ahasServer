@@ -26,14 +26,14 @@ class PatientsTest < ActionDispatch::IntegrationTest
   test 'posting a valid patient' do
     post '/api/patients', headers: authenticated_header,
                           params: { patient: { name: 'Chairman Meow',
-                              species: 'Cat',
-                              gender: 'Female',
-                              colour: 'Red',
-                              tattoo: 18,
-                              microchip: 0,
-                              reproductive_status: 'Spade',
-                              age: 23,
-                              client: @client.id } }
+                                               species: 'Cat',
+                                               gender: 'Female',
+                                               colour: 'Red',
+                                               tattoo: 18,
+                                               microchip: 0,
+                                               reproductive_status: 'Spade',
+                                               age: 23,
+                                               client: @client.id } }
 
     assert_response :success
     assert JSON.parse(response.body)['success']
