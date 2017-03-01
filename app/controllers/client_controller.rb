@@ -1,7 +1,5 @@
 class ClientController < PersonController
-
-  def index
-  end
+  def index; end
 
   def create
     @client = Client.new(client_params)

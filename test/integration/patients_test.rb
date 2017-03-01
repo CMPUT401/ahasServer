@@ -41,7 +41,7 @@ class PatientsTest < ActionDispatch::IntegrationTest
 
   test 'asking for invalid patient id returns a 404' do
     bad_id = Patient.last.id + 1
-    get "/api/patients/" + bad_id.to_s, headers: authenticated_header
+    get '/api/patients/' + bad_id.to_s, headers: authenticated_header
 
     assert_response 404
     assert_not JSON.parse(response.body)['success']
