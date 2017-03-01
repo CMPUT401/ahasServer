@@ -4,8 +4,13 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-Justin: {}
-# column: value
-#
+Justin: 
+  name: Justin Barclay
+  address: 116 St & 85 Ave, Edmonton, AB T6G 2R3
+  phoneNumber: 7805555555
+  email: fakejustin@ualberta.ca
+  licos: 123456
+  socialAssistance: 76543
+  pets: 12404
 two: {}
 # column: value
