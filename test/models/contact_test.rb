@@ -41,7 +41,7 @@ class ContactTest < ActiveSupport::TestCase
   end
 
   test 'contacts have valid types' do
-    types = ['Veterinarian', 'Volunteer', 'Labratory']
+    types = ['Veterinarian', 'Volunteer', 'Laboratory']
     types.each do |type|
       @contact.contact_type = type
       assert @contact.valid?
