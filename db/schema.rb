@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20170303070919) do
     t.string   "fax_number"
     t.string   "email"
     t.string   "address"
-    t.string   "type"
+    t.string   "contact_type"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
