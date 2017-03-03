@@ -25,8 +25,21 @@ class PatientsController < ApplicationController
     
   end
 
+  def index
+    patients = Patient.all
+    patient_list = filter_patient_keys patients
+    
+    render json: { success: true, patients: patient_list }
+  end
+
   private
 
+  def filter_patient_keys(patients)
+    patients.map do |patient|
+      { id: patient.id, name: patient.name }
+    end
+  end
+  
   def patient_params
     params.require(:patient).permit(:name, :gender, :client, :species,
                                     :reproductive_status, :tattoo, :microchip,
