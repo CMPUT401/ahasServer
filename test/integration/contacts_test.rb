@@ -3,7 +3,7 @@ require 'test_helper'
 class ContactsTest < ActionDispatch::IntegrationTest
   def setup
     @good = contacts(:one)
-    @bad = contacts(:two)
+    @good.save
   end
 
   test 'should be able to post a valid, new contact' do
@@ -38,5 +38,24 @@ class ContactsTest < ActionDispatch::IntegrationTest
     
     assert_response :error
     assert_not JSON.parse(response.body)['success']
+  end
+
+  
+  test 'asking for invalid client id returns a 404' do
+    bad_id = Patient.last.id + 1
+    get '/api/patients/' + bad_id.to_s, headers: authenticated_header
+
+    assert_response 404
+    assert_not JSON.parse(response.body)['success']
+  end
+
+  test 'asking for a valid client id should return the correct patient' do
+    good_id = @good.id
+    
+    get '/api/contacts/' + good_id.to_s, headers: authenticated_header
+
+    assert good_id.to_s == JSON.parse(response.body)['contact']['id'].to_s
+    assert_response :success
+    assert JSON.parse(response.body)['success']
   end
 end

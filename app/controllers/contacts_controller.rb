@@ -12,8 +12,8 @@ class ContactsController < ApplicationController
 
   def show
     @contact = Contact.find_by(id: params[:id])
-    if client
-      render json: { success: true, contact: contact }
+    if @contact
+      render json: { success: true, contact: @contact }
     else
       render status: :error, json: { success: false, error: 'Contact not found' }
     end
