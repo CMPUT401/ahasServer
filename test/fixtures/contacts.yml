@@ -7,7 +7,7 @@ one:
   fax_number: 780-555-5556
   email: valid@email.com
   address: 221B Baker Street, Edmonton, AB T6H 0B2
-  contact_type: thing
+  contact_type: Veterinarian
 
 two:
   first_name: 

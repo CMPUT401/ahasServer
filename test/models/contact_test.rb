@@ -29,12 +29,7 @@ class ContactTest < ActiveSupport::TestCase
     @contact.email = 'fake@email'
     assert_not @contact.valid?
   end
-
-  test 'contact does not need an address' do
-    @contact.address = ' '
-    assert @contact.valid?
-  end
-
+  
   test 'contact does not need a phone number' do
     @contact.phone_number = ' '
     assert @contact.valid?
@@ -46,7 +41,7 @@ class ContactTest < ActiveSupport::TestCase
   end
 
   test 'contacts have valid types' do
-    types = ['Thing1', 'Thing 2', 'Thing 3']
+    types = ['Veterinarian', 'Volunteer', 'Labratory']
     types.each do |type|
       @contact.contact_type = type
       assert @contact.valid?
