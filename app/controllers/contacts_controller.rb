@@ -4,13 +4,23 @@ class ContactsController < ApplicationController
 
     if @contact.save
       render status: 201, json: { success: true }
-    end
+    else
       render status: :error, json: { success: false,
-                                     errors:  @contact.errors.full_messages  }
+                                     errors: @contact.errors.full_messages }
+    end
+  end
+
+  def show
+    @contact = Contact.find_by(id: params[:id])
+    if client
+      render json: { success: true, contact: contact }
+    else
+      render status: 404, json: { success: false, error: 'Contact not found' }
+    end
   end
 
   private
-  
+
   def contact_params
     params.require(:contact).permit(:first_name, :last_name, :address,
                                     :phone_number, :email, :fax_number, :type)

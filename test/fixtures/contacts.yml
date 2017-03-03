@@ -7,7 +7,7 @@ one:
   fax_number: 780-555-5556
   email: valid@email.com
   address: 221B Baker Street, Edmonton, AB T6H 0B2
-  type: Thing
+  contact_type: thing
 
 two:
   first_name: 
@@ -16,4 +16,4 @@ two:
   fax_number: 1
   email: invalid@wrongemail
   address: 18
-  type: 
+  contact_type: 
