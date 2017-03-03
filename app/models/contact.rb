@@ -1,6 +1,6 @@
 class Contact < ApplicationRecord
   before_save { email.downcase! }
-  
+
   validates :first_name, presence: { message: 'First Name is required' },
                          length: { maximum: 25, message: 'Name is too long' }
 
@@ -22,4 +22,5 @@ class Contact < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX,
                               message: 'Email is invalid format' },
                     allow_blank: true
+  # Contacts will have "Veterinary" "Volunteer" "Labratory"
 end
