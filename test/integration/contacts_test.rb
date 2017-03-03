@@ -58,4 +58,23 @@ class ContactsTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert JSON.parse(response.body)['success']
   end
+
+  test 'getting an index should return a list of contact names and IDs' do
+    get '/api/contacts', headers: authenticated_header
+    
+    contacts = JSON.parse(response.body)['contacts']
+    assert filtered_properly contacts
+
+    assert_response :success
+    assert JSON.parse(response.body)['success']
+  end
+
+  def filtered_properly(contacts)
+    contacts.each do |contact|
+      unless ['first_name', 'last_name', 'id'].uniq.sort == contact.keys.uniq.sort
+        return false
+      end
+    end
+  end
+
 end

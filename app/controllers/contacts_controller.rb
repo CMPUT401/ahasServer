@@ -19,7 +19,20 @@ class ContactsController < ApplicationController
     end
   end
 
+  def index
+    contacts = Contact.all
+    contact_list = filter_contact_keys contacts
+    
+    render json: { success: true, contacts: contact_list }
+  end
+
   private
+  def filter_contact_keys(contacts)
+    contacts.map do |contact|
+      { id: contact.id, first_name: contact.first_name,
+        last_name: contact.last_name }
+    end
+  end
 
   def contact_params
     params.require(:contact).permit(:first_name, :last_name, :address,
