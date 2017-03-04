@@ -26,14 +26,14 @@ class PatientsTest < ActionDispatch::IntegrationTest
   test 'posting a valid patient' do
     post '/api/patients', headers: authenticated_header,
                           params: { patient: { name: 'Chairman Meow',
-                              species: 'Cat',
-                              gender: 'Female',
-                              colour: 'Red',
-                              tattoo: 18,
-                              microchip: 0,
-                              reproductive_status: 'Spade',
-                              age: 23,
-                              client: @client.id } }
+                                               species: 'Cat',
+                                               gender: 'Female',
+                                               colour: 'Red',
+                                               tattoo: 18,
+                                               microchip: 0,
+                                               reproductive_status: 'Spade',
+                                               age: 23,
+                                               client: @client.id } }
 
     assert_response :success
     assert JSON.parse(response.body)['success']
@@ -41,7 +41,7 @@ class PatientsTest < ActionDispatch::IntegrationTest
 
   test 'asking for invalid patient id returns a 404' do
     bad_id = Patient.last.id + 1
-    get "/api/patients/" + bad_id.to_s, headers: authenticated_header
+    get '/api/patients/' + bad_id.to_s, headers: authenticated_header
 
     assert_response 404
     assert_not JSON.parse(response.body)['success']
@@ -54,5 +54,22 @@ class PatientsTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert JSON.parse(response.body)['success']
+  end
+
+  test 'getting an index should return a list of names and IDs' do
+    get '/api/patients', headers: authenticated_header
+
+    patients = JSON.parse(response.body)['patients']
+    assert filtered_properly patients
+    assert_response :success
+    assert JSON.parse(response.body)['success']
+  end
+
+  def filtered_properly(patients)
+    patients.each do |patient|
+      unless ['name', 'id'].uniq.sort == patient.keys.uniq.sort
+        return false
+      end
+    end
   end
 end

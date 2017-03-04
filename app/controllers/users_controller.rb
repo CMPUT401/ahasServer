@@ -1,6 +1,6 @@
 # coding: utf-8
 class UsersController < ApplicationController
-  # skip_before_action :authenticate_user, only: [:create]
+  skip_before_action :authenticate_user, only: [:create]
 
   def create
     @user = User.new(user_params)

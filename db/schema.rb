@@ -36,6 +36,18 @@ ActiveRecord::Schema.define(version: 20170304230026) do
     t.string   "alternativeContactLastName"
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "phone_number"
+    t.string   "fax_number"
+    t.string   "email"
+    t.string   "address"
+    t.string   "contact_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "patients", force: :cascade do |t|
     t.string   "species"
     t.string   "name"
