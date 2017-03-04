@@ -15,7 +15,6 @@ class Client < ApplicationRecord
   validates :socialAssistance, presence: true, allow_blank: true, numericality: {greater_than_or_equal_to: 0}
   validates :alternativeContactFirstName, presence: true, length: {maximum: 50, message: "Alternate Name is too long"}, allow_blank: true
   validates :alternativeContactLastName, presence: true, length: {maximum: 50, message: "Alternate Name is too long"}, allow_blank: true
-
   validates :alternativeContactPhoneNumber, presence: true, allow_blank: true
   validates :alternativeContactAddress, presence: {message: "Address is required"}, length: {maximum: 50, message: "Address is too long"}
   validates :notes,presence: true, allow_blank: true
