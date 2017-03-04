@@ -3,7 +3,8 @@ require 'test_helper'
 class ClientTest < ActiveSupport::TestCase
 
   def setup
-    name = "Leeroy Jenkins"
+    firstName = "Leeroy" 
+    lastName = "Jenkins"
     address = "1234 Fake St, Edmonton, Alberta"
     phone = "780-951-9085"
     email = "leeroyjenkins@gmail.com"
@@ -19,7 +20,7 @@ class ClientTest < ActiveSupport::TestCase
 
 #    alternativeContactPhoneNumber, alternativeContactAddress, notes, alternativeContact2ndPhone,alternateContactEmail
 
-    @client = Client.new(name: name, address: address, phoneNumber: phone, email: email, \
+    @client = Client.new(firstName: firstName, lastName: lastName, address: address, phoneNumber: phone, email: email, \
                         licos: licos, aish: aish ,socialAssistance: socialAssistance,\
                         pets: pets, alternativeContactPhoneNumber: alternativeContactPhoneNumber, alternativeContactAddress: alternativeContactAddress, notes: notes, alternativeContact2ndPhone: alternativeContact2ndPhone,alternateContactEmail: alternateContactEmail)
   end
@@ -28,13 +29,23 @@ class ClientTest < ActiveSupport::TestCase
     assert @client.valid?
   end
 
-  test "client name should be present" do
-      @client.name = "      "
+  test "client first name should be present" do
+      @client.firstName = "      "
+      assert_not @client.valid?
+  end
+
+  test "client first name should not be too long" do
+        @client.firstName = "a" * 51
+        assert_not @client.valid?
+    end
+
+  test "client last should be present" do
+      @client.lastName = "      "
       assert_not @client.valid?
   end
 
   test "client name should not be too long" do
-        @client.name = "a" * 51
+        @client.lastName = "a" * 51
         assert_not @client.valid?
     end
 
@@ -68,6 +79,7 @@ class ClientTest < ActiveSupport::TestCase
     @client.licos = -12314
     assert_not @client.valid?
   end
+
   test "client licos should be able to be empty"do
     @client.licos = nil
     assert @client.valid?
