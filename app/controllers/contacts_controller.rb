@@ -1,6 +1,7 @@
 class ContactsController < ApplicationController
 
   def create
+    puts params.to_json
     unless params.keys.include? 'contact'
       @contact = Client.new
       render status: :error, json: { success: false, errors: [@contact.errors.full_messages]}
