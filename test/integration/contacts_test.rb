@@ -40,6 +40,37 @@ class ContactsTest < ActionDispatch::IntegrationTest
     assert_not JSON.parse(response.body)['success']
   end
 
+  test 'posting a contact incomplete parameters should fail' do
+    post '/api/contacts/', headers: authenticated_header, params:
+                                                            { contact:
+                                                                {
+                                                                  first_name: :Justin,
+                                                                  last_name: :Barclay,
+                                                                  address: :something,
+                                                                  phone_number: '555-5555',
+                                                                  fax_number: ' ',
+                                                                  email: 'valid@example.com',
+                                                                  type: 'Veterinarian'
+                                                                } }
+    assert_response :error
+    assert_not JSON.parse(response.body)['success']
+  end
+
+  test 'posting a contact with wrong parameters shoud fail' do
+    post '/api/contacts/', headers: authenticated_header, params:
+                                                            { contacts:
+                                                                {
+                                                                  first_name: :Justin,
+                                                                  last_name: :Barclay,
+                                                                  address: :something,
+                                                                  phone_number: '555-5555',
+                                                                  fax_number: ' ',
+                                                                  email: 'valid@example.com',
+                                                                  contact_type: 'Veterinarian'
+                                                                } }
+    assert_response :error
+    assert_not JSON.parse(response.body)['success']
+  end
   
   test 'asking for invalid client id returns a 404' do
     bad_id = Patient.last.id + 1
