@@ -49,7 +49,7 @@ class PatientsTest < ActionDispatch::IntegrationTest
 
   test 'asking for a valid patient id should return the correct patient' do
     good_id = @patient.id
-    
+
     get '/api/patients/' + good_id.to_s, headers: authenticated_header
 
     assert_response :success
