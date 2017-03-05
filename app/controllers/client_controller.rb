@@ -26,6 +26,7 @@ class ClientController < PersonController
   def client_params
     params.require(:client).permit(:name, :address, :phoneNumber, :email,
                                    :licos, :aish, :socialAssistance,
-                                   :pets)
+                                   :pets, :alternativeContactPhoneNumber, :alternativeContactAddress,  
+                       :notes, :alternativeContact2ndPhone, :alternateContactEmail)
   end
 end

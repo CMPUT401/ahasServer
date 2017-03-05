@@ -1,0 +1,40 @@
+<2017-02-17 Fri>
+* Intro
+- We did modify requirements
+    + Add admin stuff
+    + Added project overview
+- Software design doc: not changed
+- Finished some stories
+- Sequence diagrams are up (5 of them)
+** Sequence diagrams review
+- Need to show return IDs in the sequence diagram
+- Titles: client list, patient interaction, calendar interaction, contact
+  info, login
+** UML Class diagrams
+- Doesn't like our UML
+- Need multiplicities, type of relationships
+- They are all aggregation
+- Need to remove person class, there is no person class
+- You reserve an appointment for a client, and a client may register 1 to
+  many pets for that appointment
+- Each appointment has 1 to many patients. There should not be a
+- Each patient has many appointments
+- Patient alerts, secondary thing needs to keep a foreign key
+- If the foreign key is in patient, you can only have 1 alert
+- User creates many medical records. Many to one
+- User creates
+- User not Users, alter, not alerts
+- Needs some tweaking, need multiplicities
+** Stories
+- We have integration and model tests (unit tests)
+- 3 stories done, but 3 additionally complete
+- We said we'd work on 6 user stories
+    + Back end for all 6 is done
+    + Front end for 3 isn't there
+- Learning took more time than we thought
+- Logins are complete, but not connected
+- Creating a client isn't complete, because it's not connected to
+  authorization
+- Website needs to look a lot cleaner
+- UI will be polished later
+- Acceptance tests: 86 pass, 9 fail

@@ -5,7 +5,8 @@
 # below each fixture, per the syntax in the comments below
 #
 Justin: 
-  name: Justin Barclay
+  firstName: Justin 
+  lastName: Barclay
   address: 116 St & 85 Ave, Edmonton, AB T6G 2R3
   phoneNumber: 7805555555
   email: fakejustin@ualberta.ca
