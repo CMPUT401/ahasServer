@@ -102,7 +102,7 @@ class ContactsTest < ActionDispatch::IntegrationTest
 
   def filtered_properly(contacts)
     contacts.each do |contact|
-      unless ['first_name', 'last_name', 'id'].uniq.sort == contact.keys.uniq.sort
+      unless ['first_name', 'last_name', 'id', 'contact_type'].uniq.sort == contact.keys.uniq.sort
         return false
       end
     end
