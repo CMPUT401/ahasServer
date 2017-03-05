@@ -1,6 +1,7 @@
 class ContactsController < ApplicationController
 
   def create
+    
     puts params.to_json
     unless params.keys.include? 'contact'
       @contact = Client.new
