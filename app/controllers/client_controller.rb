@@ -12,6 +12,10 @@ class ClientController < PersonController
     end
   end
 
+  def fetchAll
+    
+  end
+
   def show
     client = Client.find_by(id: params[:id])
     if client

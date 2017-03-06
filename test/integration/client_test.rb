@@ -42,4 +42,12 @@ class Clients_test < ActionDispatch::IntegrationTest
     assert_response 404
     assert_not JSON.parse(response.body)['success']
   end
+
+  test 'respond to GET all' do
+
+  get '/api/client', headers: authenticated_header
+
+  putc JSON.parse(response.body.to_s)
+  end
+
 end
