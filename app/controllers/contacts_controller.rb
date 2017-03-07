@@ -34,7 +34,7 @@ class ContactsController < ApplicationController
   private
   def filter_contact_keys(contacts)
     contacts.map do |contact|
-      { id: contact.id, first_name: contact.first_name,
+      { id: contact.id, first_name: contact.first_name, contact_type: contact.contact_type,
         last_name: contact.last_name }
     end
   end
