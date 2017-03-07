@@ -2,6 +2,8 @@ class ClientController < PersonController
   def index; end
 
   def create
+    client = client_params
+    client['pets'] = Client.find_by(id: client['pets'])
     @client = Client.new(client_params)
 
     if @client.save
@@ -12,8 +14,11 @@ class ClientController < PersonController
     end
   end
 
-  def fetchAll
+  def index
+    clients = Clients.all
+    client_list = filter_client_keys clients
     
+    render json: { success: true, clients: patient_list }
   end
 
   def show
