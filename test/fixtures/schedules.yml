@@ -5,9 +5,10 @@ one:
   clientId: 1
   reason: foaming at mouth 
   notes: really bitey
-
+  location: 1234 Fake St.
 two:
-  appointmentDate: 2018-03-07 01:23:11
-  clientId: 1
+  appointmentDate: 
+  clientId: 
   reason: MyString
   notes: MyString
+  location: 5
