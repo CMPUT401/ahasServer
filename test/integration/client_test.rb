@@ -44,10 +44,9 @@ class Clients_test < ActionDispatch::IntegrationTest
   end
 
   test 'respond to GET all' do
-
-  get '/api/client', headers: authenticated_header
-
-  putc JSON.parse(response.body.to_s)
+    get '/api/client', headers: authenticated_header
+    
+    assert_response :success
   end
 
 end
