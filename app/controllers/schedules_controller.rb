@@ -11,5 +11,7 @@ class SchedulesController < ApplicationController
       render status: :error, json: { success: false, errors: @schedule.errors.full_messages }
     end
   end
-
+  def schedule_params
+    params.require(:schedule).permit(:appointmentDate, :clientID, :reason, :notes, :location)
+  end
 end
