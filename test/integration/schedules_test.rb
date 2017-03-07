@@ -7,15 +7,17 @@ class SchedulesTest < ActionDispatch::IntegrationTest
   @scheduleInstance = schedules(:one)
   @scheduleInstance.clientId = @client.id
   @scheduleInstance.save
+
+  @two = schedules(:two)
+  @two.save
   end
 
   test 'posting invalid info to /api/schedules' do
     assert_no_difference 'Schedule.count' do
       post '/api/schedules', headers: authenticated_header,
-        params: {schedule: { appointmentDate: ' ',
-                             client: ' ',
-                             notes: 0,
-                             reason: 'foaming at mouth'}}
+        params:JSON.parse(@two.to_json)     
+    puts JSON.parse(@two.to_json)     
+
     assert_response :error
     assert JSON.parse(response.body)['errors'].count > 0
   end

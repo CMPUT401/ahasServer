@@ -7,6 +7,7 @@ class ScheduleTest < ActiveSupport::TestCase
   end
 
   test 'schedule instance on eshould be valid' do
+    assert_kind_of Schedule, @one
     assert @one.valid?
   end
 

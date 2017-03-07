@@ -9,6 +9,6 @@ one:
 two:
   appointmentDate: 
   clientId: 
-  reason: MyString
+  reason: 
   notes: MyString
   location: 5
