@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  appointmentDate: 2017-03-29 11:23:11
+  clientId: 1
+  reason: foaming at mouth 
+  notes: really bitey
+
+two:
+  appointmentDate: 2018-03-07 01:23:11
+  clientId: 1
+  reason: MyString
+  notes: MyString
