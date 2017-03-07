@@ -1,10 +1,8 @@
 class ClientController < PersonController
-  def index; end
-
+  
   def create
     client = client_params
-    client['pets'] = Client.find_by(id: client['pets'])
-    @client = Client.new(client_params)
+    @client = Client.new(client)
 
     if @client.save
       render status: 201, json: { success: true }
@@ -12,13 +10,6 @@ class ClientController < PersonController
       render status: :error, json: { success: false,
                                      errors: @client.errors.full_messages }
     end
-  end
-
-  def index
-    clients = Clients.all
-    client_list = filter_client_keys clients
-    
-    render json: { success: true, clients: patient_list }
   end
 
   def show
@@ -30,8 +21,22 @@ class ClientController < PersonController
     end
   end
 
+  def index
+    clients = Client.all
+    client_list = filter_client_keys clients
+    
+    render json: { success: true, clients: client_list}
+  end
+  
   private
+  def filter_client_keys(clients)
+    clients.map do |client|
+      { id: client.id, firstName: client.firstName, lastName: client.lastName}
+    end
+  end
 
+
+  private
   def client_params
     params.require(:client).permit(:name, :address, :phoneNumber, :email,
                                    :licos, :aish, :socialAssistance,
@@ -39,3 +44,4 @@ class ClientController < PersonController
                        :notes, :alternativeContact2ndPhone, :alternateContactEmail)
   end
 end
+

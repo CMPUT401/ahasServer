@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170305024208) do
+ActiveRecord::Schema.define(version: 20170307060016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20170305024208) do
     t.string   "alternativeContactAddress"
     t.string   "notes"
     t.string   "alternativeContact2ndPhone"
+    t.index ["lastName", "firstName"], name: "index_clients_on_lastName_and_firstName", using: :btree
   end
 
   create_table "contacts", force: :cascade do |t|
