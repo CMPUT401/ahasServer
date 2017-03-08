@@ -10,6 +10,15 @@ class MedicalRecordsController < ApplicationController
     end
   end
 
+  def show
+    @medical_record = MedicalRecord.find_by(id: params[:id])
+    if @medical_record
+      render json: { success: true, medical_record: @medical_record }
+    else
+      render status: :error, json: { success: false, error: 'Medical Record not found' }
+    end
+  end
+  
   private
 
   def medical_record_params

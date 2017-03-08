@@ -46,7 +46,7 @@ class MedicalRecordTest < ActiveSupport::TestCase
     @good.temperature = 13.5
     assert @good.valid?
 
-    @good.termperature = 'Flimteeen'
+    @good.temperature = 'Flimteen'
     assert_not @good.valid?
   end
 end

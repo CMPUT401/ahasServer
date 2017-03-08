@@ -54,18 +54,46 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
       respiratoryN: true,
       respiratoryA: true
     }
+    
+    @show_record = medical_records(:one)
+
+    unless @show_record.save
+      throw Error
+    end
+    
   end
 
-   test 'Posting a valid medical record' do
+  test 'Posting a valid medical record' do
     post '/api/medical_records', headers: authenticated_header, params: { medical_record: @medical_record }
 
+    assert JSON.parse(response.body)['success']
     assert_response :created
   end
-  
+
   test 'Posting invalid medical record fails' do
     @medical_record['heart_rate'] = 'blue'
     post '/api/medical_records', headers: authenticated_header, params: { medical_record: @medical_record }
 
     assert_response :error
+    assert_not JSON.parse(response.body)['success']
+    assert JSON.parse(response.body)['errors'].length > 0
+  end
+
+  test 'Get medical_record' do
+    good_id = @show_record.id.to_s
+
+    get '/api/medical_records/' + good_id, headers: authenticated_header
+
+    assert_response :success
+    assert JSON.parse(response.body)['medical_record']['id'].to_s == good_id
+  end
+
+  test 'Get invalid medical_record' do
+    bad_id = @show_record.id + 1
+
+    get '/api/medical_records/' + bad_id.to_s, headers: authenticated_header
+
+    assert_response :error
+    assert_not JSON.parse(response.body)['success']
   end
 end

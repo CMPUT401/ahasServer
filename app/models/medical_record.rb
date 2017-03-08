@@ -1,5 +1,5 @@
 class MedicalRecord < ApplicationRecord
-  validates :temperature, presence: true, allow_blank: true
+  validates :temperature, presence: true, allow_blank: true, numericality: true
 
   validates :notes, presence: true, allow_blank: true
 
