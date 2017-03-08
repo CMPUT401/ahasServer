@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       resources    :patients
       resources    :client
       resources    :contacts
+      resources    :medical_records
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
