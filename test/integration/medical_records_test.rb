@@ -7,20 +7,20 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
   def setup
     @medical_record = {
       temperature: 38.5,
-      notes: "No new notes",
-      medications: "This might need to be removed",
-      eyes: "All good",
-      oral: "Speaks wonderfully",
-      ears: "Little bit deaf",
-      glands: "normal",
-      skin: "Covered in fur",
-      abdomen: "great abs",
-      urogential: "normal",
-      nervousSystem: "Like Woody Allen",
-      musculoskeletal: "Titanium",
-      cardiovascular: "Like molasses",
+      notes: 'No new notes',
+      medications: 'This might need to be removed',
+      eyes: 'All good',
+      oral: 'Speaks wonderfully',
+      ears: 'Little bit deaf',
+      glands: 'normal',
+      skin: 'Covered in fur',
+      abdomen: 'great abs',
+      urogential: 'normal',
+      nervousSystem: 'Like Woody Allen',
+      musculoskeletal: 'Titanium',
+      cardiovascular: 'Like molasses',
       heart_rate: 88,
-      respiratory: "good",
+      respiratory: 'good',
       respiratory_rate: 31,
       attitudeBAR: true,
       attitudeQAR: true,
@@ -54,6 +54,12 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
       respiratoryN: true,
       respiratoryA: true
     }
+  end
+
+   test 'Posting a valid medical record' do
+    post '/api/medical_records', headers: authenticated_header, params: { medical_record: @medical_record }
+
+    assert_response :created
   end
   
   test 'Posting invalid medical record fails' do
