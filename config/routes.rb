@@ -14,11 +14,13 @@ Rails.application.routes.draw do
       post         'user_token', to: 'user_token#create'
       post         'login',      to: 'user_token#create'
 
-      post        'patients/:patients_id/medical_records/:medical_records_id', to: 'medical_record#create'
-      get         'patients/:patients_id/medical_records', to: 'medical_record#index'
-      
+      # post        'patient/:patient_id/medical_records/:medical_record_id', to: 'medical_records#create'
+      # get         'patients/:patient_id/medical_records',                    to: 'medical_record#index'
+      # get         'patients/:patient_id/medical_records/:medical_record_id', to: 'medical_records#show'
       resources    :users
-      resources    :patients
+      resources    :patients do
+        resources  :medical_records
+      end
       resources    :client
       resources    :contacts
     end

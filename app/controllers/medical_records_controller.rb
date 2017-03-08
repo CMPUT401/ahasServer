@@ -2,7 +2,6 @@ class MedicalRecordsController < ApplicationController
   def create
     
     @medical_record = MedicalRecord.new(medical_record_params)
-    
     if @medical_record.save
       render status: 201, json: { success: true }
     else
@@ -11,8 +10,7 @@ class MedicalRecordsController < ApplicationController
   end
 
   def show
-    @medical_record = MedicalRecord.find_by(id: params[:medical_record_id])
-
+    @medical_record = MedicalRecord.find_by(id: params[:id])
     if @medical_record
       render json: { success: true, medical_record: @medical_record }
     else
@@ -21,8 +19,8 @@ class MedicalRecordsController < ApplicationController
   end
 
   def index
-    @medical_records = MedicalRecord.all
-    filtered_records = filter_medical_records_keys @medical_records
+    @patient = Patient.find_by(id: params[:patient_id])
+    filtered_records = filter_medical_records_keys patient.medical_records
 
     render status: :success, json: { success: true, medical_records: filtered_records }
   end
@@ -45,7 +43,7 @@ class MedicalRecordsController < ApplicationController
                                            :earsAS, :glandsN, :glandsA, :skinN, :skinA, :abdomenN,
                                            :abdomenA, :urogentialN, :urogentialA, :nervousSystemN, :nervousSystemA,
                                            :musculoskeletalN, :musculoskeletalA, :cardiovascularN, :cardiovascularA, :respiratoryN,
-                                           :respiratoryA)
+                                           :respiratoryA, :patient_id)
   end
 end
 

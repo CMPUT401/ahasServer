@@ -6,7 +6,9 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
   #   assert true
   # end
   def setup
-    @medical_record = {
+    @patient_id = patients(:one).id.to_s
+    @medical_record ={
+      patient_id: @patient_id,
       temperature: 38.5,
       notes: 'No new notes',
       medications: 'This might need to be removed',
@@ -55,9 +57,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
       respiratoryN: true,
       respiratoryA: true
     }
-
     @show_record = medical_records(:one)
-    @patient_id = patients_path(:one).id.to_s
     
     unless @show_record.save
       throw Error
@@ -65,7 +65,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
   end
 
   test 'Posting a valid medical record' do
-    post '/api/medical_records', headers: authenticated_header, params: { medical_record: @medical_record }
+    post "/api/patients/#{@patient_id}/medical_records", headers: authenticated_header, params: { medical_record: @medical_record }
 
     assert JSON.parse(response.body)['success']
     assert_response :created
@@ -73,7 +73,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
 
   test 'Posting invalid medical record fails' do
     @medical_record['heart_rate'] = 'blue'
-    post '/api/medical_records', headers: authenticated_header, params: { medical_record: @medical_record }
+    post "/api/patients/#{@patient_id}/medical_records", headers: authenticated_header, params: { medical_record: @medical_record }
 
     assert_response :error
     assert_not JSON.parse(response.body)['success']
@@ -83,8 +83,8 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
   test 'Get medical_record' do
     good_id = @show_record.id.to_s
 
-    get '/api/medical_records/' + good_id, headers: authenticated_header
-    puts response.body['medical_record']
+    get "/api/patients/#{@patient_id}/medical_records/#{good_id}", headers: authenticated_header
+    
     assert_response :success
     assert JSON.parse(response.body)['medical_record']['id'].to_s == good_id
   end
@@ -92,7 +92,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
   test 'Get invalid medical_record' do
     bad_id = @show_record.id + 1
 
-    get '/api/medical_records/' + bad_id.to_s, headers: authenticated_header
+    get "/api/patients/#{@patient_id}/medical_records/#{bad_id}", headers: authenticated_header
 
     assert_response :error
     assert_not JSON.parse(response.body)['success']
