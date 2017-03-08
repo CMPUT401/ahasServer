@@ -7,7 +7,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
   # end
   def setup
     @patient_id = patients(:one).id.to_s
-    @medical_record ={
+    @medical_record = {
       patient_id: @patient_id,
       temperature: 38.5,
       notes: 'No new notes',
@@ -58,7 +58,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
       respiratoryA: true
     }
     @show_record = medical_records(:one)
-    
+
     unless @show_record.save
       throw Error
     end
@@ -79,12 +79,12 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
     assert_not JSON.parse(response.body)['success']
     assert JSON.parse(response.body)['errors'].length > 0
   end
-  
+
   test 'Get medical_record' do
     good_id = @show_record.id.to_s
 
     get "/api/patients/#{@patient_id}/medical_records/#{good_id}", headers: authenticated_header
-    
+
     assert_response :success
     assert JSON.parse(response.body)['medical_record']['id'].to_s == good_id
   end
