@@ -2,7 +2,7 @@ class MedicalRecordsController < ApplicationController
   def create
     
     @medical_record = MedicalRecord.new(medical_record_params)
-
+    
     if @medical_record.save
       render status: 201, json: { success: true }
     else
@@ -11,7 +11,8 @@ class MedicalRecordsController < ApplicationController
   end
 
   def show
-    @medical_record = MedicalRecord.find_by(id: params[:id])
+    @medical_record = MedicalRecord.find_by(id: params[:medical_record_id])
+
     if @medical_record
       render json: { success: true, medical_record: @medical_record }
     else
