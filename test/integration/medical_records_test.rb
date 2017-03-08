@@ -1,3 +1,4 @@
+
 require 'test_helper'
 
 class MedicalRecordsTest < ActionDispatch::IntegrationTest
@@ -54,13 +55,12 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
       respiratoryN: true,
       respiratoryA: true
     }
-    
-    @show_record = medical_records(:one)
 
+    @show_record = medical_records(:one)
+    
     unless @show_record.save
       throw Error
     end
-    
   end
 
   test 'Posting a valid medical record' do
@@ -78,7 +78,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
     assert_not JSON.parse(response.body)['success']
     assert JSON.parse(response.body)['errors'].length > 0
   end
-
+  
   test 'Get medical_record' do
     good_id = @show_record.id.to_s
 
