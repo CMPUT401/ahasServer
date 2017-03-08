@@ -57,6 +57,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
     }
 
     @show_record = medical_records(:one)
+    @patient_id = patients_path(:one).id.to_s
     
     unless @show_record.save
       throw Error
@@ -83,7 +84,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
     good_id = @show_record.id.to_s
 
     get '/api/medical_records/' + good_id, headers: authenticated_header
-
+    puts response.body['medical_record']
     assert_response :success
     assert JSON.parse(response.body)['medical_record']['id'].to_s == good_id
   end

@@ -1,3 +1,4 @@
+
 Rails.application.routes.draw do
 
   get              'static_pages/home'
@@ -12,11 +13,14 @@ Rails.application.routes.draw do
       post         'signup',     to: 'users#create'
       post         'user_token', to: 'user_token#create'
       post         'login',      to: 'user_token#create'
+
+      post        'patients/:patients_id/medical_records/:medical_records_id', to: 'medical_record#create'
+      get         'patients/:patients_id/medical_records', to: 'medical_record#index'
+      
       resources    :users
       resources    :patients
       resources    :client
       resources    :contacts
-      resources    :medical_records
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
