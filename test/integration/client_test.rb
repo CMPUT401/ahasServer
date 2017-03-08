@@ -2,14 +2,17 @@ require 'test_helper'
 
 class Clients_test < ActionDispatch::IntegrationTest
   def setup
-    @client = clients(:Justin)
-    @client.save
+    @client = {client: { firstName: "Harry", lastName: "Potter",\
+                        address: "1234 Fake ave, Edmonton, Alberta",\
+                        phoneNumber: "7802344444", email: "jeff@geoff.com",\
+    }}
+    @yamlClient = clients(:Justin)
   end
 
   test "respond to successful POST" do
-      post '/api/client',
-      params: JSON.parse(@client.to_json), headers: authenticated_header
-    assert_response :success
+    post '/api/client',
+      params: @client, headers: authenticated_header
+    assert_response 201
   end
 
   test "respond to failed POST" do
@@ -25,14 +28,14 @@ class Clients_test < ActionDispatch::IntegrationTest
   end
 
   test 'respond to successful GET' do
-    good_id = @client.id.to_s
+    good_id = @yamlClient.id.to_s
     get '/api/client/' + good_id, headers: authenticated_header
 
     assert_response :success
     assert JSON.parse(response.body)['success']
 
     # This is kind of convolutes but I'm lazy and this is the easiest way to ensure that a parsed JSON string matches a client
-    assert_equal JSON.parse(@client.to_json), JSON.parse(response.body)['client']
+    assert_equal JSON.parse(@yamlClient.to_json), JSON.parse(response.body)['client']
   end
 
   test 'respond to failed GET' do
@@ -45,7 +48,6 @@ class Clients_test < ActionDispatch::IntegrationTest
 
   test 'respond to GET all' do
     get '/api/client', headers: authenticated_header
-    
     assert_response :success
   end
 
