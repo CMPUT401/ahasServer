@@ -1,0 +1,56 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one:
+  temperature: 38.5
+  notes: No new notes
+  medications: This might need to be removed
+  eyes: All good
+  oral: Speaks wonderfully
+  ears: Little bit deaf
+  glands: normal
+  skin: Covered in fur
+  abdomen: great abs
+  urogential: normal
+  nervousSystem: Like woody allen
+  musculoskeletal: Titanium
+  cardiovascular: Like molasses
+  heart_rate: 88
+  respiratory: good
+  respiratory_rate: 31
+  attitudeBAR: True
+  attitudeQAR: True
+  attitudeDepressed: True
+  eyesN: True
+  eyesA: True
+  mmN: True
+  mmPale: True
+  mmJaundiced: True
+  mmTacky: True
+  earsN: True
+  earsA: True
+  earsEarMites: True
+  earsAU: True
+  earsAD: True
+  earsAS: True
+  glandsN: True
+  glandsA: True
+  skinN: True
+  skinA: True
+  abdomenN: True
+  abdomenA: True
+  urogentialN: True
+  urogentialA: True
+  nervousSystemN: True
+  nervousSystemA: True
+  musculoskeletalN: True
+  musculoskeletalA: True
+  cardiovascularN: True
+  cardiovascularA: True
+  respiratoryN: True
+  respiratoryA: True  
+two: {}
+  # column: value True
