@@ -1,5 +1,6 @@
 class MedicalRecord < ApplicationRecord
   belongs_to :patient
+  has_many   :notes
 
   validates :patient_id, presence: true, allow_bank: false
   
