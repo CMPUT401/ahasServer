@@ -7,7 +7,8 @@ class ClientController < PersonController
     if @client.save
       render status: 201, json: { success: true }
     else
-      render status: :error, json: { success: false,
+      puts @client.errors.full_messages
+      render status: 500, json: { success: false,
                                      errors: @client.errors.full_messages }
     end
   end
@@ -38,9 +39,10 @@ class ClientController < PersonController
 
   private
   def client_params
-    params.require(:client).permit(:name, :address, :phoneNumber, :email,
+    params.require(:client).permit(:firstName, :lastName, :address, :phoneNumber, :email,
                                    :licos, :aish, :socialAssistance,
-                                   :pets, :alternativeContactPhoneNumber, :alternativeContactAddress,  
+                                   :pets, :alternativeContactLastName, :alternativeContactFirstName, 
+                                   :alternativeContactPhoneNumber, :alternativeContactAddress,  
                        :notes, :alternativeContact2ndPhone, :alternateContactEmail)
   end
 end
