@@ -1,50 +1,96 @@
 class MedicalRecord < ApplicationRecord
+  validates :temperature, presence: true, allow_blank: true
 
-  validates :temperature, presence: true
-  validates :notes, presence: true
-  validates :medications, presence: true
-  validates :eyesText, presence: true
-  validates :oral, presence: true
-  validates :ears, presence: true
-  validates :glands, presence: true
-  validates :skin, presence: true
-  validates :abdomen, presence: true
-  validates :urogential, presence: true
-  validates :nervousSystem, presence: true
-  validates :musculoskeletal, presence: true
-  validates :cardiovascular, presence: true
-  validates :heart_rate, presence: true
-  validates :respiratory, presence: true
-  validates :respiratory_rate, presence: true
-  validates :attitudeBAR, presence: true
-  validates :attitudeQAR, presence: true
-  validates :attitudeDepressed, presence: true
-  validates :eyesN, presence: true
-  validates :eyesA, presence: true
-  validates :mmN, presence: true
-  validates :mmPale, presence: true
-  validates :mmJaundiced, presence: true
-  validates :mmTacky, presence: true
-  validates :earsN, presence: true
-  validates :earsA, presence: true
-  validates :earsEarMites, presence: true
-  validates :earsAU, presence: true
-  validates :earsAD, presence: true
-  validates :earsAS, presence: true
-  validates :glandsN, presence: true
-  validates :glandsA, presence: true
-  validates :skinN, presence: true
-  validates :skinA, presence: true
-  validates :abdomenN, presence: true
-  validates :abdomenA, presence: true
-  validates :urogentialN, presence: true
-  validates :urogentialA, presence: true
-  validates :nervousSystemN, presence: true
-  validates :nervousSystemA, presence: true
-  validates :musculoskeletalN, presence: true
-  validates :musculoskeletalA, presence: true
-  validates :cardiovascularN, presence: true
-  validates :cardiovascularA, presence: true
-  validates :respiratoryN, presence: true
-  validates :respiratoryA, presence: true
+  validates :notes, presence: true, allow_blank: true
+
+  validates :medications, presence: true, allow_blank: true
+
+  validates :eyes, presence: true, allow_blank: true
+
+  validates :oral, presence: true, allow_blank: true
+
+  validates :ears, presence: true, allow_blank: true
+
+  validates :glands, presence: true, allow_blank: true
+
+  validates :skin, presence: true, allow_blank: true
+
+  validates :abdomen, presence: true, allow_blank: true
+
+  validates :urogential, presence: true, allow_blank: true
+
+  validates :nervousSystem, presence: true, allow_blank: true
+
+  validates :musculoskeletal, presence: true, allow_blank: true
+
+  validates :cardiovascular, presence: true, allow_blank: true
+
+  validates :heart_rate, presence: true, allow_blank: true, numericality: { only_integer: true }
+
+  validates :respiratory, presence: true, allow_blank: true
+
+  validates :respiratory_rate, presence: true, allow_blank: true, numericality: { only_integer: true }
+
+  validates :attitudeBAR, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :attitudeQAR, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :attitudeDepressed, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :eyesN, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :eyesA, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :mmN, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :mmPale, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :mmJaundiced, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :mmTacky, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :earsN, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :earsA, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :earsEarMites, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :earsAU, presence: true, allow_blank: true, inclusion: { in: [true, false]}
+
+  validates :earsAD, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :earsAS, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :glandsN, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :glandsA, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :skinN, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :skinA, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :abdomenN, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :abdomenA, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :urogentialN, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :urogentialA, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :nervousSystemN, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :nervousSystemA, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :musculoskeletalN, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :musculoskeletalA, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :cardiovascularN, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :cardiovascularA, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :respiratoryN, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
+  validates :respiratoryA, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+
 end

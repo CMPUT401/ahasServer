@@ -1,10 +1,10 @@
 class CreateMedicalRecords < ActiveRecord::Migration[5.0]
   def change
     create_table :medical_records do |t|
-      t.integer :temperature
+      t.float :temperature
       t.text :notes
       t.text :medications
-      t.string :eyesText
+      t.string :eyes
       t.string :oral
       t.string :ears
       t.string :glands
@@ -15,7 +15,7 @@ class CreateMedicalRecords < ActiveRecord::Migration[5.0]
       t.string :musculoskeletal
       t.string :cardiovascular
       t.integer :heart_rate
-      t.text :respiratory
+      t.string :respiratory
       t.integer :respiratory_rate
       t.boolean :attitudeBAR
       t.boolean :attitudeQAR
