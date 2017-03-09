@@ -10,7 +10,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
     @medical_record = {
       patient_id: @patient_id,
       temperature: 38.5,
-      notes: 'No new notes',
+      exam_notes: 'No new notes',
       medications: 'This might need to be removed',
       eyes: 'All good',
       oral: 'Speaks wonderfully',
@@ -57,11 +57,8 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
       respiratoryN: true,
       respiratoryA: true
     }
-    @show_record = medical_records(:one)
 
-    unless @show_record.save
-      throw Error
-    end
+    @show_record = medical_records(:one)
   end
 
   test 'Posting a valid medical record' do

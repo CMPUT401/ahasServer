@@ -3,6 +3,7 @@
 
 class Patient < ApplicationRecord
   belongs_to :client
+
   has_many :medical_records
 
   validates :species, presence: true
@@ -18,6 +19,7 @@ class Patient < ApplicationRecord
   validates :age, numericality: { only_integer: true }, allow_blank: true
 
   validates :microchip, numericality: { only_integer: true }, allow_blank: true
+  validates :client_id, presence: true, allow_blank: false, numericality: true
 
   validates :gender, presence: true
 end
