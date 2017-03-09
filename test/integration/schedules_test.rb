@@ -54,6 +54,7 @@ class SchedulesTest < ActionDispatch::IntegrationTest
   end
   test 'respond to GET all' do
     get '/api/schedules', headers: authenticated_header
+    puts response.body
     assert_response :success
   end
 
