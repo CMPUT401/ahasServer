@@ -16,12 +16,12 @@ class PatientTest < ActiveSupport::TestCase
     assert_not @two.valid?
   end
 
-  test 'name must be present' do
-    @one.first_name = nil
+  test 'first name must be present' do
+    @one.first_name = ''
     assert_not @one.valid?
   end
 
-  test 'name must be present' do
+  test 'last name must be present' do
     @one.last_name = nil
     assert_not @one.valid?
   end

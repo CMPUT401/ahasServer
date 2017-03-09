@@ -27,7 +27,7 @@ class PatientsTest < ActionDispatch::IntegrationTest
   test 'posting a valid patient' do
     post '/api/patients', headers: authenticated_header,
                           params: { patient: { first_name: 'Chairman Meow',
-                                               last_name: 'Barclay'
+                                               last_name: 'Barclay',
                                                species: 'Cat',
                                                gender: 'Female',
                                                colour: 'Red',
@@ -69,9 +69,10 @@ class PatientsTest < ActionDispatch::IntegrationTest
 
   def filtered_properly(patients)
     patients.each do |patient|
-      unless ['first_name','last_name' 'id'].uniq.sort == patient.keys.uniq.sort
+      unless ['first_name','last_name', 'id'].uniq.sort == patient.keys.uniq.sort
         return false
       end
     end
   end
+
 end

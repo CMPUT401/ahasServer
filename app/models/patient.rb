@@ -8,8 +8,10 @@ class Patient < ApplicationRecord
 
   validates :species, presence: true
 
-  validates :name, presence: true
+  validates :first_name, presence: true
 
+  validates :last_name, presence: true
+  
   validates :colour, presence: true
 
   validates :reproductive_status, presence: true
