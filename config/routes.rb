@@ -1,6 +1,8 @@
 
 Rails.application.routes.draw do
 
+  get 'schedules/new'
+
   get              'static_pages/home'
   get              'static_pages/help'
   root             'static_pages#home'
@@ -25,6 +27,7 @@ Rails.application.routes.draw do
       end
       resources    :client
       resources    :contacts
+      resources    :schedules
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

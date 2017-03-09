@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  appointmentStartDate: 2017-03-29 11:23:11
+  appointmentEndDate: 2017-03-29 12:23:11
+  clientId: 1
+  reason: foaming at mouth 
+  notes: really bitey
+  location: 1234 Fake St.
+two:
+  appointmentStartDate: 2017-03-29 11:23:11
+  appointmentEndDate:
+  clientId: 
+  reason: 
+  notes: MyString
+  location: 5
