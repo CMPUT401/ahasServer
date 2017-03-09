@@ -1,7 +1,8 @@
 class Client < ApplicationRecord
   #Ensure client's email is unique
   before_save {email.downcase!}
-  #has_many :patients
+
+  has_many :patients
 
   #Data validations
   validates :firstName, presence: {message: "Name is required"}, length: {maximum: 50, message: "Name is too long"}

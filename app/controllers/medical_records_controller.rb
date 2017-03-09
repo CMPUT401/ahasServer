@@ -20,14 +20,12 @@ class MedicalRecordsController < ApplicationController
   end
 
   def index
-
+    
     patient = Patient.find_by(id: params[:patient_id])
-
     filtered_records = filter_medical_records_keys patient.medical_records
-
     render status: 200, json: { success: true, medical_records: filtered_records }
   end
-  
+
   private
 
   def filter_medical_records_keys(medical_records)

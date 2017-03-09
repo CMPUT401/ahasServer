@@ -14,13 +14,15 @@ class ClientController < PersonController
 
   def show
     client = Client.find_by(id: params[:id])
+    patients = client.patients
+    puts patients.to_json
     if client
       render json: { success: true, client: client }
     else
       render status: 404, json: { success: false, error: 'Client not found' }
     end
   end
-
+  
   def index
     clients = Client.all
     client_list = filter_client_keys clients

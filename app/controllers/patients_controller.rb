@@ -1,5 +1,5 @@
 class PatientsController < ApplicationController
-  #skip_before_action :authenticate
+  # skip_before_action :authenticate
 
   def create
     patient = patient_params
@@ -36,12 +36,12 @@ class PatientsController < ApplicationController
 
   def filter_patient_keys(patients)
     patients.map do |patient|
-      { id: patient.id, name: patient.name }
+      { id: patient.id, first_name: patient.first_name, last_name: patient.last_name }
     end
   end
   
   def patient_params
-    params.require(:patient).permit(:name, :gender, :client, :species,
+    params.require(:patient).permit(:first_name, :last_name, :gender, :client, :species,
                                     :reproductive_status, :tattoo, :microchip,
                                     :age, :colour)
   end
