@@ -7,7 +7,7 @@
 one:
   patient: one
   temperature: 38.5
-  notes: No new notes
+  exam_notes: No new notes
   medications: This might need to be removed
   eyes: All good
   oral: Speaks wonderfully
