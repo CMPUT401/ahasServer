@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170309010027) do
+ActiveRecord::Schema.define(version: 20170309033930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,12 +119,13 @@ ActiveRecord::Schema.define(version: 20170309010027) do
 
   create_table "schedules", force: :cascade do |t|
     t.datetime "appointmentDate"
-    t.integer  "clientId"
+    t.string   "clientId"
     t.string   "reason"
     t.string   "notes"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "location"
+    t.float    "duration"
   end
 
   create_table "users", force: :cascade do |t|
