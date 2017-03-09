@@ -1,3 +1,4 @@
+
 class MedicalRecordsController < ApplicationController
   def create
     @medical_record = MedicalRecord.new medical_record_params
@@ -19,17 +20,19 @@ class MedicalRecordsController < ApplicationController
   end
 
   def index
-    @patient = Patient.find_by(id: params[:patient_id])
+
+    patient = Patient.find_by(id: params[:patient_id])
+
     filtered_records = filter_medical_records_keys patient.medical_records
 
-    render status: :success, json: { success: true, medical_records: filtered_records }
+    render status: 200, json: { success: true, medical_records: filtered_records }
   end
   
   private
 
   def filter_medical_records_keys(medical_records)
     medical_records.map do |medical_record|
-      { id: medical_record.id, notes: medical_record.note }
+      { id: medical_record.id, exam_notes: medical_record.exam_notes }
     end
   end
 
