@@ -41,7 +41,7 @@ class ClientController < PersonController
                                    :licos, :aish, :socialAssistance,
                                    :pets, :alternativeContactLastName, :alternativeContactFirstName, 
                                    :alternativeContactPhoneNumber, :alternativeContactAddress,  
-                       :notes, :alternativeContact2ndPhone, :alternateContactEmail)
+                       :notes, :alternativeContact2ndPhone, :alternativeContactEmail)
   end
 end
 

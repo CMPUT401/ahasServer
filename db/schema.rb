@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307082311) do
+ActiveRecord::Schema.define(version: 20170309010027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20170307082311) do
     t.string   "pets"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.string   "alternateContactEmail"
+    t.string   "alternativeContactEmail"
     t.string   "lastName"
     t.string   "alternativeContactLastName"
     t.string   "alternativeContactFirstName"
@@ -47,6 +47,59 @@ ActiveRecord::Schema.define(version: 20170307082311) do
     t.string   "contact_type"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "medical_records", force: :cascade do |t|
+    t.float    "temperature"
+    t.text     "notes"
+    t.text     "medications"
+    t.string   "eyes"
+    t.string   "oral"
+    t.string   "ears"
+    t.string   "glands"
+    t.string   "skin"
+    t.string   "abdomen"
+    t.string   "urogential"
+    t.string   "nervousSystem"
+    t.string   "musculoskeletal"
+    t.string   "cardiovascular"
+    t.integer  "heart_rate"
+    t.string   "respiratory"
+    t.integer  "respiratory_rate"
+    t.boolean  "attitudeBAR"
+    t.boolean  "attitudeQAR"
+    t.boolean  "attitudeDepressed"
+    t.boolean  "eyesN"
+    t.boolean  "eyesA"
+    t.boolean  "mmN"
+    t.boolean  "mmPale"
+    t.boolean  "mmJaundiced"
+    t.boolean  "mmTacky"
+    t.boolean  "earsN"
+    t.boolean  "earsA"
+    t.boolean  "earsEarMites"
+    t.boolean  "earsAU"
+    t.boolean  "earsAD"
+    t.boolean  "earsAS"
+    t.boolean  "glandsN"
+    t.boolean  "glandsA"
+    t.boolean  "skinN"
+    t.boolean  "skinA"
+    t.boolean  "abdomenN"
+    t.boolean  "abdomenA"
+    t.boolean  "urogentialN"
+    t.boolean  "urogentialA"
+    t.boolean  "nervousSystemN"
+    t.boolean  "nervousSystemA"
+    t.boolean  "musculoskeletalN"
+    t.boolean  "musculoskeletalA"
+    t.boolean  "cardiovascularN"
+    t.boolean  "cardiovascularA"
+    t.boolean  "respiratoryN"
+    t.boolean  "respiratoryA"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "patient_id",        null: false
   end
 
   create_table "patients", force: :cascade do |t|
@@ -71,6 +124,7 @@ ActiveRecord::Schema.define(version: 20170307082311) do
     t.string   "notes"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "location"
   end
 
   create_table "users", force: :cascade do |t|
