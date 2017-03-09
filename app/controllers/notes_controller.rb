@@ -1,13 +1,16 @@
 class NotesController < ApplicationController
   def create
-    #Find patient's medical record
-    record = MedicalRecord.find_by(patient_id: params[:patient_id], id: params[:medical_record_id])
-    if record.nil?
+    # Sanity check
+    if params[:note].nil?
+      render status: :error, json: { success: false, error: "Parameter 'Note' not found" }
+    end
+
+    if patient_medical_record_relations_exist?
       render status: 404, json: { success: false, error: 'Resource not found'}
     end
-    
+
     @note = Note.new notes_params
-    
+
     if @note.save
       render status: 201, json: { success: true }
     else
@@ -16,6 +19,10 @@ class NotesController < ApplicationController
   end
 
   def show
+    if patient_medical_record_relations_exist?
+      render status: 404, json: { success: false, error: 'Resource not found'}
+    end
+    
     note = Note.find_by id: params[:id]
     if !note.nil?
       render status: 200, json: { success: true, note: note }
@@ -25,8 +32,12 @@ class NotesController < ApplicationController
   end
 
   def index
-    record = MedicalRecord.find_by(id: params[:medical_record_id])
+    if patient_medical_record_relations_exist?
+      render status: 404, json: { success: false, error: 'Resource not found'}
+    end
     
+    record = MedicalRecord.find_by(id: params[:medical_record_id])
+
     if record.nil?
       render status: 404, json: { success: false, error: 'Resource not found' }
     else
@@ -46,4 +57,9 @@ class NotesController < ApplicationController
   def notes_params
     params.require(:note).permit(:body, :initials, :medical_record_id)
   end
+
+  def patient_medical_record_relations_exist?
+    MedicalRecord.find_by(patient_id: params[:patient_id], id: params[:medical_record_id]).nil?
+  end
+  
 end
