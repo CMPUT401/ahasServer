@@ -37,6 +37,7 @@ class ClientController < PersonController
 
   private
   def client_params
+    puts params.body
     params.require(:client).permit(:firstName, :lastName, :address, :phoneNumber, :email,
                                    :licos, :aish, :socialAssistance,
                                    :pets, :alternativeContactLastName, :alternativeContactFirstName, 
