@@ -2,7 +2,7 @@ class SchedulesController < ApplicationController
   
   def create 
     schedule = schedule_params
-    # extract the client id from the JSON to a Client object
+    # extract the schedule id from the JSON to a Client object
     scheduleDate = schedule[:appointmentDate].to_i
     schedule[:appointmentDate] = Time.at(scheduleDate).to_s
     @schedule = Schedule.new(schedule)
@@ -16,7 +16,32 @@ class SchedulesController < ApplicationController
     end
   end
 
+  def show
+    schedule = Schedule.find_by(id: params[:id])
+    if schedule
+      render json: { success: true, schedule: schedule }
+    else
+      render status: 404, json: { success: false, error: 'Schedule not found' }
+    end
+  end
+
+  def index
+    schedules = Schedule.all
+    schedule_list = filter_schedule_keys schedules
+    
+    render json: { success: true, schedules: schedule_list}
+  end
+  
+  private
+  def filter_schedule_keys(schedules)
+    schedules.map do |schedule|
+      { id: schedule.id, appointmentDate: schedule.appointmentDate, duration: schedule.duration,\
+      clientId: schedule.clientId
+      }
+    end
+  end
+
   def schedule_params
-    params.require(:schedule).permit(:appointmentDate, :clientId, :reason, :notes, :location, :duration)
+    params.require(:schedule).permit(:appointmentDate, :scheduleId, :reason, :notes, :location, :duration)
   end
 end
