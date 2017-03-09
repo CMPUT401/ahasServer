@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307205911) do
+ActiveRecord::Schema.define(version: 20170309010027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20170307205911) do
     t.string   "pets"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.string   "alternateContactEmail"
+    t.string   "alternativeContactEmail"
     t.string   "lastName"
     t.string   "alternativeContactLastName"
     t.string   "alternativeContactFirstName"
@@ -114,6 +114,16 @@ ActiveRecord::Schema.define(version: 20170307205911) do
     t.integer  "client_id"
     t.string   "gender"
     t.index ["client_id"], name: "index_patients_on_client_id", using: :btree
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.datetime "appointmentDate"
+    t.integer  "clientId"
+    t.string   "reason"
+    t.string   "notes"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "location"
   end
 
   create_table "users", force: :cascade do |t|
