@@ -1,7 +1,8 @@
 one:
   client: Justin
   species: Cat
-  name: Chairman Meow
+  first_name: Chairman Meow
+  last_name: Barclay
   age: 17
   gender: Male
   colour: Red

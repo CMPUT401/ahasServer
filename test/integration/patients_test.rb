@@ -11,7 +11,8 @@ class PatientsTest < ActionDispatch::IntegrationTest
   test 'posting invalid info to /api/patients' do
     assert_no_difference 'Patient.count' do
       post '/api/patients', headers: authenticated_header,
-           params: { patient: { name: '',
+           params: { patient: { first_name: '',
+                                last_name: '',
                                 gender: '',
                                 colour: '',
                                 tattoo: 'hi',
@@ -25,7 +26,8 @@ class PatientsTest < ActionDispatch::IntegrationTest
 
   test 'posting a valid patient' do
     post '/api/patients', headers: authenticated_header,
-                          params: { patient: { name: 'Chairman Meow',
+                          params: { patient: { first_name: 'Chairman Meow',
+                                               last_name: 'Barclay'
                                                species: 'Cat',
                                                gender: 'Female',
                                                colour: 'Red',
@@ -67,7 +69,7 @@ class PatientsTest < ActionDispatch::IntegrationTest
 
   def filtered_properly(patients)
     patients.each do |patient|
-      unless ['name', 'id'].uniq.sort == patient.keys.uniq.sort
+      unless ['first_name','last_name' 'id'].uniq.sort == patient.keys.uniq.sort
         return false
       end
     end
