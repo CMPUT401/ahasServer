@@ -19,16 +19,21 @@ class NotesController < ApplicationController
   end
 
   def index
-    puts params.to_json
-
     record = MedicalRecord.find_by(id: params[:medical_record_id])
-    puts record.notes
-    puts record.notes
-    render state: :success, json: { success: true, notes: record.notes }
+ 
+    notes = filter_notes_keys record.notes
+ 
+    render state: :success, json: { success: true, notes: notes }
   end
   
   private
 
+  def filter_notes_keys(notes)
+    notes.map do |note|
+      { id: note.id, date_created: note.created_at }
+    end
+  end
+  
   def notes_params
     params.require(:note).permit(:body, :initials, :medical_record_id)
   end
