@@ -19,6 +19,13 @@ class NotesTest < ActionDispatch::IntegrationTest
     assert JSON.parse(response.body)['success']
   end
 
+   test 'posting a valid note to a non existent route' do
+    post "/api/patients/#{@medical_record.patient_id}/medical_records/27/notes", headers: authenticated_header, params: { note: @note }
+    
+    assert_response 404
+    assert JSON.parse(response.body)['error']
+  end
+
   test 'posting a invalid note' do
     @note['body'] = ''
     assert_no_difference 'Note.count' do
@@ -49,5 +56,12 @@ class NotesTest < ActionDispatch::IntegrationTest
 
     assert_response 200
     assert JSON.parse(response.body)['notes'].length > 0
+  end
+
+  test 'get index of notes for medical record that does not exist' do
+    get "/api/patients/#{@medical_record.patient_id}/medical_records/27/notes", headers: authenticated_header
+
+    assert_response 404
+    assert JSON.parse(response.body)['error']
   end
 end
