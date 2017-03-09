@@ -1,5 +1,5 @@
 class ClientController < PersonController
-  
+
   def create
     client = client_params
     @client = Client.new(client)
@@ -14,15 +14,18 @@ class ClientController < PersonController
 
   def show
     client = Client.find_by(id: params[:id])
-    patients = client.patients
-    puts patients.to_json
+
     if client
+      patients = client.patients
+      client = client.attributes
+
+      client['patients'] = filter_patients_keys(patients)
       render json: { success: true, client: client }
     else
       render status: 404, json: { success: false, error: 'Client not found' }
     end
   end
-  
+
   def index
     clients = Client.all
     client_list = filter_client_keys clients
@@ -31,9 +34,16 @@ class ClientController < PersonController
   end
   
   private
+  
   def filter_client_keys(clients)
     clients.map do |client|
       { id: client.id, firstName: client.firstName, lastName: client.lastName}
+    end
+  end
+
+  def filter_patients_keys(patients)
+    patients.map do |patient|
+      { id: patient.id, first_name: patient.first_name, last_name: patient.last_name }
     end
   end
 
