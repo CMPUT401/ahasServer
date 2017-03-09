@@ -1,5 +1,6 @@
 class MedicalRecord < ApplicationRecord
   belongs_to :patient
+
   has_many   :notes
 
   validates :patient_id, presence: true, allow_bank: false
@@ -30,11 +31,11 @@ class MedicalRecord < ApplicationRecord
 
   validates :cardiovascular, presence: true, allow_blank: true
 
-  validates :heart_rate, presence: true, allow_blank: true, numericality: { only_integer: true }
+  validates :heart_rate, presence: true, allow_blank: true, numericality: true
 
   validates :respiratory, presence: true, allow_blank: true
 
-  validates :respiratory_rate, presence: true, allow_blank: true, numericality: { only_integer: true }
+  validates :respiratory_rate, presence: true, allow_blank: true, numericality: true
 
   validates :attitudeBAR, presence: true, allow_blank: true, inclusion: { in: [true, false] }
 

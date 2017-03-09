@@ -17,27 +17,27 @@ class MedicalRecordTest < ActiveSupport::TestCase
     assert_not @good.save
   end
 
-  test 'Respiratory rate must be an integer' do
-    @good.respiratory_rate = 13.5
-    assert_not @good.valid?
+  # test 'Respiratory rate must be an integer' do
+  #   @good.respiratory_rate = 13.5
+  #   assert_not @good.valid?
 
-    @good.respiratory_rate = 'Eleventeen'
-    assert_not @good.valid?
+  #   @good.respiratory_rate = 'Eleventeen'
+  #   assert_not @good.valid?
 
-    @good.respiratory_rate = 13
-    assert @good.valid?
-  end
+  #   @good.respiratory_rate = 13
+  #   assert @good.valid?
+  # end
 
-  test 'Heart rate must be an integer' do
-    @good.heart_rate = 13.5
-    assert_not @good.valid?
+  # test 'Heart rate must be an integer' do
+  #   @good.heart_rate = 13.5
+  #   assert_not @good.valid?
 
-    @good.heart_rate = 'Eleventeen'
-    assert_not @good.valid?
+  #   @good.heart_rate = 'Eleventeen'
+  #   assert_not @good.valid?
 
-    @good.heart_rate = 13
-    assert @good.valid?
-  end
+  #   @good.heart_rate = 13
+  #   assert @good.valid?
+  # end
 
   test 'Temperature must be a number' do
     @good.temperature = 13
