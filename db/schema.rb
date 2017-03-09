@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20170309030948) do
     t.string   "pets"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.string   "alternateContactEmail"
+    t.string   "alternativeContactEmail"
     t.string   "lastName"
     t.string   "alternativeContactLastName"
     t.string   "alternativeContactFirstName"
@@ -124,6 +124,15 @@ ActiveRecord::Schema.define(version: 20170309030948) do
     t.integer  "client_id"
     t.string   "gender"
     t.index ["client_id"], name: "index_patients_on_client_id", using: :btree
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.datetime "appointmentDate"
+    t.integer  "clientId"
+    t.string   "reason"
+    t.string   "notes"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "users", force: :cascade do |t|
