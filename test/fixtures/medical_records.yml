@@ -5,6 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
+  patient: one
   temperature: 38.5
   notes: No new notes
   medications: This might need to be removed
@@ -52,5 +53,3 @@ one:
   cardiovascularA: True
   respiratoryN: True
   respiratoryA: True  
-two: {}
-  # column: value True

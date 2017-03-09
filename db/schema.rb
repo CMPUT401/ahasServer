@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20170309010027) do
     t.boolean  "respiratoryA"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "patient_id",        null: false
   end
 
   create_table "patients", force: :cascade do |t|
@@ -123,7 +124,6 @@ ActiveRecord::Schema.define(version: 20170309010027) do
     t.string   "notes"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.string   "location"
   end
 
   create_table "users", force: :cascade do |t|

@@ -3,6 +3,7 @@
 
 class Patient < ApplicationRecord
   belongs_to :client
+  has_many :medical_records
 
   validates :species, presence: true
 

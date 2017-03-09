@@ -2,7 +2,6 @@ class MedicalRecordsController < ApplicationController
   def create
     
     @medical_record = MedicalRecord.new(medical_record_params)
-
     if @medical_record.save
       render status: 201, json: { success: true }
     else
@@ -18,20 +17,33 @@ class MedicalRecordsController < ApplicationController
       render status: :error, json: { success: false, error: 'Medical Record not found' }
     end
   end
+
+  def index
+    @patient = Patient.find_by(id: params[:patient_id])
+    filtered_records = filter_medical_records_keys patient.medical_records
+
+    render status: :success, json: { success: true, medical_records: filtered_records }
+  end
   
   private
 
+  def filter_medical_records_keys(medical_records)
+    medical_records.map do |medical_record|
+      { id: medical_record.id, notes: medical_record.note }
+    end
+  end
+
   def medical_record_params
     params.require(:medical_record).permit(:temperature, :notes, :medications, :eyes, :oral,
-                                    :ears, :glands, :skin, :abdomen, :urogential,
-                                    :nervousSystem, :musculoskeletal, :cardiovascular, :heart_rate,
-                                    :respiratory, :respiratory_rate, :attitudeBAR, :attitudeQAR,
-                                    :attitudeDepressed, :eyesN, :eyesA, :mmN, :mmPale, :mmJaundiced,
-                                    :mmTacky, :earsN, :earsA, :earsEarMites, :earsAU, :earsAD,
-                                    :earsAS, :glandsN, :glandsA, :skinN, :skinA, :abdomenN,
-                                    :abdomenA, :urogentialN, :urogentialA, :nervousSystemN, :nervousSystemA,
-                                    :musculoskeletalN, :musculoskeletalA, :cardiovascularN, :cardiovascularA, :respiratoryN,
-                                    :respiratoryA)
+                                           :ears, :glands, :skin, :abdomen, :urogential,
+                                           :nervousSystem, :musculoskeletal, :cardiovascular, :heart_rate,
+                                           :respiratory, :respiratory_rate, :attitudeBAR, :attitudeQAR,
+                                           :attitudeDepressed, :eyesN, :eyesA, :mmN, :mmPale, :mmJaundiced,
+                                           :mmTacky, :earsN, :earsA, :earsEarMites, :earsAU, :earsAD,
+                                           :earsAS, :glandsN, :glandsA, :skinN, :skinA, :abdomenN,
+                                           :abdomenA, :urogentialN, :urogentialA, :nervousSystemN, :nervousSystemA,
+                                           :musculoskeletalN, :musculoskeletalA, :cardiovascularN, :cardiovascularA, :respiratoryN,
+                                           :respiratoryA, :patient_id)
   end
 end
 
