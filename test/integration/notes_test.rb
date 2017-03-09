@@ -43,4 +43,11 @@ class NotesTest < ActionDispatch::IntegrationTest
     assert_response 404
     assert !JSON.parse(response.body)['error'].nil?
   end
+
+  test 'get index of notes for medical records' do
+    get "/api/patients/#{@medical_record.patient_id}/medical_records/#{@medical_record.id}/notes", headers: authenticated_header
+
+    assert_response 200
+    assert JSON.parse(response.body)['notes'].length > 0
+  end
 end

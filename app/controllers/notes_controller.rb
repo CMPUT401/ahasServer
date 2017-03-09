@@ -19,7 +19,11 @@ class NotesController < ApplicationController
   end
 
   def index
-    @record = MedicalRecord.find_by(id: params[:medical_record])
+    puts params.to_json
+
+    record = MedicalRecord.find_by(id: params[:medical_record_id])
+    puts record.notes
+    puts record.notes
     render state: :success, json: { success: true, notes: record.notes }
   end
   
