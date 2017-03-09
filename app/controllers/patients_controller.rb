@@ -1,5 +1,5 @@
 class PatientsController < ApplicationController
-  # skip_before_action :authenticate
+  before_action :authenticate_user
 
   def create
     patient = patient_params

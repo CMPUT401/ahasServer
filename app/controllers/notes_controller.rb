@@ -1,5 +1,5 @@
 class NotesController < ApplicationController
-  before_action :check_patient_medical_relation
+  before_action :check_patient_medical_relation, :authenticate_user
 
   def check_patient_medical_relation
     if patient_medical_record_relations_exist?

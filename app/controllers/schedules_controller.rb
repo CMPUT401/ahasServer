@@ -1,5 +1,5 @@
 class SchedulesController < ApplicationController 
-  
+  before_action :authenticate_user
   def create 
     schedule = schedule_params
     # extract the schedule id from the JSON to a Client object

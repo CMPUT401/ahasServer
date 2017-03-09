@@ -1,5 +1,5 @@
 class ClientController < PersonController
-
+  before_action :authenticate_user
   def create
     client = client_params
     @client = Client.new(client)
