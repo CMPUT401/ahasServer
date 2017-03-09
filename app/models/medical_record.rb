@@ -6,6 +6,9 @@ class MedicalRecord < ApplicationRecord
   validates :patient_id, presence: true, allow_bank: false
   
   validates :temperature, presence: true, allow_blank: true, numericality: true
+  validates :signature, presence: true, allow_blank: true
+
+  validates :date, presence: true, allow_blank: true
 
   validates :exam_notes, presence: true, allow_blank: true
 
