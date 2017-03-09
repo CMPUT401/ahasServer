@@ -64,4 +64,11 @@ class NotesTest < ActionDispatch::IntegrationTest
     assert_response 404
     assert JSON.parse(response.body)['error']
   end
+
+  test 'should get a 404 if a patient - medical_record relation does not exist' do
+    get "/api/patients/404/medical_records/27/notes", headers: authenticated_header
+
+    assert_response 404
+    assert JSON.parse(response.body)['error']
+  end
 end
