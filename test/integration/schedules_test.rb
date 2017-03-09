@@ -4,12 +4,6 @@ class SchedulesTest < ActionDispatch::IntegrationTest
   def setup
   @client = clients(:Justin)
   @client.save
-  @scheduleInstance = schedules(:one)
-  @scheduleInstance.clientId = @client.id
-  @scheduleInstance.save
-
-  @two = schedules(:two)
-  @two.save
   end
 
   test 'posting invalid info to /api/schedules' do
@@ -22,13 +16,17 @@ class SchedulesTest < ActionDispatch::IntegrationTest
                             location: ''} }
     end
     assert_response :error
-    puts response.body
     assert JSON.parse(response.body)['errors'].count > 0
   end
 
   test 'posting a valid schedule to /api/schedules' do
     post '/api/schedules', headers: authenticated_header,
-          params: JSON.parse(@scheduleInstance.to_json)
+          params: {schedule: { appointmentDate: '1489077477',
+                               clientId: @client.id,
+                               reason: 'bitey dog',
+                               notes: '',
+                               location: '1234 fake st', 
+                               duration: "20"}}
 
     assert_response 201 
   end
