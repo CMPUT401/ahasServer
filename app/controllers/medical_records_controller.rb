@@ -35,7 +35,7 @@ class MedicalRecordsController < ApplicationController
   end
 
   def medical_record_params
-    params.require(:medical_record).permit(:temperature, :notes, :medications, :eyes, :oral,
+    params.require(:medical_record).permit(:summary, :date, :exam_notes, :signatures, :temperature, :medications, :eyes, :oral,
                                            :ears, :glands, :skin, :abdomen, :urogential,
                                            :nervousSystem, :musculoskeletal, :cardiovascular, :heart_rate,
                                            :respiratory, :respiratory_rate, :attitudeBAR, :attitudeQAR,
