@@ -1,11 +1,11 @@
 class MedicalRecordsController < ApplicationController
   def create
+    @medical_record = MedicalRecord.new medical_record_params
     
-    @medical_record = MedicalRecord.new(medical_record_params)
     if @medical_record.save
       render status: 201, json: { success: true }
     else
-      render status: :error, json: { success: false, errors: @medical_record.errors.full_messages}
+      render status: :error, json: { success: false, errors: @medical_record.errors.full_messages }
     end
   end
 

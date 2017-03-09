@@ -21,7 +21,9 @@ Rails.application.routes.draw do
       # get         'patients/:patient_id/medical_records/:medical_record_id', to: 'medical_records#show'
       resources    :users
       resources    :patients do
-        resources  :medical_records
+        resources  :medical_records do
+          resources :notes
+        end
       end
       resources    :client
       resources    :contacts
