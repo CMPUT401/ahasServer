@@ -16,13 +16,13 @@ class ClientTest < ActiveSupport::TestCase
     alternativeContactAddress = "484 fake st, Canada"
     notes = "Client is angry"
     alternativeContact2ndPhone = "7809519084"
-    alternateContactEmail = "jimmy@jim.com"
+    alternativeContactEmail = "jimmy@jim.com"
 
-#    alternativeContactPhoneNumber, alternativeContactAddress, notes, alternativeContact2ndPhone,alternateContactEmail
+#    alternativeContactPhoneNumber, alternativeContactAddress, notes, alternativeContact2ndPhone,alternativeContactEmail
 
     @client = Client.new(firstName: firstName, lastName: lastName, address: address, phoneNumber: phone, email: email, \
                         licos: licos, aish: aish ,socialAssistance: socialAssistance,\
-                        pets: pets, alternativeContactPhoneNumber: alternativeContactPhoneNumber, alternativeContactAddress: alternativeContactAddress, notes: notes, alternativeContact2ndPhone: alternativeContact2ndPhone,alternateContactEmail: alternateContactEmail)
+                        pets: pets, alternativeContactPhoneNumber: alternativeContactPhoneNumber, alternativeContactAddress: alternativeContactAddress, notes: notes, alternativeContact2ndPhone: alternativeContact2ndPhone,alternativeContactEmail: alternativeContactEmail)
   end
 
   test "create client with good input" do
