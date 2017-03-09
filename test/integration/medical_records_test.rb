@@ -94,4 +94,12 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
     assert_response :error
     assert_not JSON.parse(response.body)['success']
   end
+
+  test 'get medical record index' do
+    get "/api/patients/#{@patient_id}/medical_records", headers: authenticated_header, params: { medical_record: @medical_record }
+
+    assert_response 200
+    assert JSON.parse(response.body)['success']
+    assert JSON.parse(response.body)['medical_records'].length > 0
+  end
 end
