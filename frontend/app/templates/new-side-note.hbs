@@ -1,0 +1,19 @@
+<div class = "container">
+	<form {{action "submitNewNote" on = "submit"}}>
+		<div class = "inputGroup">
+			<h3> Please Enter your new side note </h3>
+  			<label class = "inputLabel" for="medNotes">Side Note:</label>
+  			<div class = "inputBox">
+  				{{textarea id = 'medNotes' value = medNotes cols = "80" rows = "6"}}
+  			</div>
+  			<br>
+        <label class = "inputLabel" for="medSig">Signature:</label>
+        <br>
+        <div class = "inputBox">
+          {{input id = "medSignature" value=medSignature required='true'}}
+        </div>
+  		</div>
+  		<br>
+  		<button type = "submit" id = "create-sidenote-button">Create Note</button>
+  	</form>
+</div>

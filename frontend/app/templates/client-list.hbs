@@ -1,0 +1,15 @@
+<div class = "nameList" >
+	<!-- TODO: filter client list -->
+	{{#ember-scrollable autoHide=false}}
+		{{#each-in model as |key clients|}}
+			{{#each clients as |client|}} 
+				<div class = "nameListItem" {{action "viewClient" client.id}}>
+						<p>{{client.firstName}} {{client.lastName}}</p>
+				</div>
+			{{/each}}
+		{{/each-in}}
+	{{/ember-scrollable}}
+	<br>
+	
+</div>
+{{#link-to 'new-client' tagName='button'}}Create New Client{{/link-to}}

@@ -75,6 +75,8 @@ Rails.application.configure do
     # require 'syslog/logger'
     # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
+    config.static_cache_control = "public, max-age=31622400"
+    
     if ENV["RAILS_LOG_TO_STDOUT"].present?
         logger           = ActiveSupport::Logger.new(STDOUT)
         logger.formatter = config.log_formatter

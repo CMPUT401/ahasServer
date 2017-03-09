@@ -1,5 +1,5 @@
-
 class MedicalRecordsController < ApplicationController
+  before_action :authenticate_user
   def create
     @medical_record = MedicalRecord.new medical_record_params
     

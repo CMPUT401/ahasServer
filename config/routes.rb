@@ -1,12 +1,8 @@
 
 Rails.application.routes.draw do
 
-  get 'schedules/new'
-
-  get              'static_pages/home'
-  get              'static_pages/help'
-  root             'static_pages#home'
-
+  mount_ember_app :frontend, to: '/'
+  
   # we want our routes to be /api/routes but not our controllers
   # this may need to be reevalutated if we get lots of non api
   # controllers

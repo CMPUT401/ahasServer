@@ -1,0 +1,65 @@
+<div class = "infoBlock">
+	<div class = "panel panel-default">
+		<div class = "panel-body">
+			<h3>Client: </h3><br>
+			<h4>{{model.lastName}}, {{model.firstName}}</h4>  <br>
+			<h4>Address:</h4><br>
+			{{{model.address}}} <br>
+			<h4>Phone Number: </h4><br>
+			{{model.phoneNumber}} <br>
+			<h4>Email: </h4><br>
+			{{model.email}} <br>
+		</div>
+	</div>
+</div>
+<div class = "infoBlock">
+	<div class = "panel panel-default">
+		<div class = "panel-body">
+			<h3>Documentation Information: </h3><br>
+			<h4>LICO: </h4><br>
+			{{model.licos}}<br>
+			<h4>AISH: </h4><br>
+			{{model.aish}}<br>
+			<h4>SA: </h4><br>
+			{{model.socialAssistance}}<br>
+			<h4>Notes: </h4><br>
+			{{{model.notes}}}<br>
+		</div>
+	</div>
+</div>
+<div class = "infoBlock">
+	<div class = "panel panel-default">
+		<div class = "panel-body">
+			<h3>Alternate Contact: </h3><br>
+			<h4>{{model.alternativeContactLastName}}, {{model.alternativeContactFirstName}}</h4><br>
+			<h4>Address: </h4><br>
+			{{{model.alternativeContactAddress}}}<br>
+			<h4>Phone Number: </h4><br>
+			{{model.alternativeContactPhoneNumber}}<br>
+			<h4>Second Phone Number: </h4>
+			{{model.alternativeContact2ndPhone}}<br>
+			<h4>Email: </h4><br>
+			{{model.alternativeContactEmail}}<br>
+		</div>
+	</div>
+</div>
+<div class = "infoBlock">
+	<div class = "panel panel-default">
+		<div class = "panel-body">
+			<h3>Pet: </h3>
+			<!-- TODO loop through list of pets -->
+			<h4>Pet name</h4><br>
+			{{model.pets}}<br>
+			<h4>Species: </h4><br>
+			<h4>Animal ID: </h4><br>
+			<h4>Tattoo/microchip ID: </h4><br>
+		</div>
+	</div>
+</div>
+<div class = "infoBlock">
+	<h4>Created: </h4>{{model.created_at}}<br>
+	<h4>Last modified: </h4>{{model.updated_at}}<br>
+	<button {{action "newPatient" model.clientID}}>Add A Patient</button>
+</div>
+
+

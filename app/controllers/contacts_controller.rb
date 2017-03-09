@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-
+  before_action :authenticate_user
   def create
     unless params.keys.include? 'contact'
       @contact = Client.new
