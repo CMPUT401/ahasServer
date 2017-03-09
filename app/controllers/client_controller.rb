@@ -7,7 +7,6 @@ class ClientController < PersonController
     if @client.save
       render status: 201, json: { success: true }
     else
-      puts @client.errors.full_messages
       render status: 500, json: { success: false,
                                      errors: @client.errors.full_messages }
     end
@@ -35,7 +34,6 @@ class ClientController < PersonController
       { id: client.id, firstName: client.firstName, lastName: client.lastName}
     end
   end
-
 
   private
   def client_params

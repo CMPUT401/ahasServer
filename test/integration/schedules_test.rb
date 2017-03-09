@@ -18,10 +18,11 @@ class SchedulesTest < ActionDispatch::IntegrationTest
         params:{schedule: { appointmentDate: '',
                             clientId: '',
                             reason: '',
-                            notes: 0, 
+                            notes: 0,
                             location: ''} }
     end
     assert_response :error
+    puts response.body
     assert JSON.parse(response.body)['errors'].count > 0
   end
 
@@ -29,7 +30,7 @@ class SchedulesTest < ActionDispatch::IntegrationTest
     post '/api/schedules', headers: authenticated_header,
           params: JSON.parse(@scheduleInstance.to_json)
 
-    assert_response :success
+    assert_response 201 
   end
 
 end
