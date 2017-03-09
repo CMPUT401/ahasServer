@@ -19,6 +19,7 @@ class Client < ApplicationRecord
   validates :alternativeContactAddress, presence: {message: "Address is required"}, length: {maximum: 50, message: "Address is too long"}, allow_blank: true
   validates :notes, presence: true, allow_blank: true
   validates :alternativeContact2ndPhone, presence: true, allow_blank: true
+  validates :alternativeContactEmail, presence: true, length: {maximum: 255}, format: {with: VALID_EMAIL_REGEX, message: "Email is invalid format"}, allow_blank: true
 
 
 end

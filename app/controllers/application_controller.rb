@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def server_error(exception)
     unless performed?
       respond_to do |format|
-        format.html { render status: status, json: status}
+        format.html { render status: status, json: status }
         format.all { head status }
       end
     end
