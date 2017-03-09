@@ -18,7 +18,7 @@ class ClientTest < ActiveSupport::TestCase
     alternativeContact2ndPhone = "7809519084"
     alternativeContactEmail = "jimmy@jim.com"
 
-#    alternativeContactPhoneNumber, alternativeContactAddress, notes, alternativeContact2ndPhone,alternativeContactEmail
+# alternativeContactPhoneNumber, alternativeContactAddress, notes, alternativeContact2ndPhone,alternativeContactEmail
 
     @client = Client.new(firstName: firstName, lastName: lastName, address: address, phoneNumber: phone, email: email, \
                         licos: licos, aish: aish ,socialAssistance: socialAssistance,\
