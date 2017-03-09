@@ -9,8 +9,7 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
-
-ActiveRecord::Schema.define(version: 20170309060927) do
+ActiveRecord::Schema.define(version: 20170309030948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +102,15 @@ ActiveRecord::Schema.define(version: 20170309060927) do
     t.string   "summary"
     t.text     "signature"
     t.datetime "date"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.text     "body"
+    t.string   "initials"
+    t.integer  "medical_record_id", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["medical_record_id"], name: "index_notes_on_medical_record_id", using: :btree
   end
 
   create_table "notes", force: :cascade do |t|
