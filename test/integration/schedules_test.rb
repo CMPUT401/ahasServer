@@ -11,7 +11,7 @@ class SchedulesTest < ActionDispatch::IntegrationTest
   test 'posting invalid info to /api/schedules' do
     assert_no_difference 'Schedule.count' do
       post '/api/schedules', headers: authenticated_header,
-        params:{schedule: { appointmentDate: '',
+        params:{schedule: { appointmentStartDate: '',
                             clientId: '',
                             reason: '',
                             notes: 0,
@@ -24,12 +24,12 @@ class SchedulesTest < ActionDispatch::IntegrationTest
 
   test 'posting a valid schedule to /api/schedules' do
     post '/api/schedules', headers: authenticated_header,
-          params: {schedule: { appointmentDate: '1489077477',
+          params: {schedule: { appointmentStartDate: '1489077477',
                                clientId: @client.id,
                                reason: 'bitey dog',
                                notes: '',
                                location: '1234 fake st',
-                               duration: "20"}}
+                               appointmentEndDate: '1489083859'}}
 
     assert_response 201
   end

@@ -3,8 +3,10 @@ class SchedulesController < ApplicationController
   def create 
     schedule = schedule_params
     # extract the schedule id from the JSON to a Client object
-    scheduleDate = schedule[:appointmentDate].to_i
-    schedule[:appointmentDate] = Time.at(scheduleDate).to_s
+    scheduleStartDate = schedule[:appointmentStartDate].to_i
+    scheduleEndDate = schedule[:appointmentEndDate].to_i
+    schedule[:appointmentStartDate] = Time.at(scheduleStartDate).to_s
+    schedule[:appointmentEndDate] = Time.at(scheduleEndDate).to_s
     @schedule = Schedule.new(schedule)
 
 
@@ -42,6 +44,6 @@ class SchedulesController < ApplicationController
   end
 
   def schedule_params
-    params.require(:schedule).permit(:appointmentDate, :scheduleId, :reason, :notes, :location, :duration)
+    params.require(:schedule).permit(:appointmentStartDate, :appointmentEndDate, :scheduleId, :reason, :notes, :location, :duration)
   end
 end

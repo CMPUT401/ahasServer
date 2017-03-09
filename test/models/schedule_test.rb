@@ -16,8 +16,8 @@ class ScheduleTest < ActiveSupport::TestCase
     assert_not @two.valid?
   end
 
-  test 'appointmentDate must be present' do
-    @one.appointmentDate = nil
+  test 'appointmentStartDate must be present' do
+    @one.appointmentStartDate = nil
     assert_not @one.valid?
   end
 
