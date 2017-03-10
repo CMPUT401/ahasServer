@@ -1,9 +1,14 @@
 class MedicalRecordsController < ApplicationController
   before_action :authenticate_user
   def create
+    medicine = medicine_params
     @medical_record = MedicalRecord.new medical_record_params
     
     if @medical_record.save
+      if not medicine.nil?
+        save_medicine_in_db(medicine, @medical_record.id)
+        puts Medice.all.to_json
+      end
       render status: 201, json: { success: true }
     else
       render status: :error, json: { success: false, errors: @medical_record.errors.full_messages }
@@ -34,6 +39,22 @@ class MedicalRecordsController < ApplicationController
     end
   end
 
+  def save_medicine_in_db(medicine, medical_record_id)
+    if medicine.kind_of?(Array)
+      medicine.each do |med|
+        med.medical_record_id = medical_record_id
+        Medicine.new med
+      end
+    else
+      medicine = JSON.parse(medicine).attributes
+      @med = Medicine.new(name: medicine, patient_id: medicine['patient_id'])
+      puts @med.to_json
+      @med.medical_record_id = medical_record_id
+      @med.save
+      puts @med.errors.full_message
+    end
+  end
+  
   def medical_record_params
     params.require(:medical_record).permit(:summary, :date, :exam_notes, :signature, :temperature, :medications, :eyes, :oral,
                                            :ears, :glands, :skin, :abdomen, :urogential, :follow_up_instructions,
@@ -46,6 +67,11 @@ class MedicalRecordsController < ApplicationController
                                            :musculoskeletalN, :musculoskeletalA, :cardiovascularN, :cardiovascularA, :respiratoryN,
                                            :respiratoryA, :patient_id)
   end
+
+  def medicine_params
+    params.require(:medicine).permit(:name, :patient_id)
+  end
+  
 end
 
 
