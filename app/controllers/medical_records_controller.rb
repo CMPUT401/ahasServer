@@ -30,7 +30,7 @@ class MedicalRecordsController < ApplicationController
 
   def filter_medical_records_keys(medical_records)
     medical_records.map do |medical_record|
-      { id: medical_record.id, exam_notes: medical_record.exam_notes }
+      { id: medical_record.id, exam_notes: medical_record.exam_notes, created_at: medical_record.created_at.to_i }
     end
   end
 
