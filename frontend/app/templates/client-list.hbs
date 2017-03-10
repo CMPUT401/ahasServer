@@ -1,0 +1,16 @@
+<button  {{action "filterClient"  }} type="submit" id="search-button">Search</button>
+<input class="form-control" placeholder="Search" autofocus="autofocus" id='search-bar' />
+<div class = "nameList" >
+	<!-- TODO: filter client list -->
+	{{#ember-scrollable autoHide=false}}
+			{{#each model.clientsFiltered as |client|}}
+					<div class = "nameListItem" {{action "viewClient" client.id}}>
+							<p>{{client.firstName}} {{client.lastName}}</p>
+					</div>
+
+			{{/each}}
+	{{/ember-scrollable}}
+	<br>
+	
+</div>
+<button id = "newClientLinkButton" {{action "newClient"}}>Create New Client</button>

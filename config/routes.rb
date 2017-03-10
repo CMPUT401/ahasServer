@@ -24,6 +24,6 @@ Rails.application.routes.draw do
       resources    :schedules
     end
   end
-#  mount_ember_app :frontend, to: '/'
+  mount_ember_app :frontend, to: '/'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

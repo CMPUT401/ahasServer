@@ -1,0 +1,254 @@
+@import "bootstrap";
+@import url(https://fonts.googleapis.com/css?family=Lato:300,300italic,400,700,700italic);
+
+/**
+ * Base Elements
+ */
+
+* {
+    margin: 0;
+    margin-left: 1%;
+    padding: .5%;
+    box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+div,
+span,
+a {
+    font-family: 'Lato', 'Open Sans', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+}
+
+body {
+    background: #f2e9e6;
+}
+
+a {
+    color: #2185D0;
+    text-decoration: none;
+}
+
+p {
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+
+/**
+ * Body Container
+ */
+.container {
+    max-width: 1024px;
+    min-height: 100vh;
+    background: #ededed;
+
+    margin: 0 auto;
+}
+
+/**
+ * Content Area
+ */
+.body {
+    padding: 15px;
+}
+
+
+//user-creation page textarea
+.usertextarea {
+    margin-top: 5%;
+    margin-right: 1%;
+}
+
+//inputboxes
+.nonalignbox{
+    margin-left: 10%;
+}
+
+.status{
+    padding: 15px;
+}
+
+//new-client&new-patient
+
+.nav { width: 100%; margin: 0 auto; padding:0}
+.nav > li { width: 24%; text-align: center; margin: 0}
+.navbar {text-align: center}
+
+/* form creation/submission */
+.inputLabel{
+    display: inline-block;
+    float: left;
+    clear: left;
+    text-align: left;
+    width: 15em;
+}
+.inputBox{
+    display: inline-block;
+    float: left;
+}
+.inputGroup{
+    margin: 10px;
+    display: block;
+    clear: left;
+}
+
+//inputboxes
+.nonalignbox{
+    margin-left: 10%;
+}
+
+.status{
+    padding: 15px;
+}
+
+
+.nav { width: 100%; margin: 0 auto; padding:0}
+.nav > li { width: 24%; text-align: center; margin: 0}
+.navbar {text-align: center}
+
+/* form creation/submission */
+
+#create-patient-button{
+    margin:20px;
+    display:block;
+    width:10em;
+    clear:left;
+}
+#reset-patient-button{
+    margin:20px;
+    display:block;
+    width:10em;
+    clear:left;
+}
+#create-sidenote-button{
+    margin:20px;
+    display:block;
+    width:10em;
+    clear:left;
+}
+
+
+//view-patient
+.viewLabel{
+
+    display: inline-block;
+    float: left;
+    clear: left;
+    text-align: left;
+
+    width: 20em;
+}
+.inputBox{
+    display: inline-block;
+    float: left;
+}
+.inputGroup{
+    margin: 10px;
+    display: block;
+    clear: left;
+}
+#create-client-button{
+    margin: 20px;
+}
+
+/* login specific input stylings */
+.inputLoginGroup {
+    width: 500px ;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.inputLoginLabel{
+    display: inline-block;
+    float: left;
+    clear: left;
+    text-align: left;
+    width: 5em;
+}
+
+.viewInfo{
+    display: inline-block;
+    float: left;   
+}
+
+.viewGroup{
+    margin: 10px;
+    display: block;
+    clear:left;
+}
+#edit-patient-button{
+    margin:20px;
+    display:block;
+    width:10em;
+    clear:left;
+}
+
+#create-client-button{
+    margin: 20px;
+    display: block;
+    clear: left;
+
+}
+
+#login-button{    
+    margin-left: 90px; 
+    margin-top: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.createUserPrompt{
+    margin-top: 20px;
+
+}
+
+
+/*  create user styling  */
+
+#create-user-button{    
+    margin-left: 80px; 
+    margin-top: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.inputUserLabel{
+    display: inline-block;
+    float: left;
+    clear: left;
+    text-align: left;
+    width: 10em;
+}
+
+
+/* display list of names*/
+.nameList{
+    display: block;
+    /*height: 80%;
+    width: 40%;*/
+    height: 550px;
+    width: 300px;
+    margin: 10px;
+}
+.nameListItem  { background: #ffc863; }
+.nameListItem:nth-child(odd) {
+    /*background: #E6FBFF;*/ 
+    background: #c0c5c6;
+}
+
+/* view client-info */
+.infoBlock{
+    display: inline-block;
+    vertical-align: top;
+    width: 44%;
+}
+
