@@ -37,8 +37,8 @@ class NotesController < ApplicationController
     if record.nil?
       render status: 404, json: { success: false, error: 'Resource not found' }
     else
-      notes = filter_notes_keys record.notes
-      render status: 200, json: { success: true, notes: notes.to_json }
+      # notes = filter_notes_keys record.notes
+      render status: 200, json: { success: true, notes: record.notes } 
     end
   end
 
