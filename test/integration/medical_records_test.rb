@@ -7,11 +7,12 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
   # end
   def setup
     @patient_id = patients(:one).id.to_s
+    @medicine = medicines(:one)
+    @medicine.medical_record_id = ''
     @medical_record = {
       patient_id: @patient_id,
       temperature: 38.5,
       exam_notes: 'No new notes',
-      medications: 'This might need to be removed',
       eyes: 'All good',
       oral: 'Speaks wonderfully',
       ears: 'Little bit deaf',
@@ -101,5 +102,13 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
     assert_response 200
     assert JSON.parse(response.body)['success']
     assert JSON.parse(response.body)['medical_records'].length > 0
+  end
+
+  test 'post medical record with json' do
+    @medical_record['medicine'] = @medicine.to_json
+    post "/api/patients/#{@patient_id}/medical_records", headers: authenticated_header, params: { medical_record: @medical_record }
+
+    assert JSON.parse(response.body)['success']
+    assert_response :created
   end
 end
