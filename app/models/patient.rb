@@ -6,7 +6,7 @@ class Patient < ApplicationRecord
 
   has_many :medical_records
 
-  has_many :pictures
+  has_many :images
 
   validates :species, presence: true
 

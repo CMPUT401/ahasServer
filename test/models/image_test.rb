@@ -1,25 +1,24 @@
 require 'test_helper'
 
-class PictureTest < ActiveSupport::TestCase
+class ImageTest < ActiveSupport::TestCase
   def setup
-    @picture = pictures(:one)
-    @picture.save
+    @image = images(:one)
+
   end
 
-  test 'picture must have a valid type' do
-    #assert @picture.valid?
-    # puts @picture.errors.full_message
-    @picture.picture_type = 'lab result'
-    assert @picture.valid?
+  test 'image must have a valid type' do
+    assert @image.valid?
+    @image.picture_type = 'lab result'
+    assert @image.valid?
   end
 
-  test 'picture can not have invalid type' do
-    @picture.picture_type = :other_thing
-    assert_not @picture.valid?
+  test 'image can not have invalid type' do
+    @image.picture_type = :other_thing
+    assert_not @image.valid?
   end
 
-  test 'picture type can not be blank' do
-    @picture.picture_type = ''
-    assert_not @picture.valid?
+  test 'image type can not be blank' do
+    @image.picture_type = ''
+    assert_not @image.valid?
   end
 end

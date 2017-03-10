@@ -1,6 +1,7 @@
 
 Rails.application.routes.draw do
-  
+
+  get 'api/patients/:patient_id/images/:filter', to: 'images#index'
   # we want our routes to be /api/routes but not our controllers
   # this may need to be reevalutated if we get lots of non api
   # controllers
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
       # post        'patient/:patient_id/medical_records/:medical_record_id', to: 'medical_records#create'
       # get         'patients/:patient_id/medical_records',                    to: 'medical_record#index'
       # get         'patients/:patient_id/medical_records/:medical_record_id', to: 'medical_records#show'
+      
       resources    :users
       resources    :patients do
         resources  :medical_records do
