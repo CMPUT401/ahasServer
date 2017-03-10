@@ -1,7 +1,5 @@
 
 Rails.application.routes.draw do
-
-  mount_ember_app :frontend, to: '/'
   
   # we want our routes to be /api/routes but not our controllers
   # this may need to be reevalutated if we get lots of non api
@@ -26,5 +24,6 @@ Rails.application.routes.draw do
       resources    :schedules
     end
   end
+  mount_ember_app :frontend, to: '/'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

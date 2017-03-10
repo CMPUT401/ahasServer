@@ -27,16 +27,13 @@ class SchedulesController < ApplicationController
   def index
     schedules = Schedule.all
     schedule_list = filter_schedule_keys schedules
-    
-    render json: { success: true, schedules: schedule_list}
+    render json: { success: true, schedules: schedule_list }
   end
   
   private
   def filter_schedule_keys(schedules)
     schedules.map do |schedule|
-      { id: schedule.id, appointmentStartDate: appointmentStartDate, appointmentEndDate: appointmentEndDate,\
-      clientId: schedule.clientId
-      }
+      { id: schedule.id, appointmentStartDate: schedule.appointmentStartDate, appointmentEndDate: schedule.appointmentEndDate, clientId: schedule.clientId }
     end
   end
 

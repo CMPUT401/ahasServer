@@ -58,14 +58,14 @@ class ContactsTest < ActionDispatch::IntegrationTest
 
   test 'posting a contact with wrong parameters shoud fail' do
     post '/api/contacts/', headers: authenticated_header, params:
-                                                            { contacts:
+                                                            { contact:
                                                                 {
                                                                   first_name: :Justin,
                                                                   last_name: :Barclay,
                                                                   address: :something,
                                                                   phone_number: '555-5555',
-                                                                  fax_number: ' ',
-                                                                  email: 'valid@example.com',
+                                                                  fax_number: '',
+                                                                  email: 'valid@example',
                                                                   contact_type: 'Veterinarian'
                                                                 } }
     assert_response :error
