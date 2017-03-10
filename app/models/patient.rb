@@ -6,6 +6,8 @@ class Patient < ApplicationRecord
 
   has_many :medical_records
 
+  has_many :pictures
+
   validates :species, presence: true
 
   validates :first_name, presence: true

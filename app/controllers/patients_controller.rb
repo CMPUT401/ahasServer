@@ -23,7 +23,7 @@ class PatientsController < ApplicationController
       client = Client.find(patient.client_id)
       patient = patient.attributes
       patient['client'] = client.attributes
-      puts patient
+      
       render json: { success: true, patient: patient }
     else
       render status: 404, json: {success: false, error: 'Patient not found'}
