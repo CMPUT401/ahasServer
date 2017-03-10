@@ -19,8 +19,9 @@ class ImagesController < ApplicationController
   end
 
   def add_location(images)
+    # Attach asset_path to json
     images.map do |image|
-      image.location = asset_url image.name
+      image.location = ActionController::Base.helpers.asset_path(image.name)
     end
   end
 
