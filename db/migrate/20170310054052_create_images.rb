@@ -1,6 +1,6 @@
-class CreatePictures < ActiveRecord::Migration[5.0]
+class CreateImages < ActiveRecord::Migration[5.0]
   def change
-    create_table :pictures do |t|
+    create_table :images do |t|
       t.text :base64
       t.string :location
       t.string :picture_type

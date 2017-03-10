@@ -49,6 +49,16 @@ ActiveRecord::Schema.define(version: 20170310054052) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "images", force: :cascade do |t|
+    t.text     "base64"
+    t.string   "location"
+    t.string   "picture_type"
+    t.integer  "patient_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["patient_id"], name: "index_images_on_patient_id", using: :btree
+  end
+
   create_table "medical_records", force: :cascade do |t|
     t.float    "temperature"
     t.text     "exam_notes"
@@ -129,16 +139,6 @@ ActiveRecord::Schema.define(version: 20170310054052) do
     t.string   "gender"
     t.string   "last_name"
     t.index ["client_id"], name: "index_patients_on_client_id", using: :btree
-  end
-
-  create_table "pictures", force: :cascade do |t|
-    t.text     "base64"
-    t.string   "location"
-    t.string   "picture_type"
-    t.integer  "patient_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["patient_id"], name: "index_pictures_on_patient_id", using: :btree
   end
 
   create_table "schedules", force: :cascade do |t|

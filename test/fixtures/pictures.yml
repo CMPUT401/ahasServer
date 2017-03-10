@@ -7,4 +7,4 @@
 one:
   picture_type: 'radiograph'
   patient: one
-
+  location: /public/radiograph.jpg
