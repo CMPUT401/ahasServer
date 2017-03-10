@@ -17,6 +17,13 @@ class PatientsController < ApplicationController
   def show
     patient = Patient.find_by(id: params[:id])
     if patient
+      # Return client with a patient, to match UI
+      # UI always shows the client info with a patient info
+      
+      client = Client.find(patient.client_id)
+      patient = patient.attributes
+      patient['client'] = client.attributes
+      puts patient
       render json: { success: true, patient: patient }
     else
       render status: 404, json: {success: false, error: 'Patient not found'}
