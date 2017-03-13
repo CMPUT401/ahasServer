@@ -15,6 +15,17 @@
 - Create client
       - Mandatory client information:
           * Wants a "How did you hear about us field"
+            + Will email us
+            + Vet referral
+            + Ehs referral
+            + Televison/radio
+            + Newspaper
+            + Friend/family
+            + Pet food bank
+            + Tails of help
+            + Saw van
+            + Website
+            + Facebook/twitter
       - Alternative contact doesn't need to be required
       - Phones and email shouldn't be mandatory
 - Create patient:
@@ -37,6 +48,19 @@
     - Medications and vaccines will need a check up date
     - Wants a column for medications and vaccines to state what date to
       recheck them → wants an indicator to recheck next date
+    - We need to add weight to medical record
+    - Wants body conditioning score (9 scale) → can be a drop down
+        + 5 out of 9 is ideal
 - Contacts:
     - They want a 4th field: techs
     - Vets, volunteers, laboratories, and techs
+- All edits are locked out at midnight
+- Should be able to edit patient infos
+* Admin
+- Only admin should be able to create contacts
+- Normal users will be able to create clients and patients
+- One account per user
+- Pretty much no data can be deleted
+* Future support
+- Code will be documented
+- Let her know when presentation is, and when our next meeting is
