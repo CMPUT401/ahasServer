@@ -1,11 +1,5 @@
 class NotesController < ApplicationController
   before_action :check_patient_medical_relation, :authenticate_user
-
-  def check_patient_medical_relation
-    if patient_medical_record_relations_exist?
-      render status: 404, json: { success: false, error: 'Resource not found'}
-    end
-  end
   
   def create
     # Sanity check
@@ -43,6 +37,12 @@ class NotesController < ApplicationController
   end
 
   private
+
+  def check_patient_medical_relation
+    if patient_medical_record_relations_exist?
+      render status: 404, json: { success: false, error: 'Resource not found'}
+    end
+  end
 
   def filter_notes_keys(notes)
     notes.map do |note|
