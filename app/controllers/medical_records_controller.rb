@@ -1,9 +1,14 @@
 class MedicalRecordsController < ApplicationController
   before_action :authenticate_user
+
   def create
+    medications = params[:medications]
     @medical_record = MedicalRecord.new medical_record_params
-    
+
     if @medical_record.save
+      unless medications.nil?
+        create_medications(medications, @medical_record.id)
+      end
       render status: 201, json: { success: true }
     else
       render status: :error, json: { success: false, errors: @medical_record.errors.full_messages }
@@ -20,7 +25,6 @@ class MedicalRecordsController < ApplicationController
   end
 
   def index
-    
     patient = Patient.find_by(id: params[:patient_id])
     filtered_records = filter_medical_records_keys patient.medical_records
     render status: 200, json: { success: true, medical_records: filtered_records }
@@ -33,7 +37,7 @@ class MedicalRecordsController < ApplicationController
       { id: medical_record.id, exam_notes: medical_record.exam_notes, created_at: medical_record.created_at.to_i }
     end
   end
-
+  
   def medical_record_params
     params.require(:medical_record).permit(:summary, :date, :exam_notes, :signature, :temperature, :medications, :eyes, :oral,
                                            :ears, :glands, :skin, :abdomen, :urogential, :follow_up_instructions,
@@ -46,6 +50,27 @@ class MedicalRecordsController < ApplicationController
                                            :musculoskeletalN, :musculoskeletalA, :cardiovascularN, :cardiovascularA, :respiratoryN,
                                            :respiratoryA, :patient_id)
   end
+
+  def create_medications(medications, medical_record_id)
+    success = nil
+    medication_records = parse_medications(medications, medical_record_id)
+    Medication.transaction do
+      success = medication_records.map(&:save)
+      unless success.all?
+        raise ActiveRecord::Rollback
+      end
+    end
+    success
+  end
+
+  def parse_medications(medications, medical_record_id)
+    medications.map do |medication|
+      medication['medical_record_id'] = medical_record_id
+      Medication.new medication.permit(:name, :patient_id, :medical_record_id,
+                                       :date)
+    end
+  end
+  
 end
 
 

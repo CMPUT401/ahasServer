@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     puts exception
     unless performed?
       respond_to do |format|
-        format.html { render status: status, json: status }
+        format.html { render status: :error, json: status }
         format.all { head status }
       end
     end

@@ -5,9 +5,11 @@ class Patient < ApplicationRecord
   belongs_to :client
 
   has_many :medical_records
+  
+  has_many :medications
 
   has_many :images
-
+  
   validates :species, presence: true
 
   validates :first_name, presence: true

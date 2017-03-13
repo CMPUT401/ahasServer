@@ -2,7 +2,7 @@ class MedicalRecord < ApplicationRecord
   belongs_to :patient
 
   has_many   :notes
-
+  has_many   :medications
   validates :patient_id, presence: true, allow_bank: false
   
   validates :temperature, presence: true, allow_blank: true, numericality: true
