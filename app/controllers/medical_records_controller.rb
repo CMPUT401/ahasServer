@@ -1,9 +1,10 @@
 class MedicalRecordsController < ApplicationController
   before_action :authenticate_user
+
   def create
     medicine = medicine_params
     @medical_record = MedicalRecord.new medical_record_params
-    
+  
     if @medical_record.save
       if not medicine.nil?
         save_medicine_in_db(medicine, @medical_record.id)
@@ -25,7 +26,6 @@ class MedicalRecordsController < ApplicationController
   end
 
   def index
-    
     patient = Patient.find_by(id: params[:patient_id])
     filtered_records = filter_medical_records_keys patient.medical_records
     render status: 200, json: { success: true, medical_records: filtered_records }
