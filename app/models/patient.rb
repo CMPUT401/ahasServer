@@ -6,7 +6,7 @@ class Patient < ApplicationRecord
 
   has_many :medical_records
   
-  has_many :medicines
+  has_many :medications
 
   has_many :images
   

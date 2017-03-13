@@ -7,8 +7,8 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
   # end
   def setup
     @patient_id = patients(:one).id.to_s
-    @medicine = medicines(:one)
-    @medicine.medical_record_id = ''
+    @medication = medications(:one)
+    @medication.medical_record_id = ''
     @medical_record = {
       patient_id: @patient_id,
       temperature: 38.5,

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class MedicationTest < ActiveSupport::TestCase
   def setup
-    @medicine = medicines(:one)
+    @medicine = medications(:one)
   end
 
   test 'medicine is valid' do

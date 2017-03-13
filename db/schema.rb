@@ -117,14 +117,14 @@ ActiveRecord::Schema.define(version: 20170310164939) do
     t.text     "follow_up_instructions"
   end
 
-  create_table "medicines", force: :cascade do |t|
+  create_table "medications", force: :cascade do |t|
     t.string   "name"
     t.integer  "medical_record_id"
     t.integer  "patient_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.index ["medical_record_id"], name: "index_medicines_on_medical_record_id", using: :btree
-    t.index ["patient_id"], name: "index_medicines_on_patient_id", using: :btree
+    t.index ["medical_record_id"], name: "index_medications_on_medical_record_id", using: :btree
+    t.index ["patient_id"], name: "index_medications_on_patient_id", using: :btree
   end
 
   create_table "notes", force: :cascade do |t|
