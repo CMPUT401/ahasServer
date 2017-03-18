@@ -7,7 +7,17 @@
 one:
   patient: one
   medical_record: one
+  med_type: Medicine
   name: Hydrogen Dioxide
-  
-two: {}
-# column: value
+
+two:
+  patient: one
+  medical_record: one
+  med_type: Vaccine
+  name: Rabies
+
+three:
+  patient: one
+  medical_record: one
+  med_type: Other
+  name: Chocolate

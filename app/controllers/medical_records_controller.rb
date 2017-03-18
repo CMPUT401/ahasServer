@@ -48,7 +48,7 @@ class MedicalRecordsController < ApplicationController
                                            :earsAS, :glandsN, :glandsA, :skinN, :skinA, :abdomenN,
                                            :abdomenA, :urogentialN, :urogentialA, :nervousSystemN, :nervousSystemA,
                                            :musculoskeletalN, :musculoskeletalA, :cardiovascularN, :cardiovascularA, :respiratoryN,
-                                           :respiratoryA, :patient_id)
+                                           :respiratoryA, :patient_id, :mcsN, :mcsSevere, :weight, :weightUnit, :bcsVal, :mcsMild)
   end
 
   def create_medications(medications, medical_record_id)
@@ -67,7 +67,7 @@ class MedicalRecordsController < ApplicationController
     medications.map do |medication|
       medication['medical_record_id'] = medical_record_id
       Medication.new medication.permit(:name, :patient_id, :medical_record_id,
-                                       :date)
+                                       :date, :med_type)
     end
   end
   

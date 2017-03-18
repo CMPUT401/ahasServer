@@ -4,5 +4,5 @@ class Medication < ApplicationRecord
 
   validates :med_type, presence: true, allow_blank: false
   validates :name, presence: true, allow_blank: false
-  validate :reminder, presence: true, allow_blank: true
+  validates :reminder, presence: true, allow_blank: true
 end

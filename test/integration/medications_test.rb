@@ -9,9 +9,9 @@ class MedicationsTest < ActionDispatch::IntegrationTest
     @medication.medical_record_id = @medical_record.id
     @medication.save
 
-    @medication1 = { patient_id: @patient.id, name: 'Hydrogen Dioxide' }
-    @medication2 = { patient_id: @patient.id, name: 'Sulfur Dioxide' }
-    @medication3 = { patient_id: @patient.id, name: 'Nitrogen Dioxide' }
+    @medication1 = { patient_id: @patient.id, name: 'Hydrogen Dioxide', med_type: "Medicine" }
+    @medication2 = { patient_id: @patient.id, name: 'Sulfur Dioxide', med_type: "Other" }
+    @medication3 = { patient_id: @patient.id, name: 'Nitrogen Dioxide', med_type: "Vaccine" }
 
     @medical_record = {
       patient_id: @patient.id,
@@ -89,10 +89,10 @@ class MedicationsTest < ActionDispatch::IntegrationTest
   test 'posting to medical records, with medications as one of the parameters succeeds' do
     before = Medication.count
     post "/api/patients/#{@patient.id}/medical_records", headers: authenticated_header,
-         params: {
-           medical_record: @medical_record,
-           medications: [ @medication1, @medication2, @medication2 ]
-         }
+                                                         params: {
+                                                           medical_record: @medical_record,
+                                                           medications: [@medication1, @medication2, @medication2]
+                                                         }
     after = Medication.count
     assert after > before
     assert_response 201
