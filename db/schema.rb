@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170310164939) do
+ActiveRecord::Schema.define(version: 20170318162723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,13 @@ ActiveRecord::Schema.define(version: 20170310164939) do
     t.text     "signature"
     t.integer  "date"
     t.text     "follow_up_instructions"
+    t.boolean  "mcsN"
+    t.boolean  "mcsMild"
+    t.boolean  "mcsMod"
+    t.boolean  "mcsSevere"
+    t.integer  "weight"
+    t.string   "weightUnit"
+    t.integer  "bcsVal"
   end
 
   create_table "medications", force: :cascade do |t|
@@ -123,6 +130,8 @@ ActiveRecord::Schema.define(version: 20170310164939) do
     t.integer  "patient_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "reminder"
+    t.string   "med_type"
     t.index ["medical_record_id"], name: "index_medications_on_medical_record_id", using: :btree
     t.index ["patient_id"], name: "index_medications_on_patient_id", using: :btree
   end
