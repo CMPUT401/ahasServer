@@ -17,6 +17,7 @@ class MedicalRecordsController < ApplicationController
 
   def show
     @medical_record = MedicalRecord.find_by(id: params[:id])
+    @medications = Medication.find_by(medical_record_id: params[:id])
     if @medical_record
       render json: { success: true, medical_record: @medical_record }
     else
@@ -55,24 +56,24 @@ class MedicalRecordsController < ApplicationController
     success = nil
     medication_records = parse_medications(medications, medical_record_id)
     Medication.transaction do
-      puts medication_records.to_json
-      success = medication_records.map(&:save)
+      success = medication_records.each(&:save)
       unless success.all?
-        puts "error"
         raise ActiveRecord::Rollback
       end
     end
-    success
+    medication_records
   end
 
   def parse_medications(medications, medical_record_id)
-    medications.map do |medication|
-      medication['medical_record_id'] = medical_record_id
-      Medication.new medication.permit(:name, :patient_id, :medical_record_id,
+    meds = []
+    medications.each do |medication_num|
+      medication = medications[medication_num]
+      medication[:medical_record_id] = medical_record_id
+      meds.append Medication.new medication.permit(:name, :patient_id, :medical_record_id,
                                        :date, :med_type)
     end
+    meds
   end
-  
 end
 
 
