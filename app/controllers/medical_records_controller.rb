@@ -19,7 +19,7 @@ class MedicalRecordsController < ApplicationController
     @medical_record = MedicalRecord.find_by(id: params[:id])
     @medications = Medication.find_by(medical_record_id: params[:id])
     if @medical_record
-      render json: { success: true, medical_record: @medical_record }
+      render json: { success: true, medical_record: @medical_record, medications: @medications }
     else
       render status: :error, json: { success: false, error: 'Medical Record not found' }
     end
