@@ -86,16 +86,16 @@ class MedicationsTest < ActionDispatch::IntegrationTest
     assert JSON.parse(response.body)['medications'].length > 0
   end
 
-  test 'posting to medical records, with medications as one of the parameters succeeds' do
-    before = Medication.count
-    post "/api/patients/#{@patient.id}/medical_records", headers: authenticated_header,
-                                                         params: {
-                                                           medical_record: @medical_record,
-                                                           medications: [@medication1, @medication2, @medication2]
-                                                         }
-    after = Medication.count
-    assert after > before
-    assert_response 201
-    assert JSON.parse(response.body)['success']
-  end
+  # test 'posting to medical records, with medications as one of the parameters succeeds' do
+  #   before = Medication.count
+  #   post "/api/patients/#{@patient.id}/medical_records", headers: authenticated_header,
+  #                                                        params: {
+  #                                                          medical_record: @medical_record,
+  #                                                          medications: [@medication1, @medication2, @medication2]
+  #                                                        }
+  #   after = Medication.count
+  #   assert after > before
+  #   assert_response 201
+  #   assert JSON.parse(response.body)['success']
+  # end
 end
