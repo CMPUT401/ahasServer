@@ -51,4 +51,30 @@ class Clients_test < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'respond to successful PUT' do
+    id = @yamlClient.id.to_s
+    put '/api/client/' + id, params: @client, headers: authenticated_header
+    assert_response :success
+    assert JSON.parse(response.body)['success']
+  
+    get '/api/client/' + id, headers: authenticated_header
+    assert_not_equal @yamlClient.to_json.to_s, response.body  
+  end
+
+  test 'respond to unsuccessful PUT because of bad ID' do
+    id = @yamlClient.id + 1
+    put '/api/client/' + id.to_s, params: @client, headers: authenticated_header
+    assert_response :error
+  end
+
+  test 'respond to unsuccessful PUT because of bad input' do
+    id = @yamlClient.id.to_s
+    put '/api/client/'+ id,
+      params: {client: {firstName:  "Leeroy Jenkins", address: "1234 Fake St, Edmonton, Alberta",\
+                         phoneNumber: "7809519085", email: "leeroyjenkingmail.com", licos: "00",\
+                         socialAssistance: "PINGPING", pets: "-123"}}, headers: authenticated_header
+
+      assert_response :error
+      assert JSON.parse(response.body)['errors'].count > 0
+  end
 end

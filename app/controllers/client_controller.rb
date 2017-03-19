@@ -29,12 +29,21 @@ class ClientController < PersonController
   def index
     clients = Client.all
     client_list = filter_client_keys clients
-    
+
     render json: { success: true, clients: client_list}
   end
-  
+
+  def update
+    @client = Client.find params[:id]
+
+    if @client.update(client_params)
+      render json: { success: true}
+    else
+      render status: 500, json: {success: false, errors: @client.errors.full_messages}
+    end
+  end
+
   private
-  
   def filter_client_keys(clients)
     clients.map do |client|
       { id: client.id, firstName: client.firstName, lastName: client.lastName}
@@ -51,8 +60,8 @@ class ClientController < PersonController
   def client_params
     params.require(:client).permit(:firstName, :lastName, :address, :phoneNumber, :email,
                                    :licos, :aish, :socialAssistance,
-                                   :pets, :alternativeContactLastName, :alternativeContactFirstName, 
-                                   :alternativeContactPhoneNumber, :alternativeContactAddress,  
+                                   :pets, :alternativeContactLastName, :alternativeContactFirstName,
+                                   :alternativeContactPhoneNumber, :alternativeContactAddress,
                        :notes, :alternativeContact2ndPhone, :alternativeContactEmail)
   end
 end
