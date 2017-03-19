@@ -33,8 +33,16 @@ class ClientController < PersonController
     render json: { success: true, clients: client_list}
   end
   
+  def update
+    @client = Client.find_by(id: params[:id])
+
+    if @client.update(client_params)
+      render json: { success: true}
+    else
+      render json: {success: false, errors: @client.error.full_messages}
+
+      
   private
-  
   def filter_client_keys(clients)
     clients.map do |client|
       { id: client.id, firstName: client.firstName, lastName: client.lastName}

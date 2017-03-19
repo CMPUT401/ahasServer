@@ -13,7 +13,6 @@ Rails.application.routes.draw do
       
       get          'patients/:patient_id/medications/:id', to: 'medications#show'
       get          'patients/:patient_id/medications/', to: 'medications#index'
-      get          'patients/:patient_id/medications/', to: 'medications#index'
       get          'patients/:patient_id/medications/by/:filter', to: 'medications#filter' 
       resources    :users
       resources    :patients do

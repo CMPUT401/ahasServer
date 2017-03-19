@@ -51,4 +51,9 @@ class Clients_test < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'respond to successful PUT' do
+    @yamlClient.firstName = "James" 
+    id = @yamlClient.id.to_s
+    put '/api/client/' + id, headers: authenticated_header
+    assert_response :success
 end
