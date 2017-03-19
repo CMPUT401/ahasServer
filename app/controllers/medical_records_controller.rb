@@ -55,8 +55,10 @@ class MedicalRecordsController < ApplicationController
     success = nil
     medication_records = parse_medications(medications, medical_record_id)
     Medication.transaction do
+      puts medication_records.to_json
       success = medication_records.map(&:save)
       unless success.all?
+        puts "error"
         raise ActiveRecord::Rollback
       end
     end

@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       
       get          'patients/:patient_id/images/:id', to: 'images#show'
       get          'patients/:patient_id/images/filter/:id', to: 'images#filter'
-      post         'patients/:patient_id/images',     to: 'images#create'
+      post         'patients/:patient_id/images',    to: 'images#create'
 
       resources    :users
       resources    :patients do
