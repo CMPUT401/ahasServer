@@ -28,7 +28,6 @@ class MedicalRecordsController < ApplicationController
   def index
     patient = Patient.find_by(id: params[:patient_id]).medical_records.order(created_at: :desc)
     filtered_records = filter_medical_records_keys patient
-    puts filtered_records
     render status: 200, json: { success: true, medical_records: filtered_records }
   end
 

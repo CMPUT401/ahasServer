@@ -66,13 +66,12 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
       weight: 100,
       weightUnit: "kg",
       bcsVal: 18
-      
+
     }
 
     @show_record = medical_records(:one)
     @finalized_record = medical_records(:two)
     @show_record2 = medical_records(:two)
-
   end
 
   test 'Posting a valid medical record' do
@@ -122,7 +121,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
   test 'post medical record with json' do
     @medical_record['medicine'] = @medicine.to_json
     post "/api/patients/#{@patient_id}/medical_records", headers: authenticated_header, params: { medical_record: @medical_record }
-    
+
     assert JSON.parse(response.body)['success']
     assert_response :created
   end
@@ -149,12 +148,15 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
 
   test 'PUT a current medical record' do
     id = @show_record.id.to_s
+
     put "/api/patients/#{@patient_id.to_s}/medical_records/" + id,
     headers: authenticated_header,
     params: {medical_record: @medical_record}
 
     assert JSON.parse(response.body)['success']
     assert_response :created
+
+   get "/api/patients/#{@patient_id.to_s}/medical_records/" + id, headers: authenticated_header
   end
 
   test 'PUT out dated medical record fails' do
