@@ -5,7 +5,9 @@ class MedicalRecord < ApplicationRecord
   has_many   :medications
   validates :patient_id, presence: true, allow_bank: false
   
+  
   validates :temperature, presence: true, allow_blank: true, numericality: true
+  
   validates :signature, presence: true, allow_blank: true
 
   validates :date, presence: true, allow_blank: true, numericality: true
@@ -26,7 +28,7 @@ class MedicalRecord < ApplicationRecord
 
   validates :abdomen, presence: true, allow_blank: true
 
-  validates :urogential, presence: true, allow_blank: true
+  validates :urogenital, presence: true, allow_blank: true
 
   validates :nervousSystem, presence: true, allow_blank: true
 
@@ -82,9 +84,9 @@ class MedicalRecord < ApplicationRecord
 
   validates :abdomenA, presence: true, allow_blank: true, inclusion: { in: [true, false] }
 
-  validates :urogentialN, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+  validates :urogenitalN, presence: true, allow_blank: true, inclusion: { in: [true, false] }
 
-  validates :urogentialA, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+  validates :urogenitalA, presence: true, allow_blank: true, inclusion: { in: [true, false] }
 
   validates :nervousSystemN, presence: true, allow_blank: true, inclusion: { in: [true, false] }
 
@@ -102,4 +104,17 @@ class MedicalRecord < ApplicationRecord
 
   validates :respiratoryA, presence: true, allow_blank: true, inclusion: { in: [true, false] }
 
+  validates :mcsMod, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+  
+  validates :mcsN, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+  
+  validates :mcsMild, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+  
+  validates :mcsSevere, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+  
+  validates :weight, presence: true, allow_blank: trueb
+  
+  validates :weightUnit, presence: true, allow_blank: true
+
+  validates :bcsVal, presence: true, allow_blank: true
 end

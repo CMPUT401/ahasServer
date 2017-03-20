@@ -63,9 +63,9 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
       mcsN: true,
       mcsMild: true,
       mcsSevere: true,
-      weight: true,
-      weightUnit: true,
-      bcsVal: true
+      weight: 100,
+      weightUnit: "kg",
+      bcsVal: 18
       
     }
 

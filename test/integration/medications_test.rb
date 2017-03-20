@@ -67,9 +67,9 @@ class MedicationsTest < ActionDispatch::IntegrationTest
       mcsN: true,
       mcsMild: true,
       mcsSevere: true,
-      weight: true,
-      weightUnit: true,
-      bcsVal: true
+      weight: 100,
+      weightUnit: "kg",
+      bcsVal: 18
     }
   end
 
@@ -95,7 +95,7 @@ class MedicationsTest < ActionDispatch::IntegrationTest
     assert JSON.parse(response.body)['medications'].length > 0
   end
 
-  test 'posting to medical records, with medications as bone of the parameters succeeds' do
+  test 'posting to medical records, with medications as one of the parameters succeeds' do
     before = Medication.count
     medications = { '0' => @medication1, '1' => @medication2, '2' => @medication2 }
     

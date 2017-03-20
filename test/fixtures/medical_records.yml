@@ -59,6 +59,6 @@ one:
   mcsN: true
   mcsMild: true
   mcsSevere: true
-  weight: true
-  weightUnit: true
-  bcsVal: true
+  weight: 18
+  weightUnit: kg
+  bcsVal: 18
