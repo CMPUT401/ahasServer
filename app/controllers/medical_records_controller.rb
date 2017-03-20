@@ -26,8 +26,9 @@ class MedicalRecordsController < ApplicationController
   end
 
   def index
-    patient = Patient.find_by(id: params[:patient_id])
-    filtered_records = filter_medical_records_keys patient.medical_records
+    patient = Patient.find_by(id: params[:patient_id]).medical_records.order(created_at: :desc)
+    filtered_records = filter_medical_records_keys patient
+    puts filtered_records
     render status: 200, json: { success: true, medical_records: filtered_records }
   end
 
@@ -35,7 +36,7 @@ class MedicalRecordsController < ApplicationController
 
   def filter_medical_records_keys(medical_records)
     medical_records.map do |medical_record|
-      { id: medical_record.id, exam_notes: medical_record.exam_notes, created_at: medical_record.created_at.to_i }
+      { id: medical_record.id, summary: medical_record.summary, created_at: medical_record.created_at.to_i }
     end
   end
   
@@ -69,7 +70,7 @@ class MedicalRecordsController < ApplicationController
     medications.each do |medication_num|
       medication = medications[medication_num]
       medication[:medical_record_id] = medical_record_id
-      meds.append Medication.new medication.permit(:name, :patient_id, :medical_record_id,
+      meds.append Medication.new medication.permit(:name, :patient_id, :medical_record_id, :reminder,
                                        :date, :med_type)
     end
     meds

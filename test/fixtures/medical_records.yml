@@ -62,3 +62,64 @@ one:
   weight: 18
   weightUnit: kg
   bcsVal: 18
+  summary: "No news is bad news"
+
+two:
+  patient: one
+  temperature: 38.5
+  exam_notes: No new notes
+  medications: This might need to be removed
+  eyes: All good
+  oral: Speaks wonderfully
+  ears: Little bit deaf
+  glands: normal
+  skin: Covered in fur
+  abdomen: great abs
+  urogenital: normal
+  nervousSystem: Like woody allen
+  musculoskeletal: Titanium
+  cardiovascular: Like molasses
+  heart_rate: 88
+  respiratory: good
+  respiratory_rate: 31
+  attitudeBAR: True
+  attitudeQAR: True
+  attitudeDepressed: True
+  eyesN: True
+  eyesA: True
+  mmN: True
+  mmPale: True
+  mmJaundiced: True
+  mmTacky: True
+  earsN: True
+  earsA: True
+  earsEarMites: True
+  earsAU: True
+  earsAD: True
+  earsAS: True
+  glandsN: True
+  glandsA: True
+  skinN: True
+  skinA: True
+  abdomenN: True
+  abdomenA: True
+  urogenitalN: True
+  urogenitalA: True
+  nervousSystemN: True
+  nervousSystemA: True
+  musculoskeletalN: True
+  musculoskeletalA: True
+  cardiovascularN: True
+  cardiovascularA: True
+  respiratoryN: True
+  respiratoryA: True
+  oralA: true
+  oralN: true
+  mcsMod: true
+  mcsN: true
+  mcsMild: true
+  mcsSevere: true
+  weight: 18
+  weightUnit: kg
+  bcsVal: 18
+  summary: "No news is good news"

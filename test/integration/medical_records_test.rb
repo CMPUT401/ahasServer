@@ -70,6 +70,8 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
     }
 
     @show_record = medical_records(:one)
+    @show_record2 = medical_records(:two)
+
   end
 
   test 'Posting a valid medical record' do
@@ -107,7 +109,9 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
   end
 
   test 'get medical record index' do
-    get "/api/patients/#{@patient_id}/medical_records", headers: authenticated_header, params: { medical_record: @medical_record }
+    @show_record2[:created_at] = Date.yesterday
+    @show_record2.save
+    get "/api/patients/#{@patient_id}/medical_records", headers: authenticated_header
 
     assert_response 200
     assert JSON.parse(response.body)['success']
@@ -117,7 +121,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
   test 'post medical record with json' do
     @medical_record['medicine'] = @medicine.to_json
     post "/api/patients/#{@patient_id}/medical_records", headers: authenticated_header, params: { medical_record: @medical_record }
-
+    
     assert JSON.parse(response.body)['success']
     assert_response :created
   end
