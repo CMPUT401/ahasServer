@@ -17,16 +17,18 @@ class MedicalRecordsController < ApplicationController
 
   def show
     @medical_record = MedicalRecord.find_by(id: params[:id])
+    @medications = Medication.where("medical_record_id = ?", params[:id])
     if @medical_record
-      render json: { success: true, medical_record: @medical_record }
+      render json: { success: true, medical_record: @medical_record, medications: @medications }
     else
       render status: :error, json: { success: false, error: 'Medical Record not found' }
     end
   end
 
   def index
-    patient = Patient.find_by(id: params[:patient_id])
-    filtered_records = filter_medical_records_keys patient.medical_records
+    patient = Patient.find_by(id: params[:patient_id]).medical_records.order(created_at: :desc)
+    filtered_records = filter_medical_records_keys patient
+    puts filtered_records
     render status: 200, json: { success: true, medical_records: filtered_records }
   end
 
@@ -49,19 +51,19 @@ class MedicalRecordsController < ApplicationController
   private
   def filter_medical_records_keys(medical_records)
     medical_records.map do |medical_record|
-      { id: medical_record.id, exam_notes: medical_record.exam_notes, created_at: medical_record.created_at.to_i }
+      { id: medical_record.id, summary: medical_record.summary, created_at: medical_record.created_at.to_i }
     end
   end
 
   def medical_record_params
     params.require(:medical_record).permit(:summary, :date, :exam_notes, :signature, :temperature, :medications, :eyes, :oral,
-                                           :ears, :glands, :skin, :abdomen, :urogential, :follow_up_instructions,
+                                           :ears, :glands, :skin, :abdomen, :urogenital, :follow_up_instructions,
                                            :nervousSystem, :musculoskeletal, :cardiovascular, :heart_rate,
                                            :respiratory, :respiratory_rate, :attitudeBAR, :attitudeQAR,
                                            :attitudeDepressed, :eyesN, :eyesA, :mmN, :mmPale, :mmJaundiced,
                                            :mmTacky, :earsN, :earsA, :earsEarMites, :earsAU, :earsAD,
-                                           :earsAS, :glandsN, :glandsA, :skinN, :skinA, :abdomenN,
-                                           :abdomenA, :urogentialN, :urogentialA, :nervousSystemN, :nervousSystemA,
+                                           :earsAS, :glandsN, :glandsA, :skinN, :skinA, :abdomenN, :mcsMod, :oralA, :oralN,
+                                           :abdomenA, :urogenitalN, :urogenitalA, :nervousSystemN, :nervousSystemA,
                                            :musculoskeletalN, :musculoskeletalA, :cardiovascularN, :cardiovascularA, :respiratoryN,
                                            :respiratoryA, :patient_id, :mcsN, :mcsSevere, :weight, :weightUnit, :bcsVal, :mcsMild)
   end
@@ -70,22 +72,24 @@ class MedicalRecordsController < ApplicationController
     success = nil
     medication_records = parse_medications(medications, medical_record_id)
     Medication.transaction do
-      success = medication_records.map(&:save)
+      success = medication_records.each(&:save)
       unless success.all?
         raise ActiveRecord::Rollback
       end
     end
-    success
+    medication_records
   end
 
   def parse_medications(medications, medical_record_id)
-    medications.map do |medication|
-      medication['medical_record_id'] = medical_record_id
-      Medication.new medication.permit(:name, :patient_id, :medical_record_id,
+    meds = []
+    medications.each do |medication_num|
+      medication = medications[medication_num]
+      medication[:medical_record_id] = medical_record_id
+      meds.append Medication.new medication.permit(:name, :patient_id, :medical_record_id, :reminder,
                                        :date, :med_type)
     end
+    meds
   end
-
 end
 
 

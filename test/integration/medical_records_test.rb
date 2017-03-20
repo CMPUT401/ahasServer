@@ -19,7 +19,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
       glands: 'normal',
       skin: 'Covered in fur',
       abdomen: 'great abs',
-      urogential: 'normal',
+      urogenital: 'normal',
       nervousSystem: 'Like Woody Allen',
       musculoskeletal: 'Titanium',
       cardiovascular: 'Like molasses',
@@ -47,8 +47,8 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
       skinA: true,
       abdomenN: true,
       abdomenA: true,
-      urogentialN: true,
-      urogentialA: true,
+      urogenitalN: true,
+      urogenitalA: true,
       nervousSystemN: true,
       nervousSystemA: true,
       musculoskeletalN: true,
@@ -56,11 +56,23 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
       cardiovascularN: true,
       cardiovascularA: true,
       respiratoryN: true,
-      respiratoryA: true
+      respiratoryA: true,
+      oralA: true,
+      oralN: true,
+      mcsMod: true,
+      mcsN: true,
+      mcsMild: true,
+      mcsSevere: true,
+      weight: 100,
+      weightUnit: "kg",
+      bcsVal: 18
+      
     }
 
     @show_record = medical_records(:one)
     @finalized_record = medical_records(:two)
+    @show_record2 = medical_records(:two)
+
   end
 
   test 'Posting a valid medical record' do
@@ -98,7 +110,9 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
   end
 
   test 'get medical record index' do
-    get "/api/patients/#{@patient_id}/medical_records", headers: authenticated_header, params: { medical_record: @medical_record }
+    @show_record2[:created_at] = Date.yesterday
+    @show_record2.save
+    get "/api/patients/#{@patient_id}/medical_records", headers: authenticated_header
 
     assert_response 200
     assert JSON.parse(response.body)['success']
@@ -108,7 +122,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
   test 'post medical record with json' do
     @medical_record['medicine'] = @medicine.to_json
     post "/api/patients/#{@patient_id}/medical_records", headers: authenticated_header, params: { medical_record: @medical_record }
-
+    
     assert JSON.parse(response.body)['success']
     assert_response :created
   end

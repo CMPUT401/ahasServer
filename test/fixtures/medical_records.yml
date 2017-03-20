@@ -15,7 +15,7 @@ one:
   glands: normal
   skin: Covered in fur
   abdomen: great abs
-  urogential: normal
+  urogenital: normal
   nervousSystem: Like woody allen
   musculoskeletal: Titanium
   cardiovascular: Like molasses
@@ -43,8 +43,8 @@ one:
   skinA: True
   abdomenN: True
   abdomenA: True
-  urogentialN: True
-  urogentialA: True
+  urogenitalN: True
+  urogenitalA: True
   nervousSystemN: True
   nervousSystemA: True
   musculoskeletalN: True
@@ -52,24 +52,35 @@ one:
   cardiovascularN: True
   cardiovascularA: True
   respiratoryN: True
-  respiratoryA: True  
+  respiratoryA: True
+  oralA: true
+  oralN: true
+  mcsMod: true
+  mcsN: true
+  mcsMild: true
+  mcsSevere: true
+  weight: 18
+  weightUnit: kg
+  bcsVal: 18
+  summary: "No news is bad news"
+
 two:
-  patient: one 
+  patient: one
   temperature: 38.5
   exam_notes: No new notes
   medications: This might need to be removed
-  eyes: All three are good 
-  oral: Won't stop yelling in cantonese 
-  ears: Hugely deaf
-  glands: massive 
-  skin: Covered in an exoskeleton 
+  eyes: All good
+  oral: Speaks wonderfully
+  ears: Little bit deaf
+  glands: normal
+  skin: Covered in fur
   abdomen: great abs
-  urogential: normal
-  nervousSystem: Twitchy  
-  musculoskeletal: Adamantium 
-  cardiovascular: Super heart attack
-  heart_rate: 880
-  respiratory: breathing fire 
+  urogenital: normal
+  nervousSystem: Like woody allen
+  musculoskeletal: Titanium
+  cardiovascular: Like molasses
+  heart_rate: 88
+  respiratory: good
   respiratory_rate: 31
   attitudeBAR: True
   attitudeQAR: True
@@ -92,8 +103,8 @@ two:
   skinA: True
   abdomenN: True
   abdomenA: True
-  urogentialN: True
-  urogentialA: True
+  urogenitalN: True
+  urogenitalA: True
   nervousSystemN: True
   nervousSystemA: True
   musculoskeletalN: True
@@ -101,4 +112,14 @@ two:
   cardiovascularN: True
   cardiovascularA: True
   respiratoryN: True
-  respiratoryA: True  
+  respiratoryA: True
+  oralA: true
+  oralN: true
+  mcsMod: true
+  mcsN: true
+  mcsMild: true
+  mcsSevere: true
+  weight: 18
+  weightUnit: kg
+  bcsVal: 18
+  summary: "No news is good news"

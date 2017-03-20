@@ -23,7 +23,7 @@ class MedicationsTest < ActionDispatch::IntegrationTest
       glands: 'normal',
       skin: 'Covered in fur',
       abdomen: 'great abs',
-      urogential: 'normal',
+      urogenital: 'normal',
       nervousSystem: 'Like Woody Allen',
       musculoskeletal: 'Titanium',
       cardiovascular: 'Like molasses',
@@ -51,8 +51,8 @@ class MedicationsTest < ActionDispatch::IntegrationTest
       skinA: true,
       abdomenN: true,
       abdomenA: true,
-      urogentialN: true,
-      urogentialA: true,
+      urogenitalN: true,
+      urogenitalA: true,
       nervousSystemN: true,
       nervousSystemA: true,
       musculoskeletalN: true,
@@ -60,7 +60,16 @@ class MedicationsTest < ActionDispatch::IntegrationTest
       cardiovascularN: true,
       cardiovascularA: true,
       respiratoryN: true,
-      respiratoryA: true
+      respiratoryA: true,
+      oralA: true,
+      oralN: true,
+      mcsMod: true,
+      mcsN: true,
+      mcsMild: true,
+      mcsSevere: true,
+      weight: 100,
+      weightUnit: "kg",
+      bcsVal: 18
     }
   end
 
@@ -88,10 +97,12 @@ class MedicationsTest < ActionDispatch::IntegrationTest
 
   test 'posting to medical records, with medications as one of the parameters succeeds' do
     before = Medication.count
+    medications = { '0' => @medication1, '1' => @medication2, '2' => @medication2 }
+    
     post "/api/patients/#{@patient.id}/medical_records", headers: authenticated_header,
                                                          params: {
                                                            medical_record: @medical_record,
-                                                           medications: [@medication1, @medication2, @medication2]
+                                                           medications: medications
                                                          }
     after = Medication.count
     assert after > before

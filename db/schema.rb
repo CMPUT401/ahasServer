@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170318162723) do
+ActiveRecord::Schema.define(version: 20170320015636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,13 +50,13 @@ ActiveRecord::Schema.define(version: 20170318162723) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.text     "base64"
-    t.string   "location"
+    t.text     "data"
     t.string   "picture_type"
     t.integer  "patient_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "name"
+    t.integer  "date"
     t.index ["patient_id"], name: "index_images_on_patient_id", using: :btree
   end
 
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20170318162723) do
     t.string   "glands"
     t.string   "skin"
     t.string   "abdomen"
-    t.string   "urogential"
+    t.string   "urogenital"
     t.string   "nervousSystem"
     t.string   "musculoskeletal"
     t.string   "cardiovascular"
@@ -98,8 +98,8 @@ ActiveRecord::Schema.define(version: 20170318162723) do
     t.boolean  "skinA"
     t.boolean  "abdomenN"
     t.boolean  "abdomenA"
-    t.boolean  "urogentialN"
-    t.boolean  "urogentialA"
+    t.boolean  "urogenitalN"
+    t.boolean  "urogenitalA"
     t.boolean  "nervousSystemN"
     t.boolean  "nervousSystemA"
     t.boolean  "musculoskeletalN"
@@ -122,6 +122,8 @@ ActiveRecord::Schema.define(version: 20170318162723) do
     t.integer  "weight"
     t.string   "weightUnit"
     t.integer  "bcsVal"
+    t.boolean  "oralA"
+    t.boolean  "oralN"
   end
 
   create_table "medications", force: :cascade do |t|

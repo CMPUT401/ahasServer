@@ -7,5 +7,6 @@
 one:
   picture_type: 'radiograph'
   patient: one
-  location: 
+  data: 'ddsd'
   name: one.jpg
+  date: 111111
