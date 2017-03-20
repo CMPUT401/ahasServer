@@ -112,7 +112,7 @@ class MedicalRecord < ApplicationRecord
   
   validates :mcsSevere, presence: true, allow_blank: true, inclusion: { in: [true, false] }
   
-  validates :weight, presence: true, allow_blank: trueb
+  validates :weight, presence: true, allow_blank: true
   
   validates :weightUnit, presence: true, allow_blank: true
 
