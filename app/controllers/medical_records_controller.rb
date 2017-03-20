@@ -17,7 +17,7 @@ class MedicalRecordsController < ApplicationController
 
   def show
     @medical_record = MedicalRecord.find_by(id: params[:id])
-    @medications = Medication.where("medical_record_id = " params[:id])
+    @medications = Medication.where("medical_record_id = ?", params[:id])
     if @medical_record
       render json: { success: true, medical_record: @medical_record, medications: @medications }
     else
