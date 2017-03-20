@@ -2,4 +2,5 @@
 one:
   body: A string
   initials: JK Rowling
+  is_alert: false
   medical_record: one
