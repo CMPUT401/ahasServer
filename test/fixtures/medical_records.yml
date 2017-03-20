@@ -53,3 +53,52 @@ one:
   cardiovascularA: True
   respiratoryN: True
   respiratoryA: True  
+two:
+  patient: one 
+  temperature: 38.5
+  exam_notes: No new notes
+  medications: This might need to be removed
+  eyes: All three are good 
+  oral: Won't stop yelling in cantonese 
+  ears: Hugely deaf
+  glands: massive 
+  skin: Covered in an exoskeleton 
+  abdomen: great abs
+  urogential: normal
+  nervousSystem: Twitchy  
+  musculoskeletal: Adamantium 
+  cardiovascular: Super heart attack
+  heart_rate: 880
+  respiratory: breathing fire 
+  respiratory_rate: 31
+  attitudeBAR: True
+  attitudeQAR: True
+  attitudeDepressed: True
+  eyesN: True
+  eyesA: True
+  mmN: True
+  mmPale: True
+  mmJaundiced: True
+  mmTacky: True
+  earsN: True
+  earsA: True
+  earsEarMites: True
+  earsAU: True
+  earsAD: True
+  earsAS: True
+  glandsN: True
+  glandsA: True
+  skinN: True
+  skinA: True
+  abdomenN: True
+  abdomenA: True
+  urogentialN: True
+  urogentialA: True
+  nervousSystemN: True
+  nervousSystemA: True
+  musculoskeletalN: True
+  musculoskeletalA: True
+  cardiovascularN: True
+  cardiovascularA: True
+  respiratoryN: True
+  respiratoryA: True  

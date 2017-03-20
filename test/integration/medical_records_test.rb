@@ -60,6 +60,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
     }
 
     @show_record = medical_records(:one)
+    @finalized_record = medical_records(:two)
   end
 
   test 'Posting a valid medical record' do
@@ -111,4 +112,69 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
     assert JSON.parse(response.body)['success']
     assert_response :created
   end
+
+  test 'PUT a current medical record with invalid input' do
+    id = @show_record.id.to_s
+    @medical_record['heart_rate'] = "potato"
+    put "/api/patients/#{@patient_id.to_s}/medical_records/" + id,
+    headers: authenticated_header,
+    params: {medical_record: @medical_record}
+
+    assert_response :error
+  end
+
+  test 'PATCH a current medical record with invalid input' do
+    id = @show_record.id.to_s
+    @medical_record['heart_rate'] = "potato"
+    patch "/api/patients/#{@patient_id.to_s}/medical_records/" + id,
+    headers: authenticated_header,
+    params: {medical_record: @medical_record}
+
+    assert_response :error
+  end
+
+  test 'PUT a current medical record' do
+    id = @show_record.id.to_s
+    put "/api/patients/#{@patient_id.to_s}/medical_records/" + id,
+    headers: authenticated_header,
+    params: {medical_record: @medical_record}
+
+    assert JSON.parse(response.body)['success']
+    assert_response :created
+  end
+
+  test 'PUT out dated medical record fails' do
+    id = @show_record.id.to_s
+
+    @show_record.created_at = 1.day.ago
+    @show_record.save()
+    put "/api/patients/#{@patient_id}/medical_records/" + id, headers: authenticated_header, params: { medical_record: @medical_record }
+
+    assert_response :error
+    assert_not JSON.parse(response.body)['success']
+    @show_record.created_at = 0.day.ago
+  end
+
+  test 'patch a current medical record' do
+    id = @show_record.id.to_s
+    patch "/api/patients/#{@patient_id.to_s}/medical_records/" + id,
+    headers: authenticated_header,
+    params: {medical_record: @medical_record}
+
+    assert JSON.parse(response.body)['success']
+    assert_response :created
+  end
+
+  test 'patch out dated medical record fails' do
+    id = @show_record.id.to_s
+
+    @show_record.created_at = 1.day.ago
+    @show_record.save()
+    patch "/api/patients/#{@patient_id}/medical_records/" + id, headers: authenticated_header, params: { medical_record: @medical_record }
+
+    assert_response :error
+    assert_not JSON.parse(response.body)['success']
+    @show_record.created_at = 0.day.ago
+  end
+
 end
