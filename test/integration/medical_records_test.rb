@@ -19,7 +19,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
       glands: 'normal',
       skin: 'Covered in fur',
       abdomen: 'great abs',
-      urogential: 'normal',
+      urogenital: 'normal',
       nervousSystem: 'Like Woody Allen',
       musculoskeletal: 'Titanium',
       cardiovascular: 'Like molasses',
@@ -47,8 +47,8 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
       skinA: true,
       abdomenN: true,
       abdomenA: true,
-      urogentialN: true,
-      urogentialA: true,
+      urogenitalN: true,
+      urogenitalA: true,
       nervousSystemN: true,
       nervousSystemA: true,
       musculoskeletalN: true,
@@ -56,7 +56,17 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
       cardiovascularN: true,
       cardiovascularA: true,
       respiratoryN: true,
-      respiratoryA: true
+      respiratoryA: true,
+      oralA: true,
+      oralN: true,
+      mcsMod: true,
+      mcsN: true,
+      mcsMild: true,
+      mcsSevere: true,
+      weight: true,
+      weightUnit: true,
+      bcsVal: true
+      
     }
 
     @show_record = medical_records(:one)

@@ -23,7 +23,7 @@ class MedicationsTest < ActionDispatch::IntegrationTest
       glands: 'normal',
       skin: 'Covered in fur',
       abdomen: 'great abs',
-      urogential: 'normal',
+      urogenital: 'normal',
       nervousSystem: 'Like Woody Allen',
       musculoskeletal: 'Titanium',
       cardiovascular: 'Like molasses',
@@ -51,8 +51,8 @@ class MedicationsTest < ActionDispatch::IntegrationTest
       skinA: true,
       abdomenN: true,
       abdomenA: true,
-      urogentialN: true,
-      urogentialA: true,
+      urogenitalN: true,
+      urogenitalA: true,
       nervousSystemN: true,
       nervousSystemA: true,
       musculoskeletalN: true,
@@ -60,7 +60,16 @@ class MedicationsTest < ActionDispatch::IntegrationTest
       cardiovascularN: true,
       cardiovascularA: true,
       respiratoryN: true,
-      respiratoryA: true
+      respiratoryA: true,
+      oralA: true,
+      oralN: true,
+      mcsMod: true,
+      mcsN: true,
+      mcsMild: true,
+      mcsSevere: true,
+      weight: true,
+      weightUnit: true,
+      bcsVal: true
     }
   end
 
@@ -86,7 +95,7 @@ class MedicationsTest < ActionDispatch::IntegrationTest
     assert JSON.parse(response.body)['medications'].length > 0
   end
 
-  test 'posting to medical records, with medications as one of the parameters succeeds' do
+  test 'posting to medical records, with medications as bone of the parameters succeeds' do
     before = Medication.count
     medications = { '0' => @medication1, '1' => @medication2, '2' => @medication2 }
     

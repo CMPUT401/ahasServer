@@ -41,13 +41,13 @@ class MedicalRecordsController < ApplicationController
   
   def medical_record_params
     params.require(:medical_record).permit(:summary, :date, :exam_notes, :signature, :temperature, :medications, :eyes, :oral,
-                                           :ears, :glands, :skin, :abdomen, :urogential, :follow_up_instructions,
+                                           :ears, :glands, :skin, :abdomen, :urogenital, :follow_up_instructions,
                                            :nervousSystem, :musculoskeletal, :cardiovascular, :heart_rate,
                                            :respiratory, :respiratory_rate, :attitudeBAR, :attitudeQAR,
                                            :attitudeDepressed, :eyesN, :eyesA, :mmN, :mmPale, :mmJaundiced,
                                            :mmTacky, :earsN, :earsA, :earsEarMites, :earsAU, :earsAD,
-                                           :earsAS, :glandsN, :glandsA, :skinN, :skinA, :abdomenN,
-                                           :abdomenA, :urogentialN, :urogentialA, :nervousSystemN, :nervousSystemA,
+                                           :earsAS, :glandsN, :glandsA, :skinN, :skinA, :abdomenN, :mcsMod,
+                                           :abdomenA, :urogenitalN, :urogenitalA, :nervousSystemN, :nervousSystemA,
                                            :musculoskeletalN, :musculoskeletalA, :cardiovascularN, :cardiovascularA, :respiratoryN,
                                            :respiratoryA, :patient_id, :mcsN, :mcsSevere, :weight, :weightUnit, :bcsVal, :mcsMild)
   end

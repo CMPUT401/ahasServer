@@ -15,7 +15,7 @@ one:
   glands: normal
   skin: Covered in fur
   abdomen: great abs
-  urogential: normal
+  urogenital: normal
   nervousSystem: Like woody allen
   musculoskeletal: Titanium
   cardiovascular: Like molasses
@@ -43,8 +43,8 @@ one:
   skinA: True
   abdomenN: True
   abdomenA: True
-  urogentialN: True
-  urogentialA: True
+  urogenitalN: True
+  urogenitalA: True
   nervousSystemN: True
   nervousSystemA: True
   musculoskeletalN: True
@@ -52,4 +52,13 @@ one:
   cardiovascularN: True
   cardiovascularA: True
   respiratoryN: True
-  respiratoryA: True  
+  respiratoryA: True
+  oralA: true
+  oralN: true
+  mcsMod: true
+  mcsN: true
+  mcsMild: true
+  mcsSevere: true
+  weight: true
+  weightUnit: true
+  bcsVal: true
