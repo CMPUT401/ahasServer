@@ -46,7 +46,7 @@ class MedicalRecordsController < ApplicationController
                                            :respiratory, :respiratory_rate, :attitudeBAR, :attitudeQAR,
                                            :attitudeDepressed, :eyesN, :eyesA, :mmN, :mmPale, :mmJaundiced,
                                            :mmTacky, :earsN, :earsA, :earsEarMites, :earsAU, :earsAD,
-                                           :earsAS, :glandsN, :glandsA, :skinN, :skinA, :abdomenN, :mcsMod,
+                                           :earsAS, :glandsN, :glandsA, :skinN, :skinA, :abdomenN, :mcsMod, :oralA, :oralN,
                                            :abdomenA, :urogenitalN, :urogenitalA, :nervousSystemN, :nervousSystemA,
                                            :musculoskeletalN, :musculoskeletalA, :cardiovascularN, :cardiovascularA, :respiratoryN,
                                            :respiratoryA, :patient_id, :mcsN, :mcsSevere, :weight, :weightUnit, :bcsVal, :mcsMild)
