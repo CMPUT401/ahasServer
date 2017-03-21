@@ -14,7 +14,6 @@ class ClientController < PersonController
 
   def show
     client = Client.find_by(id: params[:id])
-
     if client
       patients = client.patients
       client = client.attributes
