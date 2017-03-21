@@ -12,8 +12,20 @@ class UsersController < ApplicationController
     end
   end
 
+  # Show a list of all users and name
+  def index
+    @users = filter_users User.all
+    render status: 200, JSON: { success: true, users: @users }
+  end
+  
   private
-
+  
+  def filter_users(users)
+    users.map do |user|
+      { email: user.email, name: user.name }
+    end
+  end
+  
   def user_params
     params.require(:user).permit(:name, :email, :password,
                                  :password_confirmation)

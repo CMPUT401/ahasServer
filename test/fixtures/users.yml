@@ -3,3 +3,8 @@ justin:
   name: Justin Barclay
   email: jbarclay@ualberta.ca
   password_digest: <%= User.digest('foobarbaz') %>
+
+kristy:
+  name: Kristy Knewbury
+  email: knewbury@ualberta.ca
+  password_digest: <%= User.digest('blizbazbar') %>
