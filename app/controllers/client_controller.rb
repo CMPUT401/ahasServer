@@ -14,7 +14,6 @@ class ClientController < PersonController
 
   def show
     client = Client.find_by(id: params[:id])
-
     if client
       patients = client.patients
       client = client.attributes
@@ -34,9 +33,11 @@ class ClientController < PersonController
   end
 
   def update
-    @client = Client.find params[:id]
+    @client = Client.find_by(id: params[:id])
 
-    if @client.update(client_params)
+    if @client.nil?
+      render status: 404, json: {success: false, error: "Client not found"}
+    elsif @client.update(client_params)
       render json: { success: true}
     else
       render status: 500, json: {success: false, errors: @client.errors.full_messages}

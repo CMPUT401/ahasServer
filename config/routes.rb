@@ -7,12 +7,12 @@ Rails.application.routes.draw do
   # controllers
   scope :api do
     constraints format: :json do
+      get          'users',      to: 'users#index'
       post         'signup',     to: 'users#create'
       post         'user_token', to: 'user_token#create'
       post         'login',      to: 'user_token#create'
       
       get          'patients/:patient_id/medications/:id', to: 'medications#show'
-      get          'patients/:patient_id/medications/', to: 'medications#index'
       get          'patients/:patient_id/medications/', to: 'medications#index'
       get          'patients/:patient_id/medications/filter/:filter', to: 'medications#filter'
       

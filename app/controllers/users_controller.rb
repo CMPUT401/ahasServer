@@ -12,8 +12,29 @@ class UsersController < ApplicationController
     end
   end
 
-  private
+  # Show a list of all users and name
+  def index
+    users = filter_users User.all
+    render status: 200, json: { success: true, users: users }
+  end
 
+  def show
+    user = User.find_by(id: params[:id])
+    if not user.nil?
+      render status: 200, json: { success: true, user: user }
+    else
+      render status: 404, json: { success: false, error: "User not found" }
+    end
+  end
+   
+  private
+  
+  def filter_users(users)
+    users.map do |user|
+      { id: user.id, email: user.email, name: user.name }
+    end
+  end
+  
   def user_params
     params.require(:user).permit(:name, :email, :password,
                                  :password_confirmation)

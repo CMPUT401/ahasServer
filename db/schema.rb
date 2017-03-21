@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170320015636) do
+ActiveRecord::Schema.define(version: 20170320211825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,6 +144,7 @@ ActiveRecord::Schema.define(version: 20170320015636) do
     t.integer  "medical_record_id", null: false
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.boolean  "is_alert"
     t.index ["medical_record_id"], name: "index_notes_on_medical_record_id", using: :btree
   end
 

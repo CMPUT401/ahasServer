@@ -2,9 +2,9 @@ require 'test_helper'
 
 class Clients_test < ActionDispatch::IntegrationTest
   def setup
-    @client = {client: { firstName: "Harry", lastName: "Potter",\
-                        address: "1234 Fake ave, Edmonton, Alberta",\
-                        phoneNumber: "7802344444", email: "jeff@geoff.com",\
+    @client = {client: { firstName: "Harry", lastName: "Potter",
+                        address: "1234 Fake ave, Edmonton, Alberta",
+                        phoneNumber: "7802344444", email: "jeff@geoff.com",
     }}
     @yamlClient = clients(:Justin)
   end
@@ -64,7 +64,7 @@ class Clients_test < ActionDispatch::IntegrationTest
   test 'respond to unsuccessful PUT because of bad ID' do
     id = @yamlClient.id + 1
     put '/api/client/' + id.to_s, params: @client, headers: authenticated_header
-    assert_response :error
+    assert_response 404
   end
 
   test 'respond to unsuccessful PUT because of bad input' do
