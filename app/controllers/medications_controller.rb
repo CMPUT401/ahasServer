@@ -48,7 +48,7 @@ class MedicationsController < ApplicationController
       medications
     end
   end
-    
+
   def medication_params
     params.require(:medications).permit(:name, :reminder, :med_type)
   end
