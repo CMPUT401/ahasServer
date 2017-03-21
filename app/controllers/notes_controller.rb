@@ -51,7 +51,7 @@ class NotesController < ApplicationController
   end
   
   def notes_params
-    params.require(:note).permit(:body, :initials, :medical_record_id)
+    params.require(:note).permit(:body, :initials, :medical_record_id, :is_alert)
   end
 
   def patient_medical_record_relations_exist?

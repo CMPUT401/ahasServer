@@ -8,6 +8,7 @@ class NotesTest < ActionDispatch::IntegrationTest
     @note = {
       medical_record_id: @medical_record.id,
       body: 'hello',
+      is_alert: true,
       initials: 'jk rowling'
     }
   end

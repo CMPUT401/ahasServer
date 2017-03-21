@@ -14,6 +14,21 @@ class NoteTest < ActiveSupport::TestCase
     assert_not @note.valid?
   end
 
+  test 'Notes with blank is_alert are not valid' do
+    @note.is_alert = ''
+    assert_not @note.valid?
+    @note.is_alert = true
+    assert @note.valid?
+  end
+
+  test 'is_alert has to be true or false' do
+    @note.is_alert = true
+    assert @note.valid?
+    @note.is_alert = false
+    assert @note.valid?
+    @note.is_alert = ""
+    assert_not @note.valid?
+  end
   test 'Notes with blank initial are not valid' do
     assert @note.valid?
     @note.initials = ''
