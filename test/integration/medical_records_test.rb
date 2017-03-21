@@ -151,7 +151,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
 
     put "/api/patients/#{@patient_id.to_s}/medical_records/" + id,
     headers: authenticated_header,
-    params: {medical_record: @medical_record}
+    params: { medical_record: @medical_record }
 
     assert_response :success
 
