@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   
   def filter_users(users)
     users.map do |user|
-      { email: user.email, name: user.name }
+      { id: user.id, email: user.email, name: user.name }
     end
   end
   
