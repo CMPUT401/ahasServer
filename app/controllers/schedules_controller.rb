@@ -33,7 +33,7 @@ class SchedulesController < ApplicationController
   private
   def filter_schedule_keys(schedules)
     schedules.map do |schedule|
-      { id: schedule.id, appointmentStartDate: schedule.appointmentStartDate, appointmentEndDate: schedule.appointmentEndDate, clientId: schedule.clientId }
+      { id: schedule.id, appointmentStartDate: schedule.appointmentStartDate, appointmentEndDate: schedule.appointmentEndDate, clientId: schedule.clientId, reason: schedule.reason}
     end
   end
 
