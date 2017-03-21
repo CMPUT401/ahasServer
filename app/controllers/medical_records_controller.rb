@@ -30,7 +30,8 @@ class MedicalRecordsController < ApplicationController
     filtered_records = filter_medical_records_keys patient
     render status: 200, json: { success: true, medical_records: filtered_records }
   end
-def update
+
+  def update
     @record = MedicalRecord.find_by(id: params[:id])
     @medications = params[:medications] 
     #puts "record created today " + @record.created_at.today?.to_s
