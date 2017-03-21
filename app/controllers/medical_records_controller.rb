@@ -33,26 +33,25 @@ class MedicalRecordsController < ApplicationController
 
   def update
     @record = MedicalRecord.find_by(id: params[:id])
-    @medications = params[:medications] 
+    @medications = params[:medications]
     #puts "record created today " + @record.created_at.today?.to_s
 
-    if @record.created_at.today?
-      if @record.update(medical_record_params) 
-          @medications.each do |medication| 
-             medUpdate = Medication.find(medication.id) 
-             if medUpdate.created_at.today? 
-                 medUpdate.update medication  
-             end
-          end
-        render status: 201, json: {success: true}
-      else
-        render status: :error, json: {success: false, errors: @record.errors.full_messages}
-      end 
-    else
+    # let's exit early
+    unless @record.created_at.today?
       render status: :error, json: { success: false, error: "Medical Record is not editable after 1 day"}
+      return
     end 
 
-  end
+    #not nesting too deep
+    if @record.update(medical_record_params)
+      unless @medications.nil?
+        updateMedication @medications
+      end
+      render status: 201, json: { success: true }
+    else
+      render status: :error, json: {success: false, errors: @record.errors.full_messages}
+    end
+end
     private
   def filter_medical_records_keys(medical_records)
     medical_records.map do |medical_record|
@@ -85,6 +84,24 @@ class MedicalRecordsController < ApplicationController
     medication_records
   end
 
+  def updateMedication(medications)
+    # Here is how to update, this needs to handle the case where they add new medication to the medical record as well 
+    errors = []
+    medications.each do |medication_num|
+      filtered_medication = medications[medication_num].permit(:name, :patient_id, :medical_record_id, :reminder,
+                                                               :date, :med_type, :id)
+
+      med = Medication.find(filtered_medication[:id]) #This is going to break on us, learn the difference between find and find_by
+      if med.created_at.today?
+        med.update filtered_medication
+        errors.push med.errors.full_messages
+      else
+        errors.push 'Medication is not editable after 1 day'
+      end
+    end
+    errors
+  end
+  
   def parse_medications(medications, medical_record_id)
     meds = []
     medications.each do |medication_num|
