@@ -38,6 +38,6 @@ class SchedulesController < ApplicationController
   end
 
   def schedule_params
-    params.require(:schedule).permit(:appointmentStartDate, :appointmentEndDate, :scheduleId, :reason, :notes, :location, :duration)
+    params.require(:schedule).permit(:appointmentStartDate, :appointmentEndDate, :scheduleId, :reason, :notes, :location, :duration, :clientId)
   end
 end
