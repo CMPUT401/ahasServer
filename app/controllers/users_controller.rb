@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   # Show a list of all users and name
   def index
     @users = filter_users User.all
-    render status: 200, JSON: { success: true, users: @users }
+    render status: 200, json: { success: true, users: @users }
   end
   
   private
