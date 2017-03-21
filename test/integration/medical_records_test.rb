@@ -153,8 +153,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
     headers: authenticated_header,
     params: {medical_record: @medical_record}
 
-    assert JSON.parse(response.body)['success']
-    assert_response :created
+    assert_response :success
 
    get "/api/patients/#{@patient_id.to_s}/medical_records/" + id, headers: authenticated_header
   end
@@ -177,8 +176,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
     headers: authenticated_header,
     params: {medical_record: @medical_record}
 
-    assert JSON.parse(response.body)['success']
-    assert_response :created
+    assert_response :success
   end
 
   test 'patch out dated medical record fails' do

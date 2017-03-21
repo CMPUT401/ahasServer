@@ -30,24 +30,29 @@ class MedicalRecordsController < ApplicationController
     filtered_records = filter_medical_records_keys patient
     render status: 200, json: { success: true, medical_records: filtered_records }
   end
-
-  def update
+def update
     @record = MedicalRecord.find_by(id: params[:id])
-
+    @medications = params[:medications] 
     #puts "record created today " + @record.created_at.today?.to_s
 
     if @record.created_at.today?
-      if @record.update(medical_record_params)
+      if @record.update(medical_record_params) 
+          @medications.each do |medication| 
+             medUpdate = Medication.find(medication.id) 
+             if medUpdate.created_at.today? 
+                 medUpdate.update medication  
+             end
+          end
         render status: 201, json: {success: true}
       else
         render status: :error, json: {success: false, errors: @record.errors.full_messages}
-      end
+      end 
     else
       render status: :error, json: { success: false, error: "Medical Record is not editable after 1 day"}
-    end
+    end 
 
   end
-  private
+    private
   def filter_medical_records_keys(medical_records)
     medical_records.map do |medical_record|
       { id: medical_record.id, summary: medical_record.summary, created_at: medical_record.created_at.to_i }
