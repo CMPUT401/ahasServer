@@ -26,7 +26,19 @@ class UsersController < ApplicationController
       render status: 404, json: { success: false, error: "User not found" }
     end
   end
-   
+
+  def delete
+    user = User.find_by(id: params[:id])
+    unless user.nil?
+      if User.destroy(params[:id])
+        render status: 200, json: { success: true, user: user }
+      else
+        render status: :error, json: {success: false, error: "Unable to delete user" }
+      end
+    else
+      render status: 404, json: { success: false, error: "User not found" }
+    end
+  end
   private
   
   def filter_users(users)
