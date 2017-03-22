@@ -8,6 +8,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
   def setup
     @patient_id = patients(:one).id.to_s
     @medication = medications(:one)
+    @medication2 = medications(:two)
     @medication.medical_record_id = ''
     @medical_record = {
       patient_id: @patient_id,
@@ -92,12 +93,19 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
 
   test 'Get medical_record' do
     good_id = @show_record.id.to_s
+    @medication.medical_record_id = @show_record.id
+    @medication.reminder = (Date.today + 1.months).to_time.to_i
+  
+    @medication2.reminder =  (Date.today + 4.months).to_time.to_i
 
+    @medication.save
+    @medication2.save
     get "/api/patients/#{@patient_id}/medical_records/#{good_id}", headers: authenticated_header
 
     assert_response :success
     assert JSON.parse(response.body)['medical_record']['id'].to_s == good_id
-    assert JSON.parse(response.body)['alerts'].count > 0
+    assert JSON.parse(response.body)['generalAlerts'].count > 0
+    assert JSON.parse(response.body)['medicationAlerts'].count. == 1
   end
 
   test 'Get invalid medical_record' do

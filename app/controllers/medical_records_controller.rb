@@ -17,10 +17,19 @@ class MedicalRecordsController < ApplicationController
 
   def show
     @medical_record = MedicalRecord.find_by(id: params[:id])
-    @notes = Note.where(medical_record_id: params[:id], is_alert: true)
+    @generalAlerts= Note.where(medical_record_id: params[:id], is_alert: true)
     @medications = Medication.where("medical_record_id = ?", params[:id])
+    @medicationAlerts = [] 
+
+    @medications.each do |med|
+      # Must implement a way to expire medication alerts
+      if med.reminder.to_i <= (Date.today + 3.months).to_time.to_i and med.reminder != nil and med.reminder != 0
+        @medicationAlerts.append(med)
+      end
+    end
     if @medical_record
-      render json: { success: true, medical_record: @medical_record, medications: @medications, alerts: @notes}
+      render json: { success: true, medical_record: @medical_record, medications: @medications, 
+                     generalAlerts: @generalAlerts, medicationAlerts: @medicationAlerts}
     else
       render status: :error, json: { success: false, error: 'Medical Record not found' }
     end

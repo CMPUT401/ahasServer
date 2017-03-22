@@ -9,6 +9,7 @@ one:
   medical_record: one
   med_type: Medicine
   name: Hydrogen Dioxide
+  reminder: <%(Date.today + 1.months).to_time.to_i %>
 
 two:
   patient: one
