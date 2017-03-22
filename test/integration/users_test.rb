@@ -28,4 +28,21 @@ class UsersTest < ActionDispatch::IntegrationTest
     assert_response 404
     assert_not JSON.parse(response.body)['success']
   end
+
+  test 'deleting a non existant user' do
+    bad_id = @user.id + 1
+    delete "/api/users/#{bad_id}", headers: authenticated_header
+
+    assert_response 404
+    assert_not JSON.parse(response.body)['success']
+  end
+
+  test 'deleting a user' do
+    before = User.count
+    delete "/api/users/#{@user.id}", headers: authenticated_header
+    after = User.count
+    assert_response 200
+    assert before > after
+    assert JSON.parse(response.body)['success']
+  end
 end
