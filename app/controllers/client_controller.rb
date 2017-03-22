@@ -7,7 +7,7 @@ class ClientController < PersonController
   before_action :authenticate_user
 
   # Handles HTTP POST request sent to /api/client.
-  # @example success response
+  # @example request body 
   #   {
   #    "success": true,
   #    "client":
@@ -109,6 +109,27 @@ class ClientController < PersonController
   end
 
   # Handles HTTP PATCH or PUT request sent to /api/client/{id}, and replies with specific client's info, or an error in a JSON.
+  # @example request body
+  #   {
+  #    "success": true,
+  #    "client":
+  #        {
+  #        "firstName": "Justin"
+  #        "lastName": "Barclay"
+  #        "address": "116 St & 85 Ave, Edmonton, AB T6G 2R3"
+  #        "phoneNumber": "7805555555"
+  #        "email": "fakejustin@ualberta.ca"
+  #        "licos": "123456"
+  #        "socialAssistance": "76543"
+  #        "pets": "12404"
+  #        "alternativeContactFirstName": "John"
+  #        "alternativeContactLastName": "Wick"
+  #        "alternativeContactPhoneNumber": "17809904957"
+  #        "alternativeContactAddress": "1234 Fake St & 96 Ave, Edmonton, AB T8G 2EF"
+  #        "notes": "His dog is super bitey"
+  #        "alternativeContact2ndPhone": "7804737373"
+  #        }
+  #   }
   # @example success response
   #   {"success":true}
   # @example failure response
@@ -134,19 +155,29 @@ class ClientController < PersonController
     end
   end
 
+  # Filters a list of clients into the appropriate format for being sent as an index
+  #
+  # @params [Array<Client>] an array containing all clients
+  # @private
+  # @return a JSONified index of clients 
   private
   def filter_client_keys(clients)
     clients.map do |client|
       { id: client.id, firstName: client.firstName, lastName: client.lastName}
     end
   end
-
+  
+  # Filters a list of patients into the appropriate format for being sent as an index
+  #
+  # @params [Array<Patient>] an array containing all patients
+  # @return a JSONified index of patients
   def filter_patients_keys(patients)
     patients.map do |patient|
       { id: patient.id, first_name: patient.first_name, last_name: patient.last_name }
     end
   end
 
+  # Permits the appropriate parameter for clients to be passed to methods while handling HTTP requests
   private
   def client_params
     params.require(:client).permit(:firstName, :lastName, :address, :phoneNumber, :email,
