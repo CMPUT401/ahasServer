@@ -1,5 +1,40 @@
+# Controls access to the client instances stored in the API database
+#
+# 
+# @author Justin Barclay & Mackenzie Bligh
+# @see https://github.com/CMPUT401/vettr_server/wiki/API-Documentation#clients
 class ClientController < PersonController
   before_action :authenticate_user
+  
+  # Handles HTTP POST request sent to /api/client. 
+  # @example success response
+  #   {
+  #  "success": true,
+  #  "client": 
+  #      {
+  #      "firstName": "Justin"
+  #      "lastName": "Barclay"
+  #      "address": "116 St & 85 Ave, Edmonton, AB T6G 2R3"
+  #      "phoneNumber": "7805555555"
+  #      "email": "fakejustin@ualberta.ca"
+  #      "licos": "123456"
+  #      "socialAssistance": "76543"
+  #      "pets": "12404"
+  #      "alternativeContactFirstName": "John"
+  #      "alternativeContactLastName": "Wick"
+  #      "alternativeContactPhoneNumber": "17809904957"
+  #      "alternativeContactAddress": "1234 Fake St & 96 Ave, Edmonton, AB T8G 2EF"
+  #      "notes": "His dog is super bitey"
+  #      "alternativeContact2ndPhone": "7804737373"
+  #      }
+  #    }
+  # @example failure response
+  #   { 
+  #   "success": false,
+  #   "errors": [....] // list of errors
+  #  }
+  # @return HTTP 201 if success: true JSON 
+  # @return HTTP 500 if failure: false JSON 
   def create
     client = client_params
     @client = Client.new(client)
@@ -11,7 +46,30 @@ class ClientController < PersonController
                                      errors: @client.errors.full_messages }
     end
   end
-
+  
+  # Handles HTTP GET request sent to /api/client/{id}, and replies with specific client's info, or an error in a JSON 
+  # @example success response
+  #   {
+  #  "success": true,
+  #  "client": 
+  #      {
+  #      "firstName": "Justin"
+  #      "lastName": "Barclay"
+  #      "address": "116 St & 85 Ave, Edmonton, AB T6G 2R3"
+  #      "phoneNumber": "7805555555"
+  #      "email": "fakejustin@ualberta.ca"
+  #      "licos": "123456"
+  #      "socialAssistance": "76543"
+  #      "pets": "12404"
+  #      }
+  #    }
+  # @example failure response
+  #   { 
+  #  "success": false,
+  #  "errors": [....] // list of errors
+  #    }
+  # @return HTTP 200 if success: true JSON 
+  # @return HTTP 404 if failure: false on failure
   def show
     client = Client.find_by(id: params[:id])
     if client
