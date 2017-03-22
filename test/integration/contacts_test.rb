@@ -46,7 +46,7 @@ class ContactsTest < ActionDispatch::IntegrationTest
                                                                           contact_type: 'Vetrinarian'
                                                                         } }
     end
-    
+
     assert_response :error
     assert_not JSON.parse(response.body)['success']
   end
@@ -82,7 +82,7 @@ class ContactsTest < ActionDispatch::IntegrationTest
     assert_response :error
     assert_not JSON.parse(response.body)['success']
   end
-  
+
   test 'asking for invalid client id returns a 404' do
     bad_id = Patient.last.id + 1
     get '/api/patients/' + bad_id.to_s, headers: authenticated_header
@@ -93,7 +93,7 @@ class ContactsTest < ActionDispatch::IntegrationTest
 
   test 'asking for a valid client id should return the correct patient' do
     good_id = @good.id
-    
+
     get '/api/contacts/' + good_id.to_s, headers: authenticated_header
 
     assert good_id.to_s == JSON.parse(response.body)['contact']['id'].to_s
@@ -103,7 +103,7 @@ class ContactsTest < ActionDispatch::IntegrationTest
 
   test 'getting an index should return a list of contact names and IDs' do
     get '/api/contacts', headers: authenticated_header
-    
+
     contacts = JSON.parse(response.body)['contacts']
     assert filtered_properly contacts
 
@@ -116,9 +116,9 @@ class ContactsTest < ActionDispatch::IntegrationTest
     put '/api/contacts/' + id, params: @contact , headers: authenticated_header
     assert_response :success
     assert JSON.parse(response.body)['success']
-  
+
     get '/api/contacts/' + id, headers: authenticated_header
-    assert_not_equal @good.to_json.to_s, response.body  
+    assert_not_equal @good.to_json.to_s, response.body
   end
 
   test 'respond to unsuccessful PUT because of bad ID' do
@@ -130,7 +130,7 @@ class ContactsTest < ActionDispatch::IntegrationTest
 
   test 'respond to unsuccessful PUT because of bad input' do
     id = @good.id.to_s
-    put '/api/contacts/' + id, 
+    put '/api/contacts/' + id,
     params: {contact: {
         first_name: "Jeff",
         last_name: :Barclay,
@@ -139,9 +139,9 @@ class ContactsTest < ActionDispatch::IntegrationTest
         fax_number: ' ',
         email: 'validexample.pizza',
         contact_type: 'Veterinarian'
-        } }, 
+        } },
     headers: authenticated_header
-   
+
     assert_response :error
     assert JSON.parse(response.body)['errors'].count > 0
   end
