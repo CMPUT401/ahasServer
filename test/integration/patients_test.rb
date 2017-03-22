@@ -66,6 +66,7 @@ class PatientsTest < ActionDispatch::IntegrationTest
     assert JSON.parse(response.body)['success']
     assert JSON.parse(response.body)['generalAlerts'].count > 0
     assert JSON.parse(response.body)['medicationAlerts'].count == 1
+    puts response.body
   end
 
   test 'getting an index should return a list of names and IDs' do

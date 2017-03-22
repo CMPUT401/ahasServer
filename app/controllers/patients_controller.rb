@@ -22,11 +22,14 @@ class PatientsController < ApplicationController
     @medications = Medication.where(patient_id: params[:id])
 
     @medical_records.each do |medRec|
-      @generalAlerts.append(Note.where(medical_record_id: medRec.id, is_alert: true))
+      @note = Note.where(medical_record_id: medRec.id, is_alert: true)
+      if @note != nil
+        @generalAlerts.append(@note)
+      end
     end
 
     @medications.each do |med| 
-      if med.reminder.to_i < (Date.today + 3.months).to_time.to_i and med.reminder != 0 and med.reminder != nil
+      if med.reminder.to_i < (Date.today + 3.months).to_time.to_i and med.reminder != 0 and med.reminder != nil and med != nil
         @medicationAlerts.append(med)
       end
     end
