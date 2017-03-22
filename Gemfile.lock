@@ -361,6 +361,7 @@ GEM
     websocket-extensions (0.1.2)
     will_paginate (3.1.0)
     xml-simple (1.1.5)
+    yard (0.9.8)
 
 PLATFORMS
   ruby
@@ -397,6 +398,7 @@ DEPENDENCIES
   uglifier (= 3.0.0)
   web-console (= 3.1.1)
   will_paginate (= 3.1.0)
+  yard
 
 RUBY VERSION
    ruby 2.4.0p0
