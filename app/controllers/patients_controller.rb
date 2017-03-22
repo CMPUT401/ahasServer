@@ -15,16 +15,34 @@ class PatientsController < ApplicationController
   end
 
   def show
-    patient = Patient.find_by(id: params[:id])
-    if patient
+    @patient = Patient.find_by(id: params[:id])
+    @medical_records = MedicalRecord.where(patient_id: params[:id])
+    @generalAlerts = []
+    @medicationAlerts = []
+    @medications = Medication.where(patient_id: params[:id])
+
+    @medical_records.each do |medRec|
+      @note = Note.where(medical_record_id: medRec.id, is_alert: true)
+      if @note != nil
+        @generalAlerts.append(@note)
+      end
+    end
+
+    @medications.each do |med| 
+      if med.reminder.to_i < (Date.today + 3.months).to_time.to_i and med.reminder != 0 and med.reminder != nil and med != nil
+        @medicationAlerts.append(med)
+      end
+    end
+
+    if @patient
       # Return client with a patient, to match UI
       # UI always shows the client info with a patient info
       
-      client = Client.find(patient.client_id)
-      patient = patient.attributes
-      patient['client'] = client.attributes
+      client = Client.find(@patient.client_id)
+      @patient = @patient.attributes
+      @patient['client'] = client.attributes
       
-      render json: { success: true, patient: patient }
+      render json: { success: true, patient: @patient, generalAlerts: @generalAlerts, medicationAlerts: @medicationAlerts}
     else
       render status: 404, json: {success: false, error: 'Patient not found'}
     end
