@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
   def server_error(exception)
     puts exception
     unless performed?
-       render status 500, json: {}
+       render status: 500, json: {}
     end
   end
 end

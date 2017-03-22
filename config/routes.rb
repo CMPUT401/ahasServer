@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     constraints format: :json do
       get          'users',      to: 'users#index'
       post         'signup',     to: 'users#create'
+      delete       'users/:id',  to: 'users#delete'    
+
       post         'user_token', to: 'user_token#create'
       post         'login',      to: 'user_token#create'
       

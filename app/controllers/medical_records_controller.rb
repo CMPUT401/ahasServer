@@ -46,7 +46,7 @@ class MedicalRecordsController < ApplicationController
     #not nesting too deep
     if @record.update(medical_record_params)
       unless @medications.nil?
-        updateMedication @medications
+        updateMedication(@medications, @record[:id])
       end
       render status: 201, json: { success: true }
     else
@@ -61,7 +61,7 @@ end
   end
 
   def medical_record_params
-    params.require(:medical_record).permit(:summary, :date, :exam_notes, :signature, :temperature, :medications, :eyes, :oral,
+    params.require(:medical_record).permit(:summary, :date, :exam_notes, :signature, :temperature, :eyes, :oral,
                                            :ears, :glands, :skin, :abdomen, :urogenital, :follow_up_instructions,
                                            :nervousSystem, :musculoskeletal, :cardiovascular, :heart_rate,
                                            :respiratory, :respiratory_rate, :attitudeBAR, :attitudeQAR,
@@ -85,8 +85,8 @@ end
     medication_records
   end
 
-  def updateMedication(medications)
-    # Here is how to update, this needs to handle the case where they add new medication to the medical record as well 
+  def updateMedication(medications, medical_record_id)
+    # Here is how to update, this needs to handle the case where they add new medication to the medical record as well
     errors = []
     medications.each do |medication_num|
       filtered_medication = medications[medication_num].permit(:name, :patient_id, :medical_record_id, :reminder,
@@ -94,9 +94,11 @@ end
 
       med = Medication.find_by(id: filtered_medication[:id])
       if med == nil
-        create_medications(med, filtered_medication[:medical_record_id])
-      end
-      if med.created_at.today?
+        filtered_medication[:medical_record_id] = medical_record_id
+        medication = Medication.new filtered_medication
+        medication.save
+        errors.push medication.errors.full_messages
+      elsif med.created_at.today?
         med.update filtered_medication
         errors.push med.errors.full_messages
       else
