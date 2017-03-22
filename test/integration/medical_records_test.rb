@@ -151,12 +151,20 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
 
     put "/api/patients/#{@patient_id.to_s}/medical_records/" + id,
     headers: authenticated_header,
-    params: {medical_record: @medical_record}
+    params: { medical_record: @medical_record }
 
-    assert JSON.parse(response.body)['success']
-    assert_response :created
+    assert_response :success
 
-   get "/api/patients/#{@patient_id.to_s}/medical_records/" + id, headers: authenticated_header
+  end
+
+  test 'PUT a current medical record with medication that is not in database' do
+    id = @show_record.id.to_s
+    
+    put "/api/patients/#{@patient_id.to_s}/medical_records/" + id,
+    headers: authenticated_header,
+    params: { medical_record: @show_record.attributes}
+    assert_response :success
+
   end
 
   test 'PUT out dated medical record fails' do
@@ -177,8 +185,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
     headers: authenticated_header,
     params: {medical_record: @medical_record}
 
-    assert JSON.parse(response.body)['success']
-    assert_response :created
+    assert_response :success
   end
 
   test 'patch out dated medical record fails' do

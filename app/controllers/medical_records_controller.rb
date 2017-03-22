@@ -33,21 +33,26 @@ class MedicalRecordsController < ApplicationController
 
   def update
     @record = MedicalRecord.find_by(id: params[:id])
-
+    @medications = params[:medications]
     #puts "record created today " + @record.created_at.today?.to_s
 
-    if @record.created_at.today?
-      if @record.update(medical_record_params)
-        render status: 201, json: {success: true}
-      else
-        render status: :error, json: {success: false, errors: @record.errors.full_messages}
-      end
-    else
+    # let's exit early
+    unless @record.created_at.today?
       render status: :error, json: { success: false, error: "Medical Record is not editable after 1 day"}
-    end
+      return
+    end 
 
-  end
-  private
+    #not nesting too deep
+    if @record.update(medical_record_params)
+      unless @medications.nil?
+        updateMedication(@medications, @record[:id])
+      end
+      render status: 201, json: { success: true }
+    else
+      render status: :error, json: {success: false, errors: @record.errors.full_messages}
+    end
+end
+    private
   def filter_medical_records_keys(medical_records)
     medical_records.map do |medical_record|
       { id: medical_record.id, summary: medical_record.summary, created_at: medical_record.created_at.to_i }
@@ -55,7 +60,7 @@ class MedicalRecordsController < ApplicationController
   end
 
   def medical_record_params
-    params.require(:medical_record).permit(:summary, :date, :exam_notes, :signature, :temperature, :medications, :eyes, :oral,
+    params.require(:medical_record).permit(:summary, :date, :exam_notes, :signature, :temperature, :eyes, :oral,
                                            :ears, :glands, :skin, :abdomen, :urogenital, :follow_up_instructions,
                                            :nervousSystem, :musculoskeletal, :cardiovascular, :heart_rate,
                                            :respiratory, :respiratory_rate, :attitudeBAR, :attitudeQAR,
@@ -79,6 +84,29 @@ class MedicalRecordsController < ApplicationController
     medication_records
   end
 
+  def updateMedication(medications, medical_record_id)
+    # Here is how to update, this needs to handle the case where they add new medication to the medical record as well
+    errors = []
+    medications.each do |medication_num|
+      filtered_medication = medications[medication_num].permit(:name, :patient_id, :medical_record_id, :reminder,
+                                                               :date, :med_type, :id)
+
+      med = Medication.find_by(id: filtered_medication[:id])
+      if med == nil
+        filtered_medication[:medical_record_id] = medical_record_id
+        medication = Medication.new filtered_medication
+        medication.save
+        errors.push medication.errors.full_messages
+      elsif med.created_at.today?
+        med.update filtered_medication
+        errors.push med.errors.full_messages
+      else
+        errors.push 'Medication is not editable after 1 day'
+      end
+    end
+    errors
+  end
+  
   def parse_medications(medications, medical_record_id)
     meds = []
     medications.each do |medication_num|
