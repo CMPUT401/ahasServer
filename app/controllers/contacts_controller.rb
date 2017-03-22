@@ -15,6 +15,18 @@ class ContactsController < ApplicationController
     end
   end
 
+  def update
+    @contact = Contact.find_by(id: params[:id])
+
+    if @contact.nil?
+      render status: 404, json: {success: false, error: "Client not found"}
+    elsif @contact.update(contact_params)
+      render json: { success: true}
+    else
+      render status: 500, json: {success: false, errors: @contact.errors.full_messages}
+    end
+  end
+
   def show
     @contact = Contact.find_by(id: params[:id])
     if @contact

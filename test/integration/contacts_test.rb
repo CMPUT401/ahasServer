@@ -4,6 +4,17 @@ class ContactsTest < ActionDispatch::IntegrationTest
   def setup
     @good = contacts(:one)
     @good.save
+    @contact =
+      {contact: {
+        first_name: "Jeff",
+        last_name: :Barclay,
+        address: :something,
+        phone_number: '556-6655',
+        fax_number: ' ',
+        email: 'valid@example.pizza',
+        contact_type: 'Veterinarian'
+        } }
+
   end
 
   test 'should be able to post a valid, new contact' do
@@ -98,6 +109,41 @@ class ContactsTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert JSON.parse(response.body)['success']
+  end
+
+  test 'respond to successful PUT' do
+    id = @good.id.to_s
+    put '/api/contacts/' + id, params: @contact , headers: authenticated_header
+    assert_response :success
+    assert JSON.parse(response.body)['success']
+  
+    get '/api/contacts/' + id, headers: authenticated_header
+    assert_not_equal @good.to_json.to_s, response.body  
+  end
+
+  test 'respond to unsuccessful PUT because of bad ID' do
+    id = @good.id + 1
+    put '/api/contacts/' + id.to_s, params: @contact , headers: authenticated_header
+
+    assert_response 404
+  end
+
+  test 'respond to unsuccessful PUT because of bad input' do
+    id = @good.id.to_s
+    put '/api/contacts/' + id, 
+    params: {contact: {
+        first_name: "Jeff",
+        last_name: :Barclay,
+        address: :something,
+        phone_number: '556-6655',
+        fax_number: ' ',
+        email: 'validexample.pizza',
+        contact_type: 'Veterinarian'
+        } }, 
+    headers: authenticated_header
+   
+    assert_response :error
+    assert JSON.parse(response.body)['errors'].count > 0
   end
 
   def filtered_properly(contacts)
