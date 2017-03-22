@@ -26,7 +26,7 @@ class PatientsController < ApplicationController
     end
 
     @medications.each do |med| 
-      if med.reminder < (Date.today + 3.months).to_time.to_i and med.reminder != 0 and med.reminder != nil
+      if med.reminder.to_i < (Date.today + 3.months).to_time.to_i and med.reminder != 0 and med.reminder != nil
         @medicationAlerts.append(med)
       end
     end
