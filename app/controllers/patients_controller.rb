@@ -16,19 +16,21 @@ class PatientsController < ApplicationController
 
   def show
     @patient = Patient.find_by(id: params[:id])
-  #  @generalAlerts= Note.where(, is_alert: true)
+    @medical_records = MedicalRecord.where(patient_id: params[:id])
+    @generalAlerts = []
+    @medicationAlerts = []
+    @medications = Medication.where(patient_id: params[:id])
 
-  #  @medical_record = MedicalRecord.find_by(id: params[:id])
-  #  @generalAlerts= Note.where(medical_record_id: params[:id], is_alert: true)
-  #  @medications = Medication.where("medical_record_id = ?", params[:id])
-  #  @medicationAlerts = [] 
+    @medical_records.each do |medRec|
+      @generalAlerts.append(Note.where(medical_record_id: medRec.id, is_alert: true))
+    end
 
-  #  @medications.each do |med|
-  #    # Must implement a way to expire medication alerts
-  #    if med.reminder.to_i <= (Date.today + 3.months).to_time.to_i and med.reminder != nil and med.reminder != 0
-  #      @medicationAlerts.append(med)
-  #    end
-  #  end
+    @medications.each do |med| 
+      if med.reminder < (Date.today + 3.months).to_time.to_i and med.reminder != 0 and med.reminder != nil
+        @medicationAlerts.append(med)
+      end
+    end
+
     if @patient
       # Return client with a patient, to match UI
       # UI always shows the client info with a patient info
@@ -37,7 +39,7 @@ class PatientsController < ApplicationController
       @patient = @patient.attributes
       @patient['client'] = client.attributes
       
-      render json: { success: true, patient: @patient}
+      render json: { success: true, patient: @patient, generalAlerts: @generalAlerts, medicationAlerts: @medicationAlerts}
     else
       render status: 404, json: {success: false, error: 'Patient not found'}
     end
