@@ -97,6 +97,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert JSON.parse(response.body)['medical_record']['id'].to_s == good_id
+    assert JSON.parse(response.body)['alerts'].count > 0
   end
 
   test 'Get invalid medical_record' do
@@ -157,15 +158,15 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
 
   end
 
-  test 'PUT a current medical record with medication that is not in database' do
-    id = @show_record.id.to_s
-    
-    put "/api/patients/#{@patient_id.to_s}/medical_records/" + id,
-    headers: authenticated_header,
-    params: { medical_record: @show_record.to_json}
-    assert_response :success
-
-  end
+#  test 'PUT a current medical record with medication that is not in database' do
+#    id = @show_record.id.to_s
+#    
+#    put "/api/patients/#{@patient_id.to_s}/medical_records/" + id,
+#    headers: authenticated_header,
+#    params: { medical_record: @show_record.to_json}
+#    assert_response :success
+#
+#  end
 
   test 'PUT out dated medical record fails' do
     id = @show_record.id.to_s

@@ -4,3 +4,10 @@ one:
   initials: JK Rowling
   is_alert: false
   medical_record: one
+two:
+  body: You are not supposed to understand this 
+  initials: GG 
+  is_alert: true 
+  medical_record: one
+
+
