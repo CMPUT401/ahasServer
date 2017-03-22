@@ -91,7 +91,10 @@ end
       filtered_medication = medications[medication_num].permit(:name, :patient_id, :medical_record_id, :reminder,
                                                                :date, :med_type, :id)
 
-      med = Medication.find(filtered_medication[:id]) #This is going to break on us, learn the difference between find and find_by
+      med = Medication.find_by(id: filtered_medication[:id])
+      if med == nil
+        create_medications(med, filtered_medication[:medical_record_id])
+      end
       if med.created_at.today?
         med.update filtered_medication
         errors.push med.errors.full_messages
