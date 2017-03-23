@@ -9,7 +9,7 @@ class ImagesTest < ActionDispatch::IntegrationTest
     get "/api/patients/#{@patient.id}/images/radiograph", headers: authenticated_header
 
     assert_response 200
-#    assert JSON.parse(response.body)['images'] > 0
+    assert JSON.parse(response.body)['images'] > 0
   end
 
   # test 'index of image type returns nothing but images of those types' do
