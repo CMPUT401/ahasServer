@@ -766,6 +766,33 @@ define('ahasweb/tests/acceptance/search-patient-test.jshint.lint-test', ['export
     assert.ok(true, 'acceptance/search-patient-test.js should pass jshint.');
   });
 });
+define('ahasweb/tests/acceptance/vaccine-list-test', ['exports', 'qunit', 'ahasweb/tests/helpers/module-for-acceptance', 'ahasweb/tests/helpers/ember-simple-auth'], function (exports, _qunit, _ahaswebTestsHelpersModuleForAcceptance, _ahaswebTestsHelpersEmberSimpleAuth) {
+
+  (0, _ahaswebTestsHelpersModuleForAcceptance['default'])('Acceptance | view vaccines');
+
+  //the test passes, but visiting this page is problematic, the component starts with inital value patiantId = 0, and
+  // this doesnt seem to be a problem when running bc by the time we get o ajax it has taken real value, but in the tests
+  // this will make some calls with 0 and config does not intercept?
+  (0, _qunit.test)('checking list added correctly', function (assert) {
+    (0, _ahaswebTestsHelpersEmberSimpleAuth.authenticateSession)(this.application);
+    visit('/view-patient/1');
+
+    click('#vaccine-component-button');
+
+    andThen(function () {
+      assert.equal(find('.vaccineList').length, 2);
+    });
+  });
+});
+define('ahasweb/tests/acceptance/vaccine-list-test.jshint.lint-test', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | acceptance/vaccine-list-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'acceptance/vaccine-list-test.js should pass jshint.');
+  });
+});
 define('ahasweb/tests/acceptance/view-contact-test', ['exports', 'qunit', 'ahasweb/tests/helpers/module-for-acceptance', 'ahasweb/tests/helpers/ember-simple-auth'], function (exports, _qunit, _ahaswebTestsHelpersModuleForAcceptance, _ahaswebTestsHelpersEmberSimpleAuth) {
 
   (0, _ahaswebTestsHelpersModuleForAcceptance['default'])('Acceptance | view contact');
@@ -944,13 +971,22 @@ define('ahasweb/tests/components/history-container.jshint.lint-test', ['exports'
     assert.ok(true, 'components/history-container.js should pass jshint.');
   });
 });
+define('ahasweb/tests/components/lab-result-history.jshint.lint-test', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | components/lab-result-history.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(false, 'components/lab-result-history.js should pass jshint.\ncomponents/lab-result-history.js: line 24, col 13, \'ajaxGet\' is defined but never used.\n\n1 error');
+  });
+});
 define('ahasweb/tests/components/medication-history.jshint.lint-test', ['exports'], function (exports) {
   'use strict';
 
   QUnit.module('JSHint | components/medication-history.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/medication-history.js should pass jshint.\ncomponents/medication-history.js: line 31, col 13, \'ajaxGet\' is defined but never used.\n\n1 error');
+    assert.ok(true, 'components/medication-history.js should pass jshint.');
   });
 });
 define('ahasweb/tests/components/medication-input.jshint.lint-test', ['exports'], function (exports) {
@@ -977,7 +1013,16 @@ define('ahasweb/tests/components/patient-history.jshint.lint-test', ['exports'],
   QUnit.module('JSHint | components/patient-history.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/patient-history.js should pass jshint.\ncomponents/patient-history.js: line 35, col 13, \'ajaxGet\' is defined but never used.\n\n1 error');
+    assert.ok(true, 'components/patient-history.js should pass jshint.');
+  });
+});
+define('ahasweb/tests/components/vaccine-history.jshint.lint-test', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | components/vaccine-history.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'components/vaccine-history.js should pass jshint.');
   });
 });
 define('ahasweb/tests/controllers/admin.jshint.lint-test', ['exports'], function (exports) {
@@ -986,7 +1031,7 @@ define('ahasweb/tests/controllers/admin.jshint.lint-test', ['exports'], function
   QUnit.module('JSHint | controllers/admin.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'controllers/admin.js should pass jshint.\ncontrollers/admin.js: line 31, col 33, Expected \'===\' and instead saw \'==\'.\n\n1 error');
+    assert.ok(true, 'controllers/admin.js should pass jshint.');
   });
 });
 define('ahasweb/tests/controllers/application.jshint.lint-test', ['exports'], function (exports) {
@@ -1124,6 +1169,15 @@ define('ahasweb/tests/controllers/new-side-note.jshint.lint-test', ['exports'], 
     assert.ok(true, 'controllers/new-side-note.js should pass jshint.');
   });
 });
+define('ahasweb/tests/controllers/radiography-upload.jshint.lint-test', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | controllers/radiography-upload.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'controllers/radiography-upload.js should pass jshint.');
+  });
+});
 define('ahasweb/tests/controllers/search-contacts.jshint.lint-test', ['exports'], function (exports) {
   'use strict';
 
@@ -1140,15 +1194,6 @@ define('ahasweb/tests/controllers/search-patient.jshint.lint-test', ['exports'],
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(false, 'controllers/search-patient.js should pass jshint.\ncontrollers/search-patient.js: line 13, col 60, \'model\' is not defined.\n\n1 error');
-  });
-});
-define('ahasweb/tests/controllers/test.jshint.lint-test', ['exports'], function (exports) {
-  'use strict';
-
-  QUnit.module('JSHint | controllers/test.js');
-  QUnit.test('should pass jshint', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'controllers/test.js should pass jshint.');
   });
 });
 define('ahasweb/tests/controllers/user.jshint.lint-test', ['exports'], function (exports) {
@@ -1452,6 +1497,44 @@ define('ahasweb/tests/integration/components/history-container-test.jshint.lint-
     assert.ok(true, 'integration/components/history-container-test.js should pass jshint.');
   });
 });
+define('ahasweb/tests/integration/components/lab-result-history-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleForComponent)('lab-result-history', 'Integration | Component | lab result history', {
+    integration: true
+  });
+
+  (0, _emberQunit.test)('it renders', function (assert) {
+
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
+
+    this.render(Ember.HTMLBars.template({
+      'id': 'FbDV5bIg',
+      'block': '{"statements":[["append",["unknown",["lab-result-history"]],false]],"locals":[],"named":[],"yields":[],"blocks":[],"hasPartials":false}',
+      'meta': {}
+    }));
+
+    assert.equal(this.$().text().trim(), '');
+
+    // Template block usage:
+    this.render(Ember.HTMLBars.template({
+      'id': '/W95A9xC',
+      'block': '{"statements":[["text","\\n"],["block",["lab-result-history"],null,null,0],["text","  "]],"locals":[],"named":[],"yields":[],"blocks":[{"statements":[["text","      template block text\\n"]],"locals":[]}],"hasPartials":false}',
+      'meta': {}
+    }));
+
+    assert.equal(this.$().text().trim(), 'template block text');
+  });
+});
+define('ahasweb/tests/integration/components/lab-result-history-test.jshint.lint-test', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | integration/components/lab-result-history-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'integration/components/lab-result-history-test.js should pass jshint.');
+  });
+});
 define('ahasweb/tests/integration/components/medication-history-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
 
   (0, _emberQunit.moduleForComponent)('medication-history', 'Integration | Component | medication history', {
@@ -1615,7 +1698,7 @@ define('ahasweb/tests/router.jshint.lint-test', ['exports'], function (exports) 
   QUnit.module('JSHint | router.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'router.js should pass jshint.');
+    assert.ok(false, 'router.js should pass jshint.\nrouter.js: line 7, col 7, \'Router\' was used before it was declared, which is illegal for \'const\' variables.\n\n1 error');
   });
 });
 define('ahasweb/tests/routes/admin.jshint.lint-test', ['exports'], function (exports) {
@@ -1762,6 +1845,15 @@ define('ahasweb/tests/routes/new-side-note.jshint.lint-test', ['exports'], funct
     assert.ok(true, 'routes/new-side-note.js should pass jshint.');
   });
 });
+define('ahasweb/tests/routes/radiography-upload.jshint.lint-test', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | routes/radiography-upload.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'routes/radiography-upload.js should pass jshint.');
+  });
+});
 define('ahasweb/tests/routes/search-contacts.jshint.lint-test', ['exports'], function (exports) {
   'use strict';
 
@@ -1814,6 +1906,15 @@ define('ahasweb/tests/routes/view-contact.jshint.lint-test', ['exports'], functi
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'routes/view-contact.js should pass jshint.');
+  });
+});
+define('ahasweb/tests/routes/view-image-record.jshint.lint-test', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | routes/view-image-record.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(false, 'routes/view-image-record.js should pass jshint.\nroutes/view-image-record.js: line 71, col 18, Missing semicolon.\nroutes/view-image-record.js: line 2, col 8, \'AuthenticatedRouteMixin\' is defined but never used.\n\n2 errors');
   });
 });
 define('ahasweb/tests/routes/view-medical-record-editable.jshint.lint-test', ['exports'], function (exports) {
@@ -2189,6 +2290,28 @@ define('ahasweb/tests/unit/controllers/new-side-note-test.jshint.lint-test', ['e
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/controllers/new-side-note-test.js should pass jshint.');
+  });
+});
+define('ahasweb/tests/unit/controllers/radiography-upload-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleFor)('controller:radiography-upload', 'Unit | Controller | radiography upload', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  // Replace this with your real tests.
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var controller = this.subject();
+    assert.ok(controller);
+  });
+});
+define('ahasweb/tests/unit/controllers/radiography-upload-test.jshint.lint-test', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | unit/controllers/radiography-upload-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/controllers/radiography-upload-test.js should pass jshint.');
   });
 });
 define('ahasweb/tests/unit/controllers/search-contacts-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
@@ -2707,6 +2830,27 @@ define('ahasweb/tests/unit/routes/new-side-note-test.jshint.lint-test', ['export
     assert.ok(true, 'unit/routes/new-side-note-test.js should pass jshint.');
   });
 });
+define('ahasweb/tests/unit/routes/radiography-upload-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleFor)('route:radiography-upload', 'Unit | Route | radiography upload', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var route = this.subject();
+    assert.ok(route);
+  });
+});
+define('ahasweb/tests/unit/routes/radiography-upload-test.jshint.lint-test', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | unit/routes/radiography-upload-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/routes/radiography-upload-test.js should pass jshint.');
+  });
+});
 define('ahasweb/tests/unit/routes/search-contacts-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
 
   (0, _emberQunit.moduleFor)('route:search-contacts', 'Unit | Route | all contacts', {
@@ -2810,6 +2954,27 @@ define('ahasweb/tests/unit/routes/view-contact-test.jshint.lint-test', ['exports
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/routes/view-contact-test.js should pass jshint.');
+  });
+});
+define('ahasweb/tests/unit/routes/view-image-record-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleFor)('route:view-image-record', 'Unit | Route | view image record', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var route = this.subject();
+    assert.ok(route);
+  });
+});
+define('ahasweb/tests/unit/routes/view-image-record-test.jshint.lint-test', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | unit/routes/view-image-record-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/routes/view-image-record-test.js should pass jshint.');
   });
 });
 define('ahasweb/tests/unit/routes/view-medical-record-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {

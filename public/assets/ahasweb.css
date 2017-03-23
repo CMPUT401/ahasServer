@@ -6110,7 +6110,16 @@ p {
   margin-right: auto; }
 
 .history-list {
-  height: 100px; }
+  height: 300px;
+  padding: 0;
+  margin-left: 0;
+  margin-right: 0; }
+
+.infoBlockComponent {
+  width: 75%;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto; }
 
 /* medical record */
 textarea {
