@@ -14,7 +14,7 @@ class ImagesController < ApplicationController
 
   def index
     filter = params[:filter]
-    filtered_images = filter_index(Patient.find_by(id: params[:patient_id]).images, filter)
+    filtered_images = filter_fields(Patient.find_by(id: params[:patient_id]).images)
     render satus: 200, json: { success: true, images: filtered_images }
   end
 
@@ -37,6 +37,12 @@ class ImagesController < ApplicationController
   def filter_index(images, filter)
     images.select do |image|
       image.picture_type == filter
+    end
+  end
+
+  def filter_fields(images)
+    images.map do |image|
+      { name: image.name, date: image.date, picture_type: image.picture_type, id: image.id }
     end
   end
 
