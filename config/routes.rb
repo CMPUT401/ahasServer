@@ -33,6 +33,8 @@ Rails.application.routes.draw do
       resources    :schedules
     end
   end
+
+  get '*path', to: 'static_pages#home'
 #  mount_ember_app :frontend, to: '/'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
