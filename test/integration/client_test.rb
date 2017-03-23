@@ -38,6 +38,12 @@ class Clients_test < ActionDispatch::IntegrationTest
     # assert_equal JSON.parse(@yamlClient.to_json), JSON.parse(response.body)['client']
   end
 
+  test 'get index of clients' do
+    get '/api/client', headers: authenticated_header
+    assert_response :success
+    assert JSON.parse(response.body)['success']
+  end
+
   test 'respond to failed GET' do
     bad_id = Client.last.id + 1
     get '/api/client/' + bad_id.to_s, headers: authenticated_header
@@ -56,7 +62,6 @@ class Clients_test < ActionDispatch::IntegrationTest
     put '/api/client/' + id, params: @client, headers: authenticated_header
     assert_response :success
     assert JSON.parse(response.body)['success']
-  
     get '/api/client/' + id, headers: authenticated_header
     assert_not_equal @yamlClient.to_json.to_s, response.body  
   end
