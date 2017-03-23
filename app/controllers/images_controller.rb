@@ -1,6 +1,7 @@
 class ImagesController < ApplicationController
   include Rails.application.routes.url_helpers
   before_action :authenticate_user
+  
   def create
     image = Image.new image_params
     if image.save
@@ -14,7 +15,7 @@ class ImagesController < ApplicationController
 
   def index
     filter = params[:filter]
-    filtered_images = filter_fields(Patient.find_by(id: params[:patient_id]).images)
+    filtered_images = filter_fields(Patient.find_by(id: params[:patient_id]).images.order(date: :desc))
     render satus: 200, json: { success: true, images: filtered_images }
   end
 
