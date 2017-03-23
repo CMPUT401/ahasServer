@@ -6,9 +6,9 @@ class ImagesController < ApplicationController
     image = Image.new image_params
     patient_id = params[:patient_id]
     unless patient_id == image.patient_id.to_s
-      render status: :error, json: { success: false, error: "Patient ID does not match route" }
+      render status: :error, json: { success: false, error: 'Patient ID does not match route' }
       return
-    end 
+    end
     if image.save
       render status: 201, json: { success: true }
     else
@@ -24,12 +24,12 @@ class ImagesController < ApplicationController
   def filter
     filter = params[:filter]
 
-    if ["lab_result", "radiograph", "portrait"].include? filter
+    if ['lab_result', 'radiograph', 'portrait'].include? filter
 
-       filtered_images = filter_fields(Patient.find_by(id: params[:patient_id]).images.where("picture_type = ?", filter).order(date: :desc))
+       filtered_images = filter_fields(Patient.find_by(id: params[:patient_id]).images.where('picture_type = ?', filter).order(date: :desc))
        render satus: 200, json: { success: true, images: filtered_images }
     else
-      render status: :error, json: { success: false, error: "Filter does not exist" }
+      render status: :error, json: { success: false, error: 'Filter does not exist' }
     end
   end
 
