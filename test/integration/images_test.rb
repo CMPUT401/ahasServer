@@ -16,5 +16,7 @@ class ImagesTest < ActionDispatch::IntegrationTest
 
   test 'index of images returns all images' do
     get "/api/patients/#{@patient.id}/images", headers: authenticated_header
+    assert_response 200
+    assert JSON.parse(response.body)['images'].length > 0
   end
 end

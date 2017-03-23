@@ -24,7 +24,9 @@ class ImagesController < ApplicationController
 
   def filter
     filter = params[:filter]
-    if  ["lab_result", "radiograph", "portrait"].include? filter
+
+    if ["lab_result", "radiograph", "portrait"].include? filter
+
        filtered_images = filter_fields(Patient.find_by(id: params[:patient_id]).images.where("picture_type = ?", filter).order(date: :desc))
        render satus: 200, json: { success: true, images: filtered_images }
     else
