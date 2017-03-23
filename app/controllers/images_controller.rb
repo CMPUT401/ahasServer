@@ -5,14 +5,13 @@ class ImagesController < ApplicationController
   def create
     image = Image.new image_params
     patient_id = params[:patient_id]
-    unless patient_id == image.patient_id
+    unless patient_id == image.patient_id.to_s
       render status: :error, json: { success: false, error: "Patient ID does not match route" }
-    end
+      return
+    end 
     if image.save
-      puts 'success'
       render status: 201, json: { success: true }
     else
-      puts 'failure'
       render status: :error, json: { success: false, errors: image.errors.full_messages }
     end
   end
@@ -33,8 +32,9 @@ class ImagesController < ApplicationController
       render status: :error, json: { success: false, error: "Filter does not exist" }
     end
   end
+
   def show
-    image = Image.find(:id)
+    image = Image.find_by(id: params[:id])
 
     if image
       render status: 200, json: { success: true, image: image }
@@ -60,12 +60,4 @@ class ImagesController < ApplicationController
       { name: image.name, date: image.date, picture_type: image.picture_type, id: image.id }
     end
   end
-
-  def add_location(images)
-    # Attach asset_path to json
-    images.map do |image|
-      image.location = ActionController::Base.helpers.asset_path(image.name)
-    end
-  end
-
 end
