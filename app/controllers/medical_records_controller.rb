@@ -1,6 +1,79 @@
+# Controller for interacting with medical records
+# This is a protected class and requires the user to login before it can access any of the functions
+#
+#
+# @author Justin Barclay & Mackenzie Bligh
+# @see https://github.com/CMPUT401/vettr_server/wiki/API-Documentation#images
 class MedicalRecordsController < ApplicationController
   before_action :authenticate_user
 
+  # Handles POST requests to store medications and medical records, route: /api/patients/:patient_id/medical_records.
+  # @example
+  #   {
+  #   "medical_record": {
+  #                       "patient_id": "integer",
+  #                      "data": "datetime",
+  #                      "summary": "string"
+  #                       "signature": "text",
+  #                      "temperature": "float",
+  #                      "exam_notes": "text",
+  #                      "eyes": "string",
+  #                      "oral": "string",
+  #                      "ears": "string",
+  #                      "glands": "string",
+  #                      "skin": "string",
+  #                      "abdomen": "string",
+  #                      "urogenital": "string",
+  #                      "nervousSystem": "string",
+  #                      "musculoskeletal": "string",
+  #                      "cardiovascular": "string",
+  #                      "heart_rate": "integer",
+  #                      "respiratory": "string",
+  #                      "respiratory_rate": "integer",
+  #                      "attitudeBAR": "Boolean",
+  #                      "attitudeQAR": "Boolean",
+  #                      "attitudeDepressed": "Boolean",
+  #                      "eyesN": "Boolean",
+  #                      "eyesA": "Boolean",
+  #                      "mmN": "Boolean",
+  #                      "mmPale": "Boolean",
+  #                      "mmJaundiced": "Boolean",
+  #                      "mmTacky": "Boolean",
+  #                      "earsN": "Boolean",
+  #                      "earsA": "Boolean",
+  #                      "earsEarMites": "Boolean",
+  #                      "earsAU": "Boolean",
+  #                      "earsAD": "Boolean",
+  #                      "earsAS": "Boolean",
+  #                      "glandsN": "Boolean",
+  #                      "glandsA": "Boolean",
+  #                      "skinN": "Boolean",
+  #                      "skinA": "Boolean",
+  #                      "abdomenN": "Boolean",
+  #                      "abdomenA": "Boolean",
+  #                      "urogenitalN": "Boolean",
+  #                      "urogenitalA": "Boolean",
+  #                      "nervousSystemN": "Boolean",
+  #                      "nervousSystemA": "Boolean",
+  #                      "musculoskeletalN": "Boolean",
+  #                      "musculoskeletalA": "Boolean",
+  #                      "cardiovascularN": "Boolean",
+  #                      "cardiovascularA": "Boolean",
+  #                      "respiratoryN": "Boolean",
+  #                      "respiratoryA": "Boolean"
+  #                     }
+  #   }
+  # @example success
+  #  {
+  #      "success": true
+  #  }
+  # @example failure
+  #   {
+  #     "success": false,
+  #     "errors": [....] // list of errors
+  #   }
+  # @return HTTP 201 on success, JSON
+  # @return HTTP 500 on failure, JSON
   def create
     medications = params[:medications]
     @medical_record = MedicalRecord.new medical_record_params
@@ -15,9 +88,69 @@ class MedicalRecordsController < ApplicationController
     end
   end
 
+  # Handles GET requests to view a medical records, route: /api/patients/:patient_id/medical_records/:id.
+  # @example response
+  #   {
+  #   "success": true,
+  #   "medical_record": {
+  #                       "patient_id": "integer",
+  #                      "data": "datetime",
+  #                      "summary": "string"
+  #                       "signature": "text",
+  #                      "temperature": "float",
+  #                      "exam_notes": "text",
+  #                      "eyes": "string",
+  #                      "oral": "string",
+  #                      "ears": "string",
+  #                      "glands": "string",
+  #                      "skin": "string",
+  #                      "abdomen": "string",
+  #                      "urogenital": "string",
+  #                      "nervousSystem": "string",
+  #                      "musculoskeletal": "string",
+  #                      "cardiovascular": "string",
+  #                      "heart_rate": "integer",
+  #                      "respiratory": "string",
+  #                      "respiratory_rate": "integer",
+  #                      "attitudeBAR": "Boolean",
+  #                      "attitudeQAR": "Boolean",
+  #                      "attitudeDepressed": "Boolean",
+  #                      "eyesN": "Boolean",
+  #                      "eyesA": "Boolean",
+  #                      "mmN": "Boolean",
+  #                      "mmPale": "Boolean",
+  #                      "mmJaundiced": "Boolean",
+  #                      "mmTacky": "Boolean",
+  #                      "earsN": "Boolean",
+  #                      "earsA": "Boolean",
+  #                      "earsEarMites": "Boolean",
+  #                      "earsAU": "Boolean",
+  #                      "earsAD": "Boolean",
+  #                      "earsAS": "Boolean",
+  #                      "glandsN": "Boolean",
+  #                      "glandsA": "Boolean",
+  #                      "skinN": "Boolean",
+  #                      "skinA": "Boolean",
+  #                      "abdomenN": "Boolean",
+  #                      "abdomenA": "Boolean",
+  #                      "urogenitalN": "Boolean",
+  #                      "urogenitalA": "Boolean",
+  #                      "nervousSystemN": "Boolean",
+  #                      "nervousSystemA": "Boolean",
+  #                      "musculoskeletalN": "Boolean",
+  #                      "musculoskeletalA": "Boolean",
+  #                      "cardiovascularN": "Boolean",
+  #                      "cardiovascularA": "Boolean",
+  #                      "respiratoryN": "Boolean",
+  #                      "respiratoryA": "Boolean"
+  #                     }
+  #   }
+  # @return HTTP 200 on success, JSON
+  # @return HTTP 404 on failure, JSON
+
   def show
     @medical_record = MedicalRecord.find_by(id: params[:id])
-   @medications = Medication.where("medical_record_id = ?", params[:id])
+    @medications = Medication.where("medical_record_id = ?", params[:id])
 
     if @medical_record
       render json: { success: true, medical_record: @medical_record, medications: @medications}
@@ -26,12 +159,86 @@ class MedicalRecordsController < ApplicationController
     end
   end
 
+  # Handles GET requests to get the index of medical records for a patient, route: /api/patients/:patient_id/medical_records.
+  # @example response
+  #   {
+  #     "success": "true",
+  #     "medical_records": [{"id": integer, "summary": text, "created_at": integer}...]
+  #   }
+  # @return HTTP 200 on success, JSON
+  
   def index
     patient = Patient.find_by(id: params[:patient_id]).medical_records.order(created_at: :desc)
     filtered_records = filter_medical_records_keys patient
     render status: 200, json: { success: true, medical_records: filtered_records }
   end
-
+  # Handles PUT/PATCH requests to update medications and medical records, route: /api/patients/:patient_id/medical_records/:id.
+  # @example
+  #   {
+  #   "medical_record": {
+  #                       "patient_id": "integer",
+  #                      "data": "datetime",
+  #                      "summary": "string"
+  #                       "signature": "text",
+  #                      "temperature": "float",
+  #                      "exam_notes": "text",
+  #                      "eyes": "string",
+  #                      "oral": "string",
+  #                      "ears": "string",
+  #                      "glands": "string",
+  #                      "skin": "string",
+  #                      "abdomen": "string",
+  #                      "urogenital": "string",
+  #                      "nervousSystem": "string",
+  #                      "musculoskeletal": "string",
+  #                      "cardiovascular": "string",
+  #                      "heart_rate": "integer",
+  #                      "respiratory": "string",
+  #                      "respiratory_rate": "integer",
+  #                      "attitudeBAR": "Boolean",
+  #                      "attitudeQAR": "Boolean",
+  #                      "attitudeDepressed": "Boolean",
+  #                      "eyesN": "Boolean",
+  #                      "eyesA": "Boolean",
+  #                      "mmN": "Boolean",
+  #                      "mmPale": "Boolean",
+  #                      "mmJaundiced": "Boolean",
+  #                      "mmTacky": "Boolean",
+  #                      "earsN": "Boolean",
+  #                      "earsA": "Boolean",
+  #                      "earsEarMites": "Boolean",
+  #                      "earsAU": "Boolean",
+  #                      "earsAD": "Boolean",
+  #                      "earsAS": "Boolean",
+  #                      "glandsN": "Boolean",
+  #                      "glandsA": "Boolean",
+  #                      "skinN": "Boolean",
+  #                      "skinA": "Boolean",
+  #                      "abdomenN": "Boolean",
+  #                      "abdomenA": "Boolean",
+  #                      "urogenitalN": "Boolean",
+  #                      "urogenitalA": "Boolean",
+  #                      "nervousSystemN": "Boolean",
+  #                      "nervousSystemA": "Boolean",
+  #                      "musculoskeletalN": "Boolean",
+  #                      "musculoskeletalA": "Boolean",
+  #                      "cardiovascularN": "Boolean",
+  #                      "cardiovascularA": "Boolean",
+  #                      "respiratoryN": "Boolean",
+  #                      "respiratoryA": "Boolean"
+  #                     }
+  #   }
+  # @example success
+  #  {
+  #      "success": true
+  #  }
+  # @example failure
+  #   {
+  #     "success": false,
+  #     "errors": [....] // list of errors
+  #   }
+  # @return HTTP 201 on success, JSON
+  # @return HTTP 500 on failure, JSON
   def update
     @record = MedicalRecord.find_by(id: params[:id])
     @medications = params[:medications]
@@ -52,8 +259,10 @@ class MedicalRecordsController < ApplicationController
     else
       render status: :error, json: {success: false, errors: @record.errors.full_messages}
     end
-end
-    private
+  end
+
+  private
+
   def filter_medical_records_keys(medical_records)
     medical_records.map do |medical_record|
       { id: medical_record.id, summary: medical_record.summary, created_at: medical_record.created_at.to_i }
@@ -114,7 +323,7 @@ end
       medication = medications[medication_num]
       medication[:medical_record_id] = medical_record_id
       meds.append Medication.new medication.permit(:name, :patient_id, :medical_record_id, :reminder,
-                                       :date, :med_type)
+                                                   :date, :med_type)
     end
     meds
   end
