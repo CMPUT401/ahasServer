@@ -269,15 +269,15 @@
       <pre class="lines">
 
 
-53
-54
 55
 56
 57
-58</pre>
+58
+59
+60</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/patients_controller.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/patients_controller.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_index'>index</span>
   <span class='id identifier rubyid_patients'>patients</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Patient.html" title="Patient (class)">Patient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
@@ -339,7 +339,9 @@
 48
 49
 50
-51</pre>
+51
+52
+53</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/controllers/patients_controller.rb', line 17</span>
@@ -352,9 +354,11 @@
   <span class='ivar'>@medications</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Medication.html" title="Medication (class)">Medication</a></span></span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>patient_id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
 
   <span class='ivar'>@medical_records</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_medRec'>medRec</span><span class='op'>|</span>
-    <span class='ivar'>@note</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Note.html" title="Note (class)">Note</a></span></span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>medical_record_id:</span> <span class='id identifier rubyid_medRec'>medRec</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='label'>is_alert:</span> <span class='kw'>true</span><span class='rparen'>)</span>
-    <span class='kw'>if</span> <span class='ivar'>@note</span> <span class='op'>!=</span> <span class='kw'>nil</span>
-      <span class='ivar'>@generalAlerts</span><span class='period'>.</span><span class='id identifier rubyid_append'>append</span><span class='lparen'>(</span><span class='ivar'>@note</span><span class='rparen'>)</span>
+    <span class='ivar'>@notes</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Note.html" title="Note (class)">Note</a></span></span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>medical_record_id:</span> <span class='id identifier rubyid_medRec'>medRec</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='label'>is_alert:</span> <span class='kw'>true</span><span class='rparen'>)</span>
+    <span class='ivar'>@notes</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_note'>note</span><span class='op'>|</span> 
+      <span class='kw'>if</span> <span class='id identifier rubyid_note'>note</span> <span class='op'>!=</span> <span class='kw'>nil</span>
+        <span class='ivar'>@generalAlerts</span><span class='period'>.</span><span class='id identifier rubyid_append'>append</span><span class='lparen'>(</span><span class='id identifier rubyid_note'>note</span><span class='rparen'>)</span>
+      <span class='kw'>end</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -389,7 +393,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Mar 23 00:22:05 2017 by
+  Generated on Thu Mar 23 22:02:20 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.8 (ruby-2.4.0).
 </div>

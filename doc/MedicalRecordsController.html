@@ -103,7 +103,42 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Controller for interacting with medical records This is a protected class
+and requires the user to login before it can access any of the functions</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://github.com/CMPUT401/vettr_server/wiki/API-Documentation#images" target="_parent" title="https://github.com/CMPUT401/vettr_server/wiki/API-Documentation#images">https://github.com/CMPUT401/vettr_server/wiki/API-Documentation#images</a></li>
+    
+  </ul>
+<p class="tag_title">Author:</p>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'>
+<p>Justin Barclay &amp; Mackenzie Bligh</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
 
 
 
@@ -135,7 +170,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Handles POST requests to store medications and medical records, route:
+/api/patients/:patient_id/medical_records.</p>
+</div></span>
   
 </li>
 
@@ -157,7 +195,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Handles GET requests to get the index of medical records for a patient,
+route: /api/patients/:patient_id/medical_records.</p>
+</div></span>
   
 </li>
 
@@ -179,7 +220,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Handles GET requests to view a medical records, route:
+/api/patients/:patient_id/medical_records/:id.</p>
+</div></span>
   
 </li>
 
@@ -201,7 +245,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Handles PUT/PATCH requests to update medications and medical records,
+route: /api/patients/:patient_id/medical_records/:id.</p>
+</div></span>
   
 </li>
 
@@ -237,28 +284,152 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Handles POST requests to store medications and medical records, route:
+/api/patients/:patient_id/medical_records.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code>{
+&quot;medical_record&quot;: {
+                    &quot;patient_id&quot;: &quot;integer&quot;,
+                   &quot;data&quot;: &quot;datetime&quot;,
+                   &quot;summary&quot;: &quot;string&quot;
+                    &quot;signature&quot;: &quot;text&quot;,
+                   &quot;temperature&quot;: &quot;float&quot;,
+                   &quot;exam_notes&quot;: &quot;text&quot;,
+                   &quot;eyes&quot;: &quot;string&quot;,
+                   &quot;oral&quot;: &quot;string&quot;,
+                   &quot;ears&quot;: &quot;string&quot;,
+                   &quot;glands&quot;: &quot;string&quot;,
+                   &quot;skin&quot;: &quot;string&quot;,
+                   &quot;abdomen&quot;: &quot;string&quot;,
+                   &quot;urogenital&quot;: &quot;string&quot;,
+                   &quot;nervousSystem&quot;: &quot;string&quot;,
+                   &quot;musculoskeletal&quot;: &quot;string&quot;,
+                   &quot;cardiovascular&quot;: &quot;string&quot;,
+                   &quot;heart_rate&quot;: &quot;integer&quot;,
+                   &quot;respiratory&quot;: &quot;string&quot;,
+                   &quot;respiratory_rate&quot;: &quot;integer&quot;,
+                   &quot;attitudeBAR&quot;: &quot;Boolean&quot;,
+                   &quot;attitudeQAR&quot;: &quot;Boolean&quot;,
+                   &quot;attitudeDepressed&quot;: &quot;Boolean&quot;,
+                   &quot;eyesN&quot;: &quot;Boolean&quot;,
+                   &quot;eyesA&quot;: &quot;Boolean&quot;,
+                   &quot;mmN&quot;: &quot;Boolean&quot;,
+                   &quot;mmPale&quot;: &quot;Boolean&quot;,
+                   &quot;mmJaundiced&quot;: &quot;Boolean&quot;,
+                   &quot;mmTacky&quot;: &quot;Boolean&quot;,
+                   &quot;earsN&quot;: &quot;Boolean&quot;,
+                   &quot;earsA&quot;: &quot;Boolean&quot;,
+                   &quot;earsEarMites&quot;: &quot;Boolean&quot;,
+                   &quot;earsAU&quot;: &quot;Boolean&quot;,
+                   &quot;earsAD&quot;: &quot;Boolean&quot;,
+                   &quot;earsAS&quot;: &quot;Boolean&quot;,
+                   &quot;glandsN&quot;: &quot;Boolean&quot;,
+                   &quot;glandsA&quot;: &quot;Boolean&quot;,
+                   &quot;skinN&quot;: &quot;Boolean&quot;,
+                   &quot;skinA&quot;: &quot;Boolean&quot;,
+                   &quot;abdomenN&quot;: &quot;Boolean&quot;,
+                   &quot;abdomenA&quot;: &quot;Boolean&quot;,
+                   &quot;urogenitalN&quot;: &quot;Boolean&quot;,
+                   &quot;urogenitalA&quot;: &quot;Boolean&quot;,
+                   &quot;nervousSystemN&quot;: &quot;Boolean&quot;,
+                   &quot;nervousSystemA&quot;: &quot;Boolean&quot;,
+                   &quot;musculoskeletalN&quot;: &quot;Boolean&quot;,
+                   &quot;musculoskeletalA&quot;: &quot;Boolean&quot;,
+                   &quot;cardiovascularN&quot;: &quot;Boolean&quot;,
+                   &quot;cardiovascularA&quot;: &quot;Boolean&quot;,
+                   &quot;respiratoryN&quot;: &quot;Boolean&quot;,
+                   &quot;respiratoryA&quot;: &quot;Boolean&quot;
+                  }
+}</code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>success</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='lbrace'>{</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>success</span><span class='label_end'>&quot;:</span> <span class='kw'>true</span>
+<span class='rbrace'>}</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>failure</p>
+</div></p>
+      
+      <pre class="example code"><code>{
+  &quot;success&quot;: false,
+  &quot;errors&quot;: [....] // list of errors
+}</code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 201 on success, JSON</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 500 on failure, JSON</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16</pre>
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/medical_records_controller.rb', line 4</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/medical_records_controller.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create'>create</span>
   <span class='id identifier rubyid_medications'>medications</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:medications</span><span class='rbracket'>]</span>
@@ -287,20 +458,65 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Handles GET requests to get the index of medical records for a patient,
+route: /api/patients/:patient_id/medical_records.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>response</p>
+</div></p>
+      
+      <pre class="example code"><code>{
+  &quot;success&quot;: &quot;true&quot;,
+  &quot;medical_records&quot;: [{&quot;id&quot;: integer, &quot;summary&quot;: text, &quot;created_at&quot;: integer}...]
+}</code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 200 on success, JSON</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-29
-30
-31
-32
-33</pre>
+170
+171
+172
+173
+174</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/medical_records_controller.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/medical_records_controller.rb', line 170</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_index'>index</span>
   <span class='id identifier rubyid_patient'>patient</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Patient.html" title="Patient (class)">Patient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:patient_id</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_medical_records'>medical_records</span><span class='period'>.</span><span class='id identifier rubyid_order'>order</span><span class='lparen'>(</span><span class='label'>created_at:</span> <span class='symbol'>:desc</span><span class='rparen'>)</span>
@@ -321,29 +537,139 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Handles GET requests to view a medical records, route:
+/api/patients/:patient_id/medical_records/:id.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>response</p>
+</div></p>
+      
+      <pre class="example code"><code>{
+&quot;success&quot;: true,
+&quot;medical_record&quot;: {
+                    &quot;patient_id&quot;: &quot;integer&quot;,
+                   &quot;data&quot;: &quot;datetime&quot;,
+                   &quot;summary&quot;: &quot;string&quot;
+                    &quot;signature&quot;: &quot;text&quot;,
+                   &quot;temperature&quot;: &quot;float&quot;,
+                   &quot;exam_notes&quot;: &quot;text&quot;,
+                   &quot;eyes&quot;: &quot;string&quot;,
+                   &quot;oral&quot;: &quot;string&quot;,
+                   &quot;ears&quot;: &quot;string&quot;,
+                   &quot;glands&quot;: &quot;string&quot;,
+                   &quot;skin&quot;: &quot;string&quot;,
+                   &quot;abdomen&quot;: &quot;string&quot;,
+                   &quot;urogenital&quot;: &quot;string&quot;,
+                   &quot;nervousSystem&quot;: &quot;string&quot;,
+                   &quot;musculoskeletal&quot;: &quot;string&quot;,
+                   &quot;cardiovascular&quot;: &quot;string&quot;,
+                   &quot;heart_rate&quot;: &quot;integer&quot;,
+                   &quot;respiratory&quot;: &quot;string&quot;,
+                   &quot;respiratory_rate&quot;: &quot;integer&quot;,
+                   &quot;attitudeBAR&quot;: &quot;Boolean&quot;,
+                   &quot;attitudeQAR&quot;: &quot;Boolean&quot;,
+                   &quot;attitudeDepressed&quot;: &quot;Boolean&quot;,
+                   &quot;eyesN&quot;: &quot;Boolean&quot;,
+                   &quot;eyesA&quot;: &quot;Boolean&quot;,
+                   &quot;mmN&quot;: &quot;Boolean&quot;,
+                   &quot;mmPale&quot;: &quot;Boolean&quot;,
+                   &quot;mmJaundiced&quot;: &quot;Boolean&quot;,
+                   &quot;mmTacky&quot;: &quot;Boolean&quot;,
+                   &quot;earsN&quot;: &quot;Boolean&quot;,
+                   &quot;earsA&quot;: &quot;Boolean&quot;,
+                   &quot;earsEarMites&quot;: &quot;Boolean&quot;,
+                   &quot;earsAU&quot;: &quot;Boolean&quot;,
+                   &quot;earsAD&quot;: &quot;Boolean&quot;,
+                   &quot;earsAS&quot;: &quot;Boolean&quot;,
+                   &quot;glandsN&quot;: &quot;Boolean&quot;,
+                   &quot;glandsA&quot;: &quot;Boolean&quot;,
+                   &quot;skinN&quot;: &quot;Boolean&quot;,
+                   &quot;skinA&quot;: &quot;Boolean&quot;,
+                   &quot;abdomenN&quot;: &quot;Boolean&quot;,
+                   &quot;abdomenA&quot;: &quot;Boolean&quot;,
+                   &quot;urogenitalN&quot;: &quot;Boolean&quot;,
+                   &quot;urogenitalA&quot;: &quot;Boolean&quot;,
+                   &quot;nervousSystemN&quot;: &quot;Boolean&quot;,
+                   &quot;nervousSystemA&quot;: &quot;Boolean&quot;,
+                   &quot;musculoskeletalN&quot;: &quot;Boolean&quot;,
+                   &quot;musculoskeletalA&quot;: &quot;Boolean&quot;,
+                   &quot;cardiovascularN&quot;: &quot;Boolean&quot;,
+                   &quot;cardiovascularA&quot;: &quot;Boolean&quot;,
+                   &quot;respiratoryN&quot;: &quot;Boolean&quot;,
+                   &quot;respiratoryA&quot;: &quot;Boolean&quot;
+                  }
+}</code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 200 on success, JSON</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 404 on failure, JSON</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27</pre>
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/medical_records_controller.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/medical_records_controller.rb', line 151</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show'>show</span>
   <span class='ivar'>@medical_record</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="MedicalRecord.html" title="MedicalRecord (class)">MedicalRecord</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
- <span class='ivar'>@medications</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Medication.html" title="Medication (class)">Medication</a></span></span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>medical_record_id = ?</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='ivar'>@medications</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Medication.html" title="Medication (class)">Medication</a></span></span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>medical_record_id = ?</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
 
   <span class='kw'>if</span> <span class='ivar'>@medical_record</span>
     <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>success:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>medical_record:</span> <span class='ivar'>@medical_record</span><span class='comma'>,</span> <span class='label'>medications:</span> <span class='ivar'>@medications</span><span class='rbrace'>}</span>
@@ -365,57 +691,181 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Handles PUT/PATCH requests to update medications and medical records,
+route: /api/patients/:patient_id/medical_records/:id.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code>{
+&quot;medical_record&quot;: {
+                    &quot;patient_id&quot;: &quot;integer&quot;,
+                   &quot;data&quot;: &quot;datetime&quot;,
+                   &quot;summary&quot;: &quot;string&quot;
+                    &quot;signature&quot;: &quot;text&quot;,
+                   &quot;temperature&quot;: &quot;float&quot;,
+                   &quot;exam_notes&quot;: &quot;text&quot;,
+                   &quot;eyes&quot;: &quot;string&quot;,
+                   &quot;oral&quot;: &quot;string&quot;,
+                   &quot;ears&quot;: &quot;string&quot;,
+                   &quot;glands&quot;: &quot;string&quot;,
+                   &quot;skin&quot;: &quot;string&quot;,
+                   &quot;abdomen&quot;: &quot;string&quot;,
+                   &quot;urogenital&quot;: &quot;string&quot;,
+                   &quot;nervousSystem&quot;: &quot;string&quot;,
+                   &quot;musculoskeletal&quot;: &quot;string&quot;,
+                   &quot;cardiovascular&quot;: &quot;string&quot;,
+                   &quot;heart_rate&quot;: &quot;integer&quot;,
+                   &quot;respiratory&quot;: &quot;string&quot;,
+                   &quot;respiratory_rate&quot;: &quot;integer&quot;,
+                   &quot;attitudeBAR&quot;: &quot;Boolean&quot;,
+                   &quot;attitudeQAR&quot;: &quot;Boolean&quot;,
+                   &quot;attitudeDepressed&quot;: &quot;Boolean&quot;,
+                   &quot;eyesN&quot;: &quot;Boolean&quot;,
+                   &quot;eyesA&quot;: &quot;Boolean&quot;,
+                   &quot;mmN&quot;: &quot;Boolean&quot;,
+                   &quot;mmPale&quot;: &quot;Boolean&quot;,
+                   &quot;mmJaundiced&quot;: &quot;Boolean&quot;,
+                   &quot;mmTacky&quot;: &quot;Boolean&quot;,
+                   &quot;earsN&quot;: &quot;Boolean&quot;,
+                   &quot;earsA&quot;: &quot;Boolean&quot;,
+                   &quot;earsEarMites&quot;: &quot;Boolean&quot;,
+                   &quot;earsAU&quot;: &quot;Boolean&quot;,
+                   &quot;earsAD&quot;: &quot;Boolean&quot;,
+                   &quot;earsAS&quot;: &quot;Boolean&quot;,
+                   &quot;glandsN&quot;: &quot;Boolean&quot;,
+                   &quot;glandsA&quot;: &quot;Boolean&quot;,
+                   &quot;skinN&quot;: &quot;Boolean&quot;,
+                   &quot;skinA&quot;: &quot;Boolean&quot;,
+                   &quot;abdomenN&quot;: &quot;Boolean&quot;,
+                   &quot;abdomenA&quot;: &quot;Boolean&quot;,
+                   &quot;urogenitalN&quot;: &quot;Boolean&quot;,
+                   &quot;urogenitalA&quot;: &quot;Boolean&quot;,
+                   &quot;nervousSystemN&quot;: &quot;Boolean&quot;,
+                   &quot;nervousSystemA&quot;: &quot;Boolean&quot;,
+                   &quot;musculoskeletalN&quot;: &quot;Boolean&quot;,
+                   &quot;musculoskeletalA&quot;: &quot;Boolean&quot;,
+                   &quot;cardiovascularN&quot;: &quot;Boolean&quot;,
+                   &quot;cardiovascularA&quot;: &quot;Boolean&quot;,
+                   &quot;respiratoryN&quot;: &quot;Boolean&quot;,
+                   &quot;respiratoryA&quot;: &quot;Boolean&quot;
+                  }
+}</code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>success</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='lbrace'>{</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>success</span><span class='label_end'>&quot;:</span> <span class='kw'>true</span>
+<span class='rbrace'>}</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>failure</p>
+</div></p>
+      
+      <pre class="example code"><code>{
+  &quot;success&quot;: false,
+  &quot;errors&quot;: [....] // list of errors
+}</code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 201 on success, JSON</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 500 on failure, JSON</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55</pre>
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/medical_records_controller.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/medical_records_controller.rb', line 242</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
-    <span class='ivar'>@record</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="MedicalRecord.html" title="MedicalRecord (class)">MedicalRecord</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
-    <span class='ivar'>@medications</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:medications</span><span class='rbracket'>]</span>
-    <span class='comment'>#puts &quot;record created today &quot; + @record.created_at.today?.to_s
+  <span class='ivar'>@record</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="MedicalRecord.html" title="MedicalRecord (class)">MedicalRecord</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='ivar'>@medications</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:medications</span><span class='rbracket'>]</span>
+  <span class='comment'>#puts &quot;record created today &quot; + @record.created_at.today?.to_s
 </span>
-    <span class='comment'># let&#39;s exit early
-</span>    <span class='kw'>unless</span> <span class='ivar'>@record</span><span class='period'>.</span><span class='id identifier rubyid_created_at'>created_at</span><span class='period'>.</span><span class='id identifier rubyid_today?'>today?</span>
-      <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='symbol'>:error</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>success:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>error:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Medical Record is not editable after 1 day</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span>
-      <span class='kw'>return</span>
-    <span class='kw'>end</span> 
+  <span class='comment'># let&#39;s exit early
+</span>  <span class='kw'>unless</span> <span class='ivar'>@record</span><span class='period'>.</span><span class='id identifier rubyid_created_at'>created_at</span><span class='period'>.</span><span class='id identifier rubyid_today?'>today?</span>
+    <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='symbol'>:error</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>success:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>error:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Medical Record is not editable after 1 day</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span>
+    <span class='kw'>return</span>
+  <span class='kw'>end</span> 
 
-    <span class='comment'>#not nesting too deep
-</span>    <span class='kw'>if</span> <span class='ivar'>@record</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='id identifier rubyid_medical_record_params'>medical_record_params</span><span class='rparen'>)</span>
-      <span class='kw'>unless</span> <span class='ivar'>@medications</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-        <span class='id identifier rubyid_updateMedication'>updateMedication</span><span class='lparen'>(</span><span class='ivar'>@medications</span><span class='comma'>,</span> <span class='ivar'>@record</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
-      <span class='kw'>end</span>
-      <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='int'>201</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>success:</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
-    <span class='kw'>else</span>
-      <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='symbol'>:error</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span><span class='label'>success:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>errors:</span> <span class='ivar'>@record</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_full_messages'>full_messages</span><span class='rbrace'>}</span>
+  <span class='comment'>#not nesting too deep
+</span>  <span class='kw'>if</span> <span class='ivar'>@record</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='id identifier rubyid_medical_record_params'>medical_record_params</span><span class='rparen'>)</span>
+    <span class='kw'>unless</span> <span class='ivar'>@medications</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+      <span class='id identifier rubyid_updateMedication'>updateMedication</span><span class='lparen'>(</span><span class='ivar'>@medications</span><span class='comma'>,</span> <span class='ivar'>@record</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
     <span class='kw'>end</span>
+    <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='int'>201</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>success:</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='symbol'>:error</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span><span class='label'>success:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>errors:</span> <span class='ivar'>@record</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_full_messages'>full_messages</span><span class='rbrace'>}</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -427,7 +877,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Mar 23 00:22:05 2017 by
+  Generated on Thu Mar 23 22:02:21 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.8 (ruby-2.4.0).
 </div>
