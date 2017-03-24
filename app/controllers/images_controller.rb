@@ -44,6 +44,7 @@ class ImagesController < ApplicationController
       if image.picture_type == 'portrait'
         patient = image.patient
         patient.portrait_id = image.id
+        patient.save
       end
       render status: 201, json: { success: true }
     else
