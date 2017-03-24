@@ -1,7 +1,5 @@
 
 Rails.application.routes.draw do
-
-  get 'api/patients/:patient_id/images/:filter', to: 'images#index'
   # we want our routes to be /api/routes but not our controllers
   # this may need to be reevalutated if we get lots of non api
   # controllers
@@ -18,8 +16,10 @@ Rails.application.routes.draw do
       get          'patients/:patient_id/medications/', to: 'medications#index'
       get          'patients/:patient_id/medications/filter/:filter', to: 'medications#filter'
       
+
+      get          'patients/:patient_id/images',   to: 'images#index'
       get          'patients/:patient_id/images/:id', to: 'images#show'
-      get          'patients/:patient_id/images/filter/:id', to: 'images#filter'
+      get          'patients/:patient_id/images/filter/:filter', to: 'images#filter'
       post         'patients/:patient_id/images',    to: 'images#create'
 
       resources    :users
@@ -33,6 +33,8 @@ Rails.application.routes.draw do
       resources    :schedules
     end
   end
+
+  get '*path', to: 'static_pages#home'
 #  mount_ember_app :frontend, to: '/'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

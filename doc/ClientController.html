@@ -105,7 +105,41 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Controls access to the client instances stored in the API database</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://github.com/CMPUT401/vettr_server/wiki/API-Documentation#clients" target="_parent" title="https://github.com/CMPUT401/vettr_server/wiki/API-Documentation#clients">https://github.com/CMPUT401/vettr_server/wiki/API-Documentation#clients</a></li>
+    
+  </ul>
+<p class="tag_title">Author:</p>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'>
+<p>Justin Barclay &amp; Mackenzie Bligh</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
 
 
 
@@ -137,7 +171,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Handles HTTP POST request sent to /api/client.</p>
+</div></span>
   
 </li>
 
@@ -159,7 +195,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Handles HTTP GET request sent to /api/client and replies with an index
+containing a list of client IDs, last names, and first names.</p>
+</div></span>
   
 </li>
 
@@ -181,7 +220,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Handles HTTP GET request sent to /api/client/id, and replies with
+specific client&#39;s info, or an error in a JSON.</p>
+</div></span>
   
 </li>
 
@@ -203,7 +245,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Handles HTTP PATCH or PUT request sent to /api/client/id, and replies
+with specific client&#39;s info, or an error in a JSON.</p>
+</div></span>
   
 </li>
 
@@ -250,26 +295,110 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Handles HTTP POST request sent to /api/client.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>request body</p>
+</div></p>
+      
+      <pre class="example code"><code>{
+ &quot;success&quot;: true,
+ &quot;client&quot;:
+     {
+     &quot;firstName&quot;: &quot;Justin&quot;
+     &quot;lastName&quot;: &quot;Barclay&quot;
+     &quot;address&quot;: &quot;116 St &amp; 85 Ave, Edmonton, AB T6G 2R3&quot;
+     &quot;phoneNumber&quot;: &quot;7805555555&quot;
+     &quot;email&quot;: &quot;fakejustin@ualberta.ca&quot;
+     &quot;licos&quot;: &quot;123456&quot;
+     &quot;socialAssistance&quot;: &quot;76543&quot;
+     &quot;pets&quot;: &quot;12404&quot;
+     &quot;alternativeContactFirstName&quot;: &quot;John&quot;
+     &quot;alternativeContactLastName&quot;: &quot;Wick&quot;
+     &quot;alternativeContactPhoneNumber&quot;: &quot;17809904957&quot;
+     &quot;alternativeContactAddress&quot;: &quot;1234 Fake St &amp; 96 Ave, Edmonton, AB T8G 2EF&quot;
+     &quot;notes&quot;: &quot;His dog is super bitey&quot;
+     &quot;alternativeContact2ndPhone&quot;: &quot;7804737373&quot;
+     }
+}</code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>failure response</p>
+</div></p>
+      
+      <pre class="example code"><code>{
+&quot;success&quot;: false,
+&quot;errors&quot;: [....] // list of errors
+}</code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 201 if success: true JSON</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 500 if failure: false JSON</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13</pre>
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/client_controller.rb', line 3</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/client_controller.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create'>create</span>
   <span class='id identifier rubyid_client'>client</span> <span class='op'>=</span> <span class='id identifier rubyid_client_params'>client_params</span>
@@ -279,7 +408,7 @@
     <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='int'>201</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>success:</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
   <span class='kw'>else</span>
     <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='int'>500</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>success:</span> <span class='kw'>false</span><span class='comma'>,</span>
-                                   <span class='label'>errors:</span> <span class='ivar'>@client</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_full_messages'>full_messages</span> <span class='rbrace'>}</span>
+                                <span class='label'>errors:</span> <span class='ivar'>@client</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_full_messages'>full_messages</span> <span class='rbrace'>}</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -296,21 +425,77 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Handles HTTP GET request sent to /api/client and replies with an index
+containing a list of client IDs, last names, and first names.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>success response</p>
+</div></p>
+      
+      <pre class="example code"><code>{
+success&quot;:true,
+clients&quot;:[
+   {
+       &quot;id&quot;:443855961,
+       &quot;firstName&quot;:&quot;Justin&quot;,
+       &quot;lastName&quot;:&quot;Barclay&quot;
+   },
+   {
+       &quot;id&quot;:298486374,
+       &quot;firstName&quot;:null,
+       &quot;lastName&quot;:null
+   }
+				]
+}</code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 200 if success: true JSON</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-28
-29
-30
-31
-32
-33</pre>
+104
+105
+106
+107
+108
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/client_controller.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/client_controller.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_index'>index</span>
   <span class='id identifier rubyid_clients'>clients</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Client.html" title="Client (class)">Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
@@ -332,27 +517,106 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Handles HTTP GET request sent to /api/client/id, and replies with
+specific client&#39;s info, or an error in a JSON.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>success response</p>
+</div></p>
+      
+      <pre class="example code"><code>{
+ &quot;success&quot;: true,
+ &quot;client&quot;:
+     {
+     &quot;firstName&quot;: &quot;Justin&quot;
+     &quot;lastName&quot;: &quot;Barclay&quot;
+     &quot;address&quot;: &quot;116 St &amp; 85 Ave, Edmonton, AB T6G 2R3&quot;
+     &quot;phoneNumber&quot;: &quot;7805555555&quot;
+     &quot;email&quot;: &quot;fakejustin@ualberta.ca&quot;
+     &quot;licos&quot;: &quot;123456&quot;
+     &quot;socialAssistance&quot;: &quot;76543&quot;
+     &quot;pets&quot;: &quot;12404&quot;
+     }
+}</code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>failure response</p>
+</div></p>
+      
+      <pre class="example code"><code>{
+ &quot;success&quot;: false,
+ &quot;errors&quot;: [....] // list of errors
+ }</code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 200 if success: true JSON</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 404 if failure: false on failure</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26</pre>
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/client_controller.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/client_controller.rb', line 73</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show'>show</span>
   <span class='id identifier rubyid_client'>client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Client.html" title="Client (class)">Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -380,26 +644,140 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>add to wiki page.</p>
+</div>
+  </div>
+
+
+<p>Handles HTTP PATCH or PUT request sent to /api/client/id, and replies
+with specific client&#39;s info, or an error in a JSON.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>request body</p>
+</div></p>
+      
+      <pre class="example code"><code>{
+ &quot;success&quot;: true,
+ &quot;client&quot;:
+     {
+     &quot;firstName&quot;: &quot;Justin&quot;
+     &quot;lastName&quot;: &quot;Barclay&quot;
+     &quot;address&quot;: &quot;116 St &amp; 85 Ave, Edmonton, AB T6G 2R3&quot;
+     &quot;phoneNumber&quot;: &quot;7805555555&quot;
+     &quot;email&quot;: &quot;fakejustin@ualberta.ca&quot;
+     &quot;licos&quot;: &quot;123456&quot;
+     &quot;socialAssistance&quot;: &quot;76543&quot;
+     &quot;pets&quot;: &quot;12404&quot;
+     &quot;alternativeContactFirstName&quot;: &quot;John&quot;
+     &quot;alternativeContactLastName&quot;: &quot;Wick&quot;
+     &quot;alternativeContactPhoneNumber&quot;: &quot;17809904957&quot;
+     &quot;alternativeContactAddress&quot;: &quot;1234 Fake St &amp; 96 Ave, Edmonton, AB T8G 2EF&quot;
+     &quot;notes&quot;: &quot;His dog is super bitey&quot;
+     &quot;alternativeContact2ndPhone&quot;: &quot;7804737373&quot;
+     }
+}</code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>success response</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>success</span><span class='label_end'>&quot;:</span><span class='kw'>true</span><span class='rbrace'>}</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>failure response</p>
+</div></p>
+      
+      <pre class="example code"><code>{
+ &quot;success&quot;: false,
+ &quot;errors&quot;: [....] // list of errors
+ }</code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 200 if success: true JSON</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 404 if client not found: false JSON</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 500 if error updating client: false JSON</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45</pre>
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/client_controller.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/client_controller.rb', line 146</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
   <span class='ivar'>@client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Client.html" title="Client (class)">Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -422,7 +800,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Mar 22 11:35:46 2017 by
+  Generated on Thu Mar 23 00:22:04 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.8 (ruby-2.4.0).
 </div>

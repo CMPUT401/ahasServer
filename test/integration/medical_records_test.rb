@@ -67,7 +67,6 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
       weight: 100,
       weightUnit: "kg",
       bcsVal: 18
-
     }
 
     @show_record = medical_records(:one)
