@@ -67,7 +67,7 @@ class ImagesTest < ActionDispatch::IntegrationTest
     post "/api/patients/#{@patient.id}/images", headers: authenticated_header, params: { image: @new_image }
 
     assert_response 201
-
+    assert_not @patient.portrait_id.nil?
     assert JSON.parse(response.body)['success']
   end
 end

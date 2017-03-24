@@ -9,7 +9,7 @@ class Clients_test < ActionDispatch::IntegrationTest
     @yamlClient = clients(:Justin)
   end
 
-  test "respond to successful POST" do
+  test "Client responds to successful POST" do
     post '/api/client',
       params: @client, headers: authenticated_header
     assert_response 201
