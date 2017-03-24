@@ -1,4 +1,4 @@
-# Controls access to the client instances stored in the API database
+# Controls access to the schedule instances stored in the API database
 #
 #
 # @author Mackenzie Bligh
@@ -39,7 +39,7 @@ class SchedulesController < ApplicationController
     end
   end
 
-  # Handles HTTP GET request sent to /api/client/{id}, and replies with specific client's info, or an error in a JSON.
+  # Handles HTTP GET request sent to /api/schedules/{id}, and replies with specific client's info, or an error in a JSON.
   # @example success response
   # @example failure response
   #   {
