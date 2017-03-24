@@ -37,14 +37,14 @@ class NotesTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test 'asking for a valid client' do
+  test 'asking for a valid note' do
     get "/api/patients/#{@medical_record.patient_id}/medical_records/#{@medical_record.id}/notes/#{@good.id}", headers: authenticated_header
 
     assert_response :success
     assert JSON.parse(response.body)['note']['id'] == @good.id
   end
 
-  test 'asking for an invalid client' do
+  test 'asking for an invalid note' do
     @bad_id = Note.last.id + 1
     get "/api/patients/#{@medical_record.patient_id}/medical_records/#{@medical_record.id}/notes/#{@bad_id}", headers: authenticated_header
 

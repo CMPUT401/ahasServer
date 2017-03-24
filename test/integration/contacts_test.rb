@@ -91,7 +91,7 @@ class ContactsTest < ActionDispatch::IntegrationTest
     assert_not JSON.parse(response.body)['success']
   end
 
-  test 'asking for a valid client id should return the correct patient' do
+  test 'asking for a valid contact id should return the correct patient' do
     good_id = @good.id
 
     get '/api/contacts/' + good_id.to_s, headers: authenticated_header
@@ -111,7 +111,7 @@ class ContactsTest < ActionDispatch::IntegrationTest
     assert JSON.parse(response.body)['success']
   end
 
-  test 'respond to successful PUT' do
+  test 'Contact respond to successful PUT' do
     id = @good.id.to_s
     put '/api/contacts/' + id, params: @contact , headers: authenticated_header
     assert_response :success
@@ -121,7 +121,7 @@ class ContactsTest < ActionDispatch::IntegrationTest
     assert_not_equal @good.to_json.to_s, response.body
   end
 
-  test 'respond to unsuccessful PUT because of bad ID' do
+  test 'Contact respond to unsuccessful PUT because of bad ID' do
     id = @good.id + 1
     put '/api/contacts/' + id.to_s, params: @contact , headers: authenticated_header
 
