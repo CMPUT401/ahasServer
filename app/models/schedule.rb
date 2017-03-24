@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: schedules
+#
+#  id                   :integer          not null, primary key
+#  clientId             :string
+#  reason               :string
+#  notes                :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  location             :string
+#  appointmentStartDate :integer
+#  appointmentEndDate   :integer
+#
+
 class Schedule < ApplicationRecord
   validates :appointmentStartDate, presence: true, allow_blank: false
   validates :appointmentEndDate, presence: true, allow_blank: false

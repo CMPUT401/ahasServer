@@ -1,4 +1,5 @@
 #!/bin/bash
+git clone git@github.com:CMPUT401/vettr_web.git
 cd ./vettr_web
 yarn install
 bower install

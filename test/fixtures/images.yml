@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: images
+#
+#  id           :integer          not null, primary key
+#  data         :text
+#  picture_type :string
+#  patient_id   :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  name         :string
+#  date         :integer
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 # This model initially had no columns defined. If you add columns to the

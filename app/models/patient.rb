@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: patients
+#
+#  id                  :integer          not null, primary key
+#  species             :string
+#  first_name          :string
+#  age                 :integer
+#  colour              :string
+#  tattoo              :integer
+#  microchip           :integer
+#  reproductive_status :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  client_id           :integer
+#  gender              :string
+#  last_name           :string
+#
+
 # The patient class is a record of identifying information for a clients
 # pet or animal.
 

@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.4.0'
 
+gem 'annotate',                '2.7.1'
 gem 'bcrypt',                  '3.1.11'
 gem 'bootstrap-sass',          '3.3.6'
 gem 'bootstrap-will_paginate', '0.0.10'

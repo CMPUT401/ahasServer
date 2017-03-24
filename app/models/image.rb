@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: images
+#
+#  id           :integer          not null, primary key
+#  data         :text
+#  picture_type :string
+#  patient_id   :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  name         :string
+#  date         :integer
+#
+
 class Image < ApplicationRecord
   belongs_to :patient
 
