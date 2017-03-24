@@ -7,7 +7,7 @@ class ClientController < PersonController
   before_action :authenticate_user
 
   # Handles HTTP POST request sent to /api/client.
-  # @example request body 
+  # @example request body
   #   {
   #    "success": true,
   #    "client":
@@ -159,14 +159,14 @@ class ClientController < PersonController
   #
   # @params [Array<Client>] an array containing all clients
   # @private
-  # @return a JSONified index of clients 
+  # @return a JSONified index of clients
   private
   def filter_client_keys(clients)
     clients.map do |client|
       { id: client.id, firstName: client.firstName, lastName: client.lastName}
     end
   end
-  
+
   # Filters a list of patients into the appropriate format for being sent as an index
   #
   # @params [Array<Patient>] an array containing all patients
