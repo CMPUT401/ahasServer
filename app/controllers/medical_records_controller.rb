@@ -242,7 +242,6 @@ class MedicalRecordsController < ApplicationController
   def update
     @record = MedicalRecord.find_by(id: params[:id])
     @medications = params[:medications]
-    #puts "record created today " + @record.created_at.today?.to_s
 
     # let's exit early
     unless @record.created_at.today?

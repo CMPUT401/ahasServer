@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class NotesController < ApplicationController
   before_action :check_patient_medical_relation, :authenticate_user
 
