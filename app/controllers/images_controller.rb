@@ -26,7 +26,7 @@ class ImagesController < ApplicationController
   #   { 
   #     "success": true
   #   }
-  # @example Failure
+  # @example failure
   #   {
   #    "success": false,
   #    "errors": [....] // list of errors
@@ -41,6 +41,10 @@ class ImagesController < ApplicationController
       return
     end
     if image.save
+      if image.picture_type == 'portrait'
+        patient = image.patient
+        patient.portrait_id = image.id
+      end
       render status: 201, json: { success: true }
     else
       render status: :error, json: { success: false, errors: image.errors.full_messages }
