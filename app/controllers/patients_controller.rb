@@ -22,9 +22,11 @@ class PatientsController < ApplicationController
     @medications = Medication.where(patient_id: params[:id])
 
     @medical_records.each do |medRec|
-      @note = Note.where(medical_record_id: medRec.id, is_alert: true)
-      if @note != nil
-        @generalAlerts.append(@note)
+      @notes = Note.where(medical_record_id: medRec.id, is_alert: true)
+      @notes.each do |note| 
+        if note != nil
+          @generalAlerts.append(note)
+        end
       end
     end
 

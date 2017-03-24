@@ -62,6 +62,7 @@ class PatientsTest < ActionDispatch::IntegrationTest
     @medication2.save
     get '/api/patients/' + good_id.to_s, headers: authenticated_header
 
+    puts response.body
     assert_response :success
     assert JSON.parse(response.body)['success']
     assert JSON.parse(response.body)['generalAlerts'].count > 0
