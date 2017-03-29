@@ -244,7 +244,6 @@ class MedicalRecordsController < ApplicationController
     @medications = params[:medications]
 
     # let's exit early
-    puts
     unless @record.created_at.today?
       render status: :error, json: { success: false, error: "Medical Record is not editable after 1 day"}
       return

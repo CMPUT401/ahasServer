@@ -4,10 +4,11 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-Justin:
+thing:
   name: Justin Barclay
   email: admin@ahas.dev
   password_digest: <%= User.digest('bizbazboo') %>
-#
+  type: Admin
 two: {}
 # column: value
+

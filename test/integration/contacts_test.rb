@@ -14,7 +14,6 @@ class ContactsTest < ActionDispatch::IntegrationTest
         email: 'valid@example.pizza',
         contact_type: 'Veterinarian'
         } }
-
   end
 
   test 'should be able to post a valid, new contact' do

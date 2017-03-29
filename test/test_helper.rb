@@ -12,4 +12,10 @@ class ActiveSupport::TestCase
 
     { "Authorization": "Bearer #{token}" }
   end
+
+  def authenticated_admin_header
+    token = Knock::AuthToken.new(payload: { sub: admins(:thing).id }).token
+    
+    { "Authorization": "Bearer #{token}" }
+  end
 end
