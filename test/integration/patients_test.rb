@@ -5,6 +5,11 @@ class PatientsTest < ActionDispatch::IntegrationTest
     @client = clients(:Justin)
     @client.save
     @patient = patients(:one)
+    @patient2 = {patient: {client_id: 443855961, species:"Cat",
+                           first_name:"Chairman Meow",last_name:"Barclay",
+                           colour:"Red",reproductive_status:"Spade",
+                           tattoo:197265, age:17,microchip: 0,
+                           gender:"Male"}}
     @patient.save
     @medication = medications(:one)
     @medication2 = medications(:two)
@@ -89,7 +94,31 @@ class PatientsTest < ActionDispatch::IntegrationTest
     assert JSON.parse(response.body)['medicationAlerts'].count == 1
   end
 
+  test 'respond to successful PUT' do
+    id = @patient.id.to_s
+    put '/api/patients/' + id, params: @patient2, headers: authenticated_header
+    assert_response :success
+    assert JSON.parse(response.body)['success']
+  end
 
+ test 'respond to unsuccessful PUT because of bad ID' do
+   id = @patient.id + 1
+   put '/api/patients/' + id.to_s, params: @patient2, headers: authenticated_header
+   assert_response 404
+ end
+
+  test 'respond to unsuccessful PUT because of bad input' do
+    id = @patient.id.to_s
+    put '/api/patients/'+ id,
+    params: {patient: {client_id: 443855961, species:"Cat",
+                           first_name:"Meow",last_name:"Barclay",
+                           colour:"Red",reproductive_status:"Spade",
+                           tattoo:197265, age:17,microchip: "ABABA",
+                           gender:"Male"}}, headers: authenticated_header
+
+      assert_response :error
+      assert JSON.parse(response.body)['errors'].count > 0
+  end
   def filtered_properly(patients)
     patients.each do |patient|
       unless ['first_name','last_name', 'id'].uniq.sort == patient.keys.uniq.sort
