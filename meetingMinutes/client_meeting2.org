@@ -1,0 +1,66 @@
+* Intro
+- App will be on a web server
+* What we are doing
+- CRUD
+- Contact management
+* Considerations
+- You would need some kind of data connection
+    * Data requirement will be small because it's mostly passing text
+- Using a touch input tablet right now. No writing recognition
+- Hoping to use a Lenovo Mix 320 tablet
+- Doesn't use the tablet in either portrait or landscape
+    * Switches between the two
+* Demo
+- We have space for microchip and tattoo
+- Create client
+      - Mandatory client information:
+          * Wants a "How did you hear about us field"
+            + Will email us
+            + Vet referral
+            + Ehs referral
+            + Televison/radio
+            + Newspaper
+            + Friend/family
+            + Pet food bank
+            + Tails of help
+            + Saw van
+            + Website
+            + Facebook/twitter
+      - Alternative contact doesn't need to be required
+      - Phones and email shouldn't be mandatory
+- Create patient:
+    - Will have to turn off requirements for last 2 fields
+    - Sex instead of gender
+    - Want sex and reproductive status combined together
+        - male
+        - male neutered
+        - Female
+        - Female spayed
+        - Unknown
+    - Wants birth date instead of age
+        - Wants age to be dynamic
+    - Make fields drop down menus
+- Medical records:
+    - Wants option to select check all
+        - BAR and all Ns
+    - Switch bottom buttons to radio buttons
+    - Want to be able to set a date for vaccine follow up
+    - Medications and vaccines will need a check up date
+    - Wants a column for medications and vaccines to state what date to
+      recheck them → wants an indicator to recheck next date
+    - We need to add weight to medical record
+    - Wants body conditioning score (9 scale) → can be a drop down
+        + 5 out of 9 is ideal
+- Contacts:
+    - They want a 4th field: techs
+    - Vets, volunteers, laboratories, and techs
+- All edits are locked out at midnight
+- Should be able to edit patient infos
+* Admin
+- Only admin should be able to create contacts
+- Normal users will be able to create clients and patients
+- One account per user
+- Pretty much no data can be deleted
+* Future support
+- Code will be documented
+- Let her know when presentation is, and when our next meeting is

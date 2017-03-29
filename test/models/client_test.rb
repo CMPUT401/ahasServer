@@ -1,3 +1,28 @@
+# == Schema Information
+#
+# Table name: clients
+#
+#  id                            :integer          not null, primary key
+#  firstName                     :string
+#  address                       :string
+#  phoneNumber                   :string
+#  email                         :string
+#  licos                         :float
+#  aish                          :float
+#  socialAssistance              :float
+#  pets                          :string
+#  created_at                    :datetime         not null
+#  updated_at                    :datetime         not null
+#  alternativeContactEmail       :string
+#  lastName                      :string
+#  alternativeContactLastName    :string
+#  alternativeContactFirstName   :string
+#  alternativeContactPhoneNumber :string
+#  alternativeContactAddress     :string
+#  notes                         :string
+#  alternativeContact2ndPhone    :string
+#
+
 require 'test_helper'
 
 class ClientTest < ActiveSupport::TestCase

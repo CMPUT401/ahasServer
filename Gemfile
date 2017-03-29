@@ -1,10 +1,12 @@
 source 'https://rubygems.org'
 ruby '2.4.0'
 
+gem 'annotate',                '2.7.1'
 gem 'bcrypt',                  '3.1.11'
 gem 'bootstrap-sass',          '3.3.6'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'carrierwave',             '0.11.2'
+# gem 'ember-cli-rails',         '0.8.4'
 gem 'faker',                   '1.6.6'
 gem 'fog',                     '1.38.0'
 gem 'jbuilder',                '2.4.1'
@@ -27,6 +29,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'yard'
   gem 'listen',                '3.0.8'
   gem 'spring',                '1.7.2'
   gem 'spring-watcher-listen', '2.0.0'
@@ -42,3 +45,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'rails_12factor', group: [:staging, :production]

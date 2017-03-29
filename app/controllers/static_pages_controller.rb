@@ -1,9 +1,7 @@
 class StaticPagesController < ApplicationController
-  skip_before_action :authenticate_user
-  
+  include ActionView::Rendering
   def home
+    render 'index.html'
   end
 
-  def help
-  end
 end

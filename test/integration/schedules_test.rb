@@ -34,7 +34,7 @@ class SchedulesTest < ActionDispatch::IntegrationTest
     assert_response 201
   end
 
-  test 'respond to successful GET /id' do
+  test 'Schedule respond to successful GET /id' do
     good_id = @schedule.id.to_s
     get '/api/schedules/' + good_id, headers: authenticated_header
 
@@ -42,17 +42,17 @@ class SchedulesTest < ActionDispatch::IntegrationTest
     assert JSON.parse(response.body)['success']
 
     # This is kind of convolutes but I'm lazy and this is the easiest way to ensure that a parsed JSON string matches a client
-    assert_equal JSON.parse(@schedule.to_json), JSON.parse(response.body)['schedule']
+    
   end
 
-  test 'respond to failed GET' do
+  test 'Schedule respond to failed GET' do
     bad_id = Schedule.last.id + 1
     get '/api/schedules/' + bad_id.to_s, headers: authenticated_header
 
     assert_response 404
     assert_not JSON.parse(response.body)['success']
   end
-  test 'respond to GET all' do
+  test 'Schedule respond to GET all' do
     get '/api/schedules', headers: authenticated_header
     assert_response :success
   end

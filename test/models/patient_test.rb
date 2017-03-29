@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: patients
+#
+#  id                  :integer          not null, primary key
+#  species             :string
+#  first_name          :string
+#  age                 :integer
+#  colour              :string
+#  tattoo              :integer
+#  microchip           :integer
+#  reproductive_status :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  client_id           :integer
+#  gender              :string
+#  last_name           :string
+#
+
 require 'test_helper'
 
 class PatientTest < ActiveSupport::TestCase
@@ -16,8 +35,13 @@ class PatientTest < ActiveSupport::TestCase
     assert_not @two.valid?
   end
 
-  test 'name must be present' do
-    @one.name = nil
+  test 'first name must be present' do
+    @one.first_name = ''
+    assert_not @one.valid?
+  end
+
+  test 'last name must be present' do
+    @one.last_name = nil
     assert_not @one.valid?
   end
 

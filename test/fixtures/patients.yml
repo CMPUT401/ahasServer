@@ -1,7 +1,27 @@
+# == Schema Information
+#
+# Table name: patients
+#
+#  id                  :integer          not null, primary key
+#  species             :string
+#  first_name          :string
+#  age                 :integer
+#  colour              :string
+#  tattoo              :integer
+#  microchip           :integer
+#  reproductive_status :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  client_id           :integer
+#  gender              :string
+#  last_name           :string
+#
+
 one:
   client: Justin
   species: Cat
-  name: Chairman Meow
+  first_name: Chairman Meow
+  last_name: Barclay
   age: 17
   gender: Male
   colour: Red
@@ -11,7 +31,8 @@ one:
 
 two:
   species: 
-  name: 
+  first_name:
+  last_name:
   age: Thing
   colour: 
   tattoo: Not a number

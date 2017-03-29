@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170309180741) do
+ActiveRecord::Schema.define(version: 20170324060335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,17 @@ ActiveRecord::Schema.define(version: 20170309180741) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "images", force: :cascade do |t|
+    t.text     "data"
+    t.string   "picture_type"
+    t.integer  "patient_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "name"
+    t.integer  "date"
+    t.index ["patient_id"], name: "index_images_on_patient_id", using: :btree
+  end
+
   create_table "medical_records", force: :cascade do |t|
     t.float    "temperature"
     t.text     "exam_notes"
@@ -59,7 +70,7 @@ ActiveRecord::Schema.define(version: 20170309180741) do
     t.string   "glands"
     t.string   "skin"
     t.string   "abdomen"
-    t.string   "urogential"
+    t.string   "urogenital"
     t.string   "nervousSystem"
     t.string   "musculoskeletal"
     t.string   "cardiovascular"
@@ -87,8 +98,8 @@ ActiveRecord::Schema.define(version: 20170309180741) do
     t.boolean  "skinA"
     t.boolean  "abdomenN"
     t.boolean  "abdomenA"
-    t.boolean  "urogentialN"
-    t.boolean  "urogentialA"
+    t.boolean  "urogenitalN"
+    t.boolean  "urogenitalA"
     t.boolean  "nervousSystemN"
     t.boolean  "nervousSystemA"
     t.boolean  "musculoskeletalN"
@@ -97,12 +108,34 @@ ActiveRecord::Schema.define(version: 20170309180741) do
     t.boolean  "cardiovascularA"
     t.boolean  "respiratoryN"
     t.boolean  "respiratoryA"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.integer  "patient_id",        null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "patient_id",             null: false
     t.string   "summary"
     t.text     "signature"
-    t.datetime "date"
+    t.integer  "date"
+    t.text     "follow_up_instructions"
+    t.boolean  "mcsN"
+    t.boolean  "mcsMild"
+    t.boolean  "mcsMod"
+    t.boolean  "mcsSevere"
+    t.integer  "weight"
+    t.string   "weightUnit"
+    t.integer  "bcsVal"
+    t.boolean  "oralA"
+    t.boolean  "oralN"
+  end
+
+  create_table "medications", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "medical_record_id"
+    t.integer  "patient_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "reminder"
+    t.string   "med_type"
+    t.index ["medical_record_id"], name: "index_medications_on_medical_record_id", using: :btree
+    t.index ["patient_id"], name: "index_medications_on_patient_id", using: :btree
   end
 
   create_table "notes", force: :cascade do |t|
@@ -111,12 +144,13 @@ ActiveRecord::Schema.define(version: 20170309180741) do
     t.integer  "medical_record_id", null: false
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.boolean  "is_alert"
     t.index ["medical_record_id"], name: "index_notes_on_medical_record_id", using: :btree
   end
 
   create_table "patients", force: :cascade do |t|
     t.string   "species"
-    t.string   "name"
+    t.string   "first_name"
     t.integer  "age"
     t.string   "colour"
     t.integer  "tattoo"
@@ -126,18 +160,20 @@ ActiveRecord::Schema.define(version: 20170309180741) do
     t.datetime "updated_at",          null: false
     t.integer  "client_id"
     t.string   "gender"
+    t.string   "last_name"
+    t.integer  "portrait_id"
     t.index ["client_id"], name: "index_patients_on_client_id", using: :btree
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.datetime "appointmentStartDate"
     t.string   "clientId"
     t.string   "reason"
     t.string   "notes"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.string   "location"
-    t.datetime "appointmentEndDate"
+    t.integer  "appointmentStartDate"
+    t.integer  "appointmentEndDate"
   end
 
   create_table "users", force: :cascade do |t|

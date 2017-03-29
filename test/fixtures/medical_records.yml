@@ -1,3 +1,73 @@
+# == Schema Information
+#
+# Table name: medical_records
+#
+#  id                     :integer          not null, primary key
+#  temperature            :float
+#  exam_notes             :text
+#  medications            :text
+#  eyes                   :string
+#  oral                   :string
+#  ears                   :string
+#  glands                 :string
+#  skin                   :string
+#  abdomen                :string
+#  urogenital             :string
+#  nervousSystem          :string
+#  musculoskeletal        :string
+#  cardiovascular         :string
+#  heart_rate             :integer
+#  respiratory            :string
+#  respiratory_rate       :integer
+#  attitudeBAR            :boolean
+#  attitudeQAR            :boolean
+#  attitudeDepressed      :boolean
+#  eyesN                  :boolean
+#  eyesA                  :boolean
+#  mmN                    :boolean
+#  mmPale                 :boolean
+#  mmJaundiced            :boolean
+#  mmTacky                :boolean
+#  earsN                  :boolean
+#  earsA                  :boolean
+#  earsEarMites           :boolean
+#  earsAU                 :boolean
+#  earsAD                 :boolean
+#  earsAS                 :boolean
+#  glandsN                :boolean
+#  glandsA                :boolean
+#  skinN                  :boolean
+#  skinA                  :boolean
+#  abdomenN               :boolean
+#  abdomenA               :boolean
+#  urogenitalN            :boolean
+#  urogenitalA            :boolean
+#  nervousSystemN         :boolean
+#  nervousSystemA         :boolean
+#  musculoskeletalN       :boolean
+#  musculoskeletalA       :boolean
+#  cardiovascularN        :boolean
+#  cardiovascularA        :boolean
+#  respiratoryN           :boolean
+#  respiratoryA           :boolean
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  patient_id             :integer          not null
+#  summary                :string
+#  signature              :text
+#  date                   :integer
+#  follow_up_instructions :text
+#  mcsN                   :boolean
+#  mcsMild                :boolean
+#  mcsMod                 :boolean
+#  mcsSevere              :boolean
+#  weight                 :integer
+#  weightUnit             :string
+#  bcsVal                 :integer
+#  oralA                  :boolean
+#  oralN                  :boolean
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 # This model initially had no columns defined. If you add columns to the
@@ -8,14 +78,13 @@ one:
   patient: one
   temperature: 38.5
   exam_notes: No new notes
-  medications: This might need to be removed
   eyes: All good
   oral: Speaks wonderfully
   ears: Little bit deaf
   glands: normal
   skin: Covered in fur
   abdomen: great abs
-  urogential: normal
+  urogenital: normal
   nervousSystem: Like woody allen
   musculoskeletal: Titanium
   cardiovascular: Like molasses
@@ -43,8 +112,8 @@ one:
   skinA: True
   abdomenN: True
   abdomenA: True
-  urogentialN: True
-  urogentialA: True
+  urogenitalN: True
+  urogenitalA: True
   nervousSystemN: True
   nervousSystemA: True
   musculoskeletalN: True
@@ -52,4 +121,73 @@ one:
   cardiovascularN: True
   cardiovascularA: True
   respiratoryN: True
-  respiratoryA: True  
+  respiratoryA: True
+  oralA: true
+  oralN: true
+  mcsMod: true
+  mcsN: true
+  mcsMild: true
+  mcsSevere: true
+  weight: 18
+  weightUnit: kg
+  bcsVal: 18
+  summary: "No news is bad news"
+
+two:
+  patient: one
+  temperature: 38.5
+  exam_notes: No new notes
+  eyes: All good
+  oral: Speaks wonderfully
+  ears: Little bit deaf
+  glands: normal
+  skin: Covered in fur
+  abdomen: great abs
+  urogenital: normal
+  nervousSystem: Like woody allen
+  musculoskeletal: Titanium
+  cardiovascular: Like molasses
+  heart_rate: 88
+  respiratory: good
+  respiratory_rate: 31
+  attitudeBAR: True
+  attitudeQAR: True
+  attitudeDepressed: True
+  eyesN: True
+  eyesA: True
+  mmN: True
+  mmPale: True
+  mmJaundiced: True
+  mmTacky: True
+  earsN: True
+  earsA: True
+  earsEarMites: True
+  earsAU: True
+  earsAD: True
+  earsAS: True
+  glandsN: True
+  glandsA: True
+  skinN: True
+  skinA: True
+  abdomenN: True
+  abdomenA: True
+  urogenitalN: True
+  urogenitalA: True
+  nervousSystemN: True
+  nervousSystemA: True
+  musculoskeletalN: True
+  musculoskeletalA: True
+  cardiovascularN: True
+  cardiovascularA: True
+  respiratoryN: True
+  respiratoryA: True
+  oralA: true
+  oralN: true
+  mcsMod: true
+  mcsN: true
+  mcsMild: true
+  mcsSevere: true
+  weight: 18
+  weightUnit: kg
+  bcsVal: 18
+  summary: "No news is good news"

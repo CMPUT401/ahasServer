@@ -1,0 +1,7 @@
+New User stories:
+
+Admin:
+1. Add new users
+2. Delete users
+3. Add volunteer
+4. Delete volunteer

@@ -6,12 +6,16 @@ class PatientsTest < ActionDispatch::IntegrationTest
     @client.save
     @patient = patients(:one)
     @patient.save
+    @medication = medications(:one)
+    @medication2 = medications(:two)
+    @show_record = medical_records(:one)
   end
 
   test 'posting invalid info to /api/patients' do
     assert_no_difference 'Patient.count' do
       post '/api/patients', headers: authenticated_header,
-           params: { patient: { name: '',
+           params: { patient: { first_name: '',
+                                last_name: '',
                                 gender: '',
                                 colour: '',
                                 tattoo: 'hi',
@@ -25,7 +29,8 @@ class PatientsTest < ActionDispatch::IntegrationTest
 
   test 'posting a valid patient' do
     post '/api/patients', headers: authenticated_header,
-                          params: { patient: { name: 'Chairman Meow',
+                          params: { patient: { first_name: 'Chairman Meow',
+                                               last_name: 'Barclay',
                                                species: 'Cat',
                                                gender: 'Female',
                                                colour: 'Red',
@@ -50,8 +55,12 @@ class PatientsTest < ActionDispatch::IntegrationTest
   test 'asking for a valid patient id should return the correct patient' do
     good_id = @patient.id
 
-    get '/api/patients/' + good_id.to_s, headers: authenticated_header
+    @medication.reminder = (Date.today + 1.months).to_time.to_i
+    @medication2.reminder =  (Date.today + 4.months).to_time.to_i
 
+    @medication.save
+    @medication2.save
+    get '/api/patients/' + good_id.to_s, headers: authenticated_header
     assert_response :success
     assert JSON.parse(response.body)['success']
   end
@@ -65,11 +74,28 @@ class PatientsTest < ActionDispatch::IntegrationTest
     assert JSON.parse(response.body)['success']
   end
 
+  test 'a patient can have alerts' do
+    good_id = @patient.id
+
+    @medication.reminder = (Date.today + 1.months).to_time.to_i
+    @medication2.reminder =  (Date.today + 4.months).to_time.to_i
+
+    @medication.save
+    @medication2.save
+    get '/api/patients/' + good_id.to_s, headers: authenticated_header
+    assert_response :success
+    assert JSON.parse(response.body)['success']
+    assert JSON.parse(response.body)['generalAlerts'].count > 0
+    assert JSON.parse(response.body)['medicationAlerts'].count == 1
+  end
+
+
   def filtered_properly(patients)
     patients.each do |patient|
-      unless ['name', 'id'].uniq.sort == patient.keys.uniq.sort
+      unless ['first_name','last_name', 'id'].uniq.sort == patient.keys.uniq.sort
         return false
       end
     end
   end
+
 end
