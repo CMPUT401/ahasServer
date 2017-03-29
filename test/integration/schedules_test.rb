@@ -6,6 +6,8 @@ class SchedulesTest < ActionDispatch::IntegrationTest
     @client.save
     @schedule = schedules(:one)
     @schedule.save
+    @schedule2 = schedules(:two)
+    @schedule2.save
     @scheduleBody = {"schedule":{clientId:"1",
                                  reason:"foaming at mouth",
                                  notes:"really bitey",
@@ -89,4 +91,18 @@ class SchedulesTest < ActionDispatch::IntegrationTest
     assert_response :error
     assert JSON.parse(response.body)['errors'].count > 0
   end
+
+  test 'respond to successful DELETE' do
+    id = @schedule.id.to_s
+    delete '/api/schedules/' + id, params: @scheduleBody, headers: authenticated_header
+    assert_response :success
+    assert JSON.parse(response.body)['success']
+  end
+
+  test 'respond to DELETE of bad ID' do
+    id = @schedule2.id + 1
+    delete '/api/schedules/' + id.to_s, params: @scheduleBody, headers: authenticated_header
+    assert_response 404
+  end
+
 end
