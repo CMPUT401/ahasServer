@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   # controllers
   scope :api do
     constraints format: :json do
-      get          'users',      to: 'users#index'
-      post         'signup',     to: 'users#create'
-      delete       'users/:id',  to: 'users#delete'    
+      get          'users',      to: 'admins#index'
+      post         'signup',     to: 'admins#create'
+      delete       'users/:id',  to: 'admins#delete'    
 
       post         'user_token', to: 'user_token#create'
       post         'login',      to: 'user_token#create'
