@@ -36,7 +36,7 @@ class User < ApplicationRecord
     self.find payload["sub"]
   end
 
-  def self.to_token_payload
-    { sub: self.id, role: self.type }
+  def to_token_payload
+    { sub: id, role: type }
   end
 end
