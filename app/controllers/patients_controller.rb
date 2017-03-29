@@ -21,8 +21,6 @@ class PatientsController < ApplicationController
     else
       render status: 404, json: {success: false, error: 'Patient not found'}
     end
-    
-    
   end
 
   def index

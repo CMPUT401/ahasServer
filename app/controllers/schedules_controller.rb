@@ -1,6 +1,6 @@
-class SchedulesController < ApplicationController 
-  
-  def create 
+class SchedulesController < ApplicationController
+
+  def create
     schedule = schedule_params
     # extract the schedule id from the JSON to a Client object
     scheduleStartDate = schedule[:appointmentStartDate].to_i
@@ -13,7 +13,7 @@ class SchedulesController < ApplicationController
     if @schedule.save
       render status: 201, json: { success: true }
     else
-     
+
       render status: :error, json: { success: false, errors: @schedule.errors.full_messages }
     end
   end
@@ -30,10 +30,10 @@ class SchedulesController < ApplicationController
   def index
     schedules = Schedule.all
     schedule_list = filter_schedule_keys schedules
-    
+
     render json: { success: true, schedules: schedule_list}
   end
-  
+
   private
   def filter_schedule_keys(schedules)
     schedules.map do |schedule|
