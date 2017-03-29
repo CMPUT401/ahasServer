@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: contacts
+#
+#  id           :integer          not null, primary key
+#  first_name   :string
+#  last_name    :string
+#  phone_number :string
+#  fax_number   :string
+#  email        :string
+#  address      :string
+#  contact_type :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
 require 'test_helper'
 
 class ContactTest < ActiveSupport::TestCase

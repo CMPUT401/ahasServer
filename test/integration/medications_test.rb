@@ -3,10 +3,10 @@ require 'test_helper'
 class MedicationsTest < ActionDispatch::IntegrationTest
   def setup
     @patient = patients(:one)
-    @medical_record = medical_records(:one)
+    @medical_record1 = medical_records(:one)
     @medication = medications(:one)
     @medication.patient_id = @patient.id
-    @medication.medical_record_id = @medical_record.id
+    @medication.medical_record_id = @medical_record1.id
     @medication.save
 
     @medication1 = { patient_id: @patient.id, name: 'Hydrogen Dioxide', med_type: "Medicine" }
@@ -100,13 +100,61 @@ class MedicationsTest < ActionDispatch::IntegrationTest
     medications = { '0' => @medication1, '1' => @medication2, '2' => @medication2 }
     
     post "/api/patients/#{@patient.id}/medical_records", headers: authenticated_header,
-                                                         params: {
-                                                           medical_record: @medical_record,
-                                                           medications: medications
-                                                         }
+         params: {
+           medical_record: @medical_record,
+           medications: medications
+         }
     after = Medication.count
     assert after > before
     assert_response 201
     assert JSON.parse(response.body)['success']
+  end
+
+  test 'putting to medical records, with medications as one of the parameters succeeds' do
+    old_id = @medication.id  
+    old_name = @medication.name
+    @medication.name = 'Hello Hello'
+    medications = { '0' => @medication.attributes }
+    put "/api/patients/#{@patient.id}/medical_records/#{@medical_record1.id}", headers: authenticated_header,
+        params: {
+          medical_record: @medical_record,
+          medications: medications
+        }
+    saved_med = Medication.find(old_id)
+    assert old_name != saved_med.name
+    assert_response 201
+    assert JSON.parse(response.body)['success']
+  end
+
+  test 'putting to medical records, with a new medications as one of the parameters succeeds' do
+    before = Medication.count
+    medications = { '0' => @medication1 }
+    put "/api/patients/#{@patient.id}/medical_records/#{@medical_record1.id}", headers: authenticated_header,
+        params: {
+          medical_record: @medical_record1.attributes,
+          medications: medications
+        }
+
+    after = Medication.count
+    assert after > before
+    assert_response 201
+    assert JSON.parse(response.body)['success']
+  end
+
+  test 'putting to medical records, with a new medication and an old medical fails' do
+    before = Medication.count
+    medications = { '0' => @medication1 }
+    @medical_record1.created_at = 1.day.ago
+    @medical_record1.save
+    put "/api/patients/#{@patient.id}/medical_records/#{@medical_record1.id}", headers: authenticated_header,
+        params: {
+          medical_record: @medical_record1.attributes,
+          medications: medications
+        }
+
+    after = Medication.count
+    assert after == before
+    assert_response :error
+    assert_not JSON.parse(response.body)['success']
   end
 end

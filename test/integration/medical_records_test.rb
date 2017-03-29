@@ -8,6 +8,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
   def setup
     @patient_id = patients(:one).id.to_s
     @medication = medications(:one)
+    @medication2 = medications(:two)
     @medication.medical_record_id = ''
     @medical_record = {
       patient_id: @patient_id,
@@ -66,7 +67,6 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
       weight: 100,
       weightUnit: "kg",
       bcsVal: 18
-
     }
 
     @show_record = medical_records(:one)
@@ -118,14 +118,6 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
     assert JSON.parse(response.body)['medical_records'].length > 0
   end
 
-  test 'post medical record with json' do
-    @medical_record['medicine'] = @medicine.to_json
-    post "/api/patients/#{@patient_id}/medical_records", headers: authenticated_header, params: { medical_record: @medical_record }
-
-    assert JSON.parse(response.body)['success']
-    assert_response :created
-  end
-
   test 'PUT a current medical record with invalid input' do
     id = @show_record.id.to_s
     @medical_record['heart_rate'] = "potato"
@@ -151,12 +143,20 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
 
     put "/api/patients/#{@patient_id.to_s}/medical_records/" + id,
     headers: authenticated_header,
-    params: {medical_record: @medical_record}
+    params: { medical_record: @medical_record }
 
-    assert JSON.parse(response.body)['success']
-    assert_response :created
+    assert_response :success
 
-   get "/api/patients/#{@patient_id.to_s}/medical_records/" + id, headers: authenticated_header
+  end
+
+  test 'PUT a current medical record with medication that is not in database' do
+    id = @show_record.id.to_s
+    
+    put "/api/patients/#{@patient_id.to_s}/medical_records/" + id,
+    headers: authenticated_header,
+    params: { medical_record: @show_record.attributes}
+    assert_response :success
+
   end
 
   test 'PUT out dated medical record fails' do
@@ -177,8 +177,7 @@ class MedicalRecordsTest < ActionDispatch::IntegrationTest
     headers: authenticated_header,
     params: {medical_record: @medical_record}
 
-    assert JSON.parse(response.body)['success']
-    assert_response :created
+    assert_response :success
   end
 
   test 'patch out dated medical record fails' do

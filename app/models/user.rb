@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  name            :string
+#  email           :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string
+#
+
 class User < ApplicationRecord
   # Ensure that the users email is unique by making all emails lowercase
   before_save { email.downcase! }

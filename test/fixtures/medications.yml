@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: medications
+#
+#  id                :integer          not null, primary key
+#  name              :string
+#  medical_record_id :integer
+#  patient_id        :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  reminder          :integer
+#  med_type          :string
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 # This model initially had no columns defined. If you add columns to the
@@ -9,6 +23,7 @@ one:
   medical_record: one
   med_type: Medicine
   name: Hydrogen Dioxide
+  reminder: <%(Date.today + 1.months).to_time.to_i %>
 
 two:
   patient: one

@@ -39,10 +39,13 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    annotate (2.7.1)
+      activerecord (>= 3.2, < 6.0)
+      rake (>= 10.4, < 12.0)
     ansi (1.5.0)
     arel (7.1.4)
     ast (2.3.0)
-    autoprefixer-rails (6.7.2)
+    autoprefixer-rails (6.7.7.1)
       execjs
     bcrypt (3.1.11)
     bootstrap-sass (3.3.6)
@@ -59,14 +62,14 @@ GEM
       mime-types (>= 1.16)
       mimemagic (>= 0.3.0)
     coderay (1.1.1)
-    concurrent-ruby (1.0.4)
+    concurrent-ruby (1.0.5)
     debug_inspector (0.0.2)
     erubis (2.7.0)
-    excon (0.54.0)
+    excon (0.55.0)
     execjs (2.7.0)
     faker (1.6.6)
       i18n (~> 0.5)
-    ffi (1.9.17)
+    ffi (1.9.18)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
     fog (1.38.0)
@@ -106,7 +109,7 @@ GEM
     fog-atmos (0.1.0)
       fog-core
       fog-xml
-    fog-aws (1.2.0)
+    fog-aws (1.2.1)
       fog-core (~> 1.38)
       fog-json (~> 1.0)
       fog-xml (~> 0.1)
@@ -140,7 +143,7 @@ GEM
       multi_json (~> 1.10)
     fog-local (0.3.1)
       fog-core (~> 1.27)
-    fog-openstack (0.1.19)
+    fog-openstack (0.1.20)
       fog-core (>= 1.40)
       fog-json (>= 1.0)
       ipaddress (>= 0.8)
@@ -185,10 +188,10 @@ GEM
     fog-voxel (0.1.0)
       fog-core
       fog-xml
-    fog-vsphere (1.7.0)
+    fog-vsphere (1.8.0)
       fog-core
       rbvmomi (~> 1.9)
-    fog-xenserver (0.2.3)
+    fog-xenserver (0.3.0)
       fog-core
       fog-xml
     fog-xml (0.1.2)
@@ -210,7 +213,7 @@ GEM
     guard-minitest (2.4.4)
       guard-compat (~> 1.2)
       minitest (>= 3.0)
-    i18n (0.8.0)
+    i18n (0.8.1)
     inflecto (0.0.2)
     ipaddress (0.8.3)
     jbuilder (2.4.1)
@@ -250,7 +253,7 @@ GEM
     multi_json (1.12.1)
     nenv (0.3.0)
     nio4r (1.2.1)
-    nokogiri (1.7.0.1)
+    nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
@@ -304,12 +307,12 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rainbow (2.2.1)
-    rake (12.0.0)
+    rake (11.3.0)
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
-    rbvmomi (1.9.4)
-      builder (~> 3.2)
+    rbvmomi (1.10.0)
+      builder (~> 3.0)
       json (>= 1.8)
       nokogiri (~> 1.5)
       trollop (~> 2.1)
@@ -341,8 +344,8 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     thor (0.19.4)
-    thread_safe (0.3.5)
-    tilt (2.0.6)
+    thread_safe (0.3.6)
+    tilt (2.0.7)
     trollop (2.1.2)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
@@ -361,11 +364,13 @@ GEM
     websocket-extensions (0.1.2)
     will_paginate (3.1.0)
     xml-simple (1.1.5)
+    yard (0.9.8)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate (= 2.7.1)
   bcrypt (= 3.1.11)
   bootstrap-sass (= 3.3.6)
   bootstrap-will_paginate (= 0.0.10)
@@ -397,6 +402,7 @@ DEPENDENCIES
   uglifier (= 3.0.0)
   web-console (= 3.1.1)
   will_paginate (= 3.1.0)
+  yard
 
 RUBY VERSION
    ruby 2.4.0p0

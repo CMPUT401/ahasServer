@@ -1,3 +1,73 @@
+# == Schema Information
+#
+# Table name: medical_records
+#
+#  id                     :integer          not null, primary key
+#  temperature            :float
+#  exam_notes             :text
+#  medications            :text
+#  eyes                   :string
+#  oral                   :string
+#  ears                   :string
+#  glands                 :string
+#  skin                   :string
+#  abdomen                :string
+#  urogenital             :string
+#  nervousSystem          :string
+#  musculoskeletal        :string
+#  cardiovascular         :string
+#  heart_rate             :integer
+#  respiratory            :string
+#  respiratory_rate       :integer
+#  attitudeBAR            :boolean
+#  attitudeQAR            :boolean
+#  attitudeDepressed      :boolean
+#  eyesN                  :boolean
+#  eyesA                  :boolean
+#  mmN                    :boolean
+#  mmPale                 :boolean
+#  mmJaundiced            :boolean
+#  mmTacky                :boolean
+#  earsN                  :boolean
+#  earsA                  :boolean
+#  earsEarMites           :boolean
+#  earsAU                 :boolean
+#  earsAD                 :boolean
+#  earsAS                 :boolean
+#  glandsN                :boolean
+#  glandsA                :boolean
+#  skinN                  :boolean
+#  skinA                  :boolean
+#  abdomenN               :boolean
+#  abdomenA               :boolean
+#  urogenitalN            :boolean
+#  urogenitalA            :boolean
+#  nervousSystemN         :boolean
+#  nervousSystemA         :boolean
+#  musculoskeletalN       :boolean
+#  musculoskeletalA       :boolean
+#  cardiovascularN        :boolean
+#  cardiovascularA        :boolean
+#  respiratoryN           :boolean
+#  respiratoryA           :boolean
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  patient_id             :integer          not null
+#  summary                :string
+#  signature              :text
+#  date                   :integer
+#  follow_up_instructions :text
+#  mcsN                   :boolean
+#  mcsMild                :boolean
+#  mcsMod                 :boolean
+#  mcsSevere              :boolean
+#  weight                 :integer
+#  weightUnit             :string
+#  bcsVal                 :integer
+#  oralA                  :boolean
+#  oralN                  :boolean
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 # This model initially had no columns defined. If you add columns to the
@@ -8,7 +78,6 @@ one:
   patient: one
   temperature: 38.5
   exam_notes: No new notes
-  medications: This might need to be removed
   eyes: All good
   oral: Speaks wonderfully
   ears: Little bit deaf
@@ -68,7 +137,6 @@ two:
   patient: one
   temperature: 38.5
   exam_notes: No new notes
-  medications: This might need to be removed
   eyes: All good
   oral: Speaks wonderfully
   ears: Little bit deaf
