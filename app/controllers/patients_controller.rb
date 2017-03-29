@@ -7,7 +7,7 @@
 class PatientsController < ApplicationController
   before_action :authenticate_user
 
-  # Handles HTTP POST request sent to /api/client.
+  # Handles HTTP POST request sent to /api/patients
   # @example request body
   #   {
   #        "patient":
@@ -169,6 +169,20 @@ class PatientsController < ApplicationController
 
   # Handles HTTP PATCH or PUT request sent to /api/client/{id}, and replies with specific client's info, or an error in a JSON.
   # @example request body
+  #   {
+  #        "patient":
+  #            {
+  #                "client": "client id",
+  #                "species": "cat",
+  #                "name": "Chairman Meow",
+  #                "age": 17,
+  #                "gender": "Male",
+  #                "colour": "Red",
+  #                "tattoo": 197265,
+  #                "microchip": nil,
+  #                "reproductive_status": "Spade"
+  #            }
+  #    }
   # @example success response
   #   {"success":true}
   # @example failure response

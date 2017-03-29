@@ -119,6 +119,7 @@ class PatientsTest < ActionDispatch::IntegrationTest
       assert_response :error
       assert JSON.parse(response.body)['errors'].count > 0
   end
+
   def filtered_properly(patients)
     patients.each do |patient|
       unless ['first_name','last_name', 'id'].uniq.sort == patient.keys.uniq.sort
