@@ -128,7 +128,7 @@ class ImagesController < ApplicationController
   # A private method to parse image params
   # @return Hash
   def image_params
-    params.require(:image).permit(:data, :picture_type, :name, :patient_id, :date)
+    params.require(:image).permit(:data, :picture_type, :name, :patient_id, :date, :data_type)
   end
 
   # A private method to filter only necessary data for index methods
