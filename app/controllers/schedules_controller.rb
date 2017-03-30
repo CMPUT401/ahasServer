@@ -72,6 +72,62 @@ class SchedulesController < ApplicationController
     render json: { success: true, schedules: schedule_list }
   end
 
+  # Handles HTTP PATCH or PUT request sent to /api/schedules/{id}, and replies with a true response, or an error in a JSON.
+  # @example request body
+  # @example success response
+  #   {"success":true}
+  # @example failure response
+  #   {
+  #    "success": false,
+  #    "errors": [....] // list of errors
+  #    }
+  #
+  # @todo add to wiki page.
+  #
+  # @return HTTP 200 if success: true JSON
+  # @return HTTP 404 if schedule instance not found: false JSON
+  # @return HTTP 500 if error updating schedule instance: false JSON
+  def update
+    @schedule = Schedule.find_by(id: params[:id])
+
+    if @schedule.nil?
+      render status: 404, json: {success: false, error: "Schedule not found"}
+    elsif @schedule.update(schedule_params)
+      render json: { success: true}
+    else
+      render status: 500, json: {success: false, errors: @schedule.errors.full_messages}
+    end
+  end
+
+  # Handles HTTP DELETE request sent to /api/schedules/{id}, and replies with a true response, or an error in a JSON.
+  # @example request body
+  # @example success response
+  #   {"success":true}
+  # @example failure response
+  #   {
+  #    "success": false,
+  #    "errors": [....] // list of errors
+  #    }
+  #
+  # @todo add to wiki page.
+  #
+  # @return HTTP 200 if success: true JSON
+  # @return HTTP 404 if schedule instance not found: false JSON
+  # @return HTTP 500 if error updating schedule instance: false JSON
+
+  def destroy
+    @schedule = Schedule.find_by(id: params[:id])
+
+    if @schedule.nil?
+      render status: 404, json: {success: false, error: "Schedule not found"}
+    elsif @schedule.destroy
+      render json: { success: true}
+    else
+      render status: 500, json: {success: false, errors: @schedule.errors.full_messages}
+    end
+
+  end
+
   private
   def filter_schedule_keys(schedules)
     schedules.map do |schedule|

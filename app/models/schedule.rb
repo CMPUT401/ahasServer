@@ -14,7 +14,7 @@
 #
 
 class Schedule < ApplicationRecord
-  validates :appointmentStartDate, presence: true, allow_blank: false
+  validates :appointmentStartDate, presence: true, allow_blank: false, numericality: {only_integer: true}
   validates :appointmentEndDate, presence: true, allow_blank: false
   validates :reason, presence:true
   validates :notes, presence: true, allow_blank: true

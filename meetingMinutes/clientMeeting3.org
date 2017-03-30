@@ -1,0 +1,22 @@
+* Questions:
+** What do you expect for a user manual?
+- Dumbed down as possible
+- Lots of screenshots
+** How far in the future do alerts show?
+- 1 month in advance
+* General App Walk Through
+- /contacts page is fine
+    + Enter to clear search is fine
+    + Partial names
+- She needs fuzzy search?
+- Patient edit button doesn't work
+- Patient summary could be 10 to 20 words
+- Side notes will have an intial
+- Side note alert check box needs to be fixed
+- Need to add a other tab (don't need to worry about it?)
+- Might need to add documents as pdf image NOT DOING
+- She wants schedules associated with patients instead of clients (FIX this)
+- Need datetime pickers on schedules
+- Need to remove date picker, and add time picker on schedules
+- Need to add names to client entries (Reason for appointment = animal name)
+- Might be easy to change to PDFs
