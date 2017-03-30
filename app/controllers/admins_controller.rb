@@ -201,6 +201,7 @@ class UsersController < ApplicationController
       render status: 404, json: { success: false, error: "User not found" }
     end
   end
+  
   private
   
   def filter_users(users)
