@@ -30,14 +30,10 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   test "An admin can signup" do
     post '/api/user_token', params: { auth: { email: "admin@ahas.dev",
                                              password: "bizbazboo" } }
-
-    puts JSON.parse(response.body)
   end
 
   test "A user can signup" do
     post '/api/user_token', params: { auth: { email: "jbarclay@ualberta.ca",
                                               password: "foobarbaz" } }
-
-    puts JSON.parse(response.body)
   end
 end
