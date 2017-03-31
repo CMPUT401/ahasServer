@@ -1,0 +1,4 @@
+* Rename repo
+- Must implement admin stuff
+    + user CRUD
+- Split client addresses into 3 lines
