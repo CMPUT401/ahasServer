@@ -252,9 +252,9 @@ class MedicalRecordsController < ApplicationController
     #not nesting too deep
     if @record.update(medical_record_params)
       unless @medications.nil?
-        updateMedication(@medications, @record[:id])
+        errors = updateMedication(@medications, @record[:id])
       end
-      render status: 201, json: { success: true }
+      render status: 201, json: { success: true, errors: errors }
     else
       render status: :error, json: {success: false, errors: @record.errors.full_messages}
     end

@@ -7,7 +7,7 @@
 class PatientsController < ApplicationController
   before_action :authenticate_user
 
-  # Handles HTTP POST request sent to /api/client.
+  # Handles HTTP POST request sent to /api/patients
   # @example request body
   #   {
   #        "patient":
@@ -47,8 +47,8 @@ class PatientsController < ApplicationController
   # @example success response
   #   {
   #       "success": true,
-  #       "patient": 
-  #           { 
+  #       "patient":
+  #           {
   #               "id": "patient_id",
   #               "species": "cat",
   #               "name": "Chairman Meow",
@@ -58,7 +58,7 @@ class PatientsController < ApplicationController
   #               "tattoo": 197265,
   #               "microchip": nil,
   #               "reproductive_status": "Spade"
-  #           "client":{  
+  #           "client":{
   #                 "id":443855961,
   #                 "firstName":"Justin",
   #                 "address":"116 St \u0026 85 Ave, Edmonton, AB T6G 2R3",
@@ -79,9 +79,9 @@ class PatientsController < ApplicationController
   #                 "notes":null,
   #                 "alternativeContact2ndPhone":null
   #                 }},
-  #           "generalAlerts":  
-  #           [  
-  #           [{  
+  #           "generalAlerts":
+  #           [
+  #           [{
   #               "id":298486374,
   #               "body":"You are not supposed to understand this",
   #               "initials":"GG",
@@ -89,10 +89,10 @@ class PatientsController < ApplicationController
   #               "created_at":"2017-03-22T07:31:04.979Z",
   #               "updated_at":"2017-03-22T07:31:04.979Z",
   #               "is_alert":true
-  #           }]] 
+  #           }]]
   #
-  #   "medicationAlerts":[  
-  #       {  
+  #   "medicationAlerts":[
+  #       {
   #           "id":980190962,
   #           "name":"Hydrogen Dioxide",
   #           "medical_record_id":980190962,
@@ -103,7 +103,7 @@ class PatientsController < ApplicationController
   #           "med_type":"Medicine"
   #       }]
   #   }
-  #   } 
+  #   }
   # @example failure response
   #   {
   #    "success": false,
@@ -152,7 +152,7 @@ class PatientsController < ApplicationController
   #   {
   #   "success": "true"
   #   "patients": [ { "name": "Chairman Meow, "id": 1}...]
-  #   } 
+  #   }
   # @example failure response
   #   {
   #    "success": false,
@@ -160,12 +160,52 @@ class PatientsController < ApplicationController
   #    }
   # @return HTTP 200 if success: true JSON
   # @return HTTP 404 if failure: false on failure
-
   def index
     patients = Patient.all
     patient_list = filter_patient_keys patients
 
     render json: { success: true, patients: patient_list }
+  end
+
+  # Handles HTTP PATCH or PUT request sent to /api/client/{id}, and replies with specific client's info, or an error in a JSON.
+  # @example request body
+  #   {
+  #        "patient":
+  #            {
+  #                "client": "client id",
+  #                "species": "cat",
+  #                "name": "Chairman Meow",
+  #                "age": 17,
+  #                "gender": "Male",
+  #                "colour": "Red",
+  #                "tattoo": 197265,
+  #                "microchip": nil,
+  #                "reproductive_status": "Spade"
+  #            }
+  #    }
+  # @example success response
+  #   {"success":true}
+  # @example failure response
+  #   {
+  #    "success": false,
+  #    "errors": [....] // list of errors
+  #    }
+  #
+  # @todo add to wiki page.
+  #
+  # @return HTTP 200 if success: true JSON
+  # @return HTTP 404 if client not found: false JSON
+  # @return HTTP 500 if error updating client: false JSON
+  def update
+    @patient = Patient.find_by(id: params[:id])
+
+    if @patient.nil?
+      render status: 404, json: {success: false, error: "Patient not found"}
+    elsif @patient.update(patient_params)
+      render json: { success: true}
+    else
+      render status: 500, json: {success: false, errors: @patient.errors.full_messages}
+    end
   end
 
   private

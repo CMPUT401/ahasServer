@@ -21,6 +21,8 @@ class Image < ApplicationRecord
   
   validates :data, presence: true, allow_blank: false
   
+  validates :data_type, presence: true, allow_blank: false
+
   validates :picture_type, inclusion: { in: ['radiograph', 'lab result', 'portrait'],
-                                           message: "%{value} is not in the list of valid types" }
+                                        message: "%{value} is not in the list of valid types" }
 end

@@ -1,0 +1,23 @@
+* Intro
+- Admin will be our nice to have
+- Alerts are created/viewed
+- Eric Covered
+    + Add schedule
+    + View schedule
+    + View schedules
+    + View alerts for patient
+- Marco Covered
+    + Edit client
+- Kristy Covered
+    + Added a lot more fields to medical records
+    + Add medicines and vaccines from medical record
+    + Medical record needs to be prettified
+    + View list of user stories
+- Histories for everything
+    + Medical records
+    + Vaccines
+    + Lab results
+    + Medications
+- Upload lab, radiograph results
+- Upload patients
+- Edit contacts
