@@ -1,15 +1,24 @@
 class UserMailer < ActionMailer::Base
   default from: 'jbarclay@ualberta.ca'
   
-  def welcome_email(user)
+  def invite_user(user)
     @user = user
-    @url  = 'http://testsite.com/login'
-    puts mail(to: @user.email, subject: 'Welcome to My Awesome Site').errors
+    @token = SecureRandom.uuid
+    @user.invite_token = @token
+    @url = "http://localhost:4200/create-user/#{@token}"
+    if @user.save
+      mail(to: "justincbarclay@gmail.com", subject: 'Welcome to AHAS').deliver
+    end
   end
 
-  private
-  
-  def generate_user_token user
-    
+  def reset_password_email(user)
+    @user = user
+    @token = SecureRandom.uuid
+    @user.invite_token = @token
+    @url = "http://localhost:4200/create-user/#{@token}"
+    if @user.save
+      mail(to: "justincbarclay@gmail.com", subject: 'Welcome to AHAS').deliver
+    end
   end
+  
 end

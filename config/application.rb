@@ -18,8 +18,8 @@ module AHAS
       end
     end
 
-      config.action_mailer.delivery_method = :postmark
-      config.action_mailer.postmark_settings = { api_key: Rails.application.secrets.postmark_api_token }
+    config.action_mailer.delivery_method = :postmark
+    config.action_mailer.postmark_settings = { api_key: Rails.application.secrets.postmark_api_key }
   end
 
 end
