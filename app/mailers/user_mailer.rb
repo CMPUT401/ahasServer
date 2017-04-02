@@ -3,9 +3,9 @@ class UserMailer < ActionMailer::Base
   
   def invite_user(user)
     @user = user
-    @token = SecureRandom.uuid
-    @user.invite_token = @token
-    @url = "http://localhost:4200/create-user/#{@token}"
+    token = SecureRandom.uuid
+    @user.invite_token = token
+    @url = "http://localhost:4200/create-user/#{token}"
     if @user.save
       mail(to: 'justincbarclay@gmail.com', subject: 'Welcome to AHAS')
     else
@@ -15,12 +15,13 @@ class UserMailer < ActionMailer::Base
 
   def reset_password_email(user)
     @user = user
-    @token = SecureRandom.uuid
-    @user.invite_token = @token
-    @url = "http://localhost:4200/reset-password/#{@token}"
+    token = SecureRandom.uuid
+    @user.reset_token = token
+    @url = "http://localhost:4200/reset-password/#{token}"
     if @user.save
-      mail(to: 'justincbarclay@gmail.com', subject: 'Password Reset')
+      mail(to: 'justincbarclay@gmail.com', subject: 'Reset Password')
+    else
+      puts "Error"
     end
-  end
-  
+  end  
 end

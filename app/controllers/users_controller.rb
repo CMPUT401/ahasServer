@@ -47,6 +47,7 @@ class UsersController < ApplicationController
     
     if updated_user[:password] == updated_user[:password_confirmation]
       @user.password = updated_user[:password]
+      @user.invite_token = nil
     else
       render status: :error, json: { success: false, error: 'Passwords don\'t match' }
       return
@@ -86,6 +87,7 @@ class UsersController < ApplicationController
     # Ensure matching passwords
     if updated_password[:password] == updated_password[:password_confirmation]
       @user.password = updated_password[:password]
+      @user.reset_token = nil
     else
       render status: :error, json: { success: false, error: 'Passwords don\'t match' }
       return

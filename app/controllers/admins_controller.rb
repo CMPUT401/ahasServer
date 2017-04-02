@@ -7,14 +7,25 @@
 class AdminsController < ApplicationController
   before_action :authenticate_admin
 
-  def invite
+  def invite_user
     @user = User.new user_params
     @user.password = SecureRandom.uuid
     if @user.save
-      UserMailer.invite_user(@user).deliver_now
+      UserMailer.invite_user(@user).deliver_now #Might be making a logical mistake, mailer not gauranteed to succeed
       render status: 200, json: { success: true }
     else
-      render status: :errors, json: { errors: @user.errors.full_messages }
+      render status: :error, json: { errors: @user.errors.full_messages }
+    end
+  end
+
+  def reset_user_password
+    @user = User.find_by(id: user_params[:id])
+
+    if @user.nil?
+      render status: :error, json: { error: 'Can not find user' }
+    else
+      UserMailer.reset_password_email(@user).deliver_now
+      render status: 200, json: { success: true }
     end
   end
 
@@ -45,7 +56,7 @@ class AdminsController < ApplicationController
   def show
     user = User.find_by(id: params[:id])
     if !user.nil?
-      render status: 200, json: { success: true, user: user }
+      render status: 200, json: { success: true, user: filter_user(user) }
     else
       render status: 404, json: { success: false, error: 'User not found' }
     end
@@ -80,7 +91,15 @@ class AdminsController < ApplicationController
     end
   end
 
+  def filter_user(user)
+    { name: user.name, email: user.email, type: user.type, id: user.id }
+  end
+
+  def new_user_params
+    params.require(:user).permit(:name, :email, :type)
+  end
+
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:name, :email, :id, :type)
   end
 end

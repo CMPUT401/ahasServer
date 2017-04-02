@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   scope :api do
     constraints format: :json do
 
-      post         'admin/invite',         to: 'admins#invite'
+      post         'admin/invite',         to: 'admins#invite_user'
       get          'admin/users',          to: 'admins#index'
-      post         'admin/reset_password', to: 'admins#reset_password'
+      post         'admin/reset_password', to: 'admins#reset_user_password'
       delete       'admin/users/:id',      to: 'admins#delete'
       get          'admin/users/:id',      to: 'admins#show'
       
