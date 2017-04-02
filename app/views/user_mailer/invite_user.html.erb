@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    </head>
+    <body>
+        <h1>Welcome to Alberta Helping Animals, <%= @user.name %></h1>
+        <p>
+            You have been invited to be a user for AHAS,
+            your username is: <%= @user.email %>.<br>
+        </p>
+        <p>
+            To finish creating your account, just follow this link: <%= @url %>.
+        </p>
+        <p>Thanks for joining and have a great day!</p>
+    </body>
+</html>
