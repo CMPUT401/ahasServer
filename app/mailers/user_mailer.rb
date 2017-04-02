@@ -7,7 +7,9 @@ class UserMailer < ActionMailer::Base
     @user.invite_token = @token
     @url = "http://localhost:4200/create-user/#{@token}"
     if @user.save
-      mail(to: "justincbarclay@gmail.com", subject: 'Welcome to AHAS').deliver
+      mail(to: 'justincbarclay@gmail.com', subject: 'Welcome to AHAS')
+    else
+      puts @user.errors.full_messages
     end
   end
 
@@ -15,9 +17,9 @@ class UserMailer < ActionMailer::Base
     @user = user
     @token = SecureRandom.uuid
     @user.invite_token = @token
-    @url = "http://localhost:4200/create-user/#{@token}"
+    @url = "http://localhost:4200/reset-password/#{@token}"
     if @user.save
-      mail(to: "justincbarclay@gmail.com", subject: 'Welcome to AHAS').deliver
+      mail(to: 'justincbarclay@gmail.com', subject: 'Password Reset')
     end
   end
   
