@@ -5,7 +5,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     token = SecureRandom.uuid
     @user.invite_token = token
-    @url = "http://localhost:4200/create-user/#{token}"
+    @url = "http://localhost:4200/new-user/#{token}"
     if @user.save
       mail(to: @user.email, subject: 'Welcome to AHAS')
     else
