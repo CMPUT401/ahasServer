@@ -8,7 +8,8 @@ class AdminsTest < ActionDispatch::IntegrationTest
   test "Test inviting a user sends an email" do
     post '/api/admin/invite', headers: authenticated_admin_header, params: { user: {
                                                                                name: 'Justin Barclay',
-                                                                               email: 'justincbarclay@gmail.com'
+                                                                               email: 'justincbarclay@gmail.com',
+                                                                               type: 'User'
                                                                              }
                                                                            }
     invite_email = ActionMailer::Base.deliveries.last
@@ -16,6 +17,17 @@ class AdminsTest < ActionDispatch::IntegrationTest
     assert JSON.parse(response.body)['success']
   end
 
+    test "Test inviting an Admin sends an email" do
+    post '/api/admin/invite', headers: authenticated_admin_header, params: { user: {
+                                                                               name: 'Justin Barclay',
+                                                                               email: 'justincbarclay@gmail.com',
+                                                                               type: 'Admin'
+                                                                             }
+                                                                           }
+    invite_email = ActionMailer::Base.deliveries.last
+    assert_equal invite_email.to[0], 'justincbarclay@gmail.com'
+    assert JSON.parse(response.body)['success']
+  end
   test "Test inviting a user with invalid credentials" do
     post '/api/admin/invite', headers: authenticated_header, params: { user: {
                                                                          name: 'Justin Barclay',
