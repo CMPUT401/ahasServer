@@ -7,7 +7,7 @@ class UserMailer < ActionMailer::Base
     @user.invite_token = token
     @url = "http://localhost:4200/create-user/#{token}"
     if @user.save
-      mail(to: 'justincbarclay@gmail.com', subject: 'Welcome to AHAS')
+      mail(to: @user.email, subject: 'Welcome to AHAS')
     else
       puts @user.errors.full_messages
     end
@@ -19,7 +19,7 @@ class UserMailer < ActionMailer::Base
     @user.reset_token = token
     @url = "http://localhost:4200/reset-password/#{token}"
     if @user.save
-      mail(to: 'justincbarclay@gmail.com', subject: 'Reset Password')
+      mail(to: @user.email, subject: 'AHAS Password Reset')
     else
       puts "Error"
     end
