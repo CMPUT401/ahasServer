@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329174607) do
+ActiveRecord::Schema.define(version: 20170403173927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -167,7 +167,6 @@ ActiveRecord::Schema.define(version: 20170329174607) do
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.string   "clientId"
     t.string   "reason"
     t.string   "notes"
     t.datetime "created_at",           null: false
@@ -175,6 +174,8 @@ ActiveRecord::Schema.define(version: 20170329174607) do
     t.string   "location"
     t.integer  "appointmentStartDate"
     t.integer  "appointmentEndDate"
+    t.integer  "patientId"
+    t.index ["patientId"], name: "index_schedules_on_patientId", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

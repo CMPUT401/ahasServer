@@ -22,6 +22,7 @@ class ScheduleTest < ActiveSupport::TestCase
   end
 
   test 'schedule instance on eshould be valid' do
+    puts @one.to_json
     assert_kind_of Schedule, @one
     assert @one.valid?
   end

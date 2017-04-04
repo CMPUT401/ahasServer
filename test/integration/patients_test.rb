@@ -81,7 +81,6 @@ class PatientsTest < ActionDispatch::IntegrationTest
 
   test 'a patient can have alerts' do
     good_id = @patient.id
-
     @medication.reminder = (Date.today + 1.months).to_time.to_i
     @medication2.reminder =  (Date.today + 4.months).to_time.to_i
 

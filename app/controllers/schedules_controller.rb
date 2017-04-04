@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-class SchedulesController < ApplicationController
-
-=======
 # Controls access to the schedule instances stored in the API database
 #
 #
@@ -34,7 +30,7 @@ class SchedulesController < ApplicationController
     schedule = schedule_params
     # extract the schedule id from the JSON to a Client object
     @schedule = Schedule.new(schedule)
-
+#    puts @schedule.to_json
     if @schedule.save
       render status: 201, json: { success: true }
     else
@@ -135,12 +131,11 @@ class SchedulesController < ApplicationController
   private
   def filter_schedule_keys(schedules)
     schedules.map do |schedule|
-      @client = Client.find_by(id: schedule.clientId)
-      { id: schedule.id,   appointmentStartDate: schedule.appointmentStartDate, appointmentEndDate: schedule.appointmentEndDate, clientId: schedule.clientId, firstName: @client.firstName, lastName: @client.lastName, reason: schedule.reason}
+      { id: schedule.id, appointmentStartDate: schedule.appointmentStartDate, appointmentEndDate: schedule.appointmentEndDate, patientId: schedule.patientId, reason: schedule.reason}
     end
   end
 
   def schedule_params
-    params.require(:schedule).permit(:appointmentStartDate, :appointmentEndDate, :scheduleId, :reason, :notes, :location, :duration, :clientId)
+    params.require(:schedule).permit(:appointmentStartDate, :appointmentEndDate, :scheduleId, :reason, :notes, :location, :duration, :patientId)
   end
 end

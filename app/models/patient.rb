@@ -29,6 +29,8 @@ class Patient < ApplicationRecord
 
   has_many :images
   
+  has_many :schedules
+
   validates :species, presence: true
 
   validates :first_name, presence: true
