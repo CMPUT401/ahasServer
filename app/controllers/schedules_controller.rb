@@ -129,7 +129,8 @@ class SchedulesController < ApplicationController
   private
   def filter_schedule_keys(schedules)
     schedules.map do |schedule|
-      { id: schedule.id, appointmentStartDate: schedule.appointmentStartDate, appointmentEndDate: schedule.appointmentEndDate, patient_id: schedule.patient_id, reason: schedule.reason}
+      patient = Patient.find_by(id: schedule.patient_id)
+      { id: schedule.id, appointmentStartDate: schedule.appointmentStartDate, appointmentEndDate: schedule.appointmentEndDate, patient_id: schedule.patient_id, reason: schedule.reason, patientFirstName: patient.first_name, patientLastName: patient.last_name}
     end
   end
 

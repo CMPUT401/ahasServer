@@ -61,6 +61,7 @@ class SchedulesTest < ActionDispatch::IntegrationTest
 
   test 'Schedule respond to GET all' do
     get '/api/schedules', headers: authenticated_header
+
     assert_response :success
   end
 
