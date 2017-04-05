@@ -18,14 +18,14 @@
 one:
   appointmentStartDate: 1491287867 
   appointmentEndDate: 1491287900
-  patientId: 980190962 
+  patient: one 
   reason: foaming at mouth 
   notes: really bitey
   location: 1234 Fake St.
 two:
   appointmentStartDate: 2017-03-29 11:23:11
   appointmentEndDate:
-  patientId: 1
+  patient: two
   reason: 
   notes: MyString
   location: 5

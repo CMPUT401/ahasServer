@@ -16,7 +16,7 @@
 class Schedule < ApplicationRecord
   belongs_to :patient
 
-  validates :patientId, presence: true, allow_bank: false
+  validates :patient_id, presence: true, allow_bank: false
 
   validates :appointmentStartDate, presence: true, allow_blank: false, numericality: {only_integer: true}
   validates :appointmentEndDate, presence: true, allow_blank: false

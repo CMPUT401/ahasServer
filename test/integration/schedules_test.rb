@@ -4,11 +4,12 @@ class SchedulesTest < ActionDispatch::IntegrationTest
   def setup
     @patient = patients(:one)
     @patient.save
+    @patient_id = @patient.id
     @schedule = schedules(:one)
     @schedule.save
     @schedule2 = schedules(:two)
     @schedule2.save
-    @scheduleBody = {"schedule":{patientId: 1,
+    @scheduleBody = {schedule:{patient_id: @patient_id.to_s,
                                  reason:"foaming at mouth",
                                  notes:"really bitey",
                                  location:"1234 Fake St.",
@@ -21,7 +22,7 @@ class SchedulesTest < ActionDispatch::IntegrationTest
     assert_no_difference 'Schedule.count' do
       post '/api/schedules', headers: authenticated_header,
         params:{schedule: { appointmentStartDate: '',
-                            patientId: '',
+                            patient_id: '',
                             reason: '',
                             notes: 0,
                             location: ''} }
@@ -33,13 +34,12 @@ class SchedulesTest < ActionDispatch::IntegrationTest
   test 'posting a valid schedule to /api/schedules' do
     post '/api/schedules', headers: authenticated_header,
       params: {schedule: { appointmentStartDate: '1489077477',
-                           patientId: @patient.id.to_s,
+                           patient_id: @patient_id.to_s,
                            reason: 'bitey dog',
                            notes: '',
                            location: '1234 fake st',
                            appointmentEndDate: '1489083859'}}
 
-      puts  @patient.id.to_s
       assert_response 201
   end
 
@@ -80,7 +80,7 @@ class SchedulesTest < ActionDispatch::IntegrationTest
   test 'respond to unsuccessful PUT because of bad input' do
     id = @schedule.id.to_s
     put '/api/schedules/'+ id,
-    params: {"schedule":{patientId:1,
+    params: {"schedule":{patient_id:1,
                                  reason:"foaming at mouth",
                                  notes:"really bitey",
                                  location:"1234 Fake St.",

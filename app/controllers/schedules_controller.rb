@@ -30,11 +30,9 @@ class SchedulesController < ApplicationController
     schedule = schedule_params
     # extract the schedule id from the JSON to a Client object
     @schedule = Schedule.new(schedule)
-#    puts @schedule.to_json
     if @schedule.save
       render status: 201, json: { success: true }
     else
-
       render status: :error, json: { success: false, errors: @schedule.errors.full_messages }
     end
   end
@@ -131,11 +129,11 @@ class SchedulesController < ApplicationController
   private
   def filter_schedule_keys(schedules)
     schedules.map do |schedule|
-      { id: schedule.id, appointmentStartDate: schedule.appointmentStartDate, appointmentEndDate: schedule.appointmentEndDate, patientId: schedule.patientId, reason: schedule.reason}
+      { id: schedule.id, appointmentStartDate: schedule.appointmentStartDate, appointmentEndDate: schedule.appointmentEndDate, patient_id: schedule.patient_id, reason: schedule.reason}
     end
   end
 
   def schedule_params
-    params.require(:schedule).permit(:appointmentStartDate, :appointmentEndDate, :scheduleId, :reason, :notes, :location, :duration, :patientId)
+    params.require(:schedule).permit(:appointmentStartDate, :appointmentEndDate, :scheduleId, :reason, :notes, :location, :duration, :patient_id)
   end
 end
