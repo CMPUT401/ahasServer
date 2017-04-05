@@ -3,8 +3,8 @@
 # @author Justin Barclay & Mackenzie Bligh
 # @see  https://github.com/CMPUT401/vettr_server/wiki/API-Documentation#clients
 class ContactsController < ApplicationController
-  before_action :authenticate_user
-
+  before_action :authenticate_user, except: [:destroy]
+  before_action :authenticate_admin, only: [:destroy]
   # Handles HTTP POST request sent to /api/contacts.
   # @example request body
   #   {
@@ -127,6 +127,19 @@ class ContactsController < ApplicationController
     contact_list = filter_contact_keys contacts
 
     render json: { success: true, contacts: contact_list }
+  end
+
+  def destroy
+    contact = Contact.find_by(id: params[:id])
+    unless contact.nil?
+      if Contact.destroy(params[:id])
+        render status: 200, json: { success: true }
+      else
+        render status: :error, json: {success: false, error: 'Unable to delete contact' }
+      end
+    else
+      render status: 404, json: { success: false, error: 'Contact not found' }
+    end
   end
 
   private
