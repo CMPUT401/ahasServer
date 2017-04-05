@@ -2,11 +2,11 @@
 #
 #
 # @author Mackenzie Bligh
-# @see https://github.com/CMPUT401/vettr_server/wiki/API-Documentation#clients
+# @see https://github.com/CMPUT401/vettr_server/wiki/API-Documentation#schedules
 class SchedulesController < ApplicationController
   before_action :authenticate_user
 
-  # Handles HTTP POST request sent to /api/client.
+  # Handles HTTP POST request sent to /api/schedules.
   # @example request body
   #   {
   #   schedule:
@@ -39,6 +39,18 @@ class SchedulesController < ApplicationController
 
   # Handles HTTP GET request sent to /api/schedules/{id}, and replies with specific client's info, or an error in a JSON.
   # @example success response
+  #   {
+  #   "success": true,
+  #   schedule:
+  #     {
+  #     appointmentStartDate: '1489077477',
+  #     clientId: @client.id,
+  #     reason: 'bitey dog',
+  #     notes: '',
+  #     location: '1234 fake st',
+  #     duration: '1489077477'
+  #     }
+  #    }
   # @example failure response
   #   {
   #    "success": false,
@@ -60,7 +72,7 @@ class SchedulesController < ApplicationController
   # @example success response
   #   {
   #   "success": "boolean",
-  #   "schedule": [{"id": "integer", "appointmentStartDate": "datetime", "duration": "datetime"}...]
+  #   "schedule": [{"id": "integer", "appointmentStartDate": "integer", "duration": "integer", patientFirstName: "string", patientLastName: "String"}...]
   #   }
   # @return HTTP 200 if success: true JSON
   # @return HTTP 500 if failure: false JSON
@@ -72,6 +84,17 @@ class SchedulesController < ApplicationController
 
   # Handles HTTP PATCH or PUT request sent to /api/schedules/{id}, and replies with a true response, or an error in a JSON.
   # @example request body
+  #   {
+  #   schedule:
+  #     {
+  #     appointmentStartDate: '1489077477',
+  #     clientId: @client.id,
+  #     reason: 'bitey dog',
+  #     notes: '',
+  #     location: '1234 fake st',
+  #     duration: '1489077477'
+  #     }
+  #    }
   # @example success response
   #   {"success":true}
   # @example failure response
