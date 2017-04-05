@@ -14,7 +14,6 @@ class ContactsTest < ActionDispatch::IntegrationTest
         email: 'valid@example.pizza',
         contact_type: 'Veterinarian'
         } }
-
   end
 
   test 'should be able to post a valid, new contact' do
@@ -144,6 +143,29 @@ class ContactsTest < ActionDispatch::IntegrationTest
 
     assert_response :error
     assert JSON.parse(response.body)['errors'].count > 0
+  end
+
+  test 'deleting a valid contact' do
+    good_id = @good.id
+
+    delete "/api/contacts/#{good_id}", headers: authenticated_admin_header
+    assert_response :success
+    assert JSON.parse(response.body)['success']
+  end
+
+  test 'deleting an invalid contact' do
+    good_id = @good.id+1
+
+    delete "/api/contacts/#{good_id}", headers: authenticated_admin_header
+    assert_response 404
+    assert_not JSON.parse(response.body)['success']
+  end
+
+  test 'unauthorized user deleting contact' do
+    good_id = @good.id
+
+    delete "/api/contacts/#{good_id}", headers: authenticated_header
+    assert_response 401
   end
 
   def filtered_properly(contacts)

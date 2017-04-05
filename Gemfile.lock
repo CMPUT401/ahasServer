@@ -264,6 +264,12 @@ GEM
       rack
       rake (>= 0.8.1)
     pg (0.18.4)
+    postmark (1.10.0)
+      json
+      rake
+    postmark-rails (0.15.0)
+      actionmailer (>= 3.0.0)
+      postmark (~> 1.10.0)
     powerpack (0.1.1)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -388,6 +394,7 @@ DEPENDENCIES
   minitest-reporters (= 1.1.9)
   passenger (>= 5.0.25)
   pg (= 0.18.4)
+  postmark-rails (= 0.15.0)
   puma (= 3.4.0)
   rack-cors (= 0.4.1)
   rails (= 5.0.1)

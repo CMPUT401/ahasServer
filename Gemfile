@@ -16,6 +16,7 @@ gem 'mini_magick',             '4.5.1'
 gem 'pg',                      '0.18.4'
 gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
 gem 'puma',                    '3.4.0'
+gem 'postmark-rails',          '0.15.0'
 gem 'rails',                   '5.0.1'
 gem 'sass-rails',              '5.0.6'
 gem 'turbolinks',              '5.0.1'
