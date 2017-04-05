@@ -5,12 +5,18 @@ Rails.application.routes.draw do
   # controllers
   scope :api do
     constraints format: :json do
-      get          'users',      to: 'users#index'
-      post         'signup',     to: 'users#create'
-      delete       'users/:id',  to: 'users#delete'    
 
-      post         'user_token', to: 'user_token#create'
-      post         'login',      to: 'user_token#create'
+      post         'admin/invite',         to: 'admins#invite_user'
+      get          'admin/users',          to: 'admins#index'
+      post         'admin/reset_password', to: 'admins#reset_user_password'
+      delete       'admin/users/:id',      to: 'admins#delete'
+      get          'admin/users/:id',      to: 'admins#show'
+      
+      post         'signup',               to: 'users#create'
+      get          'users/:token',         to: 'users#show'
+      post         'reset_password',       to: 'users#reset_password'
+      post         'user_token',           to: 'user_token#create'
+      post         'login',                to: 'user_token#create'
       
       get          'patients/:patient_id/medications/:id', to: 'medications#show'
       get          'patients/:patient_id/medications/', to: 'medications#index'
@@ -21,8 +27,6 @@ Rails.application.routes.draw do
       get          'patients/:patient_id/images/:id', to: 'images#show'
       get          'patients/:patient_id/images/filter/:filter', to: 'images#filter'
       post         'patients/:patient_id/images',    to: 'images#create'
-
-      resources    :users
       resources    :patients do
         resources  :medical_records do
           resources :notes

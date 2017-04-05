@@ -247,7 +247,7 @@ class MedicalRecordsController < ApplicationController
     unless @record.created_at.today?
       render status: :error, json: { success: false, error: "Medical Record is not editable after 1 day"}
       return
-    end 
+    end
 
     #not nesting too deep
     if @record.update(medical_record_params)
