@@ -10,21 +10,21 @@
 #  updated_at           :datetime         not null
 #  location             :string
 #  appointmentStartDate :integer
-#  appointmentEndDate   :integer
+#  duration   :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
   appointmentStartDate: 1491287867 
-  appointmentEndDate: 1491287900
+  duration: 1491287900
   patient: one 
   reason: foaming at mouth 
   notes: really bitey
   location: 1234 Fake St.
 two:
   appointmentStartDate: 2017-03-29 11:23:11
-  appointmentEndDate:
+  duration:
   patient: two
   reason: 
   notes: MyString

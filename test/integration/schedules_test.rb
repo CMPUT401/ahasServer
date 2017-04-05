@@ -14,7 +14,7 @@ class SchedulesTest < ActionDispatch::IntegrationTest
                                  notes:"really bitey",
                                  location:"1234 Fake St.",
                                  appointmentStartDate:1490786591,
-                                 appointmentEndDate:1490790191}}
+                                 duration:1490790191}}
 
   end
 
@@ -38,7 +38,7 @@ class SchedulesTest < ActionDispatch::IntegrationTest
                            reason: 'bitey dog',
                            notes: '',
                            location: '1234 fake st',
-                           appointmentEndDate: '1489083859'}}
+                           duration: '1489083859'}}
 
       assert_response 201
   end
@@ -86,7 +86,7 @@ class SchedulesTest < ActionDispatch::IntegrationTest
                                  notes:"really bitey",
                                  location:"1234 Fake St.",
                                  appointmentStartDate: "ABCD",
-                                 appointmentEndDate:1490790191}},
+                                 duration:1490790191}},
                                  headers: authenticated_header
 
     assert_response :error

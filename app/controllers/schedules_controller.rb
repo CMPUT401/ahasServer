@@ -16,7 +16,7 @@ class SchedulesController < ApplicationController
   #     reason: 'bitey dog',
   #     notes: '',
   #     location: '1234 fake st',
-  #     appointmentEndDate: '1489077477'
+  #     duration: '1489077477'
   #     }
   #    }
   # @example failure response
@@ -56,11 +56,11 @@ class SchedulesController < ApplicationController
     end
   end
 
-  # Handles HTTP GET request sent to /api/schedules and replies with an index containing a list of id, appointmentStartDate, appointmentEndDate, clientId, reason}
+  # Handles HTTP GET request sent to /api/schedules and replies with an index containing a list of id, appointmentStartDate, duration, clientId, reason}
   # @example success response
   #   {
   #   "success": "boolean",
-  #   "schedule": [{"id": "integer", "appointmentStartDate": "datetime", "appointmentEndDate": "datetime"}...]
+  #   "schedule": [{"id": "integer", "appointmentStartDate": "datetime", "duration": "datetime"}...]
   #   }
   # @return HTTP 200 if success: true JSON
   # @return HTTP 500 if failure: false JSON
@@ -130,11 +130,11 @@ class SchedulesController < ApplicationController
   def filter_schedule_keys(schedules)
     schedules.map do |schedule|
       patient = Patient.find_by(id: schedule.patient_id)
-      { id: schedule.id, appointmentStartDate: schedule.appointmentStartDate, appointmentEndDate: schedule.appointmentEndDate, patient_id: schedule.patient_id, reason: schedule.reason, patientFirstName: patient.first_name, patientLastName: patient.last_name}
+      { id: schedule.id, appointmentStartDate: schedule.appointmentStartDate, duration: schedule.duration, patient_id: schedule.patient_id, reason: schedule.reason, patientFirstName: patient.first_name, patientLastName: patient.last_name}
     end
   end
 
   def schedule_params
-    params.require(:schedule).permit(:appointmentStartDate, :appointmentEndDate, :scheduleId, :reason, :notes, :location, :duration, :patient_id)
+    params.require(:schedule).permit(:appointmentStartDate, :duration, :scheduleId, :reason, :notes, :location, :duration, :patient_id)
   end
 end

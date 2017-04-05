@@ -10,7 +10,7 @@
 #  updated_at           :datetime         not null
 #  location             :string
 #  appointmentStartDate :integer
-#  appointmentEndDate   :integer
+#  duration   :integer
 #
 
 class Schedule < ApplicationRecord
@@ -19,7 +19,7 @@ class Schedule < ApplicationRecord
   validates :patient_id, presence: true, allow_bank: false
 
   validates :appointmentStartDate, presence: true, allow_blank: false, numericality: {only_integer: true}
-  validates :appointmentEndDate, presence: true, allow_blank: false
+  validates :duration, presence: true, allow_blank: false
   validates :reason, presence:true
   validates :notes, presence: true, allow_blank: true
   validates :location, presence: true
