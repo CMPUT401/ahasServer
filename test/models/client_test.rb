@@ -93,44 +93,15 @@ class ClientTest < ActiveSupport::TestCase
       end
   end
 
-  test "client licos shouldn't accept text" do
-    @client.licos = "PING"
-    assert_not @client.valid?
-  end
-
-  test "client licos should reject numbers less than 0" do
-    @client.licos = -12314
-    assert_not @client.valid?
-  end
 
   test "client licos should be able to be empty"do
     @client.licos = nil
     assert @client.valid?
   end
 
-  test "client aish shouldn't accept text" do
-    @client.aish = "PING"
-    assert_not @client.valid?
-  end
-
-  test "client aish  should reject numbers less than 0" do
-    @client.aish = -12314
-    assert_not @client.valid?
-  end
-
-  test "client aish  should be able to be empty"do
+    test "client aish  should be able to be empty"do
     @client.socialAssistance = ""
     assert @client.valid?
-  end
-
-  test "client socialAssistance shouldn't accept text" do
-    @client.socialAssistance = "PING"
-    assert_not @client.valid?
-  end
-
-  test "client socialAssistance should reject numbers less than 0" do
-    @client.licos = -12314
-    assert_not @client.valid?
   end
 
   test "client socialAssistance should be able to be empty"do

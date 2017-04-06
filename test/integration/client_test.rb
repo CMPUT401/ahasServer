@@ -5,6 +5,7 @@ class Clients_test < ActionDispatch::IntegrationTest
     @client = {client: { firstName: "Harry", lastName: "Potter",
                         addressLine1: "1234 Fake ave, Edmonton, Alberta",
                         phoneNumber: "7802344444", email: "jeff@geoff.com",
+                        aish: "123-4567"
     }}
     @yamlClient = clients(:Justin)
   end
@@ -12,6 +13,7 @@ class Clients_test < ActionDispatch::IntegrationTest
   test "Client responds to successful POST" do
     post '/api/client',
       params: @client, headers: authenticated_header
+
     assert_response 201
   end
 

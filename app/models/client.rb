@@ -39,9 +39,9 @@ validates :addressLine3, presence: {message: "Address is required"}, length: {ma
   validates :phoneNumber, presence: true, allow_blank: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: {maximum: 255}, format: {with: VALID_EMAIL_REGEX, message: "Email is invalid format"}, allow_blank: true
-  validates :licos, presence: true, allow_blank: true, numericality: {greater_than_or_equal_to: 0}
-  validates :aish, presence: true, allow_blank: true,  numericality: {greater_than_or_equal_to: 0}
-  validates :socialAssistance, presence: true, allow_blank: true, numericality: {greater_than_or_equal_to: 0}
+  validates :licos, presence: true, allow_blank: true 
+  validates :aish, presence: true, allow_blank: true  
+  validates :socialAssistance, presence: true, allow_blank: true 
   validates :alternativeContactFirstName, presence: true, length: {maximum: 50, message: "Alternate Name is too long"}, allow_blank: true
   validates :alternativeContactLastName, presence: true, length: {maximum: 50, message: "Alternate Name is too long"}, allow_blank: true
   validates :alternativeContactPhoneNumber, presence: true, allow_blank: true
