@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170406041559) do
+ActiveRecord::Schema.define(version: 20170406060904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,15 +158,14 @@ ActiveRecord::Schema.define(version: 20170406041559) do
   create_table "patients", force: :cascade do |t|
     t.string   "species"
     t.string   "first_name"
-    t.integer  "age"
+    t.integer  "dateOfBirth"
     t.string   "colour"
     t.integer  "tattoo"
     t.integer  "microchip"
-    t.string   "reproductive_status"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "client_id"
-    t.string   "gender"
+    t.string   "sex"
     t.string   "last_name"
     t.integer  "portrait_id"
     t.index ["client_id"], name: "index_patients_on_client_id", using: :btree

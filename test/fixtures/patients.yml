@@ -5,7 +5,7 @@
 #  id                  :integer          not null, primary key
 #  species             :string
 #  first_name          :string
-#  age                 :integer
+#  dateOfBirth                 :integer
 #  colour              :string
 #  tattoo              :integer
 #  microchip           :integer
@@ -13,7 +13,7 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  client_id           :integer
-#  gender              :string
+#  sex              :string
 #  last_name           :string
 #
 
@@ -22,19 +22,17 @@ one:
   species: Cat
   first_name: Chairman Meow
   last_name: Barclay
-  age: 17
-  gender: Male
+  dateOfBirth: 17
+  sex: Male
   colour: Red
   tattoo: 197265
   microchip: nil
-  reproductive_status: "Spade"
 
 two:
   species: 
   first_name:
   last_name:
-  age: Thing
+  dateOfBirth: Thing
   colour: 
   tattoo: Not a number
   microchip: Also not a number
-  reproductive_status: 18

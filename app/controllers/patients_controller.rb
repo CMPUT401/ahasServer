@@ -15,8 +15,8 @@ class PatientsController < ApplicationController
   #                "client": "client id",
   #                "species": "cat",
   #                "name": "Chairman Meow",
-  #                "age": 17,
-  #                "gender": "Male",
+  #                "dateOfBirth": 17,
+  #                "sex": "Male",
   #                "colour": "Red",
   #                "tattoo": 197265,
   #                "microchip": nil,
@@ -39,7 +39,7 @@ class PatientsController < ApplicationController
     if @patient.save
       render status: 201, json: { success: true }
     else
-      render status: :error, json: { success: false, errors: @patient.errors.full_messages }
+      render status: :error, json: { success: false, errors: @patient.errors.full_messdateOfBirths }
     end
   end
 
@@ -52,8 +52,8 @@ class PatientsController < ApplicationController
   #               "id": "patient_id",
   #               "species": "cat",
   #               "name": "Chairman Meow",
-  #               "age": 17,
-  #               "gender": "Male",
+  #               "dateOfBirth": 17,
+  #               "sex": "Male",
   #               "colour": "Red",
   #               "tattoo": 197265,
   #               "microchip": nil,
@@ -175,8 +175,8 @@ class PatientsController < ApplicationController
   #                "client": "client id",
   #                "species": "cat",
   #                "name": "Chairman Meow",
-  #                "age": 17,
-  #                "gender": "Male",
+  #                "dateOfBirth": 17,
+  #                "sex": "Male",
   #                "colour": "Red",
   #                "tattoo": 197265,
   #                "microchip": nil,
@@ -191,7 +191,7 @@ class PatientsController < ApplicationController
   #    "errors": [....] // list of errors
   #    }
   #
-  # @todo add to wiki page.
+  # @todo add to wiki pdateOfBirth.
   #
   # @return HTTP 200 if success: true JSON
   # @return HTTP 404 if client not found: false JSON
@@ -204,7 +204,7 @@ class PatientsController < ApplicationController
     elsif @patient.update(patient_params)
       render json: { success: true}
     else
-      render status: 500, json: {success: false, errors: @patient.errors.full_messages}
+      render status: 500, json: {success: false, errors: @patient.errors.full_messdateOfBirths}
     end
   end
 
@@ -216,8 +216,8 @@ class PatientsController < ApplicationController
   end
 
   def patient_params
-    params.require(:patient).permit(:first_name, :last_name, :gender, :client, :species,
-                                    :reproductive_status, :tattoo, :microchip,
-                                    :age, :colour)
+    params.require(:patient).permit(:first_name, :last_name, :sex, :client, :species,
+                                    :tattoo, :microchip,
+                                    :dateOfBirth, :colour)
   end
 end

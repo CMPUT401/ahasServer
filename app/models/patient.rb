@@ -5,7 +5,7 @@
 #  id                  :integer          not null, primary key
 #  species             :string
 #  first_name          :string
-#  age                 :integer
+#  dateOfBirth                 :integer
 #  colour              :string
 #  tattoo              :integer
 #  microchip           :integer
@@ -13,7 +13,7 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  client_id           :integer
-#  gender              :string
+#  sex              :string
 #  last_name           :string
 #
 
@@ -27,7 +27,7 @@ class Patient < ApplicationRecord
   
   has_many :medications
 
-  has_many :images
+  has_many :imdateOfBirths
   
   has_many :schedules
 
@@ -39,14 +39,12 @@ class Patient < ApplicationRecord
   
   validates :colour, presence: true
 
-  validates :reproductive_status, presence: true
-
   validates :tattoo, numericality: { only_integer: true }, allow_blank: true
 
-  validates :age, numericality: { only_integer: true }, allow_blank: true
+  validates :dateOfBirth, numericality: { only_integer: true }, allow_blank: true
 
   validates :microchip, numericality: { only_integer: true }, allow_blank: true
   validates :client_id, presence: true, allow_blank: false, numericality: true
 
-  validates :gender, presence: true
+  validates :sex, presence: true
 end
