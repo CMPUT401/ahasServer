@@ -48,9 +48,9 @@ class Contact < ApplicationRecord
 
   def valid_type_string
     # contact_type must be one of three type
-    unless ['Veterinarian', 'Volunteer', 'Laboratory'].include? contact_type
+    unless ['Veterinarian', 'Volunteer', 'Laboratory', 'Technician'].include? contact_type
 
-      errors.add(:contact_type, ' must be either Veterinarian, Volunteer, or Labratory')
+      errors.add(:contact_type, ' must be either Veterinarian, Volunteer, Labratory or Technician')
     end
   end
 end
