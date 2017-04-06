@@ -12,7 +12,7 @@ class MedicationsTest < ActionDispatch::IntegrationTest
     @medication1 = { patient_id: @patient.id, name: 'Hydrogen Dioxide', med_type: "Medicine" }
     @medication2 = { patient_id: @patient.id, name: 'Sulfur Dioxide', med_type: "Other" }
     @medication3 = { patient_id: @patient.id, name: 'Nitrogen Dioxide', med_type: "Vaccine" }
-
+    
     @medical_record = {
       patient_id: @patient.id,
       temperature: 38.5,
@@ -157,4 +157,18 @@ class MedicationsTest < ActionDispatch::IntegrationTest
     assert_response :error
     assert_not JSON.parse(response.body)['success']
   end
+
+  test 'respond to successful DELETE' do
+    id = @medication.id.to_s
+    delete "/api/patients/#{@patient.id}/medications/" + id, headers: authenticated_header
+    assert_response :success
+    assert JSON.parse(response.body)['success']
+  end
+
+  test 'respond to DELETE of bad ID' do
+    id = @medication.id + 1
+     delete "/api/patients/#{@patient.id}/medications/" + id.to_s, headers: authenticated_header
+    assert_response 404
+  end
+
 end

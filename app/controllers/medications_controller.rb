@@ -19,7 +19,7 @@ class MedicationsController < ApplicationController
       render status: 404, json: { success: false, error: 'Medication not found' }
     end
   end
-  
+
   # Handles GET request for index of all medication for a patient, route: /api/patients/:paient_id/medications
   # @example reponse
   #   {
@@ -40,6 +40,34 @@ class MedicationsController < ApplicationController
   # def filter
   #   medications
   # end
+
+  # Handles HTTP DELETE request sent to /api/medications/{id}, and replies with a true response, or an error in a JSON.
+  # @example request body
+  # @example success response
+  #   {"success":true}
+  # @example failure response
+  #   {
+  #    "success": false,
+  #    "errors": [....] // list of errors
+  #    }
+  #
+  # @todo add to wiki page.
+  #
+  # @return HTTP 200 if success: true JSON
+  # @return HTTP 404 if schedule instance not found: false JSON
+  # @return HTTP 500 if error updating schedule instance: false JSON
+  def destroy
+    @medication= Medication.find_by(id: params[:id])
+
+    if @medication.nil?
+      render status: 404, json: {success: false, error: "Schedule not found"}
+    elsif @medication.destroy
+      render json: { success: true}
+    else
+      render status: 500, json: {success: false, errors: @medication.errors.full_messages}
+    end
+
+  end
 
   private
 

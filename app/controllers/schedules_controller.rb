@@ -135,7 +135,6 @@ class SchedulesController < ApplicationController
   # @return HTTP 200 if success: true JSON
   # @return HTTP 404 if schedule instance not found: false JSON
   # @return HTTP 500 if error updating schedule instance: false JSON
-
   def destroy
     @schedule = Schedule.find_by(id: params[:id])
 

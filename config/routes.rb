@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       
       get          'patients/:patient_id/medications/:id', to: 'medications#show'
       get          'patients/:patient_id/medications/', to: 'medications#index'
+      delete       'patients/:patient_id/medications/:id', to: 'medications#destroy'
       get          'patients/:patient_id/medications/filter/:filter', to: 'medications#filter'
       
 
