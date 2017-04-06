@@ -39,7 +39,7 @@ class PatientsController < ApplicationController
     if @patient.save
       render status: 201, json: { success: true }
     else
-      render status: :error, json: { success: false, errors: @patient.errors.full_messdateOfBirths }
+      render status: :error, json: { success: false, errors: @patient.errors.full_messages}
     end
   end
 
@@ -204,7 +204,7 @@ class PatientsController < ApplicationController
     elsif @patient.update(patient_params)
       render json: { success: true}
     else
-      render status: 500, json: {success: false, errors: @patient.errors.full_messdateOfBirths}
+      render status: 500, json: {success: false, errors: @patient.errors.full_messages}
     end
   end
 

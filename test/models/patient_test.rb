@@ -5,7 +5,7 @@
 #  id                  :integer          not null, primary key
 #  species             :string
 #  first_name          :string
-#  age                 :integer
+#  dateOfBirth                 :integer
 #  colour              :string
 #  tattoo              :integer
 #  microchip           :integer
@@ -13,7 +13,7 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  client_id           :integer
-#  gender              :string
+#  sex              :string
 #  last_name           :string
 #
 
@@ -50,18 +50,18 @@ class PatientTest < ActiveSupport::TestCase
     assert_not @one.valid?
   end
 
-  test 'patients should have a gender' do
-    @one.gender = nil
+  test 'patients should have a sex' do
+    @one.sex = nil
     assert_not @one.valid?
   end
 
   test 'patients should have color' do
-    @one.gender = nil
+    @one.sex = nil
     assert_not @one.valid?
   end
 
   test 'patients should have ' do
-    @one.gender = nil
+    @one.sex = nil
     assert_not @one.valid?
   end
 

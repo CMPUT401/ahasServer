@@ -8,8 +8,8 @@ class PatientsTest < ActionDispatch::IntegrationTest
     @patient2 = {patient: {client_id: 443855961, species:"Cat",
                            first_name:"Chairman Meow",last_name:"Barclay",
                            colour:"Red",reproductive_status:"Spade",
-                           tattoo:197265, age:17,microchip: 0,
-                           gender:"Male"}}
+                           tattoo:197265, dateOfBirth:17,microchip: 0,
+                           sex:"Male"}}
     @patient.save
     @medication = medications(:one)
     @medication2 = medications(:two)
@@ -21,15 +21,16 @@ class PatientsTest < ActionDispatch::IntegrationTest
       post '/api/patients', headers: authenticated_header,
            params: { patient: { first_name: '',
                                 last_name: '',
-                                gender: '',
+                                sex: '',
                                 colour: '',
                                 tattoo: 'hi',
                                 reproductive_status: nil,
-                                age: '',
+                                dateOfBirth: '',
                                 client: 0 } }
+
+    assert JSON.parse(response.body)['errors'].count > 0
     end
     assert_response :error
-    assert JSON.parse(response.body)['errors'].count > 0
   end
 
   test 'posting a valid patient' do
@@ -37,14 +38,12 @@ class PatientsTest < ActionDispatch::IntegrationTest
                           params: { patient: { first_name: 'Chairman Meow',
                                                last_name: 'Barclay',
                                                species: 'Cat',
-                                               gender: 'Female',
+                                               sex: 'Female',
                                                colour: 'Red',
                                                tattoo: 18,
                                                microchip: 0,
-                                               reproductive_status: 'Spade',
-                                               age: 23,
+                                               dateOfBirth: 23,
                                                client: @client.id } }
-
     assert_response :success
     assert JSON.parse(response.body)['success']
   end
@@ -112,8 +111,8 @@ class PatientsTest < ActionDispatch::IntegrationTest
     params: {patient: {client_id: 443855961, species:"Cat",
                            first_name:"Meow",last_name:"Barclay",
                            colour:"Red",reproductive_status:"Spade",
-                           tattoo:197265, age:17,microchip: "ABABA",
-                           gender:"Male"}}, headers: authenticated_header
+                           tattoo:197265, dateOfBirth:17,microchip: "ABABA",
+                           sex:"Male"}}, headers: authenticated_header
 
       assert_response :error
       assert JSON.parse(response.body)['errors'].count > 0
