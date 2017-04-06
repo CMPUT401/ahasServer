@@ -3,6 +3,7 @@ require 'test_helper'
 class ImagesTest < ActionDispatch::IntegrationTest
   def setup
     @patient = patients(:one)
+    @patient.save
     @radiograph = images(:one)
     @lab_result = images(:two)
     @portrait = images(:three)
@@ -18,7 +19,7 @@ class ImagesTest < ActionDispatch::IntegrationTest
 
   test 'getting an image with a filter of portrait should return the proper type' do
     get "/api/patients/#{@patient.id}/images/filter/portrait", headers: authenticated_header
-
+    
     images = JSON.parse(response.body)['images']
     assert_response 200
     assert images.length == 1
