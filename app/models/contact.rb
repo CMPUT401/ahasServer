@@ -8,7 +8,7 @@
 #  phone_number :string
 #  fax_number   :string
 #  email        :string
-#  address      :string
+#  addressLine1      :string
 #  contact_type :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -23,8 +23,16 @@ class Contact < ApplicationRecord
   validates :last_name, presence: { message: 'Last Name is required' },
                         length: { maximum: 25, message: 'Name is too long' }
 
-  validates :address, presence: { message: 'Address is required' },
-                      length: { maximum: 100, message: 'Address is too long' }
+  validates :addressLine1, presence: true, 
+                      length: { maximum: 100, message: 'Address line 1 is too long' }
+
+  validates :addressLine2, presence: true,  
+                      length: { maximum: 100, message: 'Address is too long' },
+                      allow_blank: true
+
+  validates :addressLine3, presence: { message: 'Address is required' },
+                      length: { maximum: 100, message: 'Address is too long' },
+                      allow_blank: true
 
   validates :phone_number, presence: true, allow_blank: true
 

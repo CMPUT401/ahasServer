@@ -12,7 +12,7 @@ class ContactsController < ApplicationController
   #     {
   #       "first_name": "Justin"
   #       "last_name": "Barclay",
-  #       "address": "116 St & 85 Ave, Edmonton, AB T6G 2R3",
+  #       "addressLine1": "116 St & 85 Ave, Edmonton, AB T6G 2R3",
   #       "email": "fakejustin@ualberta.ca",
   #       "phone_number": "555-555-5555",
   #       "fax_number": "555-555-5556",
@@ -52,7 +52,7 @@ class ContactsController < ApplicationController
   #			{
   #      first_name: "Jeff",
   #      last_name: :Barclay,
-  #      address: :something,
+  #      addressLine1: :something,
   #      phone_number: '556-6655',
   #      fax_number: ' ',
   #      email: 'valid@example.pizza',
@@ -92,7 +92,7 @@ class ContactsController < ApplicationController
   #       {
   #         "first_name": "Justin",
   #         "last_name": "Barclay"
-  #         "address": "116 St & 85 Ave, Edmonton, AB T6G 2R3",
+  #         "addressLine1": "116 St & 85 Ave, Edmonton, AB T6G 2R3",
   #         "email": "fakejustin@ualberta.ca",
   #         "phone_number": "555-555-5555",
   #         "fax_number": "555-555-5556",
@@ -151,7 +151,8 @@ class ContactsController < ApplicationController
   end
 
   def contact_params
-    params.require(:contact).permit(:first_name, :last_name, :address,
+    params.require(:contact).permit(:first_name, :last_name, :addressLine1,
+                                    :addressLine2, :addressLine3,
                                     :phone_number, :email, :fax_number,
                                     :contact_type)
   end

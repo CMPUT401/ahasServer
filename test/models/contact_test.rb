@@ -8,7 +8,7 @@
 #  phone_number :string
 #  fax_number   :string
 #  email        :string
-#  address      :string
+#  addressLine1      :string
 #  contact_type :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

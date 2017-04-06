@@ -8,7 +8,7 @@ class ContactsTest < ActionDispatch::IntegrationTest
       {contact: {
         first_name: "Jeff",
         last_name: :Barclay,
-        address: :something,
+        addressLine1: :something,
         phone_number: '556-6655',
         fax_number: ' ',
         email: 'valid@example.pizza',
@@ -22,7 +22,7 @@ class ContactsTest < ActionDispatch::IntegrationTest
                                                                 {
                                                                   first_name: :Justin,
                                                                   last_name: :Barclay,
-                                                                  address: :something,
+                                                                  addressLine1: :something,
                                                                   phone_number: '555-5555',
                                                                   fax_number: ' ',
                                                                   email: 'valid@example.com',
@@ -38,7 +38,7 @@ class ContactsTest < ActionDispatch::IntegrationTest
                                                                         {
                                                                           first_name: '',
                                                                           last_name: '',
-                                                                          address: '',
+                                                                          addressLine1: '',
                                                                           phone_number: '',
                                                                           fax_number: ' ',
                                                                           email: '',
@@ -56,7 +56,7 @@ class ContactsTest < ActionDispatch::IntegrationTest
                                                                 {
                                                                   first_name: :Justin,
                                                                   last_name: :Barclay,
-                                                                  address: :something,
+                                                                  addressLine1: :something,
                                                                   phone_number: '555-5555',
                                                                   fax_number: ' ',
                                                                   email: 'valid@example.com',
@@ -72,7 +72,7 @@ class ContactsTest < ActionDispatch::IntegrationTest
                                                                 {
                                                                   first_name: :Justin,
                                                                   last_name: :Barclay,
-                                                                  address: :something,
+                                                                  addressLine1: :something,
                                                                   phone_number: '555-5555',
                                                                   fax_number: '',
                                                                   email: 'valid@example',
@@ -133,7 +133,7 @@ class ContactsTest < ActionDispatch::IntegrationTest
     params: {contact: {
         first_name: "Jeff",
         last_name: :Barclay,
-        address: :something,
+        addressLine1: :something,
         phone_number: '556-6655',
         fax_number: ' ',
         email: 'validexample.pizza',

@@ -8,7 +8,7 @@
 #  phone_number :string
 #  fax_number   :string
 #  email        :string
-#  address      :string
+#  addressLine1      :string
 #  contact_type :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -22,7 +22,7 @@ one:
   phone_number: 780-555-5555
   fax_number: 780-555-5556
   email: valid@email.com
-  address: 221B Baker Street, Edmonton, AB T6H 0B2
+  addressLine1: 221B Baker Street, Edmonton, AB T6H 0B2
   contact_type: Veterinarian
 
 two:
@@ -31,5 +31,5 @@ two:
   phone_number: 1 
   fax_number: 1
   email: invalid@wrongemail
-  address: 18
+  addressLine1: 18
   contact_type: 
