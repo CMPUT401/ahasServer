@@ -12,7 +12,7 @@ class SchedulesController < ApplicationController
   #   schedule:
   #     {
   #     appointmentStartDate: '1489077477',
-  #     clientId: @client.id,
+  #     patient_id: @patient.id,
   #     reason: 'bitey dog',
   #     notes: '',
   #     location: '1234 fake st',
@@ -37,14 +37,14 @@ class SchedulesController < ApplicationController
     end
   end
 
-  # Handles HTTP GET request sent to /api/schedules/{id}, and replies with specific client's info, or an error in a JSON.
+  # Handles HTTP GET request sent to /api/schedules/{id}, and replies with specific patient's info, or an error in a JSON.
   # @example success response
   #   {
   #   "success": true,
   #   schedule:
   #     {
   #     appointmentStartDate: '1489077477',
-  #     clientId: @client.id,
+  #     patient_id: @patient.id,
   #     reason: 'bitey dog',
   #     notes: '',
   #     location: '1234 fake st',
@@ -68,7 +68,7 @@ class SchedulesController < ApplicationController
     end
   end
 
-  # Handles HTTP GET request sent to /api/schedules and replies with an index containing a list of id, appointmentStartDate, duration, clientId, reason}
+  # Handles HTTP GET request sent to /api/schedules and replies with an index containing a list of id, appointmentStartDate, duration, patient_id, reason}
   # @example success response
   #   {
   #   "success": "boolean",
@@ -88,7 +88,7 @@ class SchedulesController < ApplicationController
   #   schedule:
   #     {
   #     appointmentStartDate: '1489077477',
-  #     clientId: @client.id,
+  #     patient_id: @patient.id,
   #     reason: 'bitey dog',
   #     notes: '',
   #     location: '1234 fake st',
