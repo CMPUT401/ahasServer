@@ -9,12 +9,13 @@ class ClientController < PersonController
   # Handles HTTP POST request sent to /api/client.
   # @example request body
   #   {
-  #    "success": true,
   #    "client":
   #        {
   #        "firstName": "Justin"
   #        "lastName": "Barclay"
-  #        "address": "116 St & 85 Ave, Edmonton, AB T6G 2R3"
+  #        "addressLine1": "116 St & 85 Ave"
+  #        "addressLine2": "Edmonton, AB"
+  #        "addressLine3": "T6G 2R3" 
   #        "phoneNumber": "7805555555"
   #        "email": "fakejustin@ualberta.ca"
   #        "licos": "123456"
@@ -23,7 +24,7 @@ class ClientController < PersonController
   #        "alternativeContactFirstName": "John"
   #        "alternativeContactLastName": "Wick"
   #        "alternativeContactPhoneNumber": "17809904957"
-  #        "alternativeContactAddress": "1234 Fake St & 96 Ave, Edmonton, AB T8G 2EF"
+  #        "alternativeContactAddressLine1": "1234 Fake St & 96 Ave, Edmonton, AB T8G 2EF"
   #        "notes": "His dog is super bitey"
   #        "alternativeContact2ndPhone": "7804737373"
   #        }
@@ -55,13 +56,22 @@ class ClientController < PersonController
   #        {
   #        "firstName": "Justin"
   #        "lastName": "Barclay"
-  #        "address": "116 St & 85 Ave, Edmonton, AB T6G 2R3"
+  #        "addressLine1": "116 St & 85 Ave"
+  #        "addressLine2": "Edmonton, AB"
+  #        "addressLine3": "T6G 2R3" 
   #        "phoneNumber": "7805555555"
   #        "email": "fakejustin@ualberta.ca"
   #        "licos": "123456"
   #        "socialAssistance": "76543"
   #        "pets": "12404"
+  #        "alternativeContactFirstName": "John"
+  #        "alternativeContactLastName": "Wick"
+  #        "alternativeContactPhoneNumber": "17809904957"
+  #        "alternativeContactAddressLine1": "1234 Fake St & 96 Ave, Edmonton, AB T8G 2EF"
+  #        "notes": "His dog is super bitey"
+  #        "alternativeContact2ndPhone": "7804737373"
   #        }
+
   #   }
   # @example failure response
   #   {
@@ -114,20 +124,22 @@ class ClientController < PersonController
   #    "success": true,
   #    "client":
   #        {
-  #        "firstName": "Justin"
-  #        "lastName": "Barclay"
-  #        "address": "116 St & 85 Ave, Edmonton, AB T6G 2R3"
-  #        "phoneNumber": "7805555555"
-  #        "email": "fakejustin@ualberta.ca"
-  #        "licos": "123456"
-  #        "socialAssistance": "76543"
-  #        "pets": "12404"
-  #        "alternativeContactFirstName": "John"
-  #        "alternativeContactLastName": "Wick"
-  #        "alternativeContactPhoneNumber": "17809904957"
-  #        "alternativeContactAddress": "1234 Fake St & 96 Ave, Edmonton, AB T8G 2EF"
-  #        "notes": "His dog is super bitey"
-  #        "alternativeContact2ndPhone": "7804737373"
+  #        "firstName": "Justin",
+  #        "lastName": "Barclay",
+  #        "addressLine1": "116 St & 85 Ave, Edmonton, AB T6G 2R3",
+  #        "phoneNumber": "7805555555",
+  #        "email": "fakejustin@ualberta.ca",
+  #        "licos": "123456",
+  #        "socialAssistance": "76543",
+  #        "pets": "12404",
+  #        "alternativeContactFirstName": "John",
+  #        "alternativeContactLastName": "Wick",
+  #        "alternativeContactPhoneNumber": "17809904957",
+  #        "alternativeContactAddressLine1": "1234 Fake St & 96 Ave",
+  #        "alternativeContactAddressLine2": "Edmonton, AB",
+  #        "alternativeContactAddressLine3": "T8G 2EF",
+  #        "notes": "His dog is super bitey",
+  #        "alternativeContact2ndPhone": "7804737373",
   #        }
   #   }
   # @example success response
@@ -180,10 +192,12 @@ class ClientController < PersonController
   # Permits the appropriate parameter for clients to be passed to methods while handling HTTP requests
   private
   def client_params
-    params.require(:client).permit(:firstName, :lastName, :address, :phoneNumber, :email,
+    params.require(:client).permit(:firstName, :lastName, :addressLine1, :addressLine2, :addressLine3,
+                                   :phoneNumber, :email,
                                    :licos, :aish, :socialAssistance,
                                    :pets, :alternativeContactLastName, :alternativeContactFirstName,
-                                   :alternativeContactPhoneNumber, :alternativeContactAddress,
+                                   :alternativeContactPhoneNumber, :alternativeContactAddressLine1,
+                                   :alternativeContactAddressLine2, :alternativeContactAddressLine3,
                                    :notes, :alternativeContact2ndPhone, :alternativeContactEmail)
   end
 end

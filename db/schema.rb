@@ -10,30 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170405191724) do
+ActiveRecord::Schema.define(version: 20170406024901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "clients", force: :cascade do |t|
     t.string   "firstName"
-    t.string   "address"
+    t.string   "addressLine1"
     t.string   "phoneNumber"
     t.string   "email"
     t.string   "licos"
     t.string   "aish"
     t.string   "socialAssistance"
     t.string   "pets"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "alternativeContactEmail"
     t.string   "lastName"
     t.string   "alternativeContactLastName"
     t.string   "alternativeContactFirstName"
     t.string   "alternativeContactPhoneNumber"
-    t.string   "alternativeContactAddress"
+    t.string   "alternativeContactAddressLine1"
     t.string   "notes"
     t.string   "alternativeContact2ndPhone"
+    t.string   "addressLine2"
+    t.string   "addressLine3"
+    t.string   "alternativeContactAddressLine2"
+    t.string   "alternativeContactAddressLine3"
     t.index ["lastName", "firstName"], name: "index_clients_on_lastName_and_firstName", using: :btree
   end
 

@@ -32,7 +32,7 @@
 Justin: 
   firstName: Justin 
   lastName: Barclay
-  address: 116 St & 85 Ave, Edmonton, AB T6G 2R3
+  addressLine1: 116 St & 85 Ave, Edmonton, AB T6G 2R3
   phoneNumber: 7805555555
   email: fakejustin@ualberta.ca
   licos: 123456

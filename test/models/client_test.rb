@@ -4,7 +4,7 @@
 #
 #  id                            :integer          not null, primary key
 #  firstName                     :string
-#  address                       :string
+#  addressLine1                       :string
 #  phoneNumber                   :string
 #  email                         :string
 #  licos                         :float
@@ -18,7 +18,7 @@
 #  alternativeContactLastName    :string
 #  alternativeContactFirstName   :string
 #  alternativeContactPhoneNumber :string
-#  alternativeContactAddress     :string
+#  alternativeContactAddressLine1     :string
 #  notes                         :string
 #  alternativeContact2ndPhone    :string
 #
@@ -28,9 +28,9 @@ require 'test_helper'
 class ClientTest < ActiveSupport::TestCase
 
   def setup
-    firstName = "Leeroy" 
+    firstName = "Leeroy"
     lastName = "Jenkins"
-    address = "1234 Fake St, Edmonton, Alberta"
+    addressLine1 = "1234 Fake St, Edmonton, Alberta"
     phone = "780-951-9085"
     email = "leeroyjenkins@gmail.com"
     licos = 40210.00
@@ -38,14 +38,14 @@ class ClientTest < ActiveSupport::TestCase
     socialAssistance = 1231.00
     pets = 1
     alternativeContactPhoneNumber = "7809999999"
-    alternativeContactAddress = "484 fake st, Canada"
+    alternativeContactAddressLine1 = "484 fake st, Canada"
     notes = "Client is angry"
     alternativeContact2ndPhone = "7809519084"
     alternativeContactEmail = "jimmy@jim.com"
 
-    @client = Client.new(firstName: firstName, lastName: lastName, address: address, phoneNumber: phone, email: email, \
+    @client = Client.new(firstName: firstName, lastName: lastName, addressLine1: addressLine1, phoneNumber: phone, email: email, \
                         licos: licos, aish: aish ,socialAssistance: socialAssistance,\
-                        pets: pets, alternativeContactPhoneNumber: alternativeContactPhoneNumber, alternativeContactAddress: alternativeContactAddress, notes: notes, alternativeContact2ndPhone: alternativeContact2ndPhone,alternativeContactEmail: alternativeContactEmail)
+                        pets: pets, alternativeContactPhoneNumber: alternativeContactPhoneNumber, alternativeContactAddressLine1: alternativeContactAddressLine1, notes: notes, alternativeContact2ndPhone: alternativeContact2ndPhone,alternativeContactEmail: alternativeContactEmail)
   end
 
   test "create client with good input" do
@@ -77,19 +77,19 @@ class ClientTest < ActiveSupport::TestCase
       assert_not @client.valid?
   end
 
-  test "email validation should accept valid addresses" do
-      valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org first.last@foo.jp alice+bob@baz.cn]
-      valid_addresses.each do |valid_address|
-          @client.email = valid_address
-          assert @client.valid?, "#{valid_address.inspect} should be valid"
+  test "email validation should accept valid addressLine1es" do
+      valid_addressLine1es = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org first.last@foo.jp alice+bob@baz.cn]
+      valid_addressLine1es.each do |valid_addressLine1|
+          @client.email = valid_addressLine1
+          assert @client.valid?, "#{valid_addressLine1.inspect} should be valid"
       end
   end
 
-  test "email validation should reject invalid addresses" do
-      invalid_addresses = %w[user@example,com user_at_foo.org user.name@example. foo@bar_baz.com foo@bar+baz.com]
-      invalid_addresses.each do |invalid_address|
-          @client.email = invalid_address
-          assert_not @client.valid?, "#{invalid_address.inspect} should be invalid"
+  test "email validation should reject invalid addressLine1es" do
+      invalid_addressLine1es = %w[user@example,com user_at_foo.org user.name@example. foo@bar_baz.com foo@bar+baz.com]
+      invalid_addressLine1es.each do |invalid_addressLine1|
+          @client.email = invalid_addressLine1
+          assert_not @client.valid?, "#{invalid_addressLine1.inspect} should be invalid"
       end
   end
 
