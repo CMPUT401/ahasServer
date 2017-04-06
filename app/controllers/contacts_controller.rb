@@ -12,7 +12,9 @@ class ContactsController < ApplicationController
   #     {
   #       "first_name": "Justin"
   #       "last_name": "Barclay",
-  #       "addressLine1": "116 St & 85 Ave, Edmonton, AB T6G 2R3",
+  #       "addressLine1": "116 St & 85 Ave",
+  #       "addressLine2": "Edmonton",
+  #       "addressLine3": "T6G 2R3",
   #       "email": "fakejustin@ualberta.ca",
   #       "phone_number": "555-555-5555",
   #       "fax_number": "555-555-5556",
@@ -48,15 +50,17 @@ class ContactsController < ApplicationController
   # Handles HTTP PATCH or PUT request sent to /api/contact/{id}, and replies with a specific contact's info, or an error in a JSON.
   # @example request body
   #  	{
-  #    contact:
-  #			{
-  #      first_name: "Jeff",
-  #      last_name: :Barclay,
-  #      addressLine1: :something,
-  #      phone_number: '556-6655',
-  #      fax_number: ' ',
-  #      email: 'valid@example.pizza',
-  #      contact_type: 'Veterinarian'
+  #   "contact":
+  #     {
+  #       "first_name": "Justin"
+  #       "last_name": "Barclay",
+  #       "addressLine1": "116 St & 85 Ave",
+  #       "addressLine2": "Edmonton",
+  #       "addressLine3": "T6G 2R3",
+  #       "email": "fakejustin@ualberta.ca",
+  #       "phone_number": "555-555-5555",
+  #       "fax_number": "555-555-5556",
+  #       "contact_type": "Veterinarian"
   #      }
   #		}
   # @example success response
@@ -89,15 +93,17 @@ class ContactsController < ApplicationController
   #   {
   #    "success": "true"
   #    "contact":
-  #       {
-  #         "first_name": "Justin",
-  #         "last_name": "Barclay"
-  #         "addressLine1": "116 St & 85 Ave, Edmonton, AB T6G 2R3",
-  #         "email": "fakejustin@ualberta.ca",
-  #         "phone_number": "555-555-5555",
-  #         "fax_number": "555-555-5556",
-  #         "contact_type": "Veterinarian"
-  #       }
+  #     {
+  #       "first_name": "Justin"
+  #       "last_name": "Barclay",
+  #       "addressLine1": "116 St & 85 Ave",
+  #       "addressLine2": "Edmonton",
+  #       "addressLine3": "T6G 2R3",
+  #       "email": "fakejustin@ualberta.ca",
+  #       "phone_number": "555-555-5555",
+  #       "fax_number": "555-555-5556",
+  #       "contact_type": "Veterinarian"
+  #      }
   #    }
   # @example failure response
   #   {
@@ -128,7 +134,19 @@ class ContactsController < ApplicationController
 
     render json: { success: true, contacts: contact_list }
   end
-
+ 
+  # Handles HTTP DELETE request sent to /api/contacts/{id}, and replies with success, or an error in a JSON.
+  # @example success response
+  #   {
+  #    "success": "true"
+  #    }
+  # @example failure response
+  #   {
+  #    "success": false,
+  #    "errors": [....] // list of errors
+  #    }
+  # @return HTTP 200 if success: true JSON
+  # @return HTTP 500 if failure: false on failure
   def destroy
     contact = Contact.find_by(id: params[:id])
     unless contact.nil?

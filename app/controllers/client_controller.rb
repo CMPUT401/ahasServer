@@ -1,6 +1,5 @@
 # Controls access to the client instances stored in the API database
 #
-#
 # @author Justin Barclay & Mackenzie Bligh
 # @see https://github.com/CMPUT401/vettr_server/wiki/API-Documentation#clients
 class ClientController < PersonController
