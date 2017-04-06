@@ -27,7 +27,7 @@ class Patient < ApplicationRecord
   
   has_many :medications
 
-  has_many :imdateOfBirths
+  has_many :images
   
   has_many :schedules
 
