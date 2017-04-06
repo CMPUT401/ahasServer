@@ -44,6 +44,7 @@ class Patient < ApplicationRecord
   validates :dateOfBirth, numericality: { only_integer: true }, allow_blank: true
 
   validates :microchip, numericality: { only_integer: true }, allow_blank: true
+
   validates :client_id, presence: true, allow_blank: false, numericality: true
 
   validates :sex, presence: true
