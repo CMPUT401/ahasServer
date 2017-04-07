@@ -1,6 +1,7 @@
 class UserMailer < ActionMailer::Base
   default from: 'jbarclay@ualberta.ca'
-  
+
+  # Handles emailing of invite token to new users
   def invite_user(user)
     @user = user
     token = SecureRandom.uuid
@@ -13,6 +14,7 @@ class UserMailer < ActionMailer::Base
     end
   end
 
+  # Handles emailing of reset token to users
   def reset_password_email(user)
     @user = user
     token = SecureRandom.uuid

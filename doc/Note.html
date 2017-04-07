@@ -103,7 +103,28 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<h2 id="label-Schema+Information">Schema Information</h2>
 
+<p>Table name: notes</p>
+
+<pre class="code ruby"><code class="ruby">id                :integer          not null, primary key
+body              :text
+initials          :string
+medical_record_id :integer          not null
+created_at        :datetime         not null
+updated_at        :datetime         not null
+is_alert          :boolean</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -122,7 +143,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Mar 23 22:31:29 2017 by
+  Generated on Fri Apr  7 02:11:03 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.8 (ruby-2.4.0).
 </div>

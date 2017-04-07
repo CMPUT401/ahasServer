@@ -103,7 +103,31 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<h2 id="label-Schema+Information">Schema Information</h2>
 
+<p>Table name: contacts</p>
+
+<pre class="code ruby"><code class="ruby">id           :integer          not null, primary key
+first_name   :string
+last_name    :string
+phone_number :string
+fax_number   :string
+email        :string
+addressLine1      :string
+contact_type :string
+created_at   :datetime         not null
+updated_at   :datetime         not null</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
   <h2>Constant Summary</h2>
   <dl class="constants">
     
@@ -181,22 +205,22 @@
       <pre class="lines">
 
 
-25
-26
-27
-28
-29
-30
-31</pre>
+49
+50
+51
+52
+53
+54
+55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/contact.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'app/models/contact.rb', line 49</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_valid_type_string'>valid_type_string</span>
   <span class='comment'># contact_type must be one of three type
-</span>  <span class='kw'>unless</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Veterinarian</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Volunteer</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Laboratory</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_contact_type'>contact_type</span>
+</span>  <span class='kw'>unless</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Veterinarian</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Volunteer</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Laboratory</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Technician</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_contact_type'>contact_type</span>
 
-    <span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='symbol'>:contact_type</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> must be either Veterinarian, Volunteer, or Labratory</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='symbol'>:contact_type</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> must be either Veterinarian, Volunteer, Labratory or Technician</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -209,7 +233,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Mar 23 22:31:29 2017 by
+  Generated on Fri Apr  7 02:11:03 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.8 (ruby-2.4.0).
 </div>

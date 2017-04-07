@@ -60,6 +60,24 @@ class UsersController < ApplicationController
     end
   end
 
+  # Handles GET request to show user info during signup, route /users/:token
+  # This is an unprotected route.
+  # @example success
+  #   {
+  #     "user": 
+  #      { 
+  #        "name": "User McUser",
+  #        "email": "user@example.com",
+  #        "id": "integer"
+  #      }
+  #   }
+  #  # @example failure
+  #   {
+  #     "success": false
+  #     "errors": "User not found"
+  #   }
+  # @return HTTP 200 JSON, on success
+  # @return HTTP 404 JSON, on failure
   def show
     # Display a user based on an invite token
     # This might need to be refactored based on being able to update a user
@@ -70,7 +88,19 @@ class UsersController < ApplicationController
       render status: 404, json: { success: false, error: 'Unable to find user' }
     end
   end
-
+  
+  # Handle POST request to reset a users password, route reset_password
+  # @example
+  #     {
+  #     "user":
+  #         { 
+  #             "password": "strint",
+  #             "password_confirmation": "string"
+  #             "reset_token": "string"
+  #         }
+  # }
+  # @return HTTP 201 JSON, on Success
+  # @return HTTP 500 JSON, on Failure
   def reset_password
     updated_password = password_params
 

@@ -170,7 +170,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Handles HTTP POST request sent to /api/client.</p>
+<p>Handles HTTP POST request sent to /api/patients.</p>
 </div></span>
   
 </li>
@@ -226,6 +226,31 @@ specific patients&#39;s info, or an error in a JSON.</p>
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update-instance_method" title="#update (instance method)">#<strong>update</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Handles HTTP PATCH or PUT request sent to /api/client/id, and replies
+with specific client&#39;s info, or an error in a JSON.</p>
+</div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -260,7 +285,7 @@ specific patients&#39;s info, or an error in a JSON.</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Handles HTTP POST request sent to /api/client.</p>
+<p>Handles HTTP POST request sent to /api/patients</p>
 
 
   </div>
@@ -281,8 +306,8 @@ specific patients&#39;s info, or an error in a JSON.</p>
              <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>client</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>client id</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
              <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>species</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cat</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
              <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Chairman Meow</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-             <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>age</span><span class='label_end'>&quot;:</span> <span class='int'>17</span><span class='comma'>,</span>
-             <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gender</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Male</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+             <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dateOfBirth</span><span class='label_end'>&quot;:</span> <span class='int'>17</span><span class='comma'>,</span>
+             <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sex</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Male</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
              <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>colour</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Red</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
              <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tattoo</span><span class='label_end'>&quot;:</span> <span class='int'>197265</span><span class='comma'>,</span>
              <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>microchip</span><span class='label_end'>&quot;:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -366,7 +391,7 @@ specific patients&#39;s info, or an error in a JSON.</p>
   <span class='kw'>if</span> <span class='ivar'>@patient</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
     <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='int'>201</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>success:</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
   <span class='kw'>else</span>
-    <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='symbol'>:error</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>success:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>errors:</span> <span class='ivar'>@patient</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_full_messages'>full_messages</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='symbol'>:error</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>success:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>errors:</span> <span class='ivar'>@patient</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_full_messages'>full_messages</span><span class='rbrace'>}</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -405,7 +430,7 @@ specific patients&#39;s info, or an error in a JSON.</p>
       <pre class="example code"><code>{
 &quot;success&quot;: &quot;true&quot;
 &quot;patients&quot;: [ { &quot;name&quot;: &quot;Chairman Meow, &quot;id&quot;: 1}...]
-} </code></pre>
+}</code></pre>
     
       
         <p class="example_title"><div class='inline'>
@@ -458,15 +483,15 @@ specific patients&#39;s info, or an error in a JSON.</p>
       <pre class="lines">
 
 
+163
 164
 165
 166
 167
-168
-169</pre>
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/patients_controller.rb', line 164</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/patients_controller.rb', line 163</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_index'>index</span>
   <span class='id identifier rubyid_patients'>patients</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Patient.html" title="Patient (class)">Patient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
@@ -509,18 +534,18 @@ specific patients&#39;s info, or an error in a JSON.</p>
       
       <pre class="example code"><code>{
     &quot;success&quot;: true,
-    &quot;patient&quot;: 
-        { 
+    &quot;patient&quot;:
+        {
             &quot;id&quot;: &quot;patient_id&quot;,
             &quot;species&quot;: &quot;cat&quot;,
             &quot;name&quot;: &quot;Chairman Meow&quot;,
-            &quot;age&quot;: 17,
-            &quot;gender&quot;: &quot;Male&quot;,
+            &quot;dateOfBirth&quot;: 17,
+            &quot;sex&quot;: &quot;Male&quot;,
             &quot;colour&quot;: &quot;Red&quot;,
             &quot;tattoo&quot;: 197265,
             &quot;microchip&quot;: nil,
             &quot;reproductive_status&quot;: &quot;Spade&quot;
-        &quot;client&quot;:{  
+        &quot;client&quot;:{
               &quot;id&quot;:443855961,
               &quot;firstName&quot;:&quot;Justin&quot;,
               &quot;address&quot;:&quot;116 St \u0026 85 Ave, Edmonton, AB T6G 2R3&quot;,
@@ -541,9 +566,9 @@ specific patients&#39;s info, or an error in a JSON.</p>
               &quot;notes&quot;:null,
               &quot;alternativeContact2ndPhone&quot;:null
               }},
-        &quot;generalAlerts&quot;:  
-        [  
-        [{  
+        &quot;generalAlerts&quot;:
+        [
+        [{
             &quot;id&quot;:298486374,
             &quot;body&quot;:&quot;You are not supposed to understand this&quot;,
             &quot;initials&quot;:&quot;GG&quot;,
@@ -551,10 +576,10 @@ specific patients&#39;s info, or an error in a JSON.</p>
             &quot;created_at&quot;:&quot;2017-03-22T07:31:04.979Z&quot;,
             &quot;updated_at&quot;:&quot;2017-03-22T07:31:04.979Z&quot;,
             &quot;is_alert&quot;:true
-        }]] 
+        }]]
 
-&quot;medicationAlerts&quot;:[  
-    {  
+&quot;medicationAlerts&quot;:[
+    {
         &quot;id&quot;:980190962,
         &quot;name&quot;:&quot;Hydrogen Dioxide&quot;,
         &quot;medical_record_id&quot;:980190962,
@@ -565,7 +590,7 @@ specific patients&#39;s info, or an error in a JSON.</p>
         &quot;med_type&quot;:&quot;Medicine&quot;
     }]
 }
-} </code></pre>
+}</code></pre>
     
       
         <p class="example_title"><div class='inline'>
@@ -697,12 +722,166 @@ specific patients&#39;s info, or an error in a JSON.</p>
 </table>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="update-instance_method">
+  
+    #<strong>update</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>add to wiki pdateOfBirth.</p>
+</div>
+  </div>
+
+
+<p>Handles HTTP PATCH or PUT request sent to /api/client/id, and replies
+with specific client&#39;s info, or an error in a JSON.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>request body</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='lbrace'>{</span>
+     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>patient</span><span class='label_end'>&quot;:</span>
+         <span class='lbrace'>{</span>
+             <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>client</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>client id</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+             <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>species</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cat</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+             <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Chairman Meow</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+             <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dateOfBirth</span><span class='label_end'>&quot;:</span> <span class='int'>17</span><span class='comma'>,</span>
+             <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sex</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Male</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+             <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>colour</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Red</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+             <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tattoo</span><span class='label_end'>&quot;:</span> <span class='int'>197265</span><span class='comma'>,</span>
+             <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>microchip</span><span class='label_end'>&quot;:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+             <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>reproductive_status</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Spade</span><span class='tstring_end'>&quot;</span></span>
+         <span class='rbrace'>}</span>
+ <span class='rbrace'>}</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>success response</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>success</span><span class='label_end'>&quot;:</span><span class='kw'>true</span><span class='rbrace'>}</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>failure response</p>
+</div></p>
+      
+      <pre class="example code"><code>{
+ &quot;success&quot;: false,
+ &quot;errors&quot;: [....] // list of errors
+ }</code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 200 if success: true JSON</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 404 if client not found: false JSON</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 500 if error updating client: false JSON</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/patients_controller.rb', line 199</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
+  <span class='ivar'>@patient</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Patient.html" title="Patient (class)">Patient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+
+  <span class='kw'>if</span> <span class='ivar'>@patient</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='int'>404</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span><span class='label'>success:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>error:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Patient not found</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span>
+  <span class='kw'>elsif</span> <span class='ivar'>@patient</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='id identifier rubyid_patient_params'>patient_params</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>success:</span> <span class='kw'>true</span><span class='rbrace'>}</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='int'>500</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span><span class='label'>success:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>errors:</span> <span class='ivar'>@patient</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_full_messages'>full_messages</span><span class='rbrace'>}</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
 
       <div id="footer">
-  Generated on Thu Mar 23 22:31:30 2017 by
+  Generated on Fri Apr  7 02:11:04 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.8 (ruby-2.4.0).
 </div>

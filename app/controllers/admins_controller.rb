@@ -7,6 +7,29 @@
 class AdminsController < ApplicationController
   before_action :authenticate_admin
 
+  # Handles POST request to create a invite a user, route /api/admin/invite
+  # This is an unprotected route.
+  # @example
+  #   {
+  #     "user": 
+  #      { 
+  #        "name": "User McUser",
+  #        "email": "user@example.com",
+  #      }
+  #   }
+  #
+  # @example success
+  #   {
+  #     "success": true
+  #   }
+  # @example failure
+  #   {
+  #     "success": false
+  #     "errors": [....]
+  #   }
+  #
+  # @return HTTP 201 JSON, on success
+  # @return HTTP 500 JSON, on failure
   def invite_user
     @user = User.new user_params
     @user.password = SecureRandom.uuid
@@ -18,6 +41,29 @@ class AdminsController < ApplicationController
     end
   end
 
+  # Handles POST request to create a invite a user, route /api/admin/invite
+  # This is an unprotected route.
+  # This sends an email to the user with 
+  # @example
+  #   {
+  #     "user": 
+  #      { 
+  #        "id": "integer",
+  #      }
+  #   }
+  #
+  # @example success
+  #   {
+  #     "success": true
+  #   }
+  # @example failure
+  #   {
+  #     "success": false
+  #     "errors": [....]
+  #   }
+  #
+  # @return HTTP 201 JSON, on success
+  # @return HTTP 500 JSON, on failure
   def reset_user_password
     @user = User.find_by(id: user_params[:id])
 

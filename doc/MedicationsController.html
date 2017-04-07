@@ -156,6 +156,31 @@ requires the user to login before it can access any of the functions</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#destroy-instance_method" title="#destroy (instance method)">#<strong>destroy</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Handles HTTP DELETE request sent to /api/medications/id, and replies with
+a true response, or an error in a JSON.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#index-instance_method" title="#index (instance method)">#<strong>index</strong>  &#x21d2; Object </a>
     
 
@@ -226,7 +251,150 @@ requires the user to login before it can access any of the functions</p>
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="index-instance_method">
+  <h3 class="signature first" id="destroy-instance_method">
+  
+    #<strong>destroy</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>add to wiki page.</p>
+</div>
+  </div>
+
+
+<p>Handles HTTP DELETE request sent to /api/medications/id, and replies with
+a true response, or an error in a JSON.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>request body</p>
+</div></p>
+      
+      <pre class="example code"><code></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>success response</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>success</span><span class='label_end'>&quot;:</span><span class='kw'>true</span><span class='rbrace'>}</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>failure response</p>
+</div></p>
+      
+      <pre class="example code"><code>{
+ &quot;success&quot;: false,
+ &quot;errors&quot;: [....] // list of errors
+ }</code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 200 if success: true JSON</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 404 if schedule instance not found: false JSON</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>HTTP 500 if error updating schedule instance: false JSON</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/medications_controller.rb', line 59</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_destroy'>destroy</span>
+  <span class='ivar'>@medication</span><span class='op'>=</span> <span class='const'><span class='object_link'><a href="Medication.html" title="Medication (class)">Medication</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+
+  <span class='kw'>if</span> <span class='ivar'>@medication</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='int'>404</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span><span class='label'>success:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>error:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Schedule not found</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span>
+  <span class='kw'>elsif</span> <span class='ivar'>@medication</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span>
+    <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>success:</span> <span class='kw'>true</span><span class='rbrace'>}</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='int'>500</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span><span class='label'>success:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>errors:</span> <span class='ivar'>@medication</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_full_messages'>full_messages</span><span class='rbrace'>}</span>
+  <span class='kw'>end</span>
+
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="index-instance_method">
   
     #<strong>index</strong>  &#x21d2; <tt>Object</tt> 
   
@@ -400,7 +568,7 @@ requires the user to login before it can access any of the functions</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Mar 23 22:31:30 2017 by
+  Generated on Fri Apr  7 02:11:04 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.8 (ruby-2.4.0).
 </div>

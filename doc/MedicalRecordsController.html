@@ -840,8 +840,7 @@ route: /api/patients/:patient_id/medical_records/:id.</p>
 258
 259
 260
-261
-262</pre>
+261</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/controllers/medical_records_controller.rb', line 242</span>
@@ -849,20 +848,19 @@ route: /api/patients/:patient_id/medical_records/:id.</p>
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
   <span class='ivar'>@record</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="MedicalRecord.html" title="MedicalRecord (class)">MedicalRecord</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='ivar'>@medications</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:medications</span><span class='rbracket'>]</span>
-  <span class='comment'>#puts &quot;record created today &quot; + @record.created_at.today?.to_s
-</span>
+
   <span class='comment'># let&#39;s exit early
 </span>  <span class='kw'>unless</span> <span class='ivar'>@record</span><span class='period'>.</span><span class='id identifier rubyid_created_at'>created_at</span><span class='period'>.</span><span class='id identifier rubyid_today?'>today?</span>
     <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='symbol'>:error</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>success:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>error:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Medical Record is not editable after 1 day</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span>
     <span class='kw'>return</span>
-  <span class='kw'>end</span> 
+  <span class='kw'>end</span>
 
   <span class='comment'>#not nesting too deep
 </span>  <span class='kw'>if</span> <span class='ivar'>@record</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='id identifier rubyid_medical_record_params'>medical_record_params</span><span class='rparen'>)</span>
     <span class='kw'>unless</span> <span class='ivar'>@medications</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-      <span class='id identifier rubyid_updateMedication'>updateMedication</span><span class='lparen'>(</span><span class='ivar'>@medications</span><span class='comma'>,</span> <span class='ivar'>@record</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_errors'>errors</span> <span class='op'>=</span> <span class='id identifier rubyid_updateMedication'>updateMedication</span><span class='lparen'>(</span><span class='ivar'>@medications</span><span class='comma'>,</span> <span class='ivar'>@record</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
     <span class='kw'>end</span>
-    <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='int'>201</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>success:</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='int'>201</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>success:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>errors:</span> <span class='id identifier rubyid_errors'>errors</span> <span class='rbrace'>}</span>
   <span class='kw'>else</span>
     <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='symbol'>:error</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span><span class='label'>success:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>errors:</span> <span class='ivar'>@record</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_full_messages'>full_messages</span><span class='rbrace'>}</span>
   <span class='kw'>end</span>
@@ -877,7 +875,7 @@ route: /api/patients/:patient_id/medical_records/:id.</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Mar 23 22:31:31 2017 by
+  Generated on Fri Apr  7 02:11:05 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.8 (ruby-2.4.0).
 </div>

@@ -327,7 +327,7 @@ and requires the user to login before it can access any of the functions</p>
     
       
         <p class="example_title"><div class='inline'>
-<p>Failure</p>
+<p>failure</p>
 </div></p>
       
       <pre class="example code"><code>{
@@ -388,7 +388,12 @@ and requires the user to login before it can access any of the functions</p>
 45
 46
 47
-48</pre>
+48
+49
+50
+51
+52
+53</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/controllers/images_controller.rb', line 36</span>
@@ -401,6 +406,11 @@ and requires the user to login before it can access any of the functions</p>
     <span class='kw'>return</span>
   <span class='kw'>end</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_picture_type'>picture_type</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>portrait</span><span class='tstring_end'>&#39;</span></span>
+      <span class='id identifier rubyid_patient'>patient</span> <span class='op'>=</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_patient'>patient</span>
+      <span class='id identifier rubyid_patient'>patient</span><span class='period'>.</span><span class='id identifier rubyid_portrait_id'>portrait_id</span> <span class='op'>=</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+      <span class='id identifier rubyid_patient'>patient</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+    <span class='kw'>end</span>
     <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='int'>201</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>success:</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
   <span class='kw'>else</span>
     <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='symbol'>:error</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span> <span class='label'>success:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>errors:</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_full_messages'>full_messages</span> <span class='rbrace'>}</span>
@@ -457,19 +467,19 @@ and requires the user to login before it can access any of the functions</p>
       <pre class="lines">
 
 
-81
-82
-83
-84
-85
 86
 87
 88
 89
-90</pre>
+90
+91
+92
+93
+94
+95</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/images_controller.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/images_controller.rb', line 86</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_filter'>filter</span>
   <span class='id identifier rubyid_filter'>filter</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:filter</span><span class='rbracket'>]</span>
@@ -532,13 +542,13 @@ and requires the user to login before it can access any of the functions</p>
       <pre class="lines">
 
 
-63
-64
-65
-66</pre>
+68
+69
+70
+71</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/images_controller.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/images_controller.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_index'>index</span>
   <span class='id identifier rubyid_filtered_images'>filtered_images</span> <span class='op'>=</span> <span class='id identifier rubyid_filter_fields'>filter_fields</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Patient.html" title="Patient (class)">Patient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:patient_id</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_images'>images</span><span class='period'>.</span><span class='id identifier rubyid_order'>order</span><span class='lparen'>(</span><span class='label'>date:</span> <span class='symbol'>:desc</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -640,18 +650,18 @@ and requires the user to login before it can access any of the functions</p>
       <pre class="lines">
 
 
-111
-112
-113
-114
-115
 116
 117
 118
-119</pre>
+119
+120
+121
+122
+123
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/images_controller.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/images_controller.rb', line 116</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show'>show</span>
   <span class='id identifier rubyid_image'>image</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Image.html" title="Image (class)">Image</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -672,7 +682,7 @@ and requires the user to login before it can access any of the functions</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Mar 23 22:31:30 2017 by
+  Generated on Fri Apr  7 02:11:04 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.8 (ruby-2.4.0).
 </div>

@@ -120,7 +120,7 @@ authentication</p>
 
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="ContactsController.html" title="ContactsController (class)">ContactsController</a></span>, <span class='object_link'><a href="ImagesController.html" title="ImagesController (class)">ImagesController</a></span>, <span class='object_link'><a href="MedicalRecordsController.html" title="MedicalRecordsController (class)">MedicalRecordsController</a></span>, <span class='object_link'><a href="MedicationsController.html" title="MedicationsController (class)">MedicationsController</a></span>, <span class='object_link'><a href="NotesController.html" title="NotesController (class)">NotesController</a></span>, <span class='object_link'><a href="PatientsController.html" title="PatientsController (class)">PatientsController</a></span>, <span class='object_link'><a href="PersonController.html" title="PersonController (class)">PersonController</a></span>, <span class='object_link'><a href="SchedulesController.html" title="SchedulesController (class)">SchedulesController</a></span>, <span class='object_link'><a href="StaticPagesController.html" title="StaticPagesController (class)">StaticPagesController</a></span>, <span class='object_link'><a href="UsersController.html" title="UsersController (class)">UsersController</a></span></p>
+  <p class="children"><span class='object_link'><a href="AdminsController.html" title="AdminsController (class)">AdminsController</a></span>, <span class='object_link'><a href="ContactsController.html" title="ContactsController (class)">ContactsController</a></span>, <span class='object_link'><a href="ImagesController.html" title="ImagesController (class)">ImagesController</a></span>, <span class='object_link'><a href="MedicalRecordsController.html" title="MedicalRecordsController (class)">MedicalRecordsController</a></span>, <span class='object_link'><a href="MedicationsController.html" title="MedicationsController (class)">MedicationsController</a></span>, <span class='object_link'><a href="NotesController.html" title="NotesController (class)">NotesController</a></span>, <span class='object_link'><a href="PatientsController.html" title="PatientsController (class)">PatientsController</a></span>, <span class='object_link'><a href="PersonController.html" title="PersonController (class)">PersonController</a></span>, <span class='object_link'><a href="SchedulesController.html" title="SchedulesController (class)">SchedulesController</a></span>, <span class='object_link'><a href="StaticPagesController.html" title="StaticPagesController (class)">StaticPagesController</a></span>, <span class='object_link'><a href="UsersController.html" title="UsersController (class)">UsersController</a></span></p>
 </div>
 
 
@@ -247,7 +247,7 @@ taters</p>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_server_error'>server_error</span><span class='lparen'>(</span><span class='id identifier rubyid_exception'>exception</span><span class='rparen'>)</span>
   <span class='comment'># Print to server
-</span>  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_exception'>exception</span>
+</span>  <span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span><span class='lparen'>(</span><span class='id identifier rubyid_exeption'>exeption</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='rparen'>)</span>
   <span class='comment'># Send 500 error JSON
 </span>  <span class='kw'>unless</span> <span class='id identifier rubyid_performed?'>performed?</span>
      <span class='id identifier rubyid_render'>render</span> <span class='label'>status:</span> <span class='int'>500</span><span class='comma'>,</span> <span class='label'>json:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -263,7 +263,7 @@ taters</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Mar 23 22:31:30 2017 by
+  Generated on Fri Apr  7 02:11:04 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.8 (ruby-2.4.0).
 </div>

@@ -221,8 +221,7 @@ containing a list of client IDs, last names, and first names.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Handles HTTP GET request sent to /api/client/id, and replies with
-specific client&#39;s info, or an error in a JSON.</p>
+<p>}.</p>
 </div></span>
   
 </li>
@@ -314,12 +313,13 @@ with specific client&#39;s info, or an error in a JSON.</p>
 </div></p>
       
       <pre class="example code"><code>{
- &quot;success&quot;: true,
  &quot;client&quot;:
      {
      &quot;firstName&quot;: &quot;Justin&quot;
      &quot;lastName&quot;: &quot;Barclay&quot;
-     &quot;address&quot;: &quot;116 St &amp; 85 Ave, Edmonton, AB T6G 2R3&quot;
+     &quot;addressLine1&quot;: &quot;116 St &amp; 85 Ave&quot;
+     &quot;addressLine2&quot;: &quot;Edmonton, AB&quot;
+     &quot;addressLine3&quot;: &quot;T6G 2R3&quot; 
      &quot;phoneNumber&quot;: &quot;7805555555&quot;
      &quot;email&quot;: &quot;fakejustin@ualberta.ca&quot;
      &quot;licos&quot;: &quot;123456&quot;
@@ -328,7 +328,7 @@ with specific client&#39;s info, or an error in a JSON.</p>
      &quot;alternativeContactFirstName&quot;: &quot;John&quot;
      &quot;alternativeContactLastName&quot;: &quot;Wick&quot;
      &quot;alternativeContactPhoneNumber&quot;: &quot;17809904957&quot;
-     &quot;alternativeContactAddress&quot;: &quot;1234 Fake St &amp; 96 Ave, Edmonton, AB T8G 2EF&quot;
+     &quot;alternativeContactAddressLine1&quot;: &quot;1234 Fake St &amp; 96 Ave, Edmonton, AB T8G 2EF&quot;
      &quot;notes&quot;: &quot;His dog is super bitey&quot;
      &quot;alternativeContact2ndPhone&quot;: &quot;7804737373&quot;
      }
@@ -487,15 +487,15 @@ clients&quot;:[
       <pre class="lines">
 
 
-104
-105
-106
-107
-108
-109</pre>
+113
+114
+115
+116
+117
+118</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/client_controller.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/client_controller.rb', line 113</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_index'>index</span>
   <span class='id identifier rubyid_clients'>clients</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Client.html" title="Client (class)">Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
@@ -520,8 +520,7 @@ clients&quot;:[
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Handles HTTP GET request sent to /api/client/id, and replies with
-specific client&#39;s info, or an error in a JSON.</p>
+<p>}</p>
 
 
   </div>
@@ -530,26 +529,6 @@ specific client&#39;s info, or an error in a JSON.</p>
   
   <div class="examples">
     <p class="tag_title">Examples:</p>
-    
-      
-        <p class="example_title"><div class='inline'>
-<p>success response</p>
-</div></p>
-      
-      <pre class="example code"><code>{
- &quot;success&quot;: true,
- &quot;client&quot;:
-     {
-     &quot;firstName&quot;: &quot;Justin&quot;
-     &quot;lastName&quot;: &quot;Barclay&quot;
-     &quot;address&quot;: &quot;116 St &amp; 85 Ave, Edmonton, AB T6G 2R3&quot;
-     &quot;phoneNumber&quot;: &quot;7805555555&quot;
-     &quot;email&quot;: &quot;fakejustin@ualberta.ca&quot;
-     &quot;licos&quot;: &quot;123456&quot;
-     &quot;socialAssistance&quot;: &quot;76543&quot;
-     &quot;pets&quot;: &quot;12404&quot;
-     }
-}</code></pre>
     
       
         <p class="example_title"><div class='inline'>
@@ -602,21 +581,21 @@ specific client&#39;s info, or an error in a JSON.</p>
       <pre class="lines">
 
 
-73
-74
-75
-76
-77
-78
-79
-80
-81
 82
 83
-84</pre>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/client_controller.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/client_controller.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show'>show</span>
   <span class='id identifier rubyid_client'>client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Client.html" title="Client (class)">Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -671,26 +650,28 @@ with specific client&#39;s info, or an error in a JSON.</p>
 <p>request body</p>
 </div></p>
       
-      <pre class="example code"><code>{
- &quot;success&quot;: true,
- &quot;client&quot;:
-     {
-     &quot;firstName&quot;: &quot;Justin&quot;
-     &quot;lastName&quot;: &quot;Barclay&quot;
-     &quot;address&quot;: &quot;116 St &amp; 85 Ave, Edmonton, AB T6G 2R3&quot;
-     &quot;phoneNumber&quot;: &quot;7805555555&quot;
-     &quot;email&quot;: &quot;fakejustin@ualberta.ca&quot;
-     &quot;licos&quot;: &quot;123456&quot;
-     &quot;socialAssistance&quot;: &quot;76543&quot;
-     &quot;pets&quot;: &quot;12404&quot;
-     &quot;alternativeContactFirstName&quot;: &quot;John&quot;
-     &quot;alternativeContactLastName&quot;: &quot;Wick&quot;
-     &quot;alternativeContactPhoneNumber&quot;: &quot;17809904957&quot;
-     &quot;alternativeContactAddress&quot;: &quot;1234 Fake St &amp; 96 Ave, Edmonton, AB T8G 2EF&quot;
-     &quot;notes&quot;: &quot;His dog is super bitey&quot;
-     &quot;alternativeContact2ndPhone&quot;: &quot;7804737373&quot;
-     }
-}</code></pre>
+      <pre class="example code"><code><span class='lbrace'>{</span>
+ <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>success</span><span class='label_end'>&quot;:</span> <span class='kw'>true</span><span class='comma'>,</span>
+ <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>client</span><span class='label_end'>&quot;:</span>
+     <span class='lbrace'>{</span>
+     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>firstName</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Justin</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lastName</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Barclay</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>addressLine1</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>116 St &amp; 85 Ave, Edmonton, AB T6G 2R3</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>phoneNumber</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>7805555555</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>email</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>fakejustin@ualberta.ca</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>licos</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>123456</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>socialAssistance</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>76543</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>pets</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>12404</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>alternativeContactFirstName</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>John</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>alternativeContactLastName</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Wick</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>alternativeContactPhoneNumber</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>17809904957</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>alternativeContactAddressLine1</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1234 Fake St &amp; 96 Ave</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>alternativeContactAddressLine2</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Edmonton, AB</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>alternativeContactAddressLine3</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>T8G 2EF</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>notes</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>His dog is super bitey</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>alternativeContact2ndPhone</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>7804737373</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+     <span class='rbrace'>}</span>
+<span class='rbrace'>}</span></code></pre>
     
       
         <p class="example_title"><div class='inline'>
@@ -764,20 +745,20 @@ with specific client&#39;s info, or an error in a JSON.</p>
       <pre class="lines">
 
 
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156</pre>
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/client_controller.rb', line 146</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/client_controller.rb', line 157</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
   <span class='ivar'>@client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Client.html" title="Client (class)">Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -800,7 +781,7 @@ with specific client&#39;s info, or an error in a JSON.</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Mar 23 22:31:30 2017 by
+  Generated on Fri Apr  7 02:11:04 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.8 (ruby-2.4.0).
 </div>
