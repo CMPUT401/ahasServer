@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
   # @return [JSON]
   def server_error(exception)
     # Print to server
-    puts exception
+    logger.debug(exeption.inspect)
     # Send 500 error JSON
     unless performed?
        render status: 500, json: {}
