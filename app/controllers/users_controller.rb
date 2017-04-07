@@ -91,14 +91,14 @@ class UsersController < ApplicationController
   
   # Handle POST request to reset a users password, route reset_password
   # @example
-  #     {
+  #  {
   #     "user":
   #         { 
   #             "password": "strint",
   #             "password_confirmation": "string"
   #             "reset_token": "string"
   #         }
-  # }
+  #  }
   # @return HTTP 201 JSON, on Success
   # @return HTTP 500 JSON, on Failure
   def reset_password
