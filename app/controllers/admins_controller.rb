@@ -1,3 +1,4 @@
+
 # Controller for interacting with Administrative duties including User creation and Deletion
 # This is a protected class and requires the user to login before it can access any of the functions
 #
@@ -133,7 +134,7 @@ class AdminsController < ApplicationController
   
   def filter_users(users)
     users.map do |user|
-      { id: user.id, email: user.email, name: user.name }
+      { id: user.id, email: user.email, name: user.name, type: user.type }
     end
   end
 
