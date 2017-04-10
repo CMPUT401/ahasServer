@@ -1,0 +1,36 @@
+* Installation
+
+To install the server locally use the command line and type:
+
+ sudo apt-get install postgresql postgresql-contrib
+
+This will install the latest version available in your Ubuntu release and the commonly used add-ons for it.
+
+See "External Links" below for options for getting newer releases.
+
+* Server Setup
+
+If you don't intend to connect to the database from other machines, this alternative setup may be simpler.
+
+By default in Ubuntu, Postgresql is configured to use 'ident sameuser' authentication for any connections from the same machine. Check out the excellent Postgresql documentation for more information, but essentially this means that if your Ubuntu username is 'foo' and you add 'foo' as a Postgresql user then you can connect to the database without requiring a password.
+
+Since the only user who can connect to a fresh install is the postgres user, here is how to create yourself a database account (which is in this case also a database superuser) with the same name as your login name and then create a password for the user:
+
+ sudo -u postgres createuser --superuser $USER
+ sudo -u postgres psql
+
+ postgres=# \password $USER
+
+Client programs, by default, connect to the local host using your Ubuntu login name and expect to find a database with that name too. So to make things REALLY easy, use your new superuser privileges granted above to create a database with the same name as your login name:
+
+ sudo -u postgres createdb $USER
+
+Connecting to your own database to try out some SQL should now be as easy as:
+
+ psql
+
+Creating additional database is just as easy, so for example, after running this:
+
+ create database amarokdb;
+
+You can go right ahead and tell Amarok to use postgresql to store its music catalog. The database name would be amarokdb, the username would be your own login name, and you don't even need a password thanks to 'ident sameuser' so you can leave that blank. 
