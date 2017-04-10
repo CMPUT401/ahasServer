@@ -24,7 +24,7 @@ $ sudo usermod -a -G rvm `whoami`
 #+END_SRC
 
 You may need to use gpg2 instead of gpg on some systems.
-On systems where sudo is configured with secure_path, the shell environment needs to be modified to set rvmsudo_secure_path=1. secure_path is set on most Linux systems, but not on OS X. The following command tries to autodetect whether it is necessary to install rvmsudo_secure_path=1, and only installs the environment variable if it is the code.
+On systems where sudo is configured with secure _path, the shell environment needs to be modified to set rvmsudo _secure _path=1. secure_path is set on most Linux systems, but not on OS X. The following command tries to autodetect whether it is necessary to install rvmsudo_secure_path=1, and only installs the environment variable if it is the code.
 #+BEGIN_SRC bash
 $ if sudo grep -q secure_path /etc/sudoers; then sudo sh -c "echo export rvmsudo_secure_path=1 >> /etc/profile.d/rvm_secure_path.sh" && echo Environment variable installed; fi
 #+END_SRC
@@ -156,7 +156,7 @@ PID    VMSize    Private   Name
 #+END_SRC
 If you do not see any Nginx processes or Passenger processes, then you probably have some kind of installation problem or configuration problem. Please refer to the troubleshooting guide.
 
-** Step 4: update regularly
+** Step update regularly
 
 Nginx updates, Passenger updates and system updates are delivered through the APT package manager regularly. You should run the following command regularly to keep them up to date:
 
@@ -216,7 +216,7 @@ You can go right ahead and tell Amarok to use postgresql to store its music cata
 
 * Transferring the app code to the server
 
-*** 1.1 Login to your server, create a user for the app
+*** Login to your server, create a user for the app
 
 Login to your server with SSH:
 #+BEGIN_SRC bash
@@ -243,14 +243,14 @@ $ sudo chmod 700 ~myappuser/.ssh
 $ sudo sh -c "chmod 600 ~myappuser/.ssh/*"
 #+END_SRC
 
-*** 1.2 Install Git on the server
+*** Install Git on the server
 
 #+BEGIN_SRC bash
 $ sudo apt-get install -y git
 #+END_SRC
-*** 1.3 Pull code
+*** Pull code
 
-You need to pick a location in which to permanently store your application's code. A good location is /var/www/APP_NAME. Let us create that directory.
+You need to pick a location in which to permanently store your application's code. A good location is /var/www/APP _NAME. Let us create that directory.
 
 #+BEGIN_SRC bash
 $ sudo mkdir -p /var/www/ahas
@@ -267,7 +267,7 @@ Your app's code now lives on the server at /var/www/myapp/code.
 
 ** Preparing the app's environment
 
-*** 2.1 Login as the app's user
+*** Login as the app's user
 
 All subsequent instructions must be run under the application's user account. While logged into your server, login under the application's user account as follows:
 
@@ -281,7 +281,7 @@ Since you are using RVM, make sure that you activate the Ruby version that you w
 $ rvm use ruby-2.3.3
 #+END_SRC
 
-*** 2.2 Install app dependencies
+*** Install app dependencies
 
 Your application has various dependencies. They must be installed. Most of these dependencies are gems in your Gemfile, managed by Bundler. You can install them by running bundle install --deployment --without development test -j 2 in your app's directory:
 
@@ -292,7 +292,7 @@ $ bundle install --deployment --without development test
 
 Your app may also depend on services, such as PostgreSQL, Redis, etc. Installing services that your app depends on is outside of this tutorial's scope.
 
-*** 2.3 Configure database.yml and secrets.yml
+*** Configure database.yml and secrets.yml
 
 Since your Rails app probably needs a database, you need to edit config/database.yml. For demonstration purposes, we will setup your app with an SQLite database because that is the easiest.
 
@@ -381,9 +381,9 @@ $ config.domain = ENV["DOMAIN"]
 $ config.domain = https://www.yourdomain.com       
 #+END_SRC
 
-*** 2.4 Compile Rails assets and run database migrations
+*** Compile Rails assets and run database migrations
 
-From the root directory run the node build script
+From the root directory run the node build script (this downloads and builds the client side code)
 
 #+BEGIN_SRC
 $ ./build.sh
@@ -394,11 +394,11 @@ Run the following command to compile assets for the Rails asset pipeline, and to
 $ bundle exec rake assets:precompile db:migrate RAILS_ENV=production
 #+END_SRC
 
-** 3 Configuring Nginx and Passenger
+** Configuring Nginx and Passenger
 
 Now that you are done with transferring your app's code to the server and setting up an environment for your app, it is time to configure Nginx so that Passenger knows how to serve your app.
 
-*** 3.1 Determine the Ruby command that Passenger should use
+*** Determine the Ruby command that Passenger should use
 
 We need to tell Passenger which Ruby command it should use to run your app, just in case there are multiple Ruby interpreters on your system. Please run passenger-config about ruby-command to find out which Ruby interpreter you are using. For example:
 
@@ -411,7 +411,7 @@ passenger-config was invoked through the following Ruby interpreter:
 
 Please take note of the path after "Command" (in this example, /usr/local/rvm/gems/ruby-2.4.0/wrappers/ruby). You will need it in one of the next steps.
 
-*** 3.2 Go back to the admin account
+***  Go back to the admin account
 
 You have previously logged into your app's user account in order to prepare the app's environment. That user does not have sudo access. In the next steps, you need to edit configuration files, for which sudo access is needed. So you need to switch back to the admin account.
 
@@ -429,7 +429,7 @@ ahasuser$ exit
 admin$ _
 #+END_SRC
 
-*** 3.3 Edit Nginx configuration file
+***  Edit Nginx configuration file
 
 We need to create an Nginx configuration file and setup a virtual host entry that points to your app. This virtual host entry tells Nginx (and Passenger) where your app is located.
 #+BEGIN_SRC bash
@@ -461,13 +461,13 @@ When you are done, restart Nginx:
 $ sudo service nginx restart
 #+END_SRC
 
-**** 3.3.1 Setting your SSL certificate
+**** Setting your SSL certificate
 
      Because this app handles sensitive information, it is strongly suggested you follow the below guide on setting up an SSL certificate for a ruby on rails app.
 
      [[https://www.pluralsight.com/guides/ruby-ruby-on-rails/using-https-with-ruby-on-rails][SSL Setup]]
 
-*** 3.4 Test drive
+*** Test drive
 
 You should now be able to access your app through the server's host name! Try running this from your local computer. Replace yourserver.com with your server's hostname, exactly as it appears in the Nginx config file's server_name directive.
 
@@ -478,5 +478,5 @@ $ curl https://yourserver.com/
 
 If you do not see your app's front page HTML, then these are the most likely causes:
 
-You did not correctly configure your "server_name" directive. The server_name must exactly match the host name in the URL. For example, if you use the command curl http://45.55.91.235/ to access your app, then the server_name must be 45.55.91.235.
+You did not correctly configure your server _name directive. The server _name must exactly match the host name in the URL. For example, if you use the command curl http://45.55.91.235/ to access your app, then the server_name must be 45.55.91.235.
 You did not setup DNS records. Setting up DNS is outside the scope of this tutorial. In the mean time, we recommend that you use your server's IP address as the server name.
