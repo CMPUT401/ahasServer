@@ -68,9 +68,11 @@ If you do not use Rails then you can skip to the next step.
 To install Node.js:
 
 Ubuntu
-#+BEGIN_SRC bash 
+
+#+BEGIN_SRC bash
 sudo apt-get install -y nodejs &&
 sudo ln -sf /usr/bin/nodejs /usr/local/bin/node
+sudo node install -g ember
 #+END_SRC
 
 ** Heads-up: sudo vs rvmsudo
@@ -164,54 +166,103 @@ $ sudo apt-get upgrade
 #+END_SRC
 
 You do not need to restart Nginx or Passenger after an update, and you also do not need to modify any configuration files after an update. That is all taken care of automatically for you by APT.
+
+* PostgreSQL Server Installation
+
+To install the server locally use the command line and type:
+
+#+BEGIN_SRC bash
+$ sudo apt-get install postgresql postgresql-contrib
+#+END_SRC
+
+This will install the latest version available in your Ubuntu release and the commonly used add-ons for it.
+
+See "External Links" below for options for getting newer releases.
+
+** Server Setup
+
+If you don't intend to connect to the database from other machines, this alternative setup may be simpler.
+
+By default in Ubuntu, Postgresql is configured to use 'ident sameuser' authentication for any connections from the same machine. Check out the excellent Postgresql documentation for more information, but essentially this means that if your Ubuntu username is 'foo' and you add 'foo' as a Postgresql user then you can connect to the database without requiring a password.
+
+Since the only user who can connect to a fresh install is the postgres user, here is how to create yourself a database account (which is in this case also a database superuser) with the same name as your login name and then create a password for the user:
+
+#+BEGIN_SRC bash
+ sudo -u postgres createuser --superuser $USER
+ sudo -u postgres psql
+
+ postgres=# \password $USER
+#+END_SRC
+
+Client programs, by default, connect to the local host using your Ubuntu login name and expect to find a database with that name too. So to make things REALLY easy, use your new superuser privileges granted above to create a database with the same name as your login name:
+
+#+BEGIN_SRC bash
+ sudo -u postgres createdb $USER
+#+END_SRC
+
+Connecting to your own database to try out some SQL should now be as easy as:
+
+#+BEGIN_SRC bash
+ psql
+
+#+END_SRC
+Creating additional database is just as easy, so for example, after running this:
+
+#+BEGIN_SRC
+ create database amarokdb;
+#+END_SRC
+
+You can go right ahead and tell Amarok to use postgresql to store its music catalog. The database name would be amarokdb, the username would be your own login name, and you don't even need a password thanks to 'ident sameuser' so you can leave that blank. 
+
 * Transferring the app code to the server
 
 *** 1.1 Login to your server, create a user for the app
 
 Login to your server with SSH:
-#+B bash
+#+BEGIN_SRC bash
 $ ssh adminuser@yourserver.com
-#+E
+#+END_SRC
 
 Replace adminuser with the name of an account with administrator privileges or sudo privileges.
 
 Starting from this point, unless stated otherwise, all commands that we instruct you to run should be run on the server, not on your local computer!
 Now that you have logged in, you should create an operating system user account for your app. For security reasons, it is a good idea to run each app under its own user account, in order to limit the damage that security vulnerabilities in the app can do. Passenger will automatically run your app under this user account as part of its user account sandboxing feature.
 
-#+B bash
+#+BEGIN_SRC bash
 $ sudo adduser ahasuser
-#+E 
+#+END_SRC 
+
 We also ensure that that user has your SSH key installed:
 
-#+B bash
+#+BEGIN_SRC bash
 $ sudo mkdir -p ~myappuser/.ssh
 $ touch $HOME/.ssh/authorized_keys
 $ sudo sh -c "cat $HOME/.ssh/authorized_keys >> ~myappuser/.ssh/authorized_keys"
 $ sudo chown -R myappuser: ~myappuser/.ssh
 $ sudo chmod 700 ~myappuser/.ssh
 $ sudo sh -c "chmod 600 ~myappuser/.ssh/*"
-#+E
+#+END_SRC
 
 *** 1.2 Install Git on the server
 
-#+B bash
+#+BEGIN_SRC bash
 $ sudo apt-get install -y git
-#+E
+#+END_SRC
 *** 1.3 Pull code
 
 You need to pick a location in which to permanently store your application's code. A good location is /var/www/APP_NAME. Let us create that directory.
 
-#+B bash
+#+BEGIN_SRC bash
 $ sudo mkdir -p /var/www/ahas
 $ sudo chown ahasuser: /var/www/ahas
-#+E
+#+END_SRC
 
 Now let us pull the code from Git:
 
-#+B bash
+#+BEGIN_SRC bash
 $ cd /var/www/myapp
 $ sudo -u myappuser -H git clone https://github.com/CMPUT401/ahasServer.git code
-#+E
+#+END_SRC
 Your app's code now lives on the server at /var/www/myapp/code.
 
 ** Preparing the app's environment
@@ -220,22 +271,24 @@ Your app's code now lives on the server at /var/www/myapp/code.
 
 All subsequent instructions must be run under the application's user account. While logged into your server, login under the application's user account as follows:
 
-#+B bash
+#+BEGIN_SRC bash
 $ sudo -u ahasuser -H bash -l
-#+E
+#+END_SRC
+
 Since you are using RVM, make sure that you activate the Ruby version that you want to run your app under. For example:
 
-#+B bash
+#+BEGIN_SRC bash
 $ rvm use ruby-2.3.3
-#+E
+#+END_SRC
+
 *** 2.2 Install app dependencies
 
 Your application has various dependencies. They must be installed. Most of these dependencies are gems in your Gemfile, managed by Bundler. You can install them by running bundle install --deployment --without development test -j 2 in your app's directory:
 
-#+B bash
+#+BEGIN_SRC bash
 $ cd /var/www/myapp/code
 $ bundle install --deployment --without development test
-#+E
+#+END_SRC
 
 Your app may also depend on services, such as PostgreSQL, Redis, etc. Installing services that your app depends on is outside of this tutorial's scope.
 
@@ -244,39 +297,42 @@ Your app may also depend on services, such as PostgreSQL, Redis, etc. Installing
 Since your Rails app probably needs a database, you need to edit config/database.yml. For demonstration purposes, we will setup your app with an SQLite database because that is the easiest.
 
 Open the file:
-#+B bash
+#+BEGIN_SRC bash
 $ nano config/database.yml
 Ensure that the production section looks like this:
-#+E
+#+END_SRC
 
 
-#+E
+#+END_SRC
 Rails also needs a unique secret key with which to encrypt its sessions. Starting from Rails 4, this secret key is stored in config/secrets.yml. But first, we need to generate a secret key. Run:
 
 
-#+B bash
+#+BEGIN_SRC bash
 $ bundle exec rake secret
 ...
-#+E
+#+END_SRC
 This command will output a secret key. Copy that value to your clipboard. Next, open config/secrets.yml:
 
-#+B bash
+#+BEGIN_SRC bash
 $ nano config/secrets.yml
-#+E
+#+END_SRC
 
 If the file already exists, look for this:
 
-#+B
+#+BEGIN_SRC
 production:
   secret_key_base: <%=ENV["SECRET_KEY_BASE"]%>
-#+E
+#+END_SRC
+
 Then replace it with the following. If the file didn't already exist, simply insert the following.
 
-
+#+BEGIN_SRC bash
 production:
   secret_key_base: the value that you copied from 'rake secret'
+#+END_SRC
+
 To prevent other users on the system from reading sensitive information belonging to your app, let's tighten the security on the configuration directory and the database directory:
-#+B bash
+#+BEGIN_SRC bash
 $ chmod 700 config db
 $ chmod 600 config/database.yml config/secrets.yml
 #+END_SRC
@@ -286,48 +342,55 @@ $ chmod 600 config/database.yml config/secrets.yml
 The application uses the postmark service, http://www.postmarkapp.com. You will need to create an account on Postmark, go to an account page and copy the "Account Api Token" that they provide you.
 Next, go to config/secrets.yml:
 
-#+B bash
+#+BEGIN_SRC bash
 $ nano config/secrets.yml
-#+E
+#+END_SRC
 
 Look for this in the file.
-e#+B
+
+#+BEGIN_SRC
 production:
   postmark_api_key: <%= ENV["POSTMARK_API_KEY"] %>
-#+E
+#+END_SRC
 
 Then replace it with the following.
 
-#+B
+#+BEGIN_SRC
 production:
   postmark_api_key: the value that you copied from 'http://www.postmarkapp.com'
-#+E
+#+END_SRC
 
 
 **** Setting Domain
 
 We need to set the domain of the application, so that our email client can properly link users to the correct web pages.
 Next, go to config/application.rb
-#+B bash
+#+BEGIN_SRC bash
 $ nano config/application.rb
-#+E
+#+END_SRC
 
 Find the following line in the file.
 
-#+B
+#+BEGIN_SRC
 $ config.domain = ENV["DOMAIN"]       
-#+E
+#+END_SRC
 
       Replace that line with the following.
 
-#+B
+#+BEGIN_SRC
 $ config.domain = https://www.yourdomain.com       
-#+E
-nks
+#+END_SRC
+
 *** 2.4 Compile Rails assets and run database migrations
 
-Run the following command to compile assets for the Rails asset pipeline, and to run database migrations:
+From the root directory run the node build script
+
 #+BEGIN_SRC
+$ ./build.sh
+#+END_SRC
+
+Run the following command to compile assets for the Rails asset pipeline, and to run database migrations:
+#+BEGIN_SRC bash
 $ bundle exec rake assets:precompile db:migrate RAILS_ENV=production
 #+END_SRC
 
@@ -360,9 +423,11 @@ admin$ sudo -u ahasuser -H bash -l
 ahasuser$ ...
 #+END_SRC
 
+#+BEGIN_SRC bash
 # Type `exit` to go back to the account you were before
 ahasuser$ exit
 admin$ _
+#+END_SRC
 
 *** 3.3 Edit Nginx configuration file
 
@@ -373,7 +438,7 @@ $ sudo nano /etc/nginx/sites-enabled/ahas.conf
 Replace myapp with your app's name.
 
 Put this inside the file:
-#+BEGIN_SRC bash
+#+BEGIN_SRC text
 server {
     listen 80;
     server_name yourserver.com;
@@ -399,8 +464,9 @@ $ sudo service nginx restart
 **** 3.3.1 Setting your SSL certificate
 
      Because this app handles sensitive information, it is strongly suggested you follow the below guide on setting up an SSL certificate for a ruby on rails app.
-     https://www.pluralsight.com/guides/ruby-ruby-on-rails/using-https-with-ruby-on-rails
-     
+
+     [[https://www.pluralsight.com/guides/ruby-ruby-on-rails/using-https-with-ruby-on-rails][SSL Setup]]
+
 *** 3.4 Test drive
 
 You should now be able to access your app through the server's host name! Try running this from your local computer. Replace yourserver.com with your server's hostname, exactly as it appears in the Nginx config file's server_name directive.
@@ -412,5 +478,5 @@ $ curl https://yourserver.com/
 
 If you do not see your app's front page HTML, then these are the most likely causes:
 
-You did not correctly configure your server_name directive. The server_name must exactly match the host name in the URL. For example, if you use the command curl http://45.55.91.235/ to access your app, then the server_name must be 45.55.91.235.
+You did not correctly configure your "server_name" directive. The server_name must exactly match the host name in the URL. For example, if you use the command curl http://45.55.91.235/ to access your app, then the server_name must be 45.55.91.235.
 You did not setup DNS records. Setting up DNS is outside the scope of this tutorial. In the mean time, we recommend that you use your server's IP address as the server name.
