@@ -39,7 +39,7 @@ class Patient < ApplicationRecord
   
   validates :colour, presence: true
 
-  validates :tattoo, numericality: { only_integer: true }, allow_blank: true
+  validates :tattoo,  presence: true, allow_blank: true
 
   validates :dateOfBirth, numericality: { only_integer: true }, allow_blank: true
 
