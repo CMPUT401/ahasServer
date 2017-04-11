@@ -1,4 +1,4 @@
-% Created 2017-04-10 Mon 15:41
+% Created 2017-04-11 Tue 12:56
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -28,8 +28,14 @@
 
 \tableofcontents
 
+\section{Important Note:}
+\label{sec:orgf161dbb}
+\begin{itemize}
+\item It is recommended that before deploying the app you set up an SSL certificate for the application, as the security and privacy of this app was based around using HTTPS.
+\end{itemize}
+
 \section{Installing Ruby with RVM}
-\label{sec:org7777b3d}
+\label{sec:orgdd8c804}
 Before you can deploy your app on the production server, you need to install Ruby. In this tutorial we recommend that you use Ruby Version Manager (RVM) for this purpose. RVM is a tool for installing and managing multiple Ruby versions.
 
 There are other ways to install Ruby, e.g. through yum, apt-get, source tarball, rbenv and chruby. You can use one of those other installation methods if you so wish, and this tutorial will work fine even if you installed Ruby using one of those other installation methods. But the one that we recommend in this tutorial is RVM, because in our opinion it is the easiest option.
@@ -44,7 +50,7 @@ sudo apt-get update
 sudo apt-get install -y curl gnupg build-essential
 \end{verbatim}
 \section{Install RVM}
-\label{sec:org85ccdf1}
+\label{sec:orgd68fb0c}
 
 Run the following commands on your production server to install RVM:
 
@@ -63,21 +69,21 @@ $ if sudo grep -q secure_path /etc/sudoers; then sudo sh -c "echo export rvmsudo
 When you are done with all this, relogin to your server to activate RVM. This is important: if you don't relogin, RVM doesn't work. Also if you use gnu screen or another terminal multiplexer, RVM also won't work; you must use a plain ssh session.
 
 \section{Install the Ruby version you want}
-\label{sec:org969672b}
+\label{sec:org6f843de}
 
 Usually, installing the latest Ruby version will suffice. If you are deploying the example app from the quickstart, then that example application works with all Ruby versions.
 
 However, if you are deploying your own app, then your app may have a specific Ruby version requirement.
 
 \subsection{To install the latest version of Ruby, run:}
-\label{sec:orgbff34e7}
+\label{sec:org38d0f07}
 
 \begin{verbatim}
 $ rvm install ruby
 $ rvm --default use ruby
 \end{verbatim}
 \subsection{To install a specific version of Ruby, run:}
-\label{sec:orgf8b28c4}
+\label{sec:orge92f48b}
 \begin{verbatim}
 $ rvm install ruby-X.X.X
 $ rvm --default use ruby-X.X.X
@@ -86,7 +92,7 @@ $ rvm --default use ruby-X.X.X
 Replace X.X.X with the Ruby version you want.
 
 \section{Install Bundler}
-\label{sec:org7283668}
+\label{sec:org19b9729}
 
 Bundler is a popular tool for managing application gem dependencies. We will use Bundler in this tutorial, so let us install it:
 
@@ -111,14 +117,14 @@ sudo node install -g ember
 \end{verbatim}
 
 \subsection{Heads-up: sudo vs rvmsudo}
-\label{sec:org389d0e1}
+\label{sec:orgecaf68d}
 
 One thing you should be aware of when using RVM, is that you should use rvmsudo instead of sudo when executing Ruby-related commands. This is because RVM works by manipulating environment variables. However, sudo nukes all environment variables for security reasons, which intereferes with RVM.
 
 \section{Install Passenger}
-\label{sec:org553a279}
+\label{sec:org0c46ee1}
 \subsection{Step 1: install Passenger packages}
-\label{sec:orgbb142bf}
+\label{sec:orgb324d84}
 
 These commands will install Passenger + Nginx through Phusion's APT repository. If you already had Nginx installed, then these commands will upgrade Nginx to Phusion's version (with Passenger compiled in).
 
@@ -135,7 +141,7 @@ sudo apt-get update
 sudo apt-get install -y nginx-extras passenger
 \end{verbatim}
 \subsection{Step 2: enable the Passenger Nginx module and restart}
-\label{sec:orge849306}
+\label{sec:org60e78b3}
 Edit /etc/nginx/nginx.conf and uncomment include /etc/nginx/passenger.conf;. For example, you may see this:
 \begin{verbatim}
 # include /etc/nginx/passenger.conf;
@@ -159,7 +165,7 @@ When you are finished with this step, restart Nginx:
 $ sudo service nginx restart
 \end{verbatim}
 \subsection{Step 3: check installation}
-\label{sec:org328b2dc}
+\label{sec:orgc82e2ce}
 
 After installation, please validate the install by running sudo /usr/bin/passenger-config validate-install. For example:
 \begin{verbatim}
@@ -197,7 +203,7 @@ PID    VMSize    Private   Name
 If you do not see any Nginx processes or Passenger processes, then you probably have some kind of installation problem or configuration problem. Please refer to the troubleshooting guide.
 
 \subsection{Step update regularly}
-\label{sec:orgc55d344}
+\label{sec:org21f9419}
 
 Nginx updates, Passenger updates and system updates are delivered through the APT package manager regularly. You should run the following command regularly to keep them up to date:
 
@@ -209,7 +215,7 @@ $ sudo apt-get upgrade
 You do not need to restart Nginx or Passenger after an update, and you also do not need to modify any configuration files after an update. That is all taken care of automatically for you by APT.
 
 \section{PostgreSQL Server Installation}
-\label{sec:org1345afc}
+\label{sec:orgfba1e14}
 
 To install the server locally use the command line and type:
 
@@ -222,7 +228,7 @@ This will install the latest version available in your Ubuntu release and the co
 See "External Links" below for options for getting newer releases.
 
 \subsection{Server Setup}
-\label{sec:org80f2b3c}
+\label{sec:org3838d04}
 
 If you don't intend to connect to the database from other machines, this alternative setup may be simpler.
 
@@ -257,10 +263,10 @@ create database amarokdb;
 You can go right ahead and tell Amarok to use postgresql to store its music catalog. The database name would be amarokdb, the username would be your own login name, and you don't even need a password thanks to 'ident sameuser' so you can leave that blank. 
 
 \section{Transferring the app code to the server}
-\label{sec:org0a93ff3}
+\label{sec:orgb84f02d}
 
 \subsubsection{Login to your server, create a user for the app}
-\label{sec:org50f3a98}
+\label{sec:org1410642}
 
 Login to your server with SSH:
 \begin{verbatim}
@@ -288,13 +294,13 @@ $ sudo sh -c "chmod 600 ~myappuser/.ssh/*"
 \end{verbatim}
 
 \subsubsection{Install Git on the server}
-\label{sec:org432c124}
+\label{sec:org26cc820}
 
 \begin{verbatim}
 $ sudo apt-get install -y git
 \end{verbatim}
 \subsubsection{Pull code}
-\label{sec:org757e675}
+\label{sec:org08a9403}
 
 You need to pick a location in which to permanently store your application's code. A good location is /var/www/APP \_NAME. Let us create that directory.
 
@@ -312,10 +318,10 @@ $ sudo -u myappuser -H git clone https://github.com/CMPUT401/ahasServer.git code
 Your app's code now lives on the server at /var/www/myapp/code.
 
 \subsection{Preparing the app's environment}
-\label{sec:orgb31b939}
+\label{sec:orgc84ed4f}
 
 \subsubsection{Login as the app's user}
-\label{sec:org91290d3}
+\label{sec:orgdfde7f7}
 
 All subsequent instructions must be run under the application's user account. While logged into your server, login under the application's user account as follows:
 
@@ -330,7 +336,7 @@ $ rvm use ruby-2.3.3
 \end{verbatim}
 
 \subsubsection{Install app dependencies}
-\label{sec:org959f1da}
+\label{sec:org5bf255a}
 
 Your application has various dependencies. They must be installed. Most of these dependencies are gems in your Gemfile, managed by Bundler. You can install them by running bundle install --deployment --without development test -j 2 in your app's directory:
 
@@ -342,7 +348,7 @@ $ bundle install --deployment --without development test
 Your app may also depend on services, such as PostgreSQL, Redis, etc. Installing services that your app depends on is outside of this tutorial's scope.
 
 \subsubsection{Configure database.yml and secrets.yml}
-\label{sec:org00956ec}
+\label{sec:org208a399}
 
 Since your Rails app probably needs a database, you need to edit config/database.yml. For demonstration purposes, we will setup your app with an SQLite database because that is the easiest.
 
@@ -389,7 +395,7 @@ $ chmod 600 config/database.yml config/secrets.yml
 
 \begin{enumerate}
 \item Email
-\label{sec:org1840f9d}
+\label{sec:orgc91f5bf}
 
 The application uses the postmark service, \url{http://www.postmarkapp.com}. You will need to create an account on Postmark, go to an account page and copy the "Account Api Token" that they provide you.
 Next, go to config/secrets.yml:
@@ -414,7 +420,7 @@ production:
 
 
 \item Setting Domain
-\label{sec:orgc2c43d1}
+\label{sec:org1abefda}
 
 We need to set the domain of the application, so that our email client can properly link users to the correct web pages.
 Next, go to config/application.rb
@@ -436,9 +442,9 @@ $ config.domain = https://www.yourdomain.com
 \end{enumerate}
 
 \subsubsection{Compile Rails assets and run database migrations}
-\label{sec:org64b621d}
+\label{sec:org382fca0}
 
-From the root directory run the node build script
+From the root directory run the node build script (this downloads and builds the client side code)
 
 \begin{verbatim}
 $ ./build.sh
@@ -450,12 +456,12 @@ $ bundle exec rake assets:precompile db:migrate RAILS_ENV=production
 \end{verbatim}
 
 \subsection{Configuring Nginx and Passenger}
-\label{sec:org750542b}
+\label{sec:org5b88f07}
 
 Now that you are done with transferring your app's code to the server and setting up an environment for your app, it is time to configure Nginx so that Passenger knows how to serve your app.
 
 \subsubsection{Determine the Ruby command that Passenger should use}
-\label{sec:org45c3408}
+\label{sec:org3b0d70b}
 
 We need to tell Passenger which Ruby command it should use to run your app, just in case there are multiple Ruby interpreters on your system. Please run passenger-config about ruby-command to find out which Ruby interpreter you are using. For example:
 
@@ -469,7 +475,7 @@ passenger-config was invoked through the following Ruby interpreter:
 Please take note of the path after "Command" (in this example, /usr/local/rvm/gems/ruby-2.4.0/wrappers/ruby). You will need it in one of the next steps.
 
 \subsubsection{Go back to the admin account}
-\label{sec:org4062898}
+\label{sec:org4818378}
 
 You have previously logged into your app's user account in order to prepare the app's environment. That user does not have sudo access. In the next steps, you need to edit configuration files, for which sudo access is needed. So you need to switch back to the admin account.
 
@@ -488,7 +494,7 @@ admin$ _
 \end{verbatim}
 
 \subsubsection{Edit Nginx configuration file}
-\label{sec:org523855f}
+\label{sec:orgd8659b4}
 
 We need to create an Nginx configuration file and setup a virtual host entry that points to your app. This virtual host entry tells Nginx (and Passenger) where your app is located.
 \begin{verbatim}
@@ -522,7 +528,7 @@ $ sudo service nginx restart
 
 \begin{enumerate}
 \item Setting your SSL certificate
-\label{sec:org57e3e92}
+\label{sec:org52caab0}
 
 Because this app handles sensitive information, it is strongly suggested you follow the below guide on setting up an SSL certificate for a ruby on rails app.
 
@@ -530,7 +536,7 @@ Because this app handles sensitive information, it is strongly suggested you fol
 \end{enumerate}
 
 \subsubsection{Test drive}
-\label{sec:org2540b70}
+\label{sec:org1a0bde4}
 
 You should now be able to access your app through the server's host name! Try running this from your local computer. Replace yourserver.com with your server's hostname, exactly as it appears in the Nginx config file's server\(_{\text{name}}\) directive.
 
@@ -543,4 +549,11 @@ If you do not see your app's front page HTML, then these are the most likely cau
 
 You did not correctly configure your server \_name directive. The server \_name must exactly match the host name in the URL. For example, if you use the command curl \url{http://45.55.91.235/} to access your app, then the server\(_{\text{name}}\) must be 45.55.91.235.
 You did not setup DNS records. Setting up DNS is outside the scope of this tutorial. In the mean time, we recommend that you use your server's IP address as the server name.
+\section{Alternate Documentation}
+\label{sec:orga895025}
+\begin{itemize}
+\item If you're looking for alternate documentation for setting up a ruby on rails server on a linux
+a. \url{https://www.phusionpassenger.com/library/walkthroughs/deploy/ruby/}
+b. \url{https://gorails.com/setup/ubuntu/16.04}
+\end{itemize}
 \end{document}

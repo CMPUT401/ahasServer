@@ -1,3 +1,5 @@
+* Important Note:
+- It is recommended that before deploying the app you set up an SSL certificate for the application, as the security and privacy of this app was based around using HTTPS.
 
 * Installing Ruby with RVM
 Before you can deploy your app on the production server, you need to install Ruby. In this tutorial we recommend that you use Ruby Version Manager (RVM) for this purpose. RVM is a tool for installing and managing multiple Ruby versions.
@@ -480,3 +482,7 @@ If you do not see your app's front page HTML, then these are the most likely cau
 
 You did not correctly configure your server _name directive. The server _name must exactly match the host name in the URL. For example, if you use the command curl http://45.55.91.235/ to access your app, then the server_name must be 45.55.91.235.
 You did not setup DNS records. Setting up DNS is outside the scope of this tutorial. In the mean time, we recommend that you use your server's IP address as the server name.
+* Alternate Documentation
+- If you're looking for alternate documentation for setting up a ruby on rails server on a linux
+  a. https://www.phusionpassenger.com/library/walkthroughs/deploy/ruby/
+  b. https://gorails.com/setup/ubuntu/16.04
